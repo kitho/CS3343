@@ -2,15 +2,15 @@ Feature: Ticket Ordering
 
 Scenario: One Way Direct flight ticket purchasing
 
-    Given Airline Companies are provided:
+    Given Airline companies are provided:
     
     |Airline				|
 	|Cathay Pacific Airways	|
     
     And Flights are provided for the customers:
     
-    |Airline				|Flight		|Travel Class	|Depature	|Destination|Date			|Depature Date	|Depature Time	|Arrival Date	|Arrival Time	|Available	|One Way Price	|
-	|Cathay Pacific Airways |CP001		|FIRST			|Hong Kong	|Taiwan		|2014-01-01		|2014-01-01 	|14:30:00		|2014-01-01 	|17:30:00		|30			|2500.00		|
+    |Airline Company		|Flight	Number	|Travel Class	|Depature	|Destination|Depature DateTime		|Arrival DateTime		|Available	|One Way Price	|
+	|Cathay Pacific Airways |CP001			|FIRST			|Hong Kong	|Taiwan		|2014-01-01 14:30:00	|2014-01-01 17:30:00	|30			|2500.00		|
     
     And Client comes to the airline ticket ordering view
     When Client inputs the depature and destination and date:

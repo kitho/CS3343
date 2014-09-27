@@ -1,98 +1,113 @@
 package CS3343.AirlineTicketOrdering;
 
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
+import CS3343.AirlineTicketOrdering.DataSource.AirlineDataSource;
+import au.com.bytecode.opencsv.CSVWriter;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-
 public class AirlineTicketOrderingStepDef {
 	
-	@Given("^Airline Companies are provided:$")
-	public void Airline_Companies_are_provided(List<AirlineCompany> airlineCompanies) throws Throwable {
-	    
+	private class CSVFileWriter {
+		
+		public void writeToThePathWithData(String path, String fileName, DataTable dataTable) throws IOException{
+	        CSVWriter csvWriter = new CSVWriter(new FileWriter(new File(".").getCanonicalFile() + path + "/" + fileName, false));
+	        csvWriter.writeAll(convertDataTable(dataTable));
+	        csvWriter.close();
+		}
+		
+		private List<String[]> convertDataTable(DataTable dataTable){
+			List<List<String>> dataTableList = dataTable.raw();
+		    List<String[]> resultList = new ArrayList<String[]>();
+		    for(int i = 1 ; i < dataTableList.size() ; i++){
+		    	resultList.add(dataTableList.get(i).toArray(new String[dataTableList.get(i).size()]));
+		    }
+		    return resultList;
+		}
+	}
+	
+	private AirlineTicketOrderingSystem airlineTicketOrderingSystem;
+	
+	@Before
+	public void setUp(){
+		airlineTicketOrderingSystem = new AirlineTicketOrderingSystem();
+	}
+
+	@Given("^Airline companies are provided:$")
+	public void Airline_companies_are_provided(DataTable dataTable) throws Throwable {
+		CSVFileWriter writer = new CSVFileWriter();
+	    writer.writeToThePathWithData(AirlineDataSource.DATAFILEPATH, "airlinecompany.csv", dataTable);
 	}
 
 	@And("^Flights are provided for the customers:$")
-	public void Flights_are_provided_for_the_customers(DataTable arg1) throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    // For automatic conversion, change DataTable to List<YourType>
-	    throw new PendingException();
+	public void Flights_are_provided_for_the_customers(DataTable dataTable) throws Throwable {
+		CSVFileWriter writer = new CSVFileWriter();
+	    writer.writeToThePathWithData(AirlineDataSource.DATAFILEPATH, "flight.csv", dataTable);
 	}
 
 	@And("^Client comes to the airline ticket ordering view$")
 	public void Client_comes_to_the_airline_ticket_ordering_view() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+		airlineTicketOrderingSystem.invoke();
 	}
 
 	@When("^Client inputs the depature and destination and date:$")
-	public void Client_inputs_the_depature_and_destination_and_date(DataTable arg1) throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    // For automatic conversion, change DataTable to List<YourType>
-	    throw new PendingException();
+	public void Client_inputs_the_depature_and_destination_and_date(DataTable dataTable) throws Throwable {
+	    
 	}
 
 	@And("^System shows up the flights and classes and prices and times$")
 	public void System_shows_up_the_flights_and_classes_and_prices_and_times() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	    
 	}
 
 	@When("^Client selects the flight and travel Class and number of ticket:$")
-	public void Client_selects_the_flight_and_travel_Class_and_number_of_ticket(DataTable arg1) throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    // For automatic conversion, change DataTable to List<YourType>
-	    throw new PendingException();
+	public void Client_selects_the_flight_and_travel_Class_and_number_of_ticket(DataTable dataTable) throws Throwable {
+	    
 	}
 
 	@And("^System displays the total prices$")
 	public void System_displays_the_total_prices() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+
 	}
 
 	@When("^Customer confirms the order$")
 	public void Customer_confirms_the_order() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+
 	}
 
 	@And("^System enquires the personal information and credit card number to complete the order$")
 	public void System_enquires_the_personal_information_and_credit_card_number_to_complete_the_order() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+
 	}
 
 	@When("^Client inputs personal information:$")
-	public void Client_inputs_personal_information(DataTable arg1) throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    // For automatic conversion, change DataTable to List<YourType>
-	    throw new PendingException();
+	public void Client_inputs_personal_information(DataTable dataTable) throws Throwable {
+	    
 	}
 
 	@And("^System display the order for the confirmation$")
 	public void System_display_the_order_for_the_confirmation() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	    
 	}
 
 	@Then("^Client confirms the order$")
 	public void Client_confirms_the_order() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	    
 	}
 
 	@Then("^System displays the order Number:$")
-	public void System_displays_the_order_Number(DataTable arg1) throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    // For automatic conversion, change DataTable to List<YourType>
-	    throw new PendingException();
+	public void System_displays_the_order_Number(DataTable dataTable) throws Throwable {
+	    
 	}
 
 
