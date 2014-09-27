@@ -1,14 +1,10 @@
 package CS3343.AirlineTicketOrdering;
 
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import CS3343.AirlineTicketOrdering.DataSource.AirlineDataSource;
-import au.com.bytecode.opencsv.CSVWriter;
+import CS3343.AirlineTicketOrdering.DataSource.AirlineCSVDataSource;
 import cucumber.api.DataTable;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -18,41 +14,29 @@ import cucumber.api.java.en.When;
 
 public class AirlineTicketOrderingStepDef {
 	
-	private class CSVFileWriter {
-		
-		public void writeToThePathWithData(String path, String fileName, DataTable dataTable) throws IOException{
-	        CSVWriter csvWriter = new CSVWriter(new FileWriter(new File(".").getCanonicalFile() + path + "/" + fileName, false));
-	        csvWriter.writeAll(convertDataTable(dataTable));
-	        csvWriter.close();
-		}
-		
-		private List<String[]> convertDataTable(DataTable dataTable){
-			List<List<String>> dataTableList = dataTable.raw();
-		    List<String[]> resultList = new ArrayList<String[]>();
-		    for(int i = 1 ; i < dataTableList.size() ; i++){
-		    	resultList.add(dataTableList.get(i).toArray(new String[dataTableList.get(i).size()]));
-		    }
-		    return resultList;
-		}
-	}
-	
+	private File projectPath; 
 	private AirlineTicketOrderingSystem airlineTicketOrderingSystem;
 	
 	@Before
-	public void setUp(){
+	public void setUp() throws IOException{
+		projectPath = new File(".").getCanonicalFile(); 
 		airlineTicketOrderingSystem = new AirlineTicketOrderingSystem();
 	}
 
 	@Given("^Airline companies are provided:$")
 	public void Airline_companies_are_provided(DataTable dataTable) throws Throwable {
-		CSVFileWriter writer = new CSVFileWriter();
-	    writer.writeToThePathWithData(AirlineDataSource.DATAFILEPATH, "airlinecompany.csv", dataTable);
+		FileWriter fileWriter = new FileWriter(projectPath + AirlineCSVDataSource.AIRLINECSV);
+		CSVFileWriter writer = new CSVFileWriter(fileWriter);
+	    writer.writeToThePathWithData(dataTable);
+	    writer.close();
 	}
 
 	@And("^Flights are provided for the customers:$")
 	public void Flights_are_provided_for_the_customers(DataTable dataTable) throws Throwable {
-		CSVFileWriter writer = new CSVFileWriter();
-	    writer.writeToThePathWithData(AirlineDataSource.DATAFILEPATH, "flight.csv", dataTable);
+		FileWriter fileWriter = new FileWriter(projectPath + AirlineCSVDataSource.FLIGHTCSV);
+		CSVFileWriter writer = new CSVFileWriter(fileWriter);
+	    writer.writeToThePathWithData(dataTable);
+	    writer.close();
 	}
 
 	@And("^Client comes to the airline ticket ordering view$")
