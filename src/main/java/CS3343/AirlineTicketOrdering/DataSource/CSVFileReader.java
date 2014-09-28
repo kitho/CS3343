@@ -1,33 +1,24 @@
 package CS3343.AirlineTicketOrdering.DataSource;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.text.ParseException;
 import java.util.List;
 
-import au.com.bytecode.opencsv.CSVReader;
-
-public class CSVFileReader {
+public abstract class CSVFileReader<T> {
 	
-	private CSVReader reader;
+	protected BufferedReader bufferedReader;
 	
-	public CSVFileReader(FileReader fileReader){
-		reader = new CSVReader(fileReader, ',');
+	public CSVFileReader(String path) throws FileNotFoundException{
+		bufferedReader = new BufferedReader(new FileReader(path)); 
 	}
 	
-	public List<String[]> read() throws IOException{
-		List<String[]> resultList = new ArrayList<String[]>();
-		
-		String[] record = null;
-		while((record = reader.readNext()) != null){
-			resultList.add(record);
-		}
-		
-		return resultList;
-	}
+	abstract public List<T> read() throws IOException, ParseException;
 
 	public void close() throws IOException{
-		reader.close();
+		bufferedReader.close();
 	}
 	
 }

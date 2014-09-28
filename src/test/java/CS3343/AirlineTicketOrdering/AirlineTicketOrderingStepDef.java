@@ -1,10 +1,10 @@
 package CS3343.AirlineTicketOrdering;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import CS3343.AirlineTicketOrdering.DataSource.AirlineCSVDataSource;
+import CS3343.AirlineTicketOrdering.TestingTools.DataTableCSVFileWriter;
 import cucumber.api.DataTable;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -25,18 +25,16 @@ public class AirlineTicketOrderingStepDef {
 
 	@Given("^Airline companies are provided:$")
 	public void Airline_companies_are_provided(DataTable dataTable) throws Throwable {
-		FileWriter fileWriter = new FileWriter(projectPath + AirlineCSVDataSource.AIRLINECSV);
-		CSVFileWriter writer = new CSVFileWriter(fileWriter);
-	    writer.writeToThePathWithData(dataTable);
-	    writer.close();
+		DataTableCSVFileWriter dataTableCSVFileWriter = new DataTableCSVFileWriter(projectPath + AirlineCSVDataSource.AIRLINECSV);
+		dataTableCSVFileWriter.write(dataTable);
+		dataTableCSVFileWriter.close();
 	}
 
 	@And("^Flights are provided for the customers:$")
 	public void Flights_are_provided_for_the_customers(DataTable dataTable) throws Throwable {
-		FileWriter fileWriter = new FileWriter(projectPath + AirlineCSVDataSource.FLIGHTCSV);
-		CSVFileWriter writer = new CSVFileWriter(fileWriter);
-	    writer.writeToThePathWithData(dataTable);
-	    writer.close();
+		DataTableCSVFileWriter dataTableCSVFileWriter = new DataTableCSVFileWriter(projectPath + AirlineCSVDataSource.FLIGHTCSV);
+		dataTableCSVFileWriter.write(dataTable);
+		dataTableCSVFileWriter.close();
 	}
 
 	@And("^Client comes to the airline ticket ordering view$")
