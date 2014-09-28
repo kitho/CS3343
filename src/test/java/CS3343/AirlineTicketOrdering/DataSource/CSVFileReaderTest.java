@@ -1,23 +1,21 @@
 package CS3343.AirlineTicketOrdering.DataSource;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import CS3343.AirlineTicketOrdering.CSVFileWriter;
 import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
 import CS3343.AirlineTicketOrdering.Model.Flight;
+import CS3343.AirlineTicketOrdering.TestingTools.AirlineCompanyCSVFileWriter;
+import CS3343.AirlineTicketOrdering.TestingTools.FlightCSVFileWriter;
 
 public class CSVFileReaderTest {
 
@@ -32,74 +30,58 @@ public class CSVFileReaderTest {
 	
 	@Test
 	public void readAirlineCompanyCSVFileWithOneRecordTest() throws IOException, ParseException{
-
-		new Thread(){
-			
-			@Override
-		    public void run() {
-				AirlineCompany airlineCompany = new AirlineCompany("Cathay Pacific Airways");
-				
-				AirlineCompany[] airlineCompanies = new AirlineCompany[]{airlineCompany};
-				
-				try{
-					FileWriter fileWriter = new FileWriter(projectPath + AirlineCSVDataSource.AIRLINECSV, false);
-					CSVFileWriter csvWriter = new CSVFileWriter(fileWriter);
-					csvWriter.writeToThePathWithData(airlineCompanies);
-					
-					FileReader fileReader = new FileReader(projectPath + AirlineCSVDataSource.AIRLINECSV);
-					CSVFileReader csvReader = new CSVFileReader(fileReader);
-					
-					List<String[]> airlineCompanyList = csvReader.read();
-					
-					assertThat(airlineCompany.getAirline(), is(airlineCompanyList.get(0)[0]));
-					
-					csvWriter.close();
-					csvReader.close();
-				}catch(Exception e){
-					
-				}
-		    }
-			
-		}.start();
 		
+		AirlineCompany airlineCompany = new AirlineCompany("Cathay Pacific Airways");
+		
+		ArrayList<AirlineCompany> airlineCompanies = new ArrayList<AirlineCompany>();
+		airlineCompanies.add(airlineCompany);
+		
+		AirlineCompanyCSVFileWriter csvWriter = new AirlineCompanyCSVFileWriter(projectPath + AirlineCSVDataSource.AIRLINECSV);
+		csvWriter.write(airlineCompanies);
+		csvWriter.close();
+		
+		AirlineCompanyCSVFileReader csvReader = new AirlineCompanyCSVFileReader(projectPath + AirlineCSVDataSource.AIRLINECSV);
+		List<AirlineCompany> resultList = csvReader.read();
+		csvReader.close();
+		
+		assertThat(airlineCompany.getAirline(), is(resultList.get(0).getAirline()));
+			
 	}
 	
 	
 	@Test
 	public void readFlightCSVFileWithOneRecordTest() throws IOException, ParseException{
-		new Thread(){
-			
-			@Override
-		    public void run() {
-				try{
-					Flight flight = new Flight("CP001", "FIRST", "Hong Kong", "Taiwan", formatter.parse("2014-01-01 14:30:00"),
-							formatter.parse("2014-01-01 17:30:00"), 30, 2500.00);
-					
-					Flight[] flights = new Flight[]{flight};
-					FileWriter fileWriter = new FileWriter(projectPath + AirlineCSVDataSource.FLIGHTCSV, false);
-					CSVFileWriter csvWriter = new CSVFileWriter(fileWriter);
-					csvWriter.writeToThePathWithData(flights);
-					
-					FileReader fileReader = new FileReader(projectPath + AirlineCSVDataSource.FLIGHTCSV);
-					CSVFileReader csvReader = new CSVFileReader(fileReader);
-					
-					List<String[]> flightList = csvReader.read();
-					
-					assertThat(flight.getFlightNumber(), is(flightList.get(0)[0]));
-					assertThat(flight.getTravelClass(), is(flightList.get(0)[1]));
-					assertThat(flight.getDepature(), is(flightList.get(0)[2]));
-					assertThat(flight.getDestination(), is(flightList.get(0)[3]));
-					assertThat(flight.getDepatureDateTime(), is(formatter.parse(flightList.get(0)[4])));
-					assertThat(flight.getArrivalDateTime(), is(formatter.parse(flightList.get(0)[5])));
-					assertThat(flight.getAvailable(), is(Integer.parseInt(flightList.get(0)[6])));
-					assertThat(flight.getOneWayPrice(), is(Double.parseDouble(flightList.get(0)[7])));
-					
-					csvWriter.close();
-					csvReader.close();
-				}catch(Exception e){
-					
-				}
-			}
-		}.start();
+
+		Flight flight = new Flight();
+		
+		flight.setFlightNumber("CP001");
+		flight.setTravelClass("FIRST");
+		flight.setDepature("Hong Kong");
+		flight.setDestination("Taiwan");
+		flight.setDepatureDateTime(formatter.parse("2014-01-01 14:30:00"));
+		flight.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
+		flight.setAvailable(30);
+		flight.setOneWayPrice(2500.00);
+		
+		ArrayList<Flight> flights = new ArrayList<Flight>();
+		flights.add(flight);
+		
+		FlightCSVFileWriter csvWriter = new FlightCSVFileWriter(projectPath + AirlineCSVDataSource.FLIGHTCSV);
+		csvWriter.write(flights);
+		csvWriter.close();
+		
+		FlightCSVFileReader csvReader= new FlightCSVFileReader(projectPath + AirlineCSVDataSource.FLIGHTCSV);
+		List<Flight> resultList = csvReader.read();
+		csvReader.close();
+		
+		assertThat(flight.getFlightNumber(), is(resultList.get(0).getFlightNumber()));
+		assertThat(flight.getTravelClass(), is(resultList.get(0).getTravelClass()));
+		assertThat(flight.getDepature(), is(resultList.get(0).getDepature()));
+		assertThat(flight.getDestination(), is(resultList.get(0).getDestination()));
+		assertThat(flight.getDepatureDateTime(), is(resultList.get(0).getDepatureDateTime()));
+		assertThat(flight.getArrivalDateTime(), is(resultList.get(0).getArrivalDateTime()));
+		assertThat(flight.getAvailable(), is(resultList.get(0).getAvailable()));
+		assertThat(flight.getOneWayPrice(), is(resultList.get(0).getOneWayPrice()));
+
 	}
 }
