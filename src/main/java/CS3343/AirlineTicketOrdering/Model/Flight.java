@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Flight {
 	
+	private String airline;
 	private String flightNumber;
 	private String travelClass;
 	private String depature;
@@ -13,6 +14,12 @@ public class Flight {
 	private int available;
 	private double oneWayPrice;
 	
+	public String getAirline() {
+		return airline;
+	}
+	public void setAirline(String airline) {
+		this.airline = airline;
+	}
 	public String getFlightNumber() {
 		return flightNumber;
 	}
