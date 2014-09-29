@@ -17,17 +17,17 @@ public class BaggagePlan {
 	//For Pet Placed in Baggage
 	private float petFeePreKG;
 	private float petFeePreBaggage;
-	private String petFeeBasedOn;		//Value is 'KG' or 'Baggage'
-	private float normalFeeMaxWeight;	//Max Weight for normal fee
-	private float normalFeeMaxSize;		//Max Size for normal fee
+	private String petFeeBasedOn;			//Value is 'KG' or 'Baggage'
+	private float normalFeeMaxWeight;		//Max Weight for normal fee
+	private float normalFeeMaxSize;			//Max Size for normal fee
 	
 	//For Pet If Exceed Normal Fee's Weight or Size
-	private float extraFeeMaxWeight;	//Max Weight of Extra Fee
-	private float extraFeeMaxSize;		//Max Size of Extra Fee
-	private float extraFeeForLevel1;	//Less than extraFeeMaxWeight & normalFeeMaxSize
-	private float extraFeeForLevel2;	//Less than extraFeeMaxSize & normalFeeMaxWeight
-	private float extraFeeForLevel3;	//Less than extraFeeMaxWeight & extraFeeMaxSize
-	private float extraFeeForLevel4;	//More than extraFeeMaxWeight & LextraFeeMaxSize
+	private float extraFeeMaxWeight;		//Max Weight of Extra Fee
+	private float extraFeeMaxSize;			//Max Size of Extra Fee
+	private float extraFeeForLevel1;		//Less than extraFeeMaxWeight & normalFeeMaxSize
+	private float extraFeeForLevel2;		//Less than extraFeeMaxSize & normalFeeMaxWeight
+	private float extraFeeForLevel3;		//Less than extraFeeMaxWeight & extraFeeMaxSize
+	private float extraFeeForLevel4;		//More than extraFeeMaxWeight & LextraFeeMaxSize
 	
 	public float getFreeFirstClassWeight() {
 		return freeFirstClassWeight;

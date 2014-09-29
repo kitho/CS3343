@@ -1,27 +1,27 @@
+/*
+ * A baggage fee calculator to calculate baggage fee
+ * by passing multiple routes and baggage information.
+ */
+
 package CS3343.AirlineTicketOrdering.Baggage;
 
-import CS3343.AirlineTicketOrdering.Model.Flight;
+import java.util.ArrayList;
+import CS3343.AirlineTicketOrdering.Baggage.Temp.*;
 
 public class BaggageFeeCalculator {
-	private Flight flight;
+	private static BaggageFeeCalculator calculator;
+	private ArrayList<Route> routes;
 	
-	public BaggageFeeCalculator (Flight flight){
-		
+	//Singleton Pattern
+	private BaggageFeeCalculator(){}
+	
+	public static BaggageFeeCalculator getInstance(){
+		if (calculator == null)
+			calculator = new BaggageFeeCalculator();
+		return calculator;
 	}
 	
-	public float calFee(float baggageWeight, String travelClass){
-		float baggageFee;
-		
-		//float maxBaggageWeight = flight.getMaxBaggageWeight(travelClass);
-		float maxBaggageWeight = 10;
-		
-		if(baggageWeight < maxBaggageWeight){
-			baggageFee = 0;
-		}else{
-			
-		}
+	public float calFee(){
 		return 0;
 	}
-	
-	
 }
