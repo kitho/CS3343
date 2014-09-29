@@ -1,4 +1,4 @@
-package CS3343.AirlineTicketOrdering.BaggageFeeCalculator;
+package CS3343.AirlineTicketOrdering.Baggage;
 
 import CS3343.AirlineTicketOrdering.Model.Flight;
 
