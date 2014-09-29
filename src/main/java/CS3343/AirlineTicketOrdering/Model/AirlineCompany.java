@@ -20,5 +20,9 @@ public class AirlineCompany {
 	public void addFlight(Flight flight){
 		flights.add(flight);
 	}
+	
+	public List<Flight> getFlights() {
+		return flights;
+	}
 
 }
