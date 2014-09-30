@@ -25,6 +25,7 @@ public class AirlineTicketOrderingStepDef {
 		projectPath = new File(".").getCanonicalFile();
 		Files.deleteIfExists(Paths.get(projectPath + CSVFile.AIRLINECOMPANYCSV.value()));
 		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFile.MODELCSV.value()));
 		airlineTicketOrderingSystem = new AirlineTicketOrderingSystem();
 	}
 
@@ -38,6 +39,13 @@ public class AirlineTicketOrderingStepDef {
 	@And("^Flights are provided for the customers:$")
 	public void Flights_are_provided_for_the_customers(DataTable dataTable) throws Throwable {
 		DataTableCSVFileWriter dataTableCSVFileWriter = new DataTableCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value());
+		dataTableCSVFileWriter.write(dataTable);
+		dataTableCSVFileWriter.close();
+	}
+	
+	@Given("^Flights Model are provided for the customer:$")
+	public void Flights_Model_are_provided_for_the_customer(DataTable dataTable) throws Throwable {
+		DataTableCSVFileWriter dataTableCSVFileWriter = new DataTableCSVFileWriter(projectPath + CSVFile.MODELCSV.value());
 		dataTableCSVFileWriter.write(dataTable);
 		dataTableCSVFileWriter.close();
 	}
