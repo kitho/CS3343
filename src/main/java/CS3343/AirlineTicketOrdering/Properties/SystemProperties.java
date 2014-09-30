@@ -15,11 +15,12 @@ public class SystemProperties {
 	}
 	
 	protected void load(String path) throws FileNotFoundException, IOException {
-		properties.load(new FileInputStream(new File(".").getCanonicalFile() + path));
+		FileInputStream fileInputStream = new FileInputStream(new File(".").getCanonicalFile() + path);
+		properties.load(fileInputStream);
+		fileInputStream.close();
 	}
 	
 	public String getPath(String attribute){
-		properties.clear();
 		return properties.getProperty(attribute);
 	}
 

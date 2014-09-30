@@ -20,14 +20,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import CS3343.AirlineTicketOrdering.DataQuery.AirlineQuery;
-import CS3343.AirlineTicketOrdering.FileReader.AirlineCompanyCSVFileReader;
-import CS3343.AirlineTicketOrdering.FileReader.FlightCSVFileReader;
-import CS3343.AirlineTicketOrdering.FileReader.SourceReader;
+import CS3343.AirlineTicketOrdering.DataReader.AirlineCompanyCSVFileReader;
+import CS3343.AirlineTicketOrdering.DataReader.FlightCSVFileReader;
+import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
+import CS3343.AirlineTicketOrdering.DataWriter.AirlineCompanyCSVFileWriter;
+import CS3343.AirlineTicketOrdering.DataWriter.FlightCSVFileWriter;
+import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
 import CS3343.AirlineTicketOrdering.Model.Flight;
-import CS3343.AirlineTicketOrdering.TestingTools.AirlineCompanyCSVFileWriter;
-import CS3343.AirlineTicketOrdering.TestingTools.FlightCSVFileWriter;
-import CS3343.AirlineTicketOrdering.TestingTools.SourceWriter;
 
 public class AirlineCompanyCSVFileReaderTest {
 

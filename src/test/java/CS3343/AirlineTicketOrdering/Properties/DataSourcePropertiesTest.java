@@ -11,9 +11,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import CS3343.AirlineTicketOrdering.DataQuery.AirlineQuery;
+import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
+import CS3343.AirlineTicketOrdering.DataWriter.DataSourcePropertiesFileWriter;
+import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
+import CS3343.AirlineTicketOrdering.Model.Flight;
 
 public class DataSourcePropertiesTest {
 	
@@ -37,6 +45,62 @@ public class DataSourcePropertiesTest {
 			assertThat(e.getMessage().toString(), is(nullValue()));
 		}
 		
+	}
+	
+	@Test
+	public void dataSourcePropertiesReadAirlineCompanyCVFilePath() throws IOException{
+		Files.deleteIfExists(Paths.get(projectPath + DataSourceProperties.DATA_SOURCE_PATH));
+		
+		SourceWriter<Map<String, String>> dataSourceFilePropertiesWriter = 
+				new DataSourcePropertiesFileWriter(projectPath + DataSourceProperties.DATA_SOURCE_PATH);
+		
+		Map<String, String> propertyPairs = new HashMap<String, String>();
+		propertyPairs.put("airlinecompany", CSVFile.AIRLINECOMPANYCSV.value());
+		
+		dataSourceFilePropertiesWriter.write(propertyPairs);
+		dataSourceFilePropertiesWriter.close();
+		
+		SystemProperties dataSourceProperties = new DataSourceProperties();
+		
+		assertThat(CSVFile.AIRLINECOMPANYCSV.value(), is(dataSourceProperties.getPath("airlinecompany")));
+	}
+
+	@Test
+	public void dataSourcePropertiesReadFlightCSVFilePath() throws IOException{
+		Files.deleteIfExists(Paths.get(projectPath + DataSourceProperties.DATA_SOURCE_PATH));
+		
+		SourceWriter<Map<String, String>> dataSourceFilePropertiesWriter = 
+				new DataSourcePropertiesFileWriter(projectPath + DataSourceProperties.DATA_SOURCE_PATH);
+		
+		Map<String, String> propertyPairs = new HashMap<String, String>();
+		propertyPairs.put("flight", CSVFile.FLIGHTCSV.value());
+		
+		dataSourceFilePropertiesWriter.write(propertyPairs);
+		dataSourceFilePropertiesWriter.close();
+		
+		SystemProperties dataSourceProperties = new DataSourceProperties();
+		
+		assertThat(CSVFile.FLIGHTCSV.value(), is(dataSourceProperties.getPath("flight")));
+	}
+	
+	@Test
+	public void dataSourcePropertiesReadAllCSVFilePath() throws IOException{
+		Files.deleteIfExists(Paths.get(projectPath + DataSourceProperties.DATA_SOURCE_PATH));
+		
+		SourceWriter<Map<String, String>> dataSourceFilePropertiesWriter = 
+				new DataSourcePropertiesFileWriter(projectPath + DataSourceProperties.DATA_SOURCE_PATH);
+		
+		Map<String, String> propertyPairs = new HashMap<String, String>();
+		propertyPairs.put("airlinecompany", CSVFile.AIRLINECOMPANYCSV.value());
+		propertyPairs.put("flight", CSVFile.FLIGHTCSV.value());
+		
+		dataSourceFilePropertiesWriter.write(propertyPairs);
+		dataSourceFilePropertiesWriter.close();
+		
+		SystemProperties dataSourceProperties = new DataSourceProperties();
+		
+		assertThat(CSVFile.AIRLINECOMPANYCSV.value(), is(dataSourceProperties.getPath("airlinecompany")));
+		assertThat(CSVFile.FLIGHTCSV.value(), is(dataSourceProperties.getPath("flight")));
 	}
 
 }

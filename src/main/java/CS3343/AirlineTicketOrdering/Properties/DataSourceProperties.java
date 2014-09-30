@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class DataSourceProperties extends SystemProperties {
 
-	public final static String DATA_SOURCE_PATH = "/properties/datasourceproperties";
+	public final static String DATA_SOURCE_PATH = "/properties/datasource.properties";
 	
 	public DataSourceProperties() throws FileNotFoundException, IOException{
 		super();

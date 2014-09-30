@@ -19,11 +19,11 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
 import CS3343.AirlineTicketOrdering.DataQuery.AirlineQuery;
-import CS3343.AirlineTicketOrdering.FileReader.FlightCSVFileReader;
-import CS3343.AirlineTicketOrdering.FileReader.SourceReader;
+import CS3343.AirlineTicketOrdering.DataReader.FlightCSVFileReader;
+import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
+import CS3343.AirlineTicketOrdering.DataWriter.FlightCSVFileWriter;
+import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 import CS3343.AirlineTicketOrdering.Model.Flight;
-import CS3343.AirlineTicketOrdering.TestingTools.FlightCSVFileWriter;
-import CS3343.AirlineTicketOrdering.TestingTools.SourceWriter;
 
 public class FlightCSVFileReaderTest {
 

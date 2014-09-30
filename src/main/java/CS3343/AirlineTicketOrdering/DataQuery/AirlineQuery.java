@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
-import CS3343.AirlineTicketOrdering.FileReader.SourceReader;
+import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
 
 public class AirlineQuery {

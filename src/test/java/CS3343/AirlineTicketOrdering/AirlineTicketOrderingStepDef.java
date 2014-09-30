@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import CS3343.AirlineTicketOrdering.DataQuery.AirlineQuery;
-import CS3343.AirlineTicketOrdering.TestingTools.DataTableCSVFileWriter;
+import CS3343.AirlineTicketOrdering.DataWriter.DataTableCSVFileWriter;
 import cucumber.api.DataTable;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
