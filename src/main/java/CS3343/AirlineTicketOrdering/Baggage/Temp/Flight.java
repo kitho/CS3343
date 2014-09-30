@@ -8,7 +8,7 @@ public class Flight {
 	
 	private String airline;
 	private String flightNumber;
-	private String travelClass;
+	private FlightClass flightClass;
 	private Date depatureDateTime;
 	private Date arrivalDateTime;
 	private int available;
@@ -40,11 +40,12 @@ public class Flight {
 	public void setFlightNumber(String flightNumber) {
 		this.flightNumber = flightNumber;
 	}
-	public String getTravelClass() {
-		return travelClass;
+	
+	public FlightClass getFlightClass() {
+		return flightClass;
 	}
-	public void setTravelClass(String travelClass) {
-		this.travelClass = travelClass;
+	public void setFlightClass(FlightClass flightClass) {
+		this.flightClass = flightClass;
 	}
 	public Date getDepatureDateTime() {
 		return depatureDateTime;
