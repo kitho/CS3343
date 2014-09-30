@@ -12,7 +12,6 @@ public abstract class CSVFileWriter<T> {
 	protected BufferedWriter bufferedWriter;
 	
 	public CSVFileWriter(String path) throws IOException{
-		Files.deleteIfExists(Paths.get(path));
 		bufferedWriter = new BufferedWriter(new FileWriter(path, true));
 	}
 	

@@ -1,4 +1,4 @@
-package CS3343.AirlineTicketOrdering.DataSource;
+package CS3343.AirlineTicketOrdering.FileReader;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.util.List;
 
 import CS3343.AirlineTicketOrdering.Model.Flight;
 
-public class FlightCSVFileReader extends CSVFileReader<Flight> {
+public class FlightCSVFileReader extends FileReader<Flight> {
 
 	public FlightCSVFileReader(String path) throws FileNotFoundException {
 		super(path);
@@ -17,16 +17,17 @@ public class FlightCSVFileReader extends CSVFileReader<Flight> {
 
 	@Override
 	public List<Flight> read() throws IOException, ParseException {
-		
-		SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");
+
+		SimpleDateFormat formatter = new SimpleDateFormat(
+				"EEE MMM dd HH:mm:ss Z yyyy");
 		List<Flight> flights = new ArrayList<Flight>();
-		
+
 		String line;
 		while ((line = bufferedReader.readLine()) != null) {
 			String[] dataStr = line.split(",");
 			Flight flight = new Flight();
 			flight.setAirline(dataStr[0]);
-			flight.setFlightNumber(dataStr[1]);	
+			flight.setFlightNumber(dataStr[1]);
 			flight.setTravelClass(dataStr[2]);
 			flight.setDepature(dataStr[3]);
 			flight.setDestination(dataStr[4]);
@@ -36,7 +37,7 @@ public class FlightCSVFileReader extends CSVFileReader<Flight> {
 			flight.setOneWayPrice(Double.parseDouble(dataStr[8]));
 			flights.add(flight);
 		}
-		
+
 		return flights;
 	}
 
