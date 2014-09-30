@@ -27,6 +27,7 @@ import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.TestingTools.AirlineCompanyCSVFileWriter;
 import CS3343.AirlineTicketOrdering.TestingTools.FlightCSVFileWriter;
+import CS3343.AirlineTicketOrdering.TestingTools.SourceWriter;
 
 public class AirlineCompanyCSVFileReaderTest {
 
@@ -73,7 +74,7 @@ public class AirlineCompanyCSVFileReaderTest {
 		ArrayList<Flight> flights = new ArrayList<Flight>();
 		flights.add(flight);
 		
-		FlightCSVFileWriter flightCSVFileWriter = new FlightCSVFileWriter(projectPath + AirlineQuery.FLIGHTCSV);
+		SourceWriter<List<Flight>> flightCSVFileWriter = new FlightCSVFileWriter(projectPath + AirlineQuery.FLIGHTCSV);
 		flightCSVFileWriter.write(flights);
 		flightCSVFileWriter.close();
 		
@@ -83,12 +84,12 @@ public class AirlineCompanyCSVFileReaderTest {
 		ArrayList<AirlineCompany> airlineCompanies = new ArrayList<AirlineCompany>();
 		airlineCompanies.add(airlineCompany);
 		
-		AirlineCompanyCSVFileWriter airlineCompanyCSVFileWriter = new AirlineCompanyCSVFileWriter(projectPath + AirlineQuery.AIRLINECSV);
+		SourceWriter<List<AirlineCompany>> airlineCompanyCSVFileWriter = new AirlineCompanyCSVFileWriter(projectPath + AirlineQuery.AIRLINECSV);
 		airlineCompanyCSVFileWriter.write(airlineCompanies);
 		airlineCompanyCSVFileWriter.close();
 		
-		FlightCSVFileReader flightCSVFileReader = new FlightCSVFileReader(projectPath + AirlineQuery.FLIGHTCSV);
-		AirlineCompanyCSVFileReader airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + AirlineQuery.AIRLINECSV, flightCSVFileReader);
+		SourceReader<Flight> flightCSVFileReader = new FlightCSVFileReader(projectPath + AirlineQuery.FLIGHTCSV);
+		SourceReader<AirlineCompany> airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + AirlineQuery.AIRLINECSV, flightCSVFileReader);
 		List<AirlineCompany> airlineCompanyResultList = airlineCompanyCSVFileReader.read();
 		airlineCompanyCSVFileReader.close();
 		
@@ -244,7 +245,7 @@ public class AirlineCompanyCSVFileReaderTest {
 		
 		
 		for (ArrayList<Flight> flightList : flightLists) {
-			FlightCSVFileWriter flightCSVFileWriter = new FlightCSVFileWriter(projectPath + AirlineQuery.FLIGHTCSV);
+			SourceWriter<List<Flight>> flightCSVFileWriter = new FlightCSVFileWriter(projectPath + AirlineQuery.FLIGHTCSV);
 			flightCSVFileWriter.write(flightList);
 			flightCSVFileWriter.close();
 		}
@@ -269,12 +270,12 @@ public class AirlineCompanyCSVFileReaderTest {
 		airlineCompanies.add(airlineCompanyCA);
 		airlineCompanies.add(airlineCompanyHKA);
 
-		AirlineCompanyCSVFileWriter airlineCompanyCSVFileWriter = new AirlineCompanyCSVFileWriter(projectPath + AirlineQuery.AIRLINECSV);
+		SourceWriter<List<AirlineCompany>> airlineCompanyCSVFileWriter = new AirlineCompanyCSVFileWriter(projectPath + AirlineQuery.AIRLINECSV);
 		airlineCompanyCSVFileWriter.write(airlineCompanies);
 		airlineCompanyCSVFileWriter.close();
 		
 		FlightCSVFileReader flightCSVFileReader = new FlightCSVFileReader(projectPath + AirlineQuery.FLIGHTCSV);
-		AirlineCompanyCSVFileReader airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + AirlineQuery.AIRLINECSV, flightCSVFileReader);
+		SourceReader<AirlineCompany> airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + AirlineQuery.AIRLINECSV, flightCSVFileReader);
 		List<AirlineCompany> airlineCompanyResultList = airlineCompanyCSVFileReader.read();
 		airlineCompanyCSVFileReader.close();
 		

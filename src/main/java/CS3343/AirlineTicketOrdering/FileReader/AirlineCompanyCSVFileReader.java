@@ -11,10 +11,10 @@ import CS3343.AirlineTicketOrdering.Model.Flight;
 
 public class AirlineCompanyCSVFileReader extends FileReader<AirlineCompany> {
 
-	private FileReader<Flight> fileReader;
+	private SourceReader<Flight> fileReader;
 
 	public AirlineCompanyCSVFileReader(String path,
-			FileReader<Flight> fileReader) throws FileNotFoundException {
+			SourceReader<Flight> fileReader) throws FileNotFoundException {
 		super(path);
 		this.fileReader = fileReader;
 	}

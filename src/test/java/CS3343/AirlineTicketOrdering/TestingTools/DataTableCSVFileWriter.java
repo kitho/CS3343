@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import cucumber.api.DataTable;
 
-public class DataTableCSVFileWriter extends CSVFileWriter<DataTable> {
+public class DataTableCSVFileWriter extends FileWriter<DataTable> {
 	
 	public DataTableCSVFileWriter(String path) throws IOException {
 		super(path);

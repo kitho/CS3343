@@ -8,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import CS3343.AirlineTicketOrdering.Model.Flight;
 
-public class FlightCSVFileWriter extends CSVFileWriter<List<Flight>> {
+public class FlightCSVFileWriter extends FileWriter<List<Flight>> {
 
 	public FlightCSVFileWriter(String path) throws IOException {
 		super(path);

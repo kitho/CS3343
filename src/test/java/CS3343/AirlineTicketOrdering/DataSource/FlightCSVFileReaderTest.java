@@ -23,6 +23,7 @@ import CS3343.AirlineTicketOrdering.FileReader.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.FileReader.SourceReader;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.TestingTools.FlightCSVFileWriter;
+import CS3343.AirlineTicketOrdering.TestingTools.SourceWriter;
 
 public class FlightCSVFileReaderTest {
 
@@ -67,13 +68,13 @@ public class FlightCSVFileReaderTest {
 		ArrayList<Flight> flights = new ArrayList<Flight>();
 		flights.add(flight);
 		
-		FlightCSVFileWriter csvWriter = new FlightCSVFileWriter(projectPath + AirlineQuery.FLIGHTCSV);
-		csvWriter.write(flights);
-		csvWriter.close();
+		SourceWriter<List<Flight>> flightCsvFileWriter = new FlightCSVFileWriter(projectPath + AirlineQuery.FLIGHTCSV);
+		flightCsvFileWriter.write(flights);
+		flightCsvFileWriter.close();
 		
-		FlightCSVFileReader csvReader= new FlightCSVFileReader(projectPath + AirlineQuery.FLIGHTCSV);
-		List<Flight> resultList = csvReader.read();
-		csvReader.close();
+		SourceReader<Flight> flightCsvFileReader = new FlightCSVFileReader(projectPath + AirlineQuery.FLIGHTCSV);
+		List<Flight> resultList = flightCsvFileReader.read();
+		flightCsvFileReader.close();
 		
 		assertThat(flight.getAirline(), is(resultList.get(0).getAirline()));
 		assertThat(flight.getFlightNumber(), is(resultList.get(0).getFlightNumber()));
@@ -132,13 +133,13 @@ public class FlightCSVFileReaderTest {
 		flights.add(flight2);
 		flights.add(flight3);
 		
-		FlightCSVFileWriter csvWriter = new FlightCSVFileWriter(projectPath + AirlineQuery.FLIGHTCSV);
-		csvWriter.write(flights);
-		csvWriter.close();
+		SourceWriter<List<Flight>> flightCsvFileWriter = new FlightCSVFileWriter(projectPath + AirlineQuery.FLIGHTCSV);
+		flightCsvFileWriter.write(flights);
+		flightCsvFileWriter.close();
 		
-		FlightCSVFileReader csvReader= new FlightCSVFileReader(projectPath + AirlineQuery.FLIGHTCSV);
-		List<Flight> resultList = csvReader.read();
-		csvReader.close();
+		SourceReader<Flight> flightCsvFileReader = new FlightCSVFileReader(projectPath + AirlineQuery.FLIGHTCSV);
+		List<Flight> resultList = flightCsvFileReader.read();
+		flightCsvFileReader.close();
 
 		
 		assertThat(flights.size(), is(resultList.size()));
