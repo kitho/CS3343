@@ -17,11 +17,9 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import CS3343.AirlineTicketOrdering.DataQuery.AirlineQuery;
 import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
 import CS3343.AirlineTicketOrdering.DataWriter.DataSourcePropertiesFileWriter;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
-import CS3343.AirlineTicketOrdering.Model.Flight;
 
 public class DataSourcePropertiesTest {
 	
@@ -45,6 +43,24 @@ public class DataSourcePropertiesTest {
 			assertThat(e.getMessage().toString(), is(nullValue()));
 		}
 		
+	}
+	
+	@Test
+	public void dataSourcePropertiesReadNonExistedPath() throws IOException{
+		Files.deleteIfExists(Paths.get(projectPath + DataSourceProperties.DATA_SOURCE_PATH));
+		
+		SourceWriter<Map<String, String>> dataSourceFilePropertiesWriter = 
+				new DataSourcePropertiesFileWriter(projectPath + DataSourceProperties.DATA_SOURCE_PATH);
+		
+		Map<String, String> propertyPairs = new HashMap<String, String>();
+		
+		dataSourceFilePropertiesWriter.write(propertyPairs);
+		dataSourceFilePropertiesWriter.close();
+		
+		SystemProperties dataSourceProperties = new DataSourceProperties();
+		
+		assertThat(null, is(dataSourceProperties.getPath("airlinecompany")));
+		assertThat(null, is(dataSourceProperties.getPath("flight")));
 	}
 	
 	@Test
