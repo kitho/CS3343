@@ -13,7 +13,7 @@ public class BaggagePlan {
 	private Map<String, Float> extraFeePerUnit;							//<Unit, Fee>
 	
 	//Extra extra fee
-	private Map<FlightClass, Map<String, Float>> extraExtraFeeForLevel;	//<Flight, <Level, Fee>>
+	private Map<FlightClass, Map<String, Float>> extraExtraFeeForLevel;	//<FlightClass, <Level, Fee>>
 	private Map<String, Map<String, Float>> extraExtraFeeCondtion;		//<Level, <Unit, Num>>
 	
 	//For Pet Placed in Baggage

@@ -29,19 +29,12 @@ public class BaggageFeeCalculator {
 			Map<String, Float> unitNumForBaggage, ArrayList<String> sportingEquipments, 
 			Map<String, Float> unitNumForPet){
 		
-		float resultFee;
+		float resultFee = 0;
 		BaggagePlan plan = route.getBaggagePlan();
 		
-		//Calculate remaining unit
+		//Calculate remaining unit...
 		Map<FlightClass, Map<String, Float>> freeUnit = plan.getFreeUnit();
 		Map<String, Float> remainingFreeUnit = freeUnit.get(flightClass);
-		for(String key : remainingFreeUnit.keySet()){
-			Float oldValue = remainingFreeUnit.get(key);
-			Float newValue = oldValue - unitNumForBaggage.get(key);
-			remainingFreeUnit.replace(key, oldValue, newValue);
-		}
-		
-		
 		//Plus free sporting equipments unit
 		ArrayList<String> units = this.getUnits(plan, flightClass);
 		Map<String, Float> maxUnitNumsForSE = new HashMap<String, Float>();
@@ -56,12 +49,19 @@ public class BaggageFeeCalculator {
 		}
 		for(String key : remainingFreeUnit.keySet()){
 			Float oldValue = remainingFreeUnit.get(key);
-			Float newValue = oldValue + maxUnitNumsForSE.get(key);
+			Float newValue = oldValue - unitNumForBaggage.get(key) + maxUnitNumsForSE.get(key);
 			remainingFreeUnit.replace(key, oldValue, newValue);
 		}
-		
-		//Cal extra fee
-		
+
+		//Calculate extra fee
+		Map<String, Float> extraFeePerUnits = plan.getExtraFeePerUnit();
+		for(String key : remainingFreeUnit.keySet()){
+			float unitNum = remainingFreeUnit.get(key);
+			if(unitNum < 0){
+				float feePerUnit = extraFeePerUnits.get(key);
+				resultFee += unitNum * feePerUnit;
+			}
+		}
 		
 		return 0;
 	}
