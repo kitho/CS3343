@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import CS3343.AirlineTicketOrdering.DataQuery.AirlineQuery;
 import CS3343.AirlineTicketOrdering.DataReader.AirlineCompanyCSVFileReader;
+import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
 import CS3343.AirlineTicketOrdering.DataReader.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataWriter.AirlineCompanyCSVFileWriter;
@@ -42,12 +43,12 @@ public class AirlineCompanyCSVFileReaderTest {
 	
 	@Test
 	public void readAirlineCompanyCSVFileWhenFileNotExisted() throws IOException{
-		Files.deleteIfExists(Paths.get(projectPath + AirlineQuery.AIRLINECSV));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFile.AIRLINECOMPANYCSV.value()));
 		
 		SourceReader<AirlineCompany> airlineCompanyCsvReader;
 		try {
-			airlineCompanyCsvReader = new AirlineCompanyCSVFileReader(projectPath + AirlineQuery.AIRLINECSV, 
-					new FlightCSVFileReader(projectPath + AirlineQuery.FLIGHTCSV));
+			airlineCompanyCsvReader = new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value(), 
+					new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value()));
 			fail("File not existed");
 		} catch (FileNotFoundException e) {
 			assertThat(e.getMessage().toString(), is(not(nullValue())));
@@ -56,8 +57,8 @@ public class AirlineCompanyCSVFileReaderTest {
 
 	@Test
 	public void readAirlineCompanyCSVFileWithOneRecordTest() throws IOException, ParseException{
-		Files.deleteIfExists(Paths.get(projectPath + AirlineQuery.AIRLINECSV));
-		Files.deleteIfExists(Paths.get(projectPath + AirlineQuery.FLIGHTCSV));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFile.AIRLINECOMPANYCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
 		
 		Flight flight = new Flight();
 		
@@ -74,7 +75,7 @@ public class AirlineCompanyCSVFileReaderTest {
 		ArrayList<Flight> flights = new ArrayList<Flight>();
 		flights.add(flight);
 		
-		SourceWriter<List<Flight>> flightCSVFileWriter = new FlightCSVFileWriter(projectPath + AirlineQuery.FLIGHTCSV);
+		SourceWriter<List<Flight>> flightCSVFileWriter = new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value());
 		flightCSVFileWriter.write(flights);
 		flightCSVFileWriter.close();
 		
@@ -84,12 +85,12 @@ public class AirlineCompanyCSVFileReaderTest {
 		ArrayList<AirlineCompany> airlineCompanies = new ArrayList<AirlineCompany>();
 		airlineCompanies.add(airlineCompany);
 		
-		SourceWriter<List<AirlineCompany>> airlineCompanyCSVFileWriter = new AirlineCompanyCSVFileWriter(projectPath + AirlineQuery.AIRLINECSV);
+		SourceWriter<List<AirlineCompany>> airlineCompanyCSVFileWriter = new AirlineCompanyCSVFileWriter(projectPath + CSVFile.AIRLINECOMPANYCSV.value());
 		airlineCompanyCSVFileWriter.write(airlineCompanies);
 		airlineCompanyCSVFileWriter.close();
 		
-		SourceReader<Flight> flightCSVFileReader = new FlightCSVFileReader(projectPath + AirlineQuery.FLIGHTCSV);
-		SourceReader<AirlineCompany> airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + AirlineQuery.AIRLINECSV, flightCSVFileReader);
+		SourceReader<Flight> flightCSVFileReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
+		SourceReader<AirlineCompany> airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value(), flightCSVFileReader);
 		List<AirlineCompany> airlineCompanyResultList = airlineCompanyCSVFileReader.read();
 		airlineCompanyCSVFileReader.close();
 		
@@ -112,8 +113,8 @@ public class AirlineCompanyCSVFileReaderTest {
 	
 	@Test
 	public void readAirlineCompanyCSVFileWithThreeRecordTest() throws IOException, ParseException{		
-		Files.deleteIfExists(Paths.get(projectPath + AirlineQuery.AIRLINECSV));
-		Files.deleteIfExists(Paths.get(projectPath + AirlineQuery.FLIGHTCSV));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFile.AIRLINECOMPANYCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
 		
 		Flight flightCP1 = new Flight();
 		
@@ -245,7 +246,7 @@ public class AirlineCompanyCSVFileReaderTest {
 		
 		
 		for (ArrayList<Flight> flightList : flightLists) {
-			SourceWriter<List<Flight>> flightCSVFileWriter = new FlightCSVFileWriter(projectPath + AirlineQuery.FLIGHTCSV);
+			SourceWriter<List<Flight>> flightCSVFileWriter = new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value());
 			flightCSVFileWriter.write(flightList);
 			flightCSVFileWriter.close();
 		}
@@ -270,12 +271,12 @@ public class AirlineCompanyCSVFileReaderTest {
 		airlineCompanies.add(airlineCompanyCA);
 		airlineCompanies.add(airlineCompanyHKA);
 
-		SourceWriter<List<AirlineCompany>> airlineCompanyCSVFileWriter = new AirlineCompanyCSVFileWriter(projectPath + AirlineQuery.AIRLINECSV);
+		SourceWriter<List<AirlineCompany>> airlineCompanyCSVFileWriter = new AirlineCompanyCSVFileWriter(projectPath + CSVFile.AIRLINECOMPANYCSV.value());
 		airlineCompanyCSVFileWriter.write(airlineCompanies);
 		airlineCompanyCSVFileWriter.close();
 		
-		FlightCSVFileReader flightCSVFileReader = new FlightCSVFileReader(projectPath + AirlineQuery.FLIGHTCSV);
-		SourceReader<AirlineCompany> airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + AirlineQuery.AIRLINECSV, flightCSVFileReader);
+		FlightCSVFileReader flightCSVFileReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
+		SourceReader<AirlineCompany> airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value(), flightCSVFileReader);
 		List<AirlineCompany> airlineCompanyResultList = airlineCompanyCSVFileReader.read();
 		airlineCompanyCSVFileReader.close();
 		

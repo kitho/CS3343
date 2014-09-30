@@ -19,6 +19,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
 import CS3343.AirlineTicketOrdering.DataQuery.AirlineQuery;
+import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
 import CS3343.AirlineTicketOrdering.DataReader.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataWriter.FlightCSVFileWriter;
@@ -39,10 +40,10 @@ public class FlightCSVFileReaderTest {
 	
 	@Test
 	public void readFlightCSVFileWhenFileNotExisted() throws IOException{
-		Files.deleteIfExists(Paths.get(projectPath + AirlineQuery.FLIGHTCSV));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
 		SourceReader<Flight> flightCsvReader;
 		try {
-			flightCsvReader = new FlightCSVFileReader(projectPath + AirlineQuery.FLIGHTCSV);
+			flightCsvReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
 			fail("File not existed");
 		} catch (FileNotFoundException e) {
 			assertThat(e.getMessage().toString(), is(not(nullValue())));
@@ -51,7 +52,7 @@ public class FlightCSVFileReaderTest {
 	
 	@Test
 	public void readFlightCSVFileWithOneRecordTest() throws IOException, ParseException{		
-		Files.deleteIfExists(Paths.get(projectPath + AirlineQuery.FLIGHTCSV));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
 		
 		Flight flight = new Flight();
 		
@@ -68,11 +69,11 @@ public class FlightCSVFileReaderTest {
 		ArrayList<Flight> flights = new ArrayList<Flight>();
 		flights.add(flight);
 		
-		SourceWriter<List<Flight>> flightCsvFileWriter = new FlightCSVFileWriter(projectPath + AirlineQuery.FLIGHTCSV);
+		SourceWriter<List<Flight>> flightCsvFileWriter = new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value());
 		flightCsvFileWriter.write(flights);
 		flightCsvFileWriter.close();
 		
-		SourceReader<Flight> flightCsvFileReader = new FlightCSVFileReader(projectPath + AirlineQuery.FLIGHTCSV);
+		SourceReader<Flight> flightCsvFileReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
 		List<Flight> resultList = flightCsvFileReader.read();
 		flightCsvFileReader.close();
 		
@@ -90,7 +91,7 @@ public class FlightCSVFileReaderTest {
 	
 	@Test
 	public void readFlightCSVFileWithThreeRecordTest() throws IOException, ParseException{
-		Files.deleteIfExists(Paths.get(projectPath + AirlineQuery.FLIGHTCSV));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
 		
 		Flight flight1 = new Flight();
 		
@@ -133,11 +134,11 @@ public class FlightCSVFileReaderTest {
 		flights.add(flight2);
 		flights.add(flight3);
 		
-		SourceWriter<List<Flight>> flightCsvFileWriter = new FlightCSVFileWriter(projectPath + AirlineQuery.FLIGHTCSV);
+		SourceWriter<List<Flight>> flightCsvFileWriter = new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value());
 		flightCsvFileWriter.write(flights);
 		flightCsvFileWriter.close();
 		
-		SourceReader<Flight> flightCsvFileReader = new FlightCSVFileReader(projectPath + AirlineQuery.FLIGHTCSV);
+		SourceReader<Flight> flightCsvFileReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
 		List<Flight> resultList = flightCsvFileReader.read();
 		flightCsvFileReader.close();
 
