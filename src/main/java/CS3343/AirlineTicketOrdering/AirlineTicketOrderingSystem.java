@@ -7,7 +7,7 @@ public class AirlineTicketOrderingSystem {
 	}
 	
 	private static class AirlineTicketOrderingSystemInvoker{
-			
+		
 		public static void main(String[] args){
 	
 		}
