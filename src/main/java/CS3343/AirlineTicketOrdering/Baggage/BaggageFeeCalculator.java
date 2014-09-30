@@ -10,7 +10,10 @@ import CS3343.AirlineTicketOrdering.Baggage.Temp.*;
 
 public class BaggageFeeCalculator {
 	private static BaggageFeeCalculator calculator;
-	private ArrayList<Route> routes;
+	public static final int FIRSTCLASS = 0;
+	public static final int BUSINESSCLASS = 1;
+	public static final int PREMIUMECONOMYCLASS = 2;
+	public static final int ECONOMYCLASS = 3;
 	
 	//Singleton Pattern
 	private BaggageFeeCalculator(){}
@@ -21,7 +24,7 @@ public class BaggageFeeCalculator {
 		return calculator;
 	}
 	
-	public float calFee(){
+	public float calBaggageFee(Route route, int classType){
 		return 0;
 	}
 }
