@@ -7,6 +7,11 @@ public class Food {
 	private String name;
 	private String category;
 	private int unitPrice;
+	
+	public Food(){
+		
+	}
+	
 	public int getId() {
 		return id;
 	}
