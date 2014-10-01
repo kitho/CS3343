@@ -18,15 +18,44 @@ public class BaggagePlan {
 	
 	//For Pet Placed in Baggage
 	private Map<String, Float> petFee;									//<Unit,Pat Fee>
-	private Map<String, Float> normalPetFeeMaxUnit;						//<Unit,Num>
 	
 	//For Pet If Exceed Normal Fee's Weight or Size
+	private Map<String, Float> normalPetFeeMaxUnit;						//<Unit,Num>
 	private Map<String, Float> extraPetFeeMaxUnit;					//<Unit,Num>
 	private Map<String, Float> extraPetFeeForLevel;		//<Level, Pat Fee>
 														//Level 1: Less than extraFeeMaxWeight & normalFeeMaxSize
 														//		2: Less than extraFeeMaxSize & normalFeeMaxWeight
 														//		3: Less than extraFeeMaxWeight & extraFeeMaxSize
 														//		4: More than extraFeeMaxWeight & LextraFeeMaxSize
+	
+	public BaggagePlan(){
+		super();
+	}
+	
+	public BaggagePlan(
+			ArrayList<String> unit,
+			Map<FlightClass, Map<String, Float>> freeUnit,
+			Map<String, Map<String, Float>> extraFreeUnitForSportingEquipments,
+			Map<String, Float> extraFeePerUnit,
+			Map<FlightClass, Map<String, Float>> extraExtraFeeForLevel,
+			Map<String, Map<String, Float>> extraExtraFeeCondtion,
+			Map<String, Float> petFee,
+			Map<String, Float> normalPetFeeMaxUnit,
+			Map<String, Float> extraPetFeeMaxUnit,
+			Map<String, Float> extraPetFeeForLevel) {
+		super();
+		this.unit = unit;
+		this.freeUnit = freeUnit;
+		this.extraFreeUnitForSportingEquipments = extraFreeUnitForSportingEquipments;
+		this.extraFeePerUnit = extraFeePerUnit;
+		this.extraExtraFeeForLevel = extraExtraFeeForLevel;
+		this.extraExtraFeeCondtion = extraExtraFeeCondtion;
+		this.petFee = petFee;
+		this.normalPetFeeMaxUnit = normalPetFeeMaxUnit;
+		this.extraPetFeeMaxUnit = extraPetFeeMaxUnit;
+		this.extraPetFeeForLevel = extraPetFeeForLevel;
+	}
+	
 	public ArrayList<String> getUnit() {
 		return unit;
 	}
