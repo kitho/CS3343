@@ -9,9 +9,9 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import CS3343.AirlineTicketOrdering.Baggage.Temp.BaggagePlan;
-import CS3343.AirlineTicketOrdering.Baggage.Temp.FlightClass;
-import CS3343.AirlineTicketOrdering.Baggage.Temp.Route;
+import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
+import CS3343.AirlineTicketOrdering.Model.FlightClass;
+import CS3343.AirlineTicketOrdering.Model.Route;
 
 public class BaggageFeeCalculator_PieceEvnTest {
 	private BaggagePlan baggagePlan;
@@ -217,9 +217,9 @@ public class BaggageFeeCalculator_PieceEvnTest {
 				
 		//1.1 Passenger take 30KG baggage
 		Map<String, Float> unitNumForBaggage = new HashMap<String, Float>();
-		unitNumForBaggage.put(units.get(0),30f);
-		unitNumForBaggage.put(units.get(1),2f);
-		unitNumForBaggage.put(units.get(2),40f);
+		unitNumForBaggage.put(units.get(0),20f);
+		unitNumForBaggage.put(units.get(1),1f);
+		unitNumForBaggage.put(units.get(2),20f);
 		
 		//1.2 NO Equipment
 		ArrayList<String> sportingEquipments = new ArrayList<String>();
@@ -227,7 +227,7 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		//1.3 The passenger take a pets
 		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
 		unitNumForPet.put(units.get(0), 30f);
-		unitNumForPet.put(units.get(1), 1f);
+		unitNumForPet.put(units.get(1), 2f);
 		unitNumForPet.put(units.get(2), 40f);
 
 		float fee = calculator.calBaggageFeeForOnePassenger(
@@ -245,11 +245,11 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		//1. Initial passenger data...
 		ArrayList<String> units = baggagePlan.getUnit();
 		
-		//1.1 Passenger take 30KG baggage
+		//1.1 Passenger take baggage
 		Map<String, Float> unitNumForBaggage = new HashMap<String, Float>();
-		unitNumForBaggage.put(units.get(0),60f);
-		unitNumForBaggage.put(units.get(1),3f);
-		unitNumForBaggage.put(units.get(2),80f);
+		unitNumForBaggage.put(units.get(0),40f);
+		unitNumForBaggage.put(units.get(1),2f);
+		unitNumForBaggage.put(units.get(2),40f);
 		
 		//1.2 The baggage include bicycles
 		ArrayList<String> sportingEquipments = new ArrayList<String>();

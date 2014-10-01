@@ -9,9 +9,9 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import CS3343.AirlineTicketOrdering.Baggage.Temp.BaggagePlan;
-import CS3343.AirlineTicketOrdering.Baggage.Temp.FlightClass;
-import CS3343.AirlineTicketOrdering.Baggage.Temp.Route;
+import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
+import CS3343.AirlineTicketOrdering.Model.FlightClass;
+import CS3343.AirlineTicketOrdering.Model.Route;
 
 public class BaggageFeeCalculator_KGEvnTest {
 	private BaggagePlan baggagePlan;
