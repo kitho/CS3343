@@ -237,7 +237,7 @@ public class BaggageFeeCalculator_PieceEvnTest {
 					sportingEquipments, 
 					unitNumForPet);
 
-		assertEquals(1500f, fee, 0);
+		assertEquals(3000f, fee, 0);
 	}
 	
 	@Test
@@ -268,7 +268,7 @@ public class BaggageFeeCalculator_PieceEvnTest {
 				sportingEquipments, 
 				unitNumForPet);
 
-		assertEquals(1500f, fee, 0);
+		assertEquals(1900f, fee, 0);
 	}
 
 }
