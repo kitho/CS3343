@@ -61,6 +61,8 @@ public class DataSourcePropertiesTest {
 		
 		assertThat(null, is(dataSourceProperties.getPath("airlinecompany")));
 		assertThat(null, is(dataSourceProperties.getPath("flight")));
+		assertThat(null, is(dataSourceProperties.getPath("food")));
+		assertThat(null, is(dataSourceProperties.getPath("meal")));
 	}
 	
 	@Test
@@ -100,6 +102,42 @@ public class DataSourcePropertiesTest {
 	}
 	
 	@Test
+	public void dataSourcePropertiesReadFoodCSVFilePath() throws IOException{
+		Files.deleteIfExists(Paths.get(projectPath + DataSourceProperties.DATA_SOURCE_PATH));
+		
+		SourceWriter<Map<String, String>> dataSourceFilePropertiesWriter = 
+				new DataSourcePropertiesFileWriter(projectPath + DataSourceProperties.DATA_SOURCE_PATH);
+		
+		Map<String, String> propertyPairs = new HashMap<String, String>();
+		propertyPairs.put("food", CSVFile.FOODCSV.value());
+		
+		dataSourceFilePropertiesWriter.write(propertyPairs);
+		dataSourceFilePropertiesWriter.close();
+		
+		SystemProperties dataSourceProperties = new DataSourceProperties();
+		
+		assertThat(CSVFile.FOODCSV.value(), is(dataSourceProperties.getPath("food")));
+	}
+	
+	@Test
+	public void dataSourcePropertiesReadMealCSVFilePath() throws IOException{
+		Files.deleteIfExists(Paths.get(projectPath + DataSourceProperties.DATA_SOURCE_PATH));
+		
+		SourceWriter<Map<String, String>> dataSourceFilePropertiesWriter = 
+				new DataSourcePropertiesFileWriter(projectPath + DataSourceProperties.DATA_SOURCE_PATH);
+		
+		Map<String, String> propertyPairs = new HashMap<String, String>();
+		propertyPairs.put("meal", CSVFile.MEALCSV.value());
+		
+		dataSourceFilePropertiesWriter.write(propertyPairs);
+		dataSourceFilePropertiesWriter.close();
+		
+		SystemProperties dataSourceProperties = new DataSourceProperties();
+		
+		assertThat(CSVFile.MEALCSV.value(), is(dataSourceProperties.getPath("meal")));
+	}
+	
+	@Test
 	public void dataSourcePropertiesReadAllCSVFilePath() throws IOException{
 		Files.deleteIfExists(Paths.get(projectPath + DataSourceProperties.DATA_SOURCE_PATH));
 		
@@ -109,6 +147,8 @@ public class DataSourcePropertiesTest {
 		Map<String, String> propertyPairs = new HashMap<String, String>();
 		propertyPairs.put("airlinecompany", CSVFile.AIRLINECOMPANYCSV.value());
 		propertyPairs.put("flight", CSVFile.FLIGHTCSV.value());
+		propertyPairs.put("food", CSVFile.FOODCSV.value());
+		propertyPairs.put("meal", CSVFile.MEALCSV.value());
 		
 		dataSourceFilePropertiesWriter.write(propertyPairs);
 		dataSourceFilePropertiesWriter.close();
@@ -117,6 +157,10 @@ public class DataSourcePropertiesTest {
 		
 		assertThat(CSVFile.AIRLINECOMPANYCSV.value(), is(dataSourceProperties.getPath("airlinecompany")));
 		assertThat(CSVFile.FLIGHTCSV.value(), is(dataSourceProperties.getPath("flight")));
+		assertThat(CSVFile.FOODCSV.value(), is(dataSourceProperties.getPath("food")));
+		assertThat(CSVFile.MEALCSV.value(), is(dataSourceProperties.getPath("meal")));
 	}
+	
+	
 
 }
