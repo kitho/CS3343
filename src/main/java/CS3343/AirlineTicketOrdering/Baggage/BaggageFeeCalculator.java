@@ -166,7 +166,7 @@ public class BaggageFeeCalculator {
 		for(String key : remainingFreeUnit.keySet()){
 			Float oldValue = remainingFreeUnit.get(key);
 			Float newValue = oldValue - unitNumForBaggage.get(key);
-			remainingFreeUnit.replace(key, oldValue, newValue);
+			//remainingFreeUnit.replace(key, oldValue, newValue);
 		}
 		return remainingFreeUnit;
 		
@@ -190,7 +190,7 @@ public class BaggageFeeCalculator {
 		for(String key : remainingFreeUnit.keySet()){
 			Float oldValue = remainingFreeUnit.get(key);
 			Float newValue = oldValue + maxUnitNumsForSE.get(key);
-			remainingFreeUnit.replace(key, oldValue, newValue);
+			//remainingFreeUnit.replace(key, oldValue, newValue);
 		}
 		return remainingFreeUnit;
 		

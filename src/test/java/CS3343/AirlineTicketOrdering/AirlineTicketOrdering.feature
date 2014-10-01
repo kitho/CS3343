@@ -43,5 +43,4 @@ Scenario: One Way Direct flight ticket purchasing
 	|Order Number|
 	|OR1		 |
 
-Scenario: Test
 
