@@ -49,6 +49,22 @@ public class BaggageFeeCalculator {
 		baggageFee += this.calExtraFreeForRemainingUnit(remainingFreeUnit, plan);
 		
 		//Extra extra fee...
+		baggageFee += this.calExtraExtraFee(plan, unitNumForBaggage, flightClass);
+			
+		//Pet fee
+		float petFee = this.calPetFee(plan, unitNumForPet);
+		
+		//Pet extra fee
+		petFee += this.calExtraPetFee(plan, unitNumForPet, flightClass);
+		
+		resultFee = baggageFee + petFee;
+		return resultFee;
+	}
+	
+	//Calculate extra extra fee
+	private float calExtraExtraFee(BaggagePlan plan, Map<String, Float> unitNumForBaggage,
+			FlightClass flightClass){
+		float resultExtraExtraFee = 0;
 		Map<FlightClass, Map<String, Float>> extraExtraFeeForLevels = plan.getExtraExtraFeeForLevel();
 		Map<String, Map<String, ArrayList<Float>>> extraExtraFeeCondtions = plan.getExtraExtraFeeCondtion();
 		//Find last passed level
@@ -73,23 +89,44 @@ public class BaggageFeeCalculator {
 		//Plus the level's fee
 		if(lastPassedLevel != null){
 			Map<String, Float> extraExtraFees = extraExtraFeeForLevels.get(flightClass);
-			baggageFee += extraExtraFees.get(lastPassedLevel);
+			resultExtraExtraFee += extraExtraFees.get(lastPassedLevel);
 		}
-			
-		
-		//Pet fee
-		float petFee = this.calPetFee(plan, unitNumForPet);
-		
-		//Pet extra fee
-		//...
-		
-		resultFee = baggageFee + petFee;
-		return resultFee;
+		return resultExtraExtraFee;
 	}
 	
-	//Calculate baggage fee for GROUP
-	public float calBaggageFeeForGroup(){
-		return 0;
+	//Calculate extra pet fee
+	private float calExtraPetFee(BaggagePlan plan, Map<String, Float> unitNumForPet,
+			FlightClass flightClass){
+		if(unitNumForPet.size() == 0)
+			return 0;
+		float resultExtraPetFee = 0;
+		Map<FlightClass, Map<String, Float>> extraExtraPetFeeForLevels = plan.getExtraExtraPetFeeForLevel();
+		Map<String, Map<String, ArrayList<Float>>> extraExtraPetFeeCondtions = plan.getExtraExtraPetFeeCondtion();
+		//Find last passed level
+		String lastPassedLevel = null;
+		for(String keyLevel : extraExtraPetFeeCondtions.keySet()){
+			Map<String, ArrayList<Float>> conditions = extraExtraPetFeeCondtions.get(keyLevel);
+			boolean isPass = true;
+			for(String keyUnit : conditions.keySet()){
+				ArrayList<Float> conditionUnitNums = conditions.get(keyUnit);
+				Float conditionUnitNumFrom = conditionUnitNums.get(0);
+				Float conditionUnitNumTo = conditionUnitNums.get(1);
+				
+				//Does it fulfill condition?
+				Float unitNum = unitNumForPet.get(keyUnit);
+				if(conditionUnitNumFrom > unitNum ||
+						conditionUnitNumTo < unitNum)
+					isPass = false;
+			}
+			if(isPass)
+				lastPassedLevel = keyLevel;
+		}
+		//Plus the level's fee
+		if(lastPassedLevel != null){
+			Map<String, Float> extraPetFees = extraExtraPetFeeForLevels.get(flightClass);
+			resultExtraPetFee += extraPetFees.get(lastPassedLevel);
+		}
+		return resultExtraPetFee;
 	}
 	
 	//Calculate pet fee

@@ -56,9 +56,11 @@ public class BaggageFeeCalculator_KGEvnTest {
 		
 		//2.6 Initial pet fee
 		Map<String, Float> petFee = new HashMap<String, Float>();
-		petFee.put(unit.get(0), 200f);
+		petFee.put(unit.get(0), 30f);
 		
 		//2.7 Initial extra extra PET fee (NO Extra Extra Pet Fee for KG Unit)
+		Map<FlightClass, Map<String, Float>> extraPetFeeForLevels = new HashMap<FlightClass, Map<String, Float>>();
+		Map<String, Map<String, ArrayList<Float>>> extraPetFeeCondtions = new HashMap<String, Map<String, ArrayList<Float>>>();
 		
 		//2.8 Set value for baggage plan
 		baggagePlan.setUnit(unit);
@@ -68,6 +70,8 @@ public class BaggageFeeCalculator_KGEvnTest {
 		baggagePlan.setPetFee(petFee);
 		baggagePlan.setExtraExtraFeeForLevel(extraExtraFeeForLevels);
 		baggagePlan.setExtraExtraFeeCondtion(extraExtraFeeCondtions);
+		baggagePlan.setExtraExtraPetFeeForLevel(extraPetFeeForLevels);
+		baggagePlan.setExtraExtraPetFeeCondtion(extraPetFeeCondtions);
 		
 		//***3. Initial route...
 		route = new Route();
@@ -149,7 +153,9 @@ public class BaggageFeeCalculator_KGEvnTest {
 		
 		//1.3 The passenger take 10KG pets
 		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
-		unitNumForPet.put(units.get(0), 10f);
+		unitNumForPet.put(units.get(0), 30f);
+		unitNumForPet.put(units.get(1), 1f);
+		unitNumForPet.put(units.get(2), 40f);
 
 		float fee = calculator.calBaggageFeeForOnePassenger(
 					route, 
@@ -158,7 +164,7 @@ public class BaggageFeeCalculator_KGEvnTest {
 					sportingEquipments, 
 					unitNumForPet);
 
-		assertEquals(3000f, fee, 0);
+		assertEquals(1900f, fee, 0);
 	}
 	
 	@Test
@@ -168,8 +174,8 @@ public class BaggageFeeCalculator_KGEvnTest {
 		
 		//1.1 Passenger take 30KG baggage
 		Map<String, Float> unitNumForBaggage = new HashMap<String, Float>();
-		unitNumForBaggage.put(units.get(0),30f);
-		unitNumForBaggage.put(units.get(1),1f);
+		unitNumForBaggage.put(units.get(0),40f);
+		unitNumForBaggage.put(units.get(1),2f);
 		unitNumForBaggage.put(units.get(2),40f);
 		
 		//1.2 The baggage include bicycles
@@ -178,7 +184,9 @@ public class BaggageFeeCalculator_KGEvnTest {
 		
 		//1.3 The passenger take 10KG pets
 		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
-		unitNumForPet.put(units.get(0), 10f);
+		unitNumForPet.put(units.get(0), 30f);
+		unitNumForPet.put(units.get(1), 1f);
+		unitNumForPet.put(units.get(2), 40f);
 		
 		float fee = calculator.calBaggageFeeForOnePassenger(
 				route, 
@@ -187,7 +195,7 @@ public class BaggageFeeCalculator_KGEvnTest {
 				sportingEquipments, 
 				unitNumForPet);
 
-		assertEquals(2000f, fee, 0);
+		assertEquals(1900f, fee, 0);
 	}
 
 }

@@ -96,6 +96,44 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		petFee.put(unit.get(1), 1500f);
 		
 		//2.7 Initial extra extra PET fee for so many / very large pet
+		Map<FlightClass, Map<String, Float>> extraPetFeeForLevels = new HashMap<FlightClass, Map<String, Float>>();
+		//Define 3 levels' extra PET fee for the flight class
+		Map<String, Float> extraPetFees = new HashMap<String, Float>();
+		extraPetFees.put("1", 100f);
+		extraPetFees.put("2", 100f);
+		extraPetFees.put("3", 400f);
+		extraPetFees.put("4", 400f);
+		extraPetFeeForLevels.put(flightClass, extraPetFees);
+		//Define condition ranges for each level
+		//Level 1. 25-30KG
+		Map<String, Map<String, ArrayList<Float>>> extraPetFeeCondtions = new HashMap<String, Map<String, ArrayList<Float>>>();
+		unitRangeNum = new ArrayList<Float>();
+		unitRangeNum.add(25f);
+		unitRangeNum.add(30f);
+		unitRange = new HashMap<String, ArrayList<Float>>();
+		unitRange.put(unit.get(0), unitRangeNum);
+		extraPetFeeCondtions.put("1", unitRange);
+		//Level 2. 40-50 Inch
+		unitRangeNum = new ArrayList<Float>();
+		unitRangeNum.add(40f);
+		unitRangeNum.add(50f);
+		unitRange = new HashMap<String, ArrayList<Float>>();
+		unitRange.put(unit.get(2), unitRangeNum);
+		extraPetFeeCondtions.put("2", unitRange);
+		//Level 3. > 31 KG
+		unitRangeNum = new ArrayList<Float>();
+		unitRangeNum.add(31f);
+		unitRangeNum.add(9999f);
+		unitRange = new HashMap<String, ArrayList<Float>>();
+		unitRange.put(unit.get(0), unitRangeNum);
+		extraPetFeeCondtions.put("3", unitRange);
+		//Level 4. > 51 Inch
+		unitRangeNum = new ArrayList<Float>();
+		unitRangeNum.add(51f);
+		unitRangeNum.add(9999f);
+		unitRange = new HashMap<String, ArrayList<Float>>();
+		unitRange.put(unit.get(2), unitRangeNum);
+		extraPetFeeCondtions.put("4", unitRange);
 		
 		//2.8 Set value for baggage plan
 		baggagePlan.setUnit(unit);
@@ -105,6 +143,8 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		baggagePlan.setPetFee(petFee);
 		baggagePlan.setExtraExtraFeeForLevel(extraExtraFeeForLevels);
 		baggagePlan.setExtraExtraFeeCondtion(extraExtraFeeCondtions);
+		baggagePlan.setExtraExtraPetFeeForLevel(extraPetFeeForLevels);
+		baggagePlan.setExtraExtraPetFeeCondtion(extraPetFeeCondtions);
 		
 		//***3. Initial route...
 		route = new Route();
@@ -186,7 +226,9 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		
 		//1.3 The passenger take a pets
 		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
+		unitNumForPet.put(units.get(0), 30f);
 		unitNumForPet.put(units.get(1), 1f);
+		unitNumForPet.put(units.get(2), 40f);
 
 		float fee = calculator.calBaggageFeeForOnePassenger(
 					route, 
@@ -215,7 +257,9 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		
 		//1.3 The passenger take a pets
 		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
+		unitNumForPet.put(units.get(0), 30f);
 		unitNumForPet.put(units.get(1), 1f);
+		unitNumForPet.put(units.get(2), 40f);
 		
 		float fee = calculator.calBaggageFeeForOnePassenger(
 				route, 
