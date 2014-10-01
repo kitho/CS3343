@@ -1,4 +1,4 @@
-package CS3343.AirlineTicketOrdering.DataSource;
+package CS3343.AirlineTicketOrdering.DataReader;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
