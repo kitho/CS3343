@@ -35,6 +35,7 @@ public class FlightCSVFileReader extends FileReader<Flight> {
 			flight.setArrivalDateTime(formatter.parse(dataStr[6]));
 			flight.setAvailable(Integer.parseInt(dataStr[7]));
 			flight.setOneWayPrice(Double.parseDouble(dataStr[8]));
+			flight.setModel(dataStr[9]);
 			flights.add(flight);
 		}
 

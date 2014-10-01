@@ -9,12 +9,12 @@ Scenario: One Way Direct flight ticket purchasing
     
     And Flights are provided for the customers:
     
-    |Airline Company		|Flight	Number	|Travel Class	|Depature	|Destination|Depature DateTime		|Arrival DateTime		|Available	|One Way Price	|
-	|Cathay Pacific Airways |CP001			|FIRST			|Hong Kong	|Taiwan		|2014-01-01 14:30:00	|2014-01-01 17:30:00	|30			|2500.00		|
+    |Airline Company		|Flight	Number	|Travel Class	|Depature	|Destination|Depature DateTime		|Arrival DateTime		|Available	|One Way Price	|Flights Model	|
+	|Cathay Pacific Airways |CP001			|FIRST			|Hong Kong	|Taiwan		|2014-01-01 14:30:00	|2014-01-01 17:30:00	|30			|2500.00		|A320			|
     
     And Flights Model are provided for the customer:
     |Flights Model	|Seats		|Distance	|
-    |77A			|320		|9649		|
+    |A320			|180		|5000		|
     
     And Client comes to the airline ticket ordering view
     When Client inputs the depature and destination and date:

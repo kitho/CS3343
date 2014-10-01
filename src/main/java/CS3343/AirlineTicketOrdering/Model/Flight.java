@@ -13,7 +13,15 @@ public class Flight {
 	private Date arrivalDateTime;
 	private int available;
 	private double oneWayPrice;
+	private String model;
 	
+	
+	public String getModel() {
+		return model;
+	}
+	public void setModel(String model) {
+		this.model = model;
+	}
 	public String getAirline() {
 		return airline;
 	}
