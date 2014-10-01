@@ -11,6 +11,9 @@ import java.util.Iterator;
 import java.util.Map;
 
 import CS3343.AirlineTicketOrdering.Baggage.Temp.*;
+import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
+import CS3343.AirlineTicketOrdering.Model.FlightClass;
+import CS3343.AirlineTicketOrdering.Model.Route;
 
 public class BaggageFeeCalculator {
 	private static BaggageFeeCalculator calculator;

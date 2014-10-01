@@ -1,7 +1,8 @@
 //THIS CLASS IS TEMPORARY ONLY
 
-package CS3343.AirlineTicketOrdering.Baggage.Temp;
+package CS3343.AirlineTicketOrdering.Model;
 import java.util.ArrayList;
+
 
 public class Route {
 	private String destination;
