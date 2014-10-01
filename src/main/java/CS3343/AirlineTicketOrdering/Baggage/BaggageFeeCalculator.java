@@ -15,7 +15,7 @@ import CS3343.AirlineTicketOrdering.Baggage.Temp.*;
 public class BaggageFeeCalculator {
 	private static BaggageFeeCalculator calculator;
 	
-	//Singleton Pattern
+	//Singleton Pattern s
 	private BaggageFeeCalculator(){}
 	
 	public static BaggageFeeCalculator getInstance(){
