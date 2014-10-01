@@ -13,7 +13,7 @@ import CS3343.AirlineTicketOrdering.Baggage.Temp.BaggagePlan;
 import CS3343.AirlineTicketOrdering.Baggage.Temp.FlightClass;
 import CS3343.AirlineTicketOrdering.Baggage.Temp.Route;
 
-public class BaggageFeeCalculatorTest {
+public class BaggageFeeCalculator_KGEvnTest {
 	private BaggagePlan baggagePlan;
 	private FlightClass flightClass;
 	private Route route;
@@ -50,16 +50,24 @@ public class BaggageFeeCalculatorTest {
 		Map<String, Float> extraFeePerUnit = new HashMap<String, Float>();
 		extraFeePerUnit.put(unit.get(0), 100f);
 		
-		//2.5 Initial pet fee
+		//2.5 Initial extra extra fee (NO Extra Extra Fee for KG Unit)
+		Map<FlightClass, Map<String, Float>> extraExtraFeeForLevels = new HashMap<FlightClass, Map<String, Float>>();
+		Map<String, Map<String, ArrayList<Float>>> extraExtraFeeCondtions = new HashMap<String, Map<String, ArrayList<Float>>>();
+		
+		//2.6 Initial pet fee
 		Map<String, Float> petFee = new HashMap<String, Float>();
 		petFee.put(unit.get(0), 200f);
 		
-		//2.6 Set value for baggage plan
+		//2.7 Initial extra extra PET fee (NO Extra Extra Pet Fee for KG Unit)
+		
+		//2.8 Set value for baggage plan
 		baggagePlan.setUnit(unit);
 		baggagePlan.setFreeUnit(freeUnits);
 		baggagePlan.setExtraFreeUnitForSportingEquipments(extraFreeUnitForSportingEquipments);
 		baggagePlan.setExtraFeePerUnit(extraFeePerUnit);
 		baggagePlan.setPetFee(petFee);
+		baggagePlan.setExtraExtraFeeForLevel(extraExtraFeeForLevels);
+		baggagePlan.setExtraExtraFeeCondtion(extraExtraFeeCondtions);
 		
 		//***3. Initial route...
 		route = new Route();
@@ -68,7 +76,7 @@ public class BaggageFeeCalculatorTest {
 		//***4. Get instance of calculator...
 		calculator = BaggageFeeCalculator.getInstance();
 	}
-	
+
 	@Test
 	public void calculateBaggageFeeWithoutEquipmentAndPet(){
 		//1. Initial passenger data...
@@ -77,6 +85,8 @@ public class BaggageFeeCalculatorTest {
 		//1.1 Passenger take n KG baggage
 		Map<String, Float> unitNumForBaggage = new HashMap<String, Float>();
 		unitNumForBaggage.put(units.get(0),30f);
+		unitNumForBaggage.put(units.get(1),1f);
+		unitNumForBaggage.put(units.get(2),40f);
 		
 		//1.2 NO sporting  equipment
 		ArrayList<String> sportingEquipments = new ArrayList<String>();
@@ -99,9 +109,11 @@ public class BaggageFeeCalculatorTest {
 		//1. Initial passenger data...
 		ArrayList<String> units = baggagePlan.getUnit();
 				
-		//1.1 Passenger take 50KG baggage
+		//1.1 Passenger take 30KG baggage
 		Map<String, Float> unitNumForBaggage = new HashMap<String, Float>();
-		unitNumForBaggage.put(units.get(0),50f);
+		unitNumForBaggage.put(units.get(0),30f);
+		unitNumForBaggage.put(units.get(1),1f);
+		unitNumForBaggage.put(units.get(2),40f);
 		
 		//1.2 The baggage include bicycles
 		ArrayList<String> sportingEquipments = new ArrayList<String>();
@@ -117,7 +129,7 @@ public class BaggageFeeCalculatorTest {
 				sportingEquipments, 
 				unitNumForPet);
 
-		assertEquals(2000f, fee, 0);
+		assertEquals(0f, fee, 0);
 	}
 	
 	
@@ -129,6 +141,8 @@ public class BaggageFeeCalculatorTest {
 		//1.1 Passenger take 30KG baggage
 		Map<String, Float> unitNumForBaggage = new HashMap<String, Float>();
 		unitNumForBaggage.put(units.get(0),30f);
+		unitNumForBaggage.put(units.get(1),1f);
+		unitNumForBaggage.put(units.get(2),40f);
 		
 		//1.2 NO Equipment
 		ArrayList<String> sportingEquipments = new ArrayList<String>();
@@ -138,11 +152,11 @@ public class BaggageFeeCalculatorTest {
 		unitNumForPet.put(units.get(0), 10f);
 
 		float fee = calculator.calBaggageFeeForOnePassenger(
-				route, 
-				flightClass, 
-				unitNumForBaggage, 
-				sportingEquipments, 
-				unitNumForPet);
+					route, 
+					flightClass, 
+					unitNumForBaggage, 
+					sportingEquipments, 
+					unitNumForPet);
 
 		assertEquals(3000f, fee, 0);
 	}
@@ -152,9 +166,11 @@ public class BaggageFeeCalculatorTest {
 		//1. Initial passenger data...
 		ArrayList<String> units = baggagePlan.getUnit();
 		
-		//1.1 Passenger take 40KG baggage
+		//1.1 Passenger take 30KG baggage
 		Map<String, Float> unitNumForBaggage = new HashMap<String, Float>();
-		unitNumForBaggage.put(units.get(0),40f);
+		unitNumForBaggage.put(units.get(0),30f);
+		unitNumForBaggage.put(units.get(1),1f);
+		unitNumForBaggage.put(units.get(2),40f);
 		
 		//1.2 The baggage include bicycles
 		ArrayList<String> sportingEquipments = new ArrayList<String>();
@@ -171,7 +187,7 @@ public class BaggageFeeCalculatorTest {
 				sportingEquipments, 
 				unitNumForPet);
 
-		assertEquals(3000f, fee, 0);
+		assertEquals(2000f, fee, 0);
 	}
 
 }

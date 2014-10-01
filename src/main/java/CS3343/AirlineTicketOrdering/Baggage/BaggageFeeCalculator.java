@@ -48,10 +48,34 @@ public class BaggageFeeCalculator {
 		//Calculate extra fee
 		baggageFee += this.calExtraFreeForRemainingUnit(remainingFreeUnit, plan);
 		
-		//Extra extra fee
-		//...
-		//Map<FlightClass, Map<String, Float>> extraExtraFeeForLevel = plan.getExtraExtraFeeForLevel();
-		//Map<String, Map<String, Float>> extraExtraFeeCondtion = plan.getExtraExtraFeeCondtion();
+		//Extra extra fee...
+		Map<FlightClass, Map<String, Float>> extraExtraFeeForLevels = plan.getExtraExtraFeeForLevel();
+		Map<String, Map<String, ArrayList<Float>>> extraExtraFeeCondtions = plan.getExtraExtraFeeCondtion();
+		//Find last passed level
+		String lastPassedLevel = null;
+		for(String keyLevel : extraExtraFeeCondtions.keySet()){
+			Map<String, ArrayList<Float>> conditions = extraExtraFeeCondtions.get(keyLevel);
+			boolean isPass = true;
+			for(String keyUnit : conditions.keySet()){
+				ArrayList<Float> conditionUnitNums = conditions.get(keyUnit);
+				Float conditionUnitNumFrom = conditionUnitNums.get(0);
+				Float conditionUnitNumTo = conditionUnitNums.get(1);
+				
+				//Does it fulfill condition?
+				Float unitNumForPassenger = unitNumForBaggage.get(keyUnit);
+				if(conditionUnitNumFrom > unitNumForPassenger ||
+						conditionUnitNumTo < unitNumForPassenger)
+					isPass = false;
+			}
+			if(isPass)
+				lastPassedLevel = keyLevel;
+		}
+		//Plus the level's fee
+		if(lastPassedLevel != null){
+			Map<String, Float> extraExtraFees = extraExtraFeeForLevels.get(flightClass);
+			baggageFee += extraExtraFees.get(lastPassedLevel);
+		}
+			
 		
 		//Pet fee
 		float petFee = this.calPetFee(plan, unitNumForPet);
