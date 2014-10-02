@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import CS3343.AirlineTicketOrdering.Model.Flight;
 
@@ -19,7 +20,7 @@ public class FlightCSVFileReader extends FileReader<Flight> {
 	public List<Flight> read() throws IOException, ParseException {
 
 		SimpleDateFormat formatter = new SimpleDateFormat(
-				"EEE MMM dd HH:mm:ss Z yyyy");
+				"EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
 		List<Flight> flights = new ArrayList<Flight>();
 
 		String line;

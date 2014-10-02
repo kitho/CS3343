@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class FlightCSVFileReaderTest {
 	@Before
 	public void setUp() throws IOException{
 		projectPath = new File(".").getCanonicalFile(); 
-		formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 	}
 
 	
