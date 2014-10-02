@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import CS3343.AirlineTicketOrdering.DataQuery.AirlineQuery;
 import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
 import CS3343.AirlineTicketOrdering.DataWriter.DataTableCSVFileWriter;
+import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 import cucumber.api.DataTable;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -31,21 +31,21 @@ public class AirlineTicketOrderingStepDef {
 
 	@Given("^Airline companies are provided:$")
 	public void Airline_companies_are_provided(DataTable dataTable) throws Throwable {
-		DataTableCSVFileWriter dataTableCSVFileWriter = new DataTableCSVFileWriter(projectPath + CSVFile.AIRLINECOMPANYCSV.value());
+		SourceWriter<DataTable> dataTableCSVFileWriter = new DataTableCSVFileWriter(projectPath + CSVFile.AIRLINECOMPANYCSV.value());
 		dataTableCSVFileWriter.write(dataTable);
 		dataTableCSVFileWriter.close();
 	}
 
 	@And("^Flights are provided for the customers:$")
 	public void Flights_are_provided_for_the_customers(DataTable dataTable) throws Throwable {
-		DataTableCSVFileWriter dataTableCSVFileWriter = new DataTableCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value());
+		SourceWriter<DataTable> dataTableCSVFileWriter = new DataTableCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value());
 		dataTableCSVFileWriter.write(dataTable);
 		dataTableCSVFileWriter.close();
 	}
 	
 	@Given("^Flights Model are provided for the customer:$")
 	public void Flights_Model_are_provided_for_the_customer(DataTable dataTable) throws Throwable {
-		DataTableCSVFileWriter dataTableCSVFileWriter = new DataTableCSVFileWriter(projectPath + CSVFile.MODELCSV.value());
+		SourceWriter<DataTable> dataTableCSVFileWriter = new DataTableCSVFileWriter(projectPath + CSVFile.MODELCSV.value());
 		dataTableCSVFileWriter.write(dataTable);
 		dataTableCSVFileWriter.close();
 	}

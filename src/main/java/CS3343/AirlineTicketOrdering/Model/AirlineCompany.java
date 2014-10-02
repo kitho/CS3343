@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AirlineCompany {
 	
-	private String airline;
+	private final String airline;
 	private List<Flight> flights;
 	
 	public AirlineCompany(String airline){

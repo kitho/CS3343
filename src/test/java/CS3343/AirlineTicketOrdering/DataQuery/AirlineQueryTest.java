@@ -282,8 +282,6 @@ public class AirlineQueryTest {
 			assertThat(flights.get(i).getAvailable(), is(flightsResult.get(i).getAvailable()));
 			assertThat(flights.get(i).getOneWayPrice(), is(flightsResult.get(i).getOneWayPrice()));
 		}
-
-		
 	}
 
 }
