@@ -19,7 +19,9 @@ public class PathFinding {
 	public ArrayList<Route> getDirectFlight(){
 		ArrayList<Route> routeList = routeTable.getRouteList();
 		ArrayList<Route> resultRouteList = new ArrayList<Route>();
-		resultRouteList.add(findRoute(from, to, routeList));
+		Route route = findRoute(from, to, routeList);
+		if (route != null)
+			resultRouteList.add(route);
 		return resultRouteList;
 	}
 	
@@ -31,4 +33,14 @@ public class PathFinding {
 		}
 		return null;		
 	}
+	
+	public ArrayList<Route> getIndirectFlight(){
+		ArrayList<Route> routeList = routeTable.getRouteList();
+		ArrayList<Route> resultRouteList = new ArrayList<Route>();
+		Route route = findRoute(from, to, routeList);
+		if (route != null)
+			resultRouteList.add(route);
+		return resultRouteList;
+	}	
+	
 }
