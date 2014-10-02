@@ -13,8 +13,8 @@ Scenario: One Way Direct flight ticket purchasing
 	|Cathay Pacific Airways |CP001			|FIRST			|Hong Kong	|Taiwan		|2014-01-01 14:30:00	|2014-01-01 17:30:00	|30			|2500.00		|A320			|
     
     And Flights Model are provided for the customer:
-    |Flights Model	|Seats		|Distance	|
-    |A320			|180		|5000		|
+    |Flights Model	|Seats		|Max Baggage KG	|
+    |A320			|180		|50000			|
     
     And Client comes to the airline ticket ordering view
     When Client inputs the depature and destination and date:

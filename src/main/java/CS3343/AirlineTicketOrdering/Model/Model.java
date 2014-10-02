@@ -3,7 +3,7 @@ package CS3343.AirlineTicketOrdering.Model;
 public class Model {
 	public String model;
 	public int seat;
-	public int distance;
+	public int maxBaggageKg;
 	
 	
 	
@@ -19,13 +19,13 @@ public class Model {
 	public void setSeat(int seat) {
 		this.seat = seat;
 	}
-	public int getDistance() {
-		return distance;
+	public int getMaxBaggageKg() {
+		return maxBaggageKg;
 	}
-	public void setDistance(int distance) {
-		this.distance = distance;
+	public void setMaxBaggageKg(int maxBaggageKg) {
+		this.maxBaggageKg = maxBaggageKg;
 	}
-	
+
 	
 
 }

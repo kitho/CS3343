@@ -52,7 +52,7 @@ public class ModelCSVFileReaderTest {
 		
 		model.setModel("A320");
 		model.setSeat(180);
-		model.setDistance(5000);
+		model.setMaxBaggageKg(5000);
 		
 		List<Model> models = new ArrayList<Model>();
 		models.add(model);
@@ -65,7 +65,7 @@ public class ModelCSVFileReaderTest {
 		List<Model> resultList = modelCsvFileReader.read();
 		modelCsvFileReader.close();
 		
-		assertThat(model.getDistance(),is(resultList.get(0).getDistance()));
+		assertThat(model.getMaxBaggageKg(),is(resultList.get(0).getMaxBaggageKg()));
 		assertThat(model.getModel(),is(resultList.get(0).getModel()));
 		assertThat(model.getSeat(),is(resultList.get(0).getSeat()));
 	}
@@ -77,12 +77,12 @@ public class ModelCSVFileReaderTest {
 		Model model1 = new Model();
 		model1.setModel("A320");
 		model1.setSeat(180);
-		model1.setDistance(5000);
+		model1.setMaxBaggageKg(5000);
 		
 		Model model2 = new Model();
 		model2.setModel("737-900");
 		model2.setSeat(215);
-		model2.setDistance(5925);
+		model2.setMaxBaggageKg(5925);
 
 		List<Model> models = new ArrayList<Model>();
 		models.add(model1);
@@ -99,7 +99,7 @@ public class ModelCSVFileReaderTest {
 		assertThat(models.size(), is(resultList.size()));
 		
 		for(int i = 0; i < models.size(); i++){
-			assertThat(models.get(i).getDistance(),is(resultList.get(i).getDistance()));
+			assertThat(models.get(i).getMaxBaggageKg(),is(resultList.get(i).getMaxBaggageKg()));
 			assertThat(models.get(i).getModel(),is(resultList.get(i).getModel()));
 			assertThat(models.get(i).getSeat(),is(resultList.get(i).getSeat()));
 		}
