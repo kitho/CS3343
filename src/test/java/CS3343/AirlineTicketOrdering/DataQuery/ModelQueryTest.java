@@ -14,21 +14,16 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
 import CS3343.AirlineTicketOrdering.DataReader.ModelCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.Model.Model;
 
 public class ModelQueryTest {
 	
-	private File projectPath;
-	private SourceReader<Model> modelReader;
 
 	
 	@Before
 	public void setUp() throws IOException{
-		projectPath = new File(".").getCanonicalFile(); 
-		modelReader = new ModelCSVFileReader(projectPath + CSVFile.MODELCSV.value());
 	}
 	
 	@Test
