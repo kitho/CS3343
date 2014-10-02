@@ -24,7 +24,6 @@ public class ModelCSVFileReader extends FileReader<Model> {
 			Model model = new Model();
 			model.setModel(dataStr[0]);
 			model.setSeat(Integer.parseInt(dataStr[1]));
-			model.setDistance(Integer.parseInt(dataStr[2]));
 			models.add(model);
 		}
 
