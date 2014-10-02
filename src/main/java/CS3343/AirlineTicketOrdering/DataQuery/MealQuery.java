@@ -40,7 +40,7 @@ public class MealQuery {
 		List<Flight> fList = new ArrayList<Flight>();
 		
 		for(Flight flight: this.flights){
-			if(flight.getMealIds().contains("mealId")){
+			if(flight.getMealIds().contains(mealId)){
 				fList.add(flight);
 			}
 		}
