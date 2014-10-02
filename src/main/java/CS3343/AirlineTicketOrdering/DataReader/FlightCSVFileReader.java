@@ -19,8 +19,10 @@ public class FlightCSVFileReader extends FileReader<Flight> {
 	@Override
 	public List<Flight> read() throws IOException, ParseException {
 
+//		SimpleDateFormat formatter = new SimpleDateFormat(
+//				"EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
 		SimpleDateFormat formatter = new SimpleDateFormat(
-				"EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
+				"dd/mm/yyyy HH:mm", Locale.ENGLISH);
 		List<Flight> flights = new ArrayList<Flight>();
 
 		String line;
