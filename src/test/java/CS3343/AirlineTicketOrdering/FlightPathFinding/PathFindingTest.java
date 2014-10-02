@@ -49,4 +49,11 @@ public class PathFindingTest {
 		assertThat(resultRoutes.size(), is(1));		
 	}	
 	
+	@Test
+	public void testDirectFlight5(){
+		PathFinding	pathFinding = new PathFinding("Thailand", "Taiwan");
+		ArrayList<Route> resultRoutes = pathFinding.getDirectFlight();
+		assertThat(resultRoutes.size(), is(1));		
+	}	
+	
 }
