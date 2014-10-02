@@ -37,6 +37,8 @@ public class FlightCSVFileReader extends FileReader<Flight> {
 			flight.setAvailable(Integer.parseInt(dataStr[7]));
 			flight.setOneWayPrice(Double.parseDouble(dataStr[8]));
 			flight.setModel(dataStr[9]);
+			flight.setMealIds(dataStr[10]);
+			flight.setFoodIds(dataStr[11]);
 			flights.add(flight);
 		}
 

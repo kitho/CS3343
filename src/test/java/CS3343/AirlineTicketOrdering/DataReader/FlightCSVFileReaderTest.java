@@ -67,6 +67,8 @@ public class FlightCSVFileReaderTest {
 		flight.setAvailable(30);
 		flight.setOneWayPrice(2500.00);
 		flight.setModel("737-900");
+		flight.setMealIds("M1");
+		flight.setFoodIds("4-3-6-11-12-1-5");
 		
 		ArrayList<Flight> flights = new ArrayList<Flight>();
 		flights.add(flight);
@@ -89,8 +91,8 @@ public class FlightCSVFileReaderTest {
 		assertThat(flight.getAvailable(), is(resultList.get(0).getAvailable()));
 		assertThat(flight.getOneWayPrice(), is(resultList.get(0).getOneWayPrice()));
 		assertThat(flight.getModel(), is(resultList.get(0).getModel()));
-
-
+		assertThat(flight.getMealIds(), is(resultList.get(0).getMealIds()));
+		assertThat(flight.getFoodIds(), is(resultList.get(0).getFoodIds()));
 	}
 	
 	@Test
@@ -109,6 +111,8 @@ public class FlightCSVFileReaderTest {
 		flight1.setAvailable(30);
 		flight1.setOneWayPrice(2500.00);
 		flight1.setModel("737-900");
+		flight1.setMealIds("M1");
+		flight1.setFoodIds("4-3-6-11-12-1-5");
 		
 		Flight flight2 = new Flight();
 		
@@ -122,7 +126,8 @@ public class FlightCSVFileReaderTest {
 		flight2.setAvailable(25);
 		flight2.setOneWayPrice(1500.00);
 		flight2.setModel("737-900");
-
+		flight2.setMealIds("M2");
+		flight2.setFoodIds("1-2-3-4-5-6-7-8-9-10-11-12-13");
 		
 		Flight flight3 = new Flight();
 		
@@ -136,7 +141,8 @@ public class FlightCSVFileReaderTest {
 		flight3.setAvailable(100);
 		flight3.setOneWayPrice(10500.00);
 		flight3.setModel("737-900");
-
+		flight3.setMealIds("M3");
+		flight3.setFoodIds("4-13-2-9-5");
 		
 		ArrayList<Flight> flights = new ArrayList<Flight>();
 		flights.add(flight1);
@@ -165,6 +171,8 @@ public class FlightCSVFileReaderTest {
 			assertThat(flights.get(i).getAvailable(), is(resultList.get(i).getAvailable()));
 			assertThat(flights.get(i).getOneWayPrice(), is(resultList.get(i).getOneWayPrice()));
 			assertThat(flights.get(i).getModel(), is(resultList.get(i).getModel()));
+			assertThat(flights.get(i).getMealIds(), is(resultList.get(i).getMealIds()));
+			assertThat(flights.get(i).getFoodIds(), is(resultList.get(i).getFoodIds()));
 
 		}
 		

@@ -14,8 +14,21 @@ public class Flight {
 	private int available;
 	private double oneWayPrice;
 	private String model;
+	private String mealIds;
+	private String foodIds;
 	
-	
+	public String getMealIds() {
+		return mealIds;
+	}
+	public void setMealIds(String mealIds) {
+		this.mealIds = mealIds;
+	}
+	public String getFoodIds() {
+		return foodIds;
+	}
+	public void setFoodIds(String foodIds) {
+		this.foodIds = foodIds;
+	}
 	public String getModel() {
 		return model;
 	}
