@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Meal {
 	private String mealId;
-	private List<Food>foodList;
+	private String foodIds;
 	
 	public Meal(){
-		foodList = new ArrayList<Food>();
+		
 	}
 	
 	public String getMealId() {
@@ -18,12 +18,15 @@ public class Meal {
 	public void setMealId(String mealId) {
 		this.mealId = mealId;
 	}
-	public List<Food> getFoodList() {
-		return foodList;
+
+	public String getFoodIds() {
+		return foodIds;
 	}
-	public void addFood(Food food) {
-		this.foodList.add(food);
+
+	public void setFoodIds(String foodIds) {
+		this.foodIds = foodIds;
 	}
+
 	
 	
 }
