@@ -13,7 +13,7 @@ public class RouteTable {
 		routeList.add(r);
 		Route r1 = new Route();
 		r1.setDeparture("Tokyo");
-		r1.setDestination("Taiwai");
+		r1.setDestination("Taiwan");
 		routeList.add(r1);
 		Route r2 = new Route();
 		r2.setDeparture("Tokyo");
