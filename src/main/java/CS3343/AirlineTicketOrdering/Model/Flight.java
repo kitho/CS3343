@@ -89,5 +89,51 @@ public class Flight {
 	public void setOneWayPrice(double oneWayPrice) {
 		this.oneWayPrice = oneWayPrice;
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((airline == null) ? 0 : airline.hashCode());
+		result = prime * result
+				+ ((flightNumber == null) ? 0 : flightNumber.hashCode());
+		result = prime * result + ((model == null) ? 0 : model.hashCode());
+		result = prime * result
+				+ ((travelClass == null) ? 0 : travelClass.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Flight other = (Flight) obj;
+		if (airline == null) {
+			if (other.airline != null)
+				return false;
+		} else if (!airline.equals(other.airline))
+			return false;
+		if (flightNumber == null) {
+			if (other.flightNumber != null)
+				return false;
+		} else if (!flightNumber.equals(other.flightNumber))
+			return false;
+		if (model == null) {
+			if (other.model != null)
+				return false;
+		} else if (!model.equals(other.model))
+			return false;
+		if (travelClass == null) {
+			if (other.travelClass != null)
+				return false;
+		} else if (!travelClass.equals(other.travelClass))
+			return false;
+		return true;
+	}
 
+	
 }

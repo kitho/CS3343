@@ -17,6 +17,8 @@ import org.junit.Test;
 import static org.mockito.Mockito.*;
 import CS3343.AirlineTicketOrdering.DataReader.AirlineCompanyCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
+import CS3343.AirlineTicketOrdering.DataWriter.FlightCSVFileWriter;
+import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 
@@ -32,7 +34,7 @@ public class AirlineQueryTest {
 	@Test
 	public void findFlightsByDepatureAndDestinationAndDateWithoutSuitableFlightTest() throws ParseException, IOException {
 		SourceReader<AirlineCompany> airlineCompanyReader = mock(AirlineCompanyCSVFileReader.class);
-		
+
 		String depature = "Japan";
 		String destination = "Australia"; 
 		Date depatureDate = formatter.parse("2014-12-31 00:00:00");
@@ -56,7 +58,7 @@ public class AirlineQueryTest {
 		
 		when(airlineCompanyReader.read()).thenReturn(airlineCompanies);
 		
-		AirlineQuery airlineQuery = new AirlineQuery(airlineCompanyReader);
+		AirlineQuery airlineQuery = new AirlineQuery(airlineCompanyReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
 		List<Flight> flights = airlineQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
 		
 		assertThat(0, is(flights.size()));
@@ -89,7 +91,7 @@ public class AirlineQueryTest {
 		
 		when(airlineCompanyReader.read()).thenReturn(airlineCompanies);
 		
-		AirlineQuery airlineQuery = new AirlineQuery(airlineCompanyReader);
+		AirlineQuery airlineQuery = new AirlineQuery(airlineCompanyReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
 		List<Flight> flights = airlineQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
 		
 		assertThat(1, is(flights.size()));
@@ -171,7 +173,7 @@ public class AirlineQueryTest {
 		
 		when(airlineCompanyReader.read()).thenReturn(airlineCompanies);
 		
-		AirlineQuery airlineQuery = new AirlineQuery(airlineCompanyReader);
+		AirlineQuery airlineQuery = new AirlineQuery(airlineCompanyReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
 		List<Flight> flightsResult = airlineQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
 		
 		assertThat(flights.size(), is(flightsResult.size()));
@@ -260,7 +262,7 @@ public class AirlineQueryTest {
 		
 		when(airlineCompanyReader.read()).thenReturn(airlineCompanies);
 		
-		AirlineQuery airlineQuery = new AirlineQuery(airlineCompanyReader);
+		AirlineQuery airlineQuery = new AirlineQuery(airlineCompanyReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
 		List<Flight> flightsResult = airlineQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
 		
 		assertThat(flights.size(), is(flightsResult.size()));
@@ -282,6 +284,48 @@ public class AirlineQueryTest {
 			assertThat(flights.get(i).getAvailable(), is(flightsResult.get(i).getAvailable()));
 			assertThat(flights.get(i).getOneWayPrice(), is(flightsResult.get(i).getOneWayPrice()));
 		}
+	}
+	
+	@Test
+	public void updateFlightAvailableByFlightAndReducingNumberTest() throws ParseException, IOException {
+		SourceReader<AirlineCompany> airlineCompanyReader = mock(AirlineCompanyCSVFileReader.class);
+		SourceWriter<List<Flight>> flightWriter = mock(FlightCSVFileWriter.class);
+		
+		Flight flight = new Flight();
+		
+		flight.setAirline("Cathay Pacific Airways");
+		flight.setFlightNumber("CP001");
+		flight.setTravelClass("FIRST");
+		flight.setDepature("Hong Kong");
+		flight.setDestination("Taiwan");
+		flight.setDepatureDateTime(formatter.parse("2014-01-01 09:30:00"));
+		flight.setArrivalDateTime(formatter.parse("2014-01-01 11:30:00"));
+		flight.setAvailable(30);
+		flight.setOneWayPrice(2500.00);
+		
+		AirlineCompany airlineCompany = new AirlineCompany("Cathay Pacific Airways");
+		airlineCompany.addFlight(flight);
+		
+		List<AirlineCompany> airlineCompanies= new ArrayList<AirlineCompany>();
+		airlineCompanies.add(airlineCompany);
+		
+		when(airlineCompanyReader.read()).thenReturn(airlineCompanies);
+		doNothing().when(flightWriter).write(null);;
+		
+		AirlineQuery airlineQuery = new AirlineQuery(airlineCompanyReader, flightWriter);
+		airlineQuery.updateFlightAvailableByFlightAndReducingNumber(flight, 1);
+		
+		int count = 0;
+		for (AirlineCompany airlineCompanyResult : airlineCompanies) {
+			for (Flight flightResult : airlineCompanyResult.getFlights()) {
+				if (flight.equals(flightResult)) {
+					count++;
+					assertThat(flightResult.getAvailable(), is(29));
+				}
+			}
+		}
+		
+		assertThat(count, is(1));
 	}
 
 }

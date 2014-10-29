@@ -8,8 +8,6 @@ public class InputDestinationView implements AirlineTicketOrderingView {
 	public void display(){
 		Scanner scanner = new Scanner(System.in);
 		
-		System.out.println("Welcome to Airline Ticket Ordering System");
-		
 		System.out.print("Date (YYYY-MM-DD): ");
 		String depatureDate = scanner.next();
 		
