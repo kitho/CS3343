@@ -14,8 +14,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import CS3343.AirlineTicketOrdering.DataReader.ModelCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
+import CS3343.AirlineTicketOrdering.DataReader.Impl.ModelCSVFileReader;
 import CS3343.AirlineTicketOrdering.Model.Model;
 
 public class ModelQueryTest {

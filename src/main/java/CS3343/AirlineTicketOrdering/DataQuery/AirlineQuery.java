@@ -20,6 +20,7 @@ public class AirlineQuery {
 	
 	public AirlineQuery(SourceReader<AirlineCompany> airlineCompanyReader, SourceWriter<List<Flight>> flightWriter) throws IOException, ParseException{
 		airlineCompanies = airlineCompanyReader.read();
+		this.flightWriter = flightWriter;
 	}
 
 	public List<Flight> findFlightsByDepatureAndDestinationAndDate(String depature,

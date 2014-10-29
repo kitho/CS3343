@@ -19,6 +19,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
 import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
+import CS3343.AirlineTicketOrdering.DataReader.Impl.ModelCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.ModelCSVFileWriter;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 import CS3343.AirlineTicketOrdering.Model.Model;

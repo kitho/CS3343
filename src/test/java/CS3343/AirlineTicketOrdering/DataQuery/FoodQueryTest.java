@@ -18,10 +18,10 @@ import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
-import CS3343.AirlineTicketOrdering.DataReader.FlightCSVFileReader;
-import CS3343.AirlineTicketOrdering.DataReader.MealCSVFileReader;
-import CS3343.AirlineTicketOrdering.DataReader.FoodCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
+import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
+import CS3343.AirlineTicketOrdering.DataReader.Impl.FoodCSVFileReader;
+import CS3343.AirlineTicketOrdering.DataReader.Impl.MealCSVFileReader;
 import CS3343.AirlineTicketOrdering.Model.Meal;
 import CS3343.AirlineTicketOrdering.Model.Food;
 import CS3343.AirlineTicketOrdering.Model.Flight;
