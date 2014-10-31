@@ -6,13 +6,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import TestingTool.DataWriter.FoodCSVFileWriter;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -20,11 +20,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
 import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
-import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FoodCSVFileReader;
-import CS3343.AirlineTicketOrdering.DataWriter.FoodCSVFileWriter;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
-import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Model.Food;
 
 public class FoodCSVFileReaderTest {

@@ -18,6 +18,7 @@ public class FlightCSVFileWriter extends FileWriter<List<Flight>> {
 	@Override
 	public void write(List<Flight> flights) throws IOException {
 		ReflectionToStringBuilder.setDefaultStyle(ToStringStyle.SIMPLE_STYLE);
+		
 		for (Flight flight : flights) {
 			String dataString = ReflectionToStringBuilder.toString(flight); 
 			bufferedWriter.write(dataString);

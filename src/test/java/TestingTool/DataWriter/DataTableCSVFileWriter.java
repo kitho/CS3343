@@ -1,10 +1,11 @@
-package CS3343.AirlineTicketOrdering.DataWriter;
+package TestingTool.DataWriter;
 
 import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import CS3343.AirlineTicketOrdering.DataWriter.FileWriter;
 import cucumber.api.DataTable;
 
 public class DataTableCSVFileWriter extends FileWriter<DataTable> {

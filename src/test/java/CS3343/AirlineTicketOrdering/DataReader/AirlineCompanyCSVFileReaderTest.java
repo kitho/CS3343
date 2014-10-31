@@ -19,12 +19,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import CS3343.AirlineTicketOrdering.DataQuery.AirlineQuery;
+import TestingTool.DataWriter.AirlineCompanyCSVFileWriter;
 import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.AirlineCompanyCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
-import CS3343.AirlineTicketOrdering.DataWriter.AirlineCompanyCSVFileWriter;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
 import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
@@ -53,6 +52,7 @@ public class AirlineCompanyCSVFileReaderTest {
 		} catch (FileNotFoundException e) {
 			assertThat(e.getMessage().toString(), is(not(nullValue())));
 		}
+
 	}
 
 	@Test
