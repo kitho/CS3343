@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
+import CS3343.AirlineTicketOrdering.CustomDateUtil.CustomDateFormatter;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
@@ -25,12 +25,12 @@ import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;
 public class FlightCSVFileWriterTest {
 	
 	private File projectPath;
-	private SimpleDateFormat formatter;
+	private CustomDateFormatter formatter;
 	
 	@Before
 	public void setUp() throws IOException {
 		projectPath = new File(".").getCanonicalFile(); 
-		formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		formatter = new CustomDateFormatter();
 	}
 	
 	@Test
