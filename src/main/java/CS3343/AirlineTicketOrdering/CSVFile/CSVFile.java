@@ -1,7 +1,7 @@
 package CS3343.AirlineTicketOrdering.CSVFile;
 
 public enum CSVFile {
-	AIRLINECOMPANYCSV("/datasource/airlineCompany.csv"), FLIGHTCSV("/datasource/flight.csv"), MODELCSV("/datasource/model.csv");
+	AIRLINECOMPANYCSV("/datasource/airlineCompany.csv"), FLIGHTCSV("/datasource/flight.csv");
 	
 	private String value;
 	
