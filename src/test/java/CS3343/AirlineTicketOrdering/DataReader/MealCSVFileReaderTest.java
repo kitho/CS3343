@@ -30,6 +30,7 @@ import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
 import CS3343.AirlineTicketOrdering.Model.Food;
 import CS3343.AirlineTicketOrdering.Model.Meal;
+import CS3343.AirlineTicketOrdering.Parser.Impl.MealParser;
 
 public class MealCSVFileReaderTest {
 	private File projectPath;
@@ -44,10 +45,9 @@ public class MealCSVFileReaderTest {
 	public void readMealCSVFileWhenFileNotExisted() throws IOException{
 		Files.deleteIfExists(Paths.get(projectPath + CSVFile.MEALCSV.value()));
 		
-		SourceReader<AirlineCompany> mealCsvReader;
+		SourceReader<Meal> mealCsvReader;
 		try {
-			mealCsvReader = new AirlineCompanyCSVFileReader(projectPath + CSVFile.MEALCSV.value(), 
-					new FlightCSVFileReader(projectPath + CSVFile.MEALCSV.value()));
+			mealCsvReader = new MealCSVFileReader(projectPath + CSVFile.MEALCSV.value());
 			fail("File not existed");
 		} catch (FileNotFoundException e) {
 			assertThat(e.getMessage().toString(), is(not(nullValue())));
@@ -71,7 +71,7 @@ public class MealCSVFileReaderTest {
 		mealCsvFileWriter.close();
 		
 		SourceReader<Meal> mealCsvFileReader = new MealCSVFileReader(projectPath + CSVFile.MEALCSV.value());
-		List<Meal> resultList = mealCsvFileReader.read();
+		List<Meal> resultList = mealCsvFileReader.read(new MealParser());
 		mealCsvFileReader.close();
 
 		assertThat(meal.getMealId(), is(resultList.get(0).getMealId()));
@@ -104,7 +104,7 @@ public class MealCSVFileReaderTest {
 		mealCsvFileWriter.close();
 		
 		SourceReader<Meal> mealCsvFileReader = new MealCSVFileReader(projectPath + CSVFile.MEALCSV.value());
-		List<Meal> resultList = mealCsvFileReader.read();
+		List<Meal> resultList = mealCsvFileReader.read(new MealParser());
 		mealCsvFileReader.close();
 		
 		assertThat(meals.size(), is(resultList.size()));

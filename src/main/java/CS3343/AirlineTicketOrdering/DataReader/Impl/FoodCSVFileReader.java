@@ -8,7 +8,7 @@ import java.util.List;
 
 import CS3343.AirlineTicketOrdering.DataReader.FileReader;
 import CS3343.AirlineTicketOrdering.Model.Food;
-import CS3343.AirlineTicketOrdering.Model.Meal;
+import CS3343.AirlineTicketOrdering.Parser.Parser;
 
 public class FoodCSVFileReader extends FileReader<Food> {
 	
@@ -17,18 +17,12 @@ public class FoodCSVFileReader extends FileReader<Food> {
 	}
 
 	@Override
-	public List<Food> read() throws IOException, ParseException {
+	public List<Food> read(Parser<Food> parser) throws IOException, ParseException {
 		List<Food> foods = new ArrayList<Food>();
 		
 		String line;
 		while ((line = bufferedReader.readLine()) != null){
-			String[] dataStr = line.split(",");
-			Food food = new Food();
-			food.setId(Integer.parseInt(dataStr[0]));
-			food.setName(dataStr[1]);
-			food.setCategory(dataStr[2]);
-			food.setUnitPrice(Integer.parseInt(dataStr[3]));
-			foods.add(food);
+			foods.add(parser.parseString(line));
 		}
 		
 		return foods;

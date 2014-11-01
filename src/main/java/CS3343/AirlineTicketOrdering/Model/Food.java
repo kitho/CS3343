@@ -1,16 +1,11 @@
 package CS3343.AirlineTicketOrdering.Model;
 
-import java.util.ArrayList;
 
 public class Food {
 	private int id;
 	private String name;
 	private String category;
 	private int unitPrice;
-	
-	public Food(){
-		
-	}
 	
 	public int getId() {
 		return id;

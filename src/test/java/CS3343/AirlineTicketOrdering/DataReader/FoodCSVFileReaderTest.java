@@ -23,6 +23,7 @@ import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FoodCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 import CS3343.AirlineTicketOrdering.Model.Food;
+import CS3343.AirlineTicketOrdering.Parser.Impl.FoodParser;
 
 public class FoodCSVFileReaderTest {
 	private File projectPath;
@@ -64,7 +65,7 @@ public class FoodCSVFileReaderTest {
 		foodCsvFileWriter.close();
 		
 		SourceReader<Food> foodCsvFileReader = new FoodCSVFileReader(projectPath + CSVFile.FOODCSV.value());
-		List<Food> resultList = foodCsvFileReader.read();
+		List<Food> resultList = foodCsvFileReader.read(new FoodParser());
 		foodCsvFileReader.close();
 		
 		assertThat(food.getId(),is(resultList.get(0).getId()));
@@ -116,7 +117,7 @@ public class FoodCSVFileReaderTest {
 		foodCsvFileWriter.close();
 		
 		SourceReader<Food> foodCsvFileReader = new FoodCSVFileReader(projectPath + CSVFile.FOODCSV.value());
-		List<Food> resultList = foodCsvFileReader.read();
+		List<Food> resultList = foodCsvFileReader.read(new FoodParser());
 		foodCsvFileReader.close();
 		
 		assertThat(foods.size(), is(resultList.size()));

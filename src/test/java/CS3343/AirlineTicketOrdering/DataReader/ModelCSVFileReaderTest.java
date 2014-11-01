@@ -23,6 +23,7 @@ import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.ModelCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 import CS3343.AirlineTicketOrdering.Model.Model;
+import CS3343.AirlineTicketOrdering.Parser.Impl.ModelParser;
 
 public class ModelCSVFileReaderTest {
 	private File projectPath;
@@ -63,7 +64,7 @@ public class ModelCSVFileReaderTest {
 		modelCsvFileWriter.close();
 		
 		SourceReader<Model> modelCsvFileReader = new ModelCSVFileReader(projectPath + CSVFile.MODELCSV.value());
-		List<Model> resultList = modelCsvFileReader.read();
+		List<Model> resultList = modelCsvFileReader.read(new ModelParser());
 		modelCsvFileReader.close();
 		
 		assertThat(model.getMaxBaggageKg(),is(resultList.get(0).getMaxBaggageKg()));
@@ -94,7 +95,7 @@ public class ModelCSVFileReaderTest {
 		modelCSVFileWriter.close();
 		
 		SourceReader<Model> modelCSVFileReader = new ModelCSVFileReader(projectPath + CSVFile.MODELCSV.value());
-		List<Model> resultList = modelCSVFileReader.read();
+		List<Model> resultList = modelCSVFileReader.read(new ModelParser());
 		modelCSVFileReader.close();
 		
 		assertThat(models.size(), is(resultList.size()));

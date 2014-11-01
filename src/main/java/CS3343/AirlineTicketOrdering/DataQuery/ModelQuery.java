@@ -6,12 +6,13 @@ import java.util.List;
 
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.Model.Model;
+import CS3343.AirlineTicketOrdering.Parser.Impl.ModelParser;
 
 public class ModelQuery {
 	private List<Model> models;
 	
 	public ModelQuery(SourceReader<Model> modelReader) throws IOException, ParseException{
-		models = modelReader.read();
+		models = modelReader.read(new ModelParser());
 	}
 
 	public Model getModelByName(String name){

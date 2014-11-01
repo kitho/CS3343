@@ -20,6 +20,7 @@ import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
 import CS3343.AirlineTicketOrdering.Model.Flight;
+import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;
 
 public class FlightCSVFileWriterTest {
 	
@@ -56,7 +57,7 @@ public class FlightCSVFileWriterTest {
 		flightCSVFileWriter.close();
 		
 		SourceReader<Flight> flightCSVFileReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
-		List<Flight> flightResultList = (ArrayList<Flight>) flightCSVFileReader.read();
+		List<Flight> flightResultList = (ArrayList<Flight>) flightCSVFileReader.read(new FlightParser());
 
 		assertThat(true, is(Files.exists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()))));
 		assertThat(1, is(flightResultList.size()));
@@ -123,7 +124,7 @@ public class FlightCSVFileWriterTest {
 		flightCSVFileWriter.close();
 		
 		SourceReader<Flight> flightCSVFileReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
-		List<Flight> flightResultList = (ArrayList<Flight>) flightCSVFileReader.read();
+		List<Flight> flightResultList = (ArrayList<Flight>) flightCSVFileReader.read(new FlightParser());
 
 		assertThat(true, is(Files.exists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()))));
 		assertThat(3, is(flightResultList.size()));

@@ -5,12 +5,15 @@ import java.util.List;
 
 public class AirlineCompany {
 	
-	private final String airline;
+	private String airline;
 	private List<Flight> flights;
 	
-	public AirlineCompany(String airline){
-		this.airline = airline;
+	public AirlineCompany(){
 		flights = new ArrayList<Flight>();
+	}
+	
+	public void setAirline(String airline){
+		this.airline = airline;
 	}
 	
 	public String getAirline(){

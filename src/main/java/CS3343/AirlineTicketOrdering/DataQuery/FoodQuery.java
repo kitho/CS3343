@@ -10,17 +10,19 @@ import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Model.Food;
 import CS3343.AirlineTicketOrdering.Model.Meal;
+import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;
+import CS3343.AirlineTicketOrdering.Parser.Impl.FoodParser;
+import CS3343.AirlineTicketOrdering.Parser.Impl.MealParser;
 
 public class FoodQuery {
 	private List<Flight> flights;
 	private List<Meal> meals;
 	private List<Food> foods;
 	
-	
 	public FoodQuery(SourceReader<Flight> flightReader,SourceReader<Meal> mealReader, SourceReader<Food> foodReader) throws IOException, ParseException{
-		flights = flightReader.read();
-		meals = mealReader.read();
-		foods = foodReader.read();
+		flights = flightReader.read(new FlightParser());
+		meals = mealReader.read(new MealParser());
+		foods = foodReader.read(new FoodParser());
 	}
 	
 	public List<Food> findAllFoods(){

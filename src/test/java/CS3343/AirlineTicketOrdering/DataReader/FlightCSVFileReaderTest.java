@@ -19,13 +19,13 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
-import CS3343.AirlineTicketOrdering.DataQuery.AirlineQuery;
 import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
 import CS3343.AirlineTicketOrdering.Model.Flight;
+import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;
 
 public class FlightCSVFileReaderTest {
 
@@ -78,7 +78,7 @@ public class FlightCSVFileReaderTest {
 		flightCsvFileWriter.close();
 		
 		SourceReader<Flight> flightCsvFileReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
-		List<Flight> resultList = flightCsvFileReader.read();
+		List<Flight> resultList = flightCsvFileReader.read(new FlightParser());
 		flightCsvFileReader.close();
 		
 		assertThat(flight.getAirline(), is(resultList.get(0).getAirline()));
@@ -154,7 +154,7 @@ public class FlightCSVFileReaderTest {
 		flightCsvFileWriter.close();
 		
 		SourceReader<Flight> flightCsvFileReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
-		List<Flight> resultList = flightCsvFileReader.read();
+		List<Flight> resultList = flightCsvFileReader.read(new FlightParser());
 		flightCsvFileReader.close();
 
 		

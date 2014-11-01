@@ -1,15 +1,8 @@
 package CS3343.AirlineTicketOrdering.Model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Meal {
 	private String mealId;
 	private String foodIds;
-	
-	public Meal(){
-		
-	}
 	
 	public String getMealId() {
 		return mealId;
@@ -26,7 +19,5 @@ public class Meal {
 	public void setFoodIds(String foodIds) {
 		this.foodIds = foodIds;
 	}
-
-	
 	
 }

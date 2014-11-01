@@ -8,9 +8,9 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import CS3343.AirlineTicketOrdering.Model.Flight;
-import CS3343.AirlineTicketOrdering.Parser.ModelParser;
+import CS3343.AirlineTicketOrdering.Parser.Parser;
 
-public class FlightParser implements ModelParser<Flight> {
+public class FlightParser implements Parser<Flight> {
 	
 	private SimpleDateFormat formatter;
 	

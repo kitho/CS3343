@@ -8,8 +8,7 @@ import java.util.List;
 
 import CS3343.AirlineTicketOrdering.DataReader.FileReader;
 import CS3343.AirlineTicketOrdering.Model.Flight;
-import CS3343.AirlineTicketOrdering.Parser.ModelParser;
-import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;
+import CS3343.AirlineTicketOrdering.Parser.Parser;
 
 public class FlightCSVFileReader extends FileReader<Flight> {
 
@@ -18,15 +17,13 @@ public class FlightCSVFileReader extends FileReader<Flight> {
 	}
 
 	@Override
-	public List<Flight> read() throws IOException, ParseException {
+	public List<Flight> read(Parser<Flight> parser) throws IOException, ParseException {
 
 		List<Flight> flights = new ArrayList<Flight>();
-		ModelParser<Flight> flightParser = new FlightParser();
 
 		String line;
 		while ((line = bufferedReader.readLine()) != null) {
-			Flight flight = flightParser.parseString(line);
-			flights.add(flight);
+			flights.add(parser.parseString(line));
 		}
 
 		return flights;

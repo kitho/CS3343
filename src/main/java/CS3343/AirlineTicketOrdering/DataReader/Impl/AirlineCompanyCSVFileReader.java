@@ -7,36 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CS3343.AirlineTicketOrdering.DataReader.FileReader;
-import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
-import CS3343.AirlineTicketOrdering.Model.Flight;
+import CS3343.AirlineTicketOrdering.Parser.Parser;
 
 public class AirlineCompanyCSVFileReader extends FileReader<AirlineCompany> {
 
-	private SourceReader<Flight> fileReader;
-
-	public AirlineCompanyCSVFileReader(String path,
-			SourceReader<Flight> fileReader) throws FileNotFoundException {
+	public AirlineCompanyCSVFileReader(String path) throws FileNotFoundException {
 		super(path);
-		this.fileReader = fileReader;
 	}
 
 	@Override
-	public List<AirlineCompany> read() throws IOException, ParseException {
-		List<Flight> flights = fileReader.read();
-		fileReader.close();
+	public List<AirlineCompany> read(Parser<AirlineCompany> parser) throws IOException, ParseException {
 
 		List<AirlineCompany> airlineCompanies = new ArrayList<AirlineCompany>();
 
 		String line;
 		while ((line = bufferedReader.readLine()) != null) {
-			AirlineCompany airlineCompany = new AirlineCompany(line);
+			AirlineCompany airlineCompany = parser.parseString(line);
 			airlineCompanies.add(airlineCompany);
-			for (Flight flight : flights) {
-				if (airlineCompany.getAirline().equals(flight.getAirline())) {
-					airlineCompany.addFlight(flight);
-				}
-			}
 		}
 
 		return airlineCompanies;

@@ -1,7 +1,6 @@
 package CS3343.AirlineTicketOrdering.DataQuery;
 
 import java.io.IOException;
-import java.util.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +9,9 @@ import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Model.Meal;
 import CS3343.AirlineTicketOrdering.Model.Food;
+import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;
+import CS3343.AirlineTicketOrdering.Parser.Impl.FoodParser;
+import CS3343.AirlineTicketOrdering.Parser.Impl.MealParser;
 
 public class MealQuery {
 	private List<Flight> flights;
@@ -17,10 +19,9 @@ public class MealQuery {
 	private List<Meal> meals;
 	
 	public MealQuery(SourceReader<Flight> flightReader,SourceReader<Meal> mealReader, SourceReader<Food> foodReader) throws IOException, ParseException{
-		flights = flightReader.read();
-		meals = mealReader.read();
-		foods = foodReader.read();
-		
+		flights = flightReader.read(new FlightParser());
+		meals = mealReader.read(new MealParser());
+		foods = foodReader.read(new FoodParser());
 	}
 	
 	public List<Meal> findAllMeals(){

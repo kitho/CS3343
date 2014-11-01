@@ -8,6 +8,7 @@ import java.util.List;
 
 import CS3343.AirlineTicketOrdering.DataReader.FileReader;
 import CS3343.AirlineTicketOrdering.Model.Model;
+import CS3343.AirlineTicketOrdering.Parser.Parser;
 
 public class ModelCSVFileReader extends FileReader<Model> {
 	public ModelCSVFileReader(String path) throws FileNotFoundException {
@@ -15,18 +16,13 @@ public class ModelCSVFileReader extends FileReader<Model> {
 	}
 
 	@Override
-	public List<Model> read() throws IOException, ParseException {
+	public List<Model> read(Parser<Model> parser) throws IOException, ParseException {
 
 		List<Model> models = new ArrayList<Model>();
 
 		String line;
 		while ((line = bufferedReader.readLine()) != null) {
-			String[] dataStr = line.split(",");
-			Model model = new Model();
-			model.setModel(dataStr[0]);
-			model.setSeat(Integer.parseInt(dataStr[1]));
-			model.setMaxBaggageKg(Integer.parseInt(dataStr[2]));
-			models.add(model);
+			models.add(parser.parseString(line));
 		}
 
 		return models;

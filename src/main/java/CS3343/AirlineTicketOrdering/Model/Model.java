@@ -1,11 +1,9 @@
 package CS3343.AirlineTicketOrdering.Model;
 
 public class Model {
-	public String model;
-	public int seat;
-	public int maxBaggageKg;
-	
-	
+	private String model;
+	private int seat;
+	private int maxBaggageKg;
 	
 	public String getModel() {
 		return model;
@@ -25,7 +23,5 @@ public class Model {
 	public void setMaxBaggageKg(int maxBaggageKg) {
 		this.maxBaggageKg = maxBaggageKg;
 	}
-
-	
 
 }

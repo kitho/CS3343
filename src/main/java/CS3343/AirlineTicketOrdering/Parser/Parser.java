@@ -2,7 +2,7 @@ package CS3343.AirlineTicketOrdering.Parser;
 
 import java.text.ParseException;
 
-public interface ModelParser<T> {
+public interface Parser<T> {
 
 	public T parseString(String line) throws ParseException;
 	
