@@ -1,23 +1,23 @@
 package CS3343.AirlineTicketOrdering.Parser;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import CS3343.AirlineTicketOrdering.CustomDateUtil.CustomDateFormatter;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;
 
 public class FlightParserTest {
 	
-	private SimpleDateFormat formatter;
+	private CustomDateFormatter formatter;
 	
 	@Before
 	public void setUp(){
-		formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		formatter = new CustomDateFormatter();
 	}
 	
 	@Test
