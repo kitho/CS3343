@@ -13,8 +13,7 @@ public class InputDesintationController extends AirlineTicketOrderingController 
 	public void execute() {
 		view.display(session);
 		
-		session.getAttribute("abc");
-	
+		
 	}
 
 }

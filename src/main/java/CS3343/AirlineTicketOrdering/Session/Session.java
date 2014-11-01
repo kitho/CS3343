@@ -25,5 +25,13 @@ public class Session {
 	public Object getAttribute(String key) {
 		return sessionMap.get(key);
 	}
+	
+	public void removeAttribute(String key){
+		sessionMap.remove(key);
+	}
+	
+	public void clear() {
+		sessionMap.clear();
+	}
 
 }
