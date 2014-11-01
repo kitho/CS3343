@@ -6,14 +6,14 @@ public class InputDesintationController extends AirlineTicketOrderingController 
 	private View view;
 	
 	public InputDesintationController(View view) {
-		this.view = view;
+		super(view);
 	}
 	
 	@Override
-	public void execute() {
+	public void execute() throws Exception {
 		view.display(session);
 		
-		
+		next.next();
 	}
 
 }

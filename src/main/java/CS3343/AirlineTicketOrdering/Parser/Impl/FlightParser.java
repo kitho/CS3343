@@ -1,22 +1,21 @@
 package CS3343.AirlineTicketOrdering.Parser.Impl;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import CS3343.AirlineTicketOrdering.CustomDateUtil.CustomDateFormatter;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Parser.Parser;
 
 public class FlightParser implements Parser<Flight> {
 	
-	private SimpleDateFormat formatter;
+	private CustomDateFormatter formatter;
 	
 	public FlightParser(){
-		formatter = new SimpleDateFormat(
-				"yyyy-MM-dd HH:mm:ss");
+		formatter = new CustomDateFormatter();
 	}
 
 	public Flight parseString(String line) throws ParseException {

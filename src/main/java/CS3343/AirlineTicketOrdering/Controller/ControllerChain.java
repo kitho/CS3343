@@ -8,7 +8,7 @@ public class ControllerChain {
 		this.next = next;
 	}
 	
-	public void next() {
+	public void next() throws Exception {
 		if(next != null)
 			next.execute();
 	}

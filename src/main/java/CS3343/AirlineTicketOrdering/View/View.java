@@ -4,6 +4,6 @@ import CS3343.AirlineTicketOrdering.Session.Session;
 
 public interface View {
 
-	public void display(Session session);
+	public void display(Session response);
 
 }
