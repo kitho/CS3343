@@ -23,6 +23,8 @@ import CS3343.AirlineTicketOrdering.DataReader.Impl.MealCSVFileReader;
 import CS3343.AirlineTicketOrdering.Model.Meal;
 import CS3343.AirlineTicketOrdering.Model.Food;
 import CS3343.AirlineTicketOrdering.Model.Flight;
+import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;
+import CS3343.AirlineTicketOrdering.Parser.Impl.MealParser;
 
 public class MealQueryTest {
 	private File projectPath;
@@ -41,7 +43,7 @@ public class MealQueryTest {
 	@Test
 	public void findAllMealsTest() throws ParseException, IOException{
 		List<Meal> meals = new ArrayList<Meal>();
-		meals = mealReader.read();
+		meals = mealReader.read(new MealParser());
 		
 		mealReader.close();
 		mealReader = new MealCSVFileReader(projectPath + CSVFile.MEALCSV.value());
@@ -81,7 +83,7 @@ public class MealQueryTest {
 	@Test
 	public void findFlightsByOneMealTest() throws ParseException, IOException{
 		List<Flight> flights = new ArrayList<Flight>();
-		flights = flightReader.read();
+		flights = flightReader.read(new FlightParser());
 		
 		Flight flight1 = flights.get(0);
 		Flight flight2 = flights.get(1);
@@ -126,7 +128,7 @@ public class MealQueryTest {
 	@Test
 	public void findMealsByOneFlightTest() throws ParseException, IOException{
 		List<Meal> meals = new ArrayList<Meal>();
-		meals = mealReader.read();
+		meals = mealReader.read(new MealParser());
 		
 		Meal m1 = meals.get(0);
 		Meal m2 = meals.get(1);
@@ -162,7 +164,7 @@ public class MealQueryTest {
 	@Test
 	public void findMealsByOneFoodTest() throws ParseException, IOException{
 		List<Meal> meals = new ArrayList<Meal>();
-		meals = mealReader.read();
+		meals = mealReader.read(new MealParser());
 		
 		mealReader.close();
 		mealReader = new MealCSVFileReader(projectPath + CSVFile.MEALCSV.value());

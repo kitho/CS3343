@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,21 +22,17 @@ import TestingTool.DataWriter.AirlineCompanyCSVFileWriter;
 import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.AirlineCompanyCSVFileReader;
-import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
-import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
 import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
-import CS3343.AirlineTicketOrdering.Model.Flight;
+import CS3343.AirlineTicketOrdering.Parser.Impl.AirlineCompanyParser;
 
 public class AirlineCompanyCSVFileReaderTest {
 
 	private File projectPath;
-	private SimpleDateFormat formatter;
 	
 	@Before
 	public void setUp() throws IOException{
 		projectPath = new File(".").getCanonicalFile(); 
-		formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	}
 	
 	@Test
@@ -46,8 +41,7 @@ public class AirlineCompanyCSVFileReaderTest {
 		
 		SourceReader<AirlineCompany> airlineCompanyCsvReader;
 		try {
-			airlineCompanyCsvReader = new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value(), 
-					new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value()));
+			airlineCompanyCsvReader = new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value());
 			fail("File not existed");
 		} catch (FileNotFoundException e) {
 			assertThat(e.getMessage().toString(), is(not(nullValue())));
@@ -58,32 +52,9 @@ public class AirlineCompanyCSVFileReaderTest {
 	@Test
 	public void readAirlineCompanyCSVFileWithOneRecordTest() throws IOException, ParseException{
 		Files.deleteIfExists(Paths.get(projectPath + CSVFile.AIRLINECOMPANYCSV.value()));
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
 		
-		Flight flight = new Flight();
-		
-		flight.setAirline("Cathay Pacific Airways");
-		flight.setFlightNumber("CP001");
-		flight.setTravelClass("FIRST");
-		flight.setDepature("Hong Kong");
-		flight.setDestination("Taiwan");
-		flight.setDepatureDateTime(formatter.parse("2014-01-01 14:30:00"));
-		flight.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
-		flight.setAvailable(30);
-		flight.setOneWayPrice(2500.00);
-		flight.setMealIds("M1");
-		flight.setFoodIds("1");
-		flight.setModel("A123");
-		
-		ArrayList<Flight> flights = new ArrayList<Flight>();
-		flights.add(flight);
-		
-		SourceWriter<List<Flight>> flightCSVFileWriter = new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value());
-		flightCSVFileWriter.write(flights);
-		flightCSVFileWriter.close();
-		
-		AirlineCompany airlineCompany = new AirlineCompany("Cathay Pacific Airways");
-		airlineCompany.addFlight(flight);
+		AirlineCompany airlineCompany = new AirlineCompany();
+		airlineCompany.setAirline("Cathay Pacific Airways");
 		
 		ArrayList<AirlineCompany> airlineCompanies = new ArrayList<AirlineCompany>();
 		airlineCompanies.add(airlineCompany);
@@ -92,24 +63,13 @@ public class AirlineCompanyCSVFileReaderTest {
 		airlineCompanyCSVFileWriter.write(airlineCompanies);
 		airlineCompanyCSVFileWriter.close();
 		
-		SourceReader<Flight> flightCSVFileReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
-		SourceReader<AirlineCompany> airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value(), flightCSVFileReader);
-		List<AirlineCompany> airlineCompanyResultList = airlineCompanyCSVFileReader.read();
+		SourceReader<AirlineCompany> airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value());
+		List<AirlineCompany> airlineCompanyResultList = airlineCompanyCSVFileReader.read(new AirlineCompanyParser());
 		airlineCompanyCSVFileReader.close();
 		
 		assertThat(airlineCompany.getAirline(), is(airlineCompanyResultList.get(0).getAirline()));
 		
 		assertThat(airlineCompany.getFlights().size(), is(airlineCompanyResultList.get(0).getFlights().size()));
-		
-		assertThat(flight.getAirline(), is(airlineCompanyResultList.get(0).getFlights().get(0).getAirline()));
-		assertThat(flight.getFlightNumber(), is(airlineCompanyResultList.get(0).getFlights().get(0).getFlightNumber()));
-		assertThat(flight.getTravelClass(), is(airlineCompanyResultList.get(0).getFlights().get(0).getTravelClass()));
-		assertThat(flight.getDepature(), is(airlineCompanyResultList.get(0).getFlights().get(0).getDepature()));
-		assertThat(flight.getDestination(), is(airlineCompanyResultList.get(0).getFlights().get(0).getDestination()));
-		assertThat(flight.getDepatureDateTime(), is(airlineCompanyResultList.get(0).getFlights().get(0).getDepatureDateTime()));
-		assertThat(flight.getArrivalDateTime(), is(airlineCompanyResultList.get(0).getFlights().get(0).getArrivalDateTime()));
-		assertThat(flight.getAvailable(), is(airlineCompanyResultList.get(0).getFlights().get(0).getAvailable()));
-		assertThat(flight.getOneWayPrice(), is(airlineCompanyResultList.get(0).getFlights().get(0).getOneWayPrice()));
 		
 	}
 	
@@ -117,185 +77,15 @@ public class AirlineCompanyCSVFileReaderTest {
 	@Test
 	public void readAirlineCompanyCSVFileWithThreeRecordTest() throws IOException, ParseException{		
 		Files.deleteIfExists(Paths.get(projectPath + CSVFile.AIRLINECOMPANYCSV.value()));
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
 		
-		Flight flightCP1 = new Flight();
+		AirlineCompany airlineCompanyCP = new AirlineCompany();
+		airlineCompanyCP.setAirline("Cathay Pacific Airways");
 		
-		flightCP1.setAirline("Cathay Pacific Airways");
-		flightCP1.setFlightNumber("CP001");
-		flightCP1.setTravelClass("FIRST");
-		flightCP1.setDepature("Hong Kong");
-		flightCP1.setDestination("Taiwan");
-		flightCP1.setDepatureDateTime(formatter.parse("2014-01-01 14:30:00"));
-		flightCP1.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
-		flightCP1.setAvailable(30);
-		flightCP1.setOneWayPrice(2500.00);
-		flightCP1.setMealIds("M1");
-		flightCP1.setFoodIds("1");
-		flightCP1.setModel("A123");
-		
-		Flight flightCP2 = new Flight();
-		
-		flightCP2.setAirline("Cathay Pacific Airways");
-		flightCP2.setFlightNumber("CP001");
-		flightCP2.setTravelClass("BUSINESS");
-		flightCP2.setDepature("Hong Kong");
-		flightCP2.setDestination("Taiwan");
-		flightCP2.setDepatureDateTime(formatter.parse("2014-01-01 14:30:00"));
-		flightCP2.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
-		flightCP2.setAvailable(50);
-		flightCP2.setOneWayPrice(1500.00);
-		flightCP2.setMealIds("M1");
-		flightCP2.setFoodIds("1");
-		flightCP2.setModel("A123");
-		
-		Flight flightCP3 = new Flight();
-		
-		flightCP3.setAirline("Cathay Pacific Airways");
-		flightCP3.setFlightNumber("CP001");
-		flightCP3.setTravelClass("ECONOMY");
-		flightCP3.setDepature("Hong Kong");
-		flightCP3.setDestination("Taiwan");
-		flightCP3.setDepatureDateTime(formatter.parse("2014-01-01 14:30:00"));
-		flightCP3.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
-		flightCP3.setAvailable(250);
-		flightCP3.setOneWayPrice(700.00);
-		flightCP3.setMealIds("M1");
-		flightCP3.setFoodIds("1");
-		flightCP3.setModel("A123");
-		
-		ArrayList<Flight> flightsCP = new ArrayList<Flight>();
-		flightsCP.add(flightCP1);
-		flightsCP.add(flightCP2);
-		flightsCP.add(flightCP3);
-		
-		Flight flightCA1 = new Flight();
-		
-		flightCA1.setAirline("China Airlines");
-		flightCA1.setFlightNumber("CA001");
-		flightCA1.setTravelClass("FIRST");
-		flightCA1.setDepature("Hong Kong");
-		flightCA1.setDestination("Shanghai");
-		flightCA1.setDepatureDateTime(formatter.parse("2014-01-02 01:30:00"));
-		flightCA1.setArrivalDateTime(formatter.parse("2014-01-02 03:30:00"));
-		flightCA1.setAvailable(25);
-		flightCA1.setOneWayPrice(1500.00);
-		flightCA1.setMealIds("M1");
-		flightCA1.setFoodIds("1");
-		flightCA1.setModel("A123");
-		
-		Flight flightCA2 = new Flight();
-		
-		flightCA2.setAirline("China Airlines");
-		flightCA2.setFlightNumber("CA001");
-		flightCA2.setTravelClass("BUSINESS");
-		flightCA2.setDepature("Hong Kong");
-		flightCA2.setDestination("Shanghai");
-		flightCA2.setDepatureDateTime(formatter.parse("2014-01-02 01:30:00"));
-		flightCA2.setArrivalDateTime(formatter.parse("2014-01-02 03:30:00"));
-		flightCA2.setAvailable(50);
-		flightCA2.setOneWayPrice(1100.00);
-		flightCA2.setMealIds("M1");
-		flightCA2.setFoodIds("1");
-		flightCA2.setModel("A123");
-		
-		Flight flightCA3 = new Flight();
-		
-		flightCA3.setAirline("China Airlines");
-		flightCA3.setFlightNumber("CA001");
-		flightCA3.setTravelClass("ECONOMY");
-		flightCA3.setDepature("Hong Kong");
-		flightCA3.setDestination("Shanghai");
-		flightCA3.setDepatureDateTime(formatter.parse("2014-01-02 01:30:00"));
-		flightCA3.setArrivalDateTime(formatter.parse("2014-01-02 03:30:00"));
-		flightCA3.setAvailable(150);
-		flightCA3.setOneWayPrice(650.00);
-		flightCA3.setMealIds("M1");
-		flightCA3.setFoodIds("1");
-		flightCA3.setModel("A123");
-		
-		ArrayList<Flight> flightsCA = new ArrayList<Flight>();
-		flightsCA.add(flightCA1);
-		flightsCA.add(flightCA2);
-		flightsCA.add(flightCA3);
-		
-		Flight flightHKA1 = new Flight();
-		
-		flightHKA1.setAirline("Hong Kong Airlines");
-		flightHKA1.setFlightNumber("HKA001");
-		flightHKA1.setTravelClass("FIRST");
-		flightHKA1.setDepature("Canada");
-		flightHKA1.setDestination("Hong Kong");
-		flightHKA1.setDepatureDateTime(formatter.parse("2014-12-30 19:30:00"));
-		flightHKA1.setArrivalDateTime(formatter.parse("2014-12-31 15:30:00"));
-		flightHKA1.setAvailable(30);
-		flightHKA1.setOneWayPrice(15500.00);
-		flightHKA1.setMealIds("M1");
-		flightHKA1.setFoodIds("1");
-		flightHKA1.setModel("A123");
-		
-		Flight flightHKA2 = new Flight();
-		
-		flightHKA2.setAirline("Hong Kong Airlines");
-		flightHKA2.setFlightNumber("HKA001");
-		flightHKA2.setTravelClass("BUSINESS");
-		flightHKA2.setDepature("Canada");
-		flightHKA2.setDestination("Hong Kong");
-		flightHKA2.setDepatureDateTime(formatter.parse("2014-12-30 19:30:00"));
-		flightHKA2.setArrivalDateTime(formatter.parse("2014-12-31 15:30:00"));
-		flightHKA2.setAvailable(65);
-		flightHKA2.setOneWayPrice(10500.00);
-		flightHKA2.setMealIds("M1");
-		flightHKA2.setFoodIds("1");
-		flightHKA2.setModel("A123");
-		
-		Flight flightHKA3 = new Flight();
-		
-		flightHKA3.setAirline("Hong Kong Airlines");
-		flightHKA3.setFlightNumber("HKA001");
-		flightHKA3.setTravelClass("ECONOMY");
-		flightHKA3.setDepature("Canada");
-		flightHKA3.setDestination("Hong Kong");
-		flightHKA3.setDepatureDateTime(formatter.parse("2014-12-30 19:30:00"));
-		flightHKA3.setArrivalDateTime(formatter.parse("2014-12-31 15:30:00"));
-		flightHKA3.setAvailable(300);
-		flightHKA3.setOneWayPrice(7500.00);
-		flightHKA3.setMealIds("M1");
-		flightHKA3.setFoodIds("1");
-		flightHKA3.setModel("A123");
-		
-		
-		ArrayList<Flight> flightsHKA = new ArrayList<Flight>();
-		flightsHKA.add(flightHKA1);
-		flightsHKA.add(flightHKA2);
-		flightsHKA.add(flightHKA3);
-		
-		ArrayList<ArrayList<Flight>> flightLists = new ArrayList<ArrayList<Flight>>();
-		flightLists.add(flightsCP);
-		flightLists.add(flightsCA);
-		flightLists.add(flightsHKA);
-		
-		
-		for (ArrayList<Flight> flightList : flightLists) {
-			SourceWriter<List<Flight>> flightCSVFileWriter = new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value());
-			flightCSVFileWriter.write(flightList);
-			flightCSVFileWriter.close();
-		}
-		
-		AirlineCompany airlineCompanyCP = new AirlineCompany("Cathay Pacific Airways");
-		airlineCompanyCP.addFlight(flightCP1);
-		airlineCompanyCP.addFlight(flightCP2);
-		airlineCompanyCP.addFlight(flightCP3);
-		
-		AirlineCompany airlineCompanyCA = new AirlineCompany("China Airlines");
-		airlineCompanyCA.addFlight(flightCA1);
-		airlineCompanyCA.addFlight(flightCA2);
-		airlineCompanyCA.addFlight(flightCA3);
-		
-		AirlineCompany airlineCompanyHKA = new AirlineCompany("Hong Kong Airlines");
-		airlineCompanyHKA.addFlight(flightHKA1);
-		airlineCompanyHKA.addFlight(flightHKA2);
-		airlineCompanyHKA.addFlight(flightHKA3);
+		AirlineCompany airlineCompanyCA = new AirlineCompany();
+		airlineCompanyCA.setAirline("China Airlines");
+
+		AirlineCompany airlineCompanyHKA = new AirlineCompany();
+		airlineCompanyHKA.setAirline("Hong Kong Airlines");
 		
 		ArrayList<AirlineCompany> airlineCompanies = new ArrayList<AirlineCompany>();
 		airlineCompanies.add(airlineCompanyCP);
@@ -306,9 +96,8 @@ public class AirlineCompanyCSVFileReaderTest {
 		airlineCompanyCSVFileWriter.write(airlineCompanies);
 		airlineCompanyCSVFileWriter.close();
 		
-		FlightCSVFileReader flightCSVFileReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
-		SourceReader<AirlineCompany> airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value(), flightCSVFileReader);
-		List<AirlineCompany> airlineCompanyResultList = airlineCompanyCSVFileReader.read();
+		SourceReader<AirlineCompany> airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value());
+		List<AirlineCompany> airlineCompanyResultList = airlineCompanyCSVFileReader.read(new AirlineCompanyParser());
 		airlineCompanyCSVFileReader.close();
 		
 		assertThat(airlineCompanies.size(), is(airlineCompanyResultList.size()));
@@ -318,47 +107,6 @@ public class AirlineCompanyCSVFileReaderTest {
 		}
 		
 		assertThat(airlineCompanyCP.getFlights().size(), is(airlineCompanyResultList.get(0).getFlights().size()));
-		
-		for (int i = 0; i < airlineCompanyCP.getFlights().size() ; i++) {
-			assertThat(airlineCompanyCP.getFlights().get(i).getAirline(), is(airlineCompanyResultList.get(0).getFlights().get(i).getAirline()));
-			assertThat(airlineCompanyCP.getFlights().get(i).getFlightNumber(), is(airlineCompanyResultList.get(0).getFlights().get(i).getFlightNumber()));
-			assertThat(airlineCompanyCP.getFlights().get(i).getTravelClass(), is(airlineCompanyResultList.get(0).getFlights().get(i).getTravelClass()));
-			assertThat(airlineCompanyCP.getFlights().get(i).getDepature(), is(airlineCompanyResultList.get(0).getFlights().get(i).getDepature()));
-			assertThat(airlineCompanyCP.getFlights().get(i).getDestination(), is(airlineCompanyResultList.get(0).getFlights().get(i).getDestination()));
-			assertThat(airlineCompanyCP.getFlights().get(i).getDepatureDateTime(), is(airlineCompanyResultList.get(0).getFlights().get(i).getDepatureDateTime()));
-			assertThat(airlineCompanyCP.getFlights().get(i).getArrivalDateTime(), is(airlineCompanyResultList.get(0).getFlights().get(i).getArrivalDateTime()));
-			assertThat(airlineCompanyCP.getFlights().get(i).getAvailable(), is(airlineCompanyResultList.get(0).getFlights().get(i).getAvailable()));
-			assertThat(airlineCompanyCP.getFlights().get(i).getOneWayPrice(), is(airlineCompanyResultList.get(0).getFlights().get(i).getOneWayPrice()));
-		}
-		
-		assertThat(airlineCompanyCA.getFlights().size(), is(airlineCompanyResultList.get(1).getFlights().size()));
-		
-		for (int i = 0; i < airlineCompanyCA.getFlights().size() ; i++) {
-			assertThat(airlineCompanyCA.getFlights().get(i).getAirline(), is(airlineCompanyResultList.get(1).getFlights().get(i).getAirline()));
-			assertThat(airlineCompanyCA.getFlights().get(i).getFlightNumber(), is(airlineCompanyResultList.get(1).getFlights().get(i).getFlightNumber()));
-			assertThat(airlineCompanyCA.getFlights().get(i).getTravelClass(), is(airlineCompanyResultList.get(1).getFlights().get(i).getTravelClass()));
-			assertThat(airlineCompanyCA.getFlights().get(i).getDepature(), is(airlineCompanyResultList.get(1).getFlights().get(i).getDepature()));
-			assertThat(airlineCompanyCA.getFlights().get(i).getDestination(), is(airlineCompanyResultList.get(1).getFlights().get(i).getDestination()));
-			assertThat(airlineCompanyCA.getFlights().get(i).getDepatureDateTime(), is(airlineCompanyResultList.get(1).getFlights().get(i).getDepatureDateTime()));
-			assertThat(airlineCompanyCA.getFlights().get(i).getArrivalDateTime(), is(airlineCompanyResultList.get(1).getFlights().get(i).getArrivalDateTime()));
-			assertThat(airlineCompanyCA.getFlights().get(i).getAvailable(), is(airlineCompanyResultList.get(1).getFlights().get(i).getAvailable()));
-			assertThat(airlineCompanyCA.getFlights().get(i).getOneWayPrice(), is(airlineCompanyResultList.get(1).getFlights().get(i).getOneWayPrice()));
-		}
-		
-		assertThat(airlineCompanyHKA.getFlights().size(), is(airlineCompanyResultList.get(2).getFlights().size()));
-		
-		for (int i = 0; i < airlineCompanyHKA.getFlights().size() ; i++) {
-			assertThat(airlineCompanyHKA.getFlights().get(i).getAirline(), is(airlineCompanyResultList.get(2).getFlights().get(i).getAirline()));
-			assertThat(airlineCompanyHKA.getFlights().get(i).getFlightNumber(), is(airlineCompanyResultList.get(2).getFlights().get(i).getFlightNumber()));
-			assertThat(airlineCompanyHKA.getFlights().get(i).getTravelClass(), is(airlineCompanyResultList.get(2).getFlights().get(i).getTravelClass()));
-			assertThat(airlineCompanyHKA.getFlights().get(i).getDepature(), is(airlineCompanyResultList.get(2).getFlights().get(i).getDepature()));
-			assertThat(airlineCompanyHKA.getFlights().get(i).getDestination(), is(airlineCompanyResultList.get(2).getFlights().get(i).getDestination()));
-			assertThat(airlineCompanyHKA.getFlights().get(i).getDepatureDateTime(), is(airlineCompanyResultList.get(2).getFlights().get(i).getDepatureDateTime()));
-			assertThat(airlineCompanyHKA.getFlights().get(i).getArrivalDateTime(), is(airlineCompanyResultList.get(2).getFlights().get(i).getArrivalDateTime()));
-			assertThat(airlineCompanyHKA.getFlights().get(i).getAvailable(), is(airlineCompanyResultList.get(2).getFlights().get(i).getAvailable()));
-			assertThat(airlineCompanyHKA.getFlights().get(i).getOneWayPrice(), is(airlineCompanyResultList.get(2).getFlights().get(i).getOneWayPrice()));
-		}
-		
 		
 	}
 	

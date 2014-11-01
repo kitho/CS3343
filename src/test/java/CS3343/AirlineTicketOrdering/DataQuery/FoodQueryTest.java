@@ -22,6 +22,7 @@ import CS3343.AirlineTicketOrdering.DataReader.Impl.MealCSVFileReader;
 import CS3343.AirlineTicketOrdering.Model.Meal;
 import CS3343.AirlineTicketOrdering.Model.Food;
 import CS3343.AirlineTicketOrdering.Model.Flight;
+import CS3343.AirlineTicketOrdering.Parser.Impl.FoodParser;
 
 public class FoodQueryTest {
 	private File projectPath;
@@ -40,7 +41,7 @@ public class FoodQueryTest {
 	@Test
 	public void findAllFoodsTest() throws IOException, ParseException{
 		List<Food> foods = new ArrayList<Food>();
-		foods = foodReader.read();
+		foods = foodReader.read(new FoodParser());
 		
 		foodReader.close();
 		foodReader = new FoodCSVFileReader(projectPath + CSVFile.FOODCSV.value()); 
@@ -62,7 +63,7 @@ public class FoodQueryTest {
 	@Test
 	public void findFoodByFoodIdTest() throws IOException, ParseException{
 		List<Food> foods = new ArrayList<Food>();
-		foods = foodReader.read();
+		foods = foodReader.read(new FoodParser());
 		
 		Food food = foods.get(0);
 		
@@ -91,7 +92,7 @@ public class FoodQueryTest {
 	@Test
 	public void findFoodsByCategoryTest() throws IOException, ParseException{
 		List<Food> foods = new ArrayList<Food>();
-		foods = foodReader.read();
+		foods = foodReader.read(new FoodParser());
 		
 		List<Food> tempF = new ArrayList<Food>();
 		tempF.add(foods.get(2));
@@ -128,7 +129,7 @@ public class FoodQueryTest {
 	@Test
 	public void findFoodsByOneMealTest() throws IOException, ParseException{
 		List<Food> foods = new ArrayList<Food>();
-		foods = foodReader.read();
+		foods = foodReader.read(new FoodParser());
 		
 		List<Food> tempF = new ArrayList<Food>();
 		tempF.add(foods.get(3));
