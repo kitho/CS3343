@@ -22,21 +22,12 @@ public class InputDestinationViewTest {
 	
 	@Test
 	public void displayTest() {
-		System.setIn(new ByteArrayInputStream("2014-01-01".getBytes()));
-//		System.setIn(new ByteArrayInputStream("Hong Kong".getBytes()));
-//		System.setIn(new ByteArrayInputStream("Taiwan".getBytes()));
+		System.setIn(new ByteArrayInputStream("2014-01-01 Hong Kong Taiwan".getBytes()));
 		
 		AirlineTicketOrderingView inputDestinationView = new InputDestinationView();
 		inputDestinationView.display();
-				
-		String welcomeString = "Welcome to Airline Ticket Ordering System";
-		String dateString = "Date (YYYY-MM-DD): ";
-		String depatureString = "Depature: ";
-		String destinationString = "Destination: ";
 		
-		assertThat(welcomeString + "\n" + dateString, is(outContent.toString()));
-//		assertThat(depatureString, is(outContent.toString()));
-//		assertThat(destinationString, is(outContent.toString()));
+		assertThat("[Date (YYYY-MM-DD)] [Depature] [Destination]: ", is(outContent.toString()));
 		System.setIn(System.in);
 	}
 

@@ -9,7 +9,7 @@ public class AirlineTicketOrderingSystem {
 	private static class AirlineTicketOrderingSystemInvoker{
 		
 		public static void main(String[] args){
-			
+			System.out.println("Welcome to Airline Ticket Ordering System");
 		}
 	}
 }

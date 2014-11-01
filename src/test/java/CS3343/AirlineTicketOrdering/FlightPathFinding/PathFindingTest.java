@@ -23,37 +23,40 @@ public class PathFindingTest {
 	public void testDirectFlight1(){
 		PathFinding	pathFinding = new PathFinding("Hong Kong", "Thailand");
 
-		ArrayList<Route> resultRoutes = pathFinding.getDirectFlight();
-		assertThat(resultRoutes.size(), is(1));		
+		ArrayList<FlightPath> resultRoutes = pathFinding.getDirectFlight();
+		assertThat(resultRoutes.size(), is(1));
+		assertThat(resultRoutes.get(0).getFlightList().size(), is(1));
 	}	
 	
 	@Test
 	public void testDirectFlight2(){
 		PathFinding	pathFinding = new PathFinding("Hong Kong", "Tokyo");
 
-		ArrayList<Route> resultRoutes = pathFinding.getDirectFlight();
-		assertThat(resultRoutes.size(), is(1));		
+		ArrayList<FlightPath> resultRoutes = pathFinding.getDirectFlight();
+		assertThat(resultRoutes.size(), is(1));
+		assertThat(resultRoutes.get(0).getFlightList().size(), is(1));
 	}
 	
 	@Test
 	public void testDirectFlight3(){
 		PathFinding	pathFinding = new PathFinding("Hong Kong", "Taiwan");
-		ArrayList<Route> resultRoutes = pathFinding.getDirectFlight();
-		assertThat(resultRoutes.size(), is(0));		
+		ArrayList<FlightPath> resultRoutes = pathFinding.getDirectFlight();
+		assertThat(resultRoutes.size(), is(0));
 	}	
 	
 	@Test
 	public void testDirectFlight4(){
 		PathFinding	pathFinding = new PathFinding("Tokyo", "Taiwan");
-		ArrayList<Route> resultRoutes = pathFinding.getDirectFlight();
-		assertThat(resultRoutes.size(), is(1));		
+		ArrayList<FlightPath> resultRoutes = pathFinding.getDirectFlight();
+		assertThat(resultRoutes.size(), is(1));
+		assertThat(resultRoutes.get(0).getFlightList().size(), is(1));
 	}	
 	
 	@Test
 	public void testDirectFlight5(){
 		PathFinding	pathFinding = new PathFinding("Thailand", "Taiwan");
-		ArrayList<Route> resultRoutes = pathFinding.getDirectFlight();
-		assertThat(resultRoutes.size(), is(1));		
+		ArrayList<FlightPath> resultRoutes = pathFinding.getDirectFlight();
+		assertThat(resultRoutes.size(), is(0));
 	}	
 	
 }

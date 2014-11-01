@@ -19,14 +19,13 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import CS3343.AirlineTicketOrdering.DataQuery.AirlineQuery;
-import CS3343.AirlineTicketOrdering.DataReader.AirlineCompanyCSVFileReader;
+import TestingTool.DataWriter.AirlineCompanyCSVFileWriter;
 import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
-import CS3343.AirlineTicketOrdering.DataReader.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
-import CS3343.AirlineTicketOrdering.DataWriter.AirlineCompanyCSVFileWriter;
-import CS3343.AirlineTicketOrdering.DataWriter.FlightCSVFileWriter;
+import CS3343.AirlineTicketOrdering.DataReader.Impl.AirlineCompanyCSVFileReader;
+import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
+import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
 import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 
@@ -53,6 +52,7 @@ public class AirlineCompanyCSVFileReaderTest {
 		} catch (FileNotFoundException e) {
 			assertThat(e.getMessage().toString(), is(not(nullValue())));
 		}
+
 	}
 
 	@Test
@@ -71,6 +71,9 @@ public class AirlineCompanyCSVFileReaderTest {
 		flight.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
 		flight.setAvailable(30);
 		flight.setOneWayPrice(2500.00);
+		flight.setMealIds("M1");
+		flight.setFoodIds("1");
+		flight.setModel("A123");
 		
 		ArrayList<Flight> flights = new ArrayList<Flight>();
 		flights.add(flight);
@@ -127,6 +130,9 @@ public class AirlineCompanyCSVFileReaderTest {
 		flightCP1.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
 		flightCP1.setAvailable(30);
 		flightCP1.setOneWayPrice(2500.00);
+		flightCP1.setMealIds("M1");
+		flightCP1.setFoodIds("1");
+		flightCP1.setModel("A123");
 		
 		Flight flightCP2 = new Flight();
 		
@@ -139,6 +145,9 @@ public class AirlineCompanyCSVFileReaderTest {
 		flightCP2.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
 		flightCP2.setAvailable(50);
 		flightCP2.setOneWayPrice(1500.00);
+		flightCP2.setMealIds("M1");
+		flightCP2.setFoodIds("1");
+		flightCP2.setModel("A123");
 		
 		Flight flightCP3 = new Flight();
 		
@@ -151,6 +160,9 @@ public class AirlineCompanyCSVFileReaderTest {
 		flightCP3.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
 		flightCP3.setAvailable(250);
 		flightCP3.setOneWayPrice(700.00);
+		flightCP3.setMealIds("M1");
+		flightCP3.setFoodIds("1");
+		flightCP3.setModel("A123");
 		
 		ArrayList<Flight> flightsCP = new ArrayList<Flight>();
 		flightsCP.add(flightCP1);
@@ -168,6 +180,9 @@ public class AirlineCompanyCSVFileReaderTest {
 		flightCA1.setArrivalDateTime(formatter.parse("2014-01-02 03:30:00"));
 		flightCA1.setAvailable(25);
 		flightCA1.setOneWayPrice(1500.00);
+		flightCA1.setMealIds("M1");
+		flightCA1.setFoodIds("1");
+		flightCA1.setModel("A123");
 		
 		Flight flightCA2 = new Flight();
 		
@@ -180,6 +195,9 @@ public class AirlineCompanyCSVFileReaderTest {
 		flightCA2.setArrivalDateTime(formatter.parse("2014-01-02 03:30:00"));
 		flightCA2.setAvailable(50);
 		flightCA2.setOneWayPrice(1100.00);
+		flightCA2.setMealIds("M1");
+		flightCA2.setFoodIds("1");
+		flightCA2.setModel("A123");
 		
 		Flight flightCA3 = new Flight();
 		
@@ -192,6 +210,9 @@ public class AirlineCompanyCSVFileReaderTest {
 		flightCA3.setArrivalDateTime(formatter.parse("2014-01-02 03:30:00"));
 		flightCA3.setAvailable(150);
 		flightCA3.setOneWayPrice(650.00);
+		flightCA3.setMealIds("M1");
+		flightCA3.setFoodIds("1");
+		flightCA3.setModel("A123");
 		
 		ArrayList<Flight> flightsCA = new ArrayList<Flight>();
 		flightsCA.add(flightCA1);
@@ -209,6 +230,9 @@ public class AirlineCompanyCSVFileReaderTest {
 		flightHKA1.setArrivalDateTime(formatter.parse("2014-12-31 15:30:00"));
 		flightHKA1.setAvailable(30);
 		flightHKA1.setOneWayPrice(15500.00);
+		flightHKA1.setMealIds("M1");
+		flightHKA1.setFoodIds("1");
+		flightHKA1.setModel("A123");
 		
 		Flight flightHKA2 = new Flight();
 		
@@ -221,6 +245,9 @@ public class AirlineCompanyCSVFileReaderTest {
 		flightHKA2.setArrivalDateTime(formatter.parse("2014-12-31 15:30:00"));
 		flightHKA2.setAvailable(65);
 		flightHKA2.setOneWayPrice(10500.00);
+		flightHKA2.setMealIds("M1");
+		flightHKA2.setFoodIds("1");
+		flightHKA2.setModel("A123");
 		
 		Flight flightHKA3 = new Flight();
 		
@@ -233,6 +260,10 @@ public class AirlineCompanyCSVFileReaderTest {
 		flightHKA3.setArrivalDateTime(formatter.parse("2014-12-31 15:30:00"));
 		flightHKA3.setAvailable(300);
 		flightHKA3.setOneWayPrice(7500.00);
+		flightHKA3.setMealIds("M1");
+		flightHKA3.setFoodIds("1");
+		flightHKA3.setModel("A123");
+		
 		
 		ArrayList<Flight> flightsHKA = new ArrayList<Flight>();
 		flightsHKA.add(flightHKA1);

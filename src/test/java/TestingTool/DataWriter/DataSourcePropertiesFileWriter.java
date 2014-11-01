@@ -1,9 +1,11 @@
-package CS3343.AirlineTicketOrdering.DataWriter;
+package TestingTool.DataWriter;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
+
+import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 
 
 public class DataSourcePropertiesFileWriter implements SourceWriter<Map<String, String>> {

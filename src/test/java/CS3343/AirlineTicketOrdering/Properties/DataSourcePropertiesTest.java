@@ -17,8 +17,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import TestingTool.DataWriter.DataSourcePropertiesFileWriter;
 import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
-import CS3343.AirlineTicketOrdering.DataWriter.DataSourcePropertiesFileWriter;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 
 public class DataSourcePropertiesTest {
