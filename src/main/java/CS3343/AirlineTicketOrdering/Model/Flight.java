@@ -13,28 +13,7 @@ public class Flight {
 	private Date arrivalDateTime;
 	private int available;
 	private double oneWayPrice;
-	private String model;
-	private String mealIds;
-	private String foodIds;
 	
-	public String getMealIds() {
-		return mealIds;
-	}
-	public void setMealIds(String mealIds) {
-		this.mealIds = mealIds;
-	}
-	public String getFoodIds() {
-		return foodIds;
-	}
-	public void setFoodIds(String foodIds) {
-		this.foodIds = foodIds;
-	}
-	public String getModel() {
-		return model;
-	}
-	public void setModel(String model) {
-		this.model = model;
-	}
 	public String getAirline() {
 		return airline;
 	}
@@ -97,7 +76,6 @@ public class Flight {
 		result = prime * result + ((airline == null) ? 0 : airline.hashCode());
 		result = prime * result
 				+ ((flightNumber == null) ? 0 : flightNumber.hashCode());
-		result = prime * result + ((model == null) ? 0 : model.hashCode());
 		result = prime * result
 				+ ((travelClass == null) ? 0 : travelClass.hashCode());
 		return result;
@@ -122,11 +100,6 @@ public class Flight {
 				return false;
 		} else if (!flightNumber.equals(other.flightNumber))
 			return false;
-		if (model == null) {
-			if (other.model != null)
-				return false;
-		} else if (!model.equals(other.model))
-			return false;
 		if (travelClass == null) {
 			if (other.travelClass != null)
 				return false;
@@ -134,6 +107,5 @@ public class Flight {
 			return false;
 		return true;
 	}
-
 	
 }

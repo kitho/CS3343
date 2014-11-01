@@ -15,7 +15,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
+import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
@@ -48,9 +48,6 @@ public class FlightCSVFileWriterTest {
 		flight.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
 		flight.setAvailable(30);
 		flight.setOneWayPrice(2500.00);
-		flight.setModel("737-900");
-		flight.setMealIds("M1");
-		flight.setFoodIds("4-3-6-11-12-1-5");
 		
 		List<Flight> flights = new ArrayList<Flight>();
 		flights.add(flight);
@@ -92,9 +89,6 @@ public class FlightCSVFileWriterTest {
 		flightCP1.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
 		flightCP1.setAvailable(30);
 		flightCP1.setOneWayPrice(2500.00);
-		flightCP1.setModel("737-900");
-		flightCP1.setMealIds("M1");
-		flightCP1.setFoodIds("4-3-6-11-12-1-5");
 		
 		Flight flightCP2 = new Flight();
 		
@@ -107,9 +101,6 @@ public class FlightCSVFileWriterTest {
 		flightCP2.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
 		flightCP2.setAvailable(50);
 		flightCP2.setOneWayPrice(1500.00);
-		flightCP2.setModel("737-900");
-		flightCP2.setMealIds("M1");
-		flightCP2.setFoodIds("4-3-6-11-12-1-5");
 		
 		Flight flightCP3 = new Flight();
 		
@@ -122,9 +113,6 @@ public class FlightCSVFileWriterTest {
 		flightCP3.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
 		flightCP3.setAvailable(250);
 		flightCP3.setOneWayPrice(700.00);
-		flightCP3.setModel("737-900");
-		flightCP3.setMealIds("M1");
-		flightCP3.setFoodIds("4-3-6-11-12-1-5");
 		
 		List<Flight> flightsCP = new ArrayList<Flight>();
 		flightsCP.add(flightCP1);

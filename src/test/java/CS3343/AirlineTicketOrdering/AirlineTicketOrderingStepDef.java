@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import TestingTool.DataWriter.DataTableCSVFileWriter;
-import CS3343.AirlineTicketOrdering.DataReader.CSVFile;
+import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 import cucumber.api.DataTable;
 import cucumber.api.java.Before;
@@ -25,7 +25,6 @@ public class AirlineTicketOrderingStepDef {
 		projectPath = new File(".").getCanonicalFile();
 		Files.deleteIfExists(Paths.get(projectPath + CSVFile.AIRLINECOMPANYCSV.value()));
 		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.MODELCSV.value()));
 		airlineTicketOrderingSystem = new AirlineTicketOrderingSystem();
 	}
 
@@ -43,12 +42,6 @@ public class AirlineTicketOrderingStepDef {
 		dataTableCSVFileWriter.close();
 	}
 	
-	@Given("^Flights Model are provided for the customer:$")
-	public void Flights_Model_are_provided_for_the_customer(DataTable dataTable) throws Throwable {
-		SourceWriter<DataTable> dataTableCSVFileWriter = new DataTableCSVFileWriter(projectPath + CSVFile.MODELCSV.value());
-		dataTableCSVFileWriter.write(dataTable);
-		dataTableCSVFileWriter.close();
-	}
 
 	@And("^Client comes to the airline ticket ordering view$")
 	public void Client_comes_to_the_airline_ticket_ordering_view() throws Throwable {

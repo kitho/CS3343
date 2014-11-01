@@ -52,9 +52,6 @@ public class FlightParserTest {
 		assertThat(formatter.parse(arrivalDateTime), is(flight.getArrivalDateTime()));
 		assertThat(available, is(flight.getAvailable()));
 		assertThat(oneWayPrice, is(flight.getOneWayPrice()));
-		assertThat(model, is(flight.getModel()));
-		assertThat(mealIds, is(flight.getMealIds()));
-		assertThat(foodIds, is(flight.getFoodIds()));
 		
 	}
 	
@@ -71,16 +68,13 @@ public class FlightParserTest {
 		flight.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
 		flight.setAvailable(30);
 		flight.setOneWayPrice(2500.00);
-		flight.setModel("737-900");
-		flight.setMealIds("M1");
-		flight.setFoodIds("4-3-6-11-12-1-5");
 		
 		Parser<Flight> flightParser = new FlightParser();
 		String line = flightParser.parseObject(flight);
 		
 		String flightString =  flight.getAirline() + "," + flight.getFlightNumber() + "," + flight.getTravelClass() + "," + flight.getDepature()
 				+ "," + flight.getDestination() + "," + formatter.format(flight.getDepatureDateTime()) + "," + formatter.format(flight.getArrivalDateTime())
-				+ "," + flight.getAvailable() + "," + flight.getOneWayPrice() + "," + flight.getModel() + "," + flight.getMealIds() + "," + flight.getFoodIds();
+				+ "," + flight.getAvailable() + "," + flight.getOneWayPrice();
 		assertThat(flightString, is(line));
 		
 	}

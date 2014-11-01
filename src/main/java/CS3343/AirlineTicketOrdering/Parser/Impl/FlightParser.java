@@ -32,9 +32,6 @@ public class FlightParser implements Parser<Flight> {
 		flight.setArrivalDateTime(formatter.parse(dataStr[6]));
 		flight.setAvailable(Integer.parseInt(dataStr[7]));
 		flight.setOneWayPrice(Double.parseDouble(dataStr[8]));
-		flight.setModel(dataStr[9]);
-		flight.setMealIds(dataStr[10]);
-		flight.setFoodIds(dataStr[11]);
 		
 		return flight;
 	}
@@ -51,9 +48,6 @@ public class FlightParser implements Parser<Flight> {
 		dataList.add(formatter.format(flight.getArrivalDateTime()));
 		dataList.add(String.valueOf(flight.getAvailable()));
 		dataList.add(String.valueOf(flight.getOneWayPrice()));
-		dataList.add(flight.getModel());
-		dataList.add(flight.getMealIds());
-		dataList.add(flight.getFoodIds());
 		
 		String line = StringUtils.join(dataList, ",");
 		
