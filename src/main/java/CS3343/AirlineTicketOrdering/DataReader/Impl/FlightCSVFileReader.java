@@ -25,7 +25,7 @@ public class FlightCSVFileReader extends FileReader<Flight> {
 
 		String line;
 		while ((line = bufferedReader.readLine()) != null) {
-			Flight flight = flightParser.parse(line);
+			Flight flight = flightParser.parseString(line);
 			flights.add(flight);
 		}
 

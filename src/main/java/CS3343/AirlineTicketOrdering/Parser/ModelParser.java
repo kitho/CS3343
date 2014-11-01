@@ -4,6 +4,7 @@ import java.text.ParseException;
 
 public interface ModelParser<T> {
 
-	public T parse(String line) throws ParseException;
+	public T parseString(String line) throws ParseException;
 	
+	public String parseObject(T t);
 }
