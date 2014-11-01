@@ -25,6 +25,7 @@ public class AirlineQuery {
 		airlineCompanies = airlineCompanyReader.read(new AirlineCompanyParser());
 		flights = flightReader.read(new FlightParser());
 		this.flightWriter = flightWriter;
+		
 	}
 
 	public List<Flight> findFlightsByDepatureAndDestinationAndDate(String depature,
