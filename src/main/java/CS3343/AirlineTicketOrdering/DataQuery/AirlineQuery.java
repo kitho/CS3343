@@ -25,20 +25,22 @@ public class AirlineQuery {
 		airlineCompanies = airlineCompanyReader.read(new AirlineCompanyParser());
 		flights = flightReader.read(new FlightParser());
 		this.flightWriter = flightWriter;
-		
+		for(int i = 0; i < airlineCompanies.size(); i++){
+			for(int j = 0; j < flights.size(); j ++)
+				airlineCompanies.get(i).addFlight(flights.get(j));
+		}
 	}
 
 	public List<Flight> findFlightsByDepatureAndDestinationAndDate(String depature,
 			String destination, Date depatureDate) {
 		List<Flight> flightResultList = new ArrayList<Flight>();
 		
-		for (AirlineCompany airlineCompany : airlineCompanies) {
-			for (Flight flight : flights) {
-				if(flight.getDepature().toUpperCase().equals(depature.toUpperCase()) &&
-						flight.getDestination().toUpperCase().equals(destination.toUpperCase()) &&
-						DateUtils.isSameDay(depatureDate, flight.getDepatureDateTime()) && flight.getAvailable() > 0)
+		
+		for (Flight flight : flights) {
+			if(flight.getDepature().toUpperCase().equals(depature.toUpperCase()) &&
+					flight.getDestination().toUpperCase().equals(destination.toUpperCase()) &&
+					DateUtils.isSameDay(depatureDate, flight.getDepatureDateTime()) && flight.getAvailable() > 0)
 					flightResultList.add(flight);
-			}
 		}
 		
 		return flightResultList;
