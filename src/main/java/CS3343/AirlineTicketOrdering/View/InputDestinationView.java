@@ -2,9 +2,11 @@ package CS3343.AirlineTicketOrdering.View;
 
 import java.util.Scanner;
 
-public class InputDestinationView implements AirlineTicketOrderingView {
+import CS3343.AirlineTicketOrdering.Session.Session;
 
-	public void display(){
+public class InputDestinationView implements View {
+
+	public void display(Session session){
 		Scanner scanner = new Scanner(System.in);
 		
 		String[] splitString = null;

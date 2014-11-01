@@ -24,8 +24,8 @@ public class InputDestinationViewTest {
 	public void displayTest() {
 		System.setIn(new ByteArrayInputStream("2014-01-01 Hong Kong Taiwan".getBytes()));
 		
-		AirlineTicketOrderingView inputDestinationView = new InputDestinationView();
-		inputDestinationView.display();
+		View inputDestinationView = new InputDestinationView();
+		//inputDestinationView.display();
 		
 		assertThat("[Date (YYYY-MM-DD)] [Depature] [Destination]: ", is(outContent.toString()));
 		System.setIn(System.in);
