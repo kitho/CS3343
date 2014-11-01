@@ -6,6 +6,8 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
+import CS3343.AirlineTicketOrdering.Session.Session;
+
 public class SessionTest {
 	
 	@Test

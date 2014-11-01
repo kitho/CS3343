@@ -42,7 +42,6 @@ public class AirlineTicketOrderingStepDef {
 		dataTableCSVFileWriter.close();
 	}
 	
-
 	@And("^Client comes to the airline ticket ordering view$")
 	public void Client_comes_to_the_airline_ticket_ordering_view() throws Throwable {
 		airlineTicketOrderingSystem.invoke();
