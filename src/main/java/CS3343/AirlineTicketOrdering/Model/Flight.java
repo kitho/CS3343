@@ -68,19 +68,22 @@ public class Flight {
 	public void setOneWayPrice(double oneWayPrice) {
 		this.oneWayPrice = oneWayPrice;
 	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((airline == null) ? 0 : airline.hashCode());
 		result = prime * result
+				+ ((arrivalDateTime == null) ? 0 : arrivalDateTime.hashCode());
+		result = prime
+				* result
+				+ ((depatureDateTime == null) ? 0 : depatureDateTime.hashCode());
+		result = prime * result
 				+ ((flightNumber == null) ? 0 : flightNumber.hashCode());
 		result = prime * result
 				+ ((travelClass == null) ? 0 : travelClass.hashCode());
 		return result;
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -95,6 +98,16 @@ public class Flight {
 				return false;
 		} else if (!airline.equals(other.airline))
 			return false;
+		if (arrivalDateTime == null) {
+			if (other.arrivalDateTime != null)
+				return false;
+		} else if (!arrivalDateTime.equals(other.arrivalDateTime))
+			return false;
+		if (depatureDateTime == null) {
+			if (other.depatureDateTime != null)
+				return false;
+		} else if (!depatureDateTime.equals(other.depatureDateTime))
+			return false;
 		if (flightNumber == null) {
 			if (other.flightNumber != null)
 				return false;
@@ -107,5 +120,7 @@ public class Flight {
 			return false;
 		return true;
 	}
+	
+	
 	
 }
