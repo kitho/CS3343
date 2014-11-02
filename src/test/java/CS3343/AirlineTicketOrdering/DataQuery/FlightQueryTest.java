@@ -27,7 +27,7 @@ import CS3343.AirlineTicketOrdering.Parser.Parser;
 import CS3343.AirlineTicketOrdering.Parser.Impl.AirlineCompanyParser;
 import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;
 
-public class AirlineQueryTest {
+public class FlightQueryTest {
 	
 	private SimpleDateFormat formatter;
 
@@ -68,8 +68,8 @@ public class AirlineQueryTest {
 		when(airlineCompanyReader.read((Parser<AirlineCompany>) any())).thenReturn(airlineCompanies);
 		when(flightReader.read((Parser<Flight>) any())).thenReturn(flights);
 		
-		AirlineQuery airlineQuery = new AirlineQuery(airlineCompanyReader,flightReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
-		List<Flight> resultFlights = airlineQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
+		FlightQuery FlightQuery = new FlightQuery(airlineCompanyReader,flightReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
+		List<Flight> resultFlights = FlightQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
 		
 		assertThat(0, is(resultFlights.size()));
 	}
@@ -107,8 +107,8 @@ public class AirlineQueryTest {
 		when(flightReader.read((Parser<Flight>) any())).thenReturn(flights);
 
 		
-		AirlineQuery airlineQuery = new AirlineQuery(airlineCompanyReader,flightReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
-		List<Flight> resultFlights = airlineQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
+		FlightQuery FlightQuery = new FlightQuery(airlineCompanyReader,flightReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
+		List<Flight> resultFlights = FlightQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
 		
 		assertThat(1, is(flights.size()));
 		
@@ -192,8 +192,8 @@ public class AirlineQueryTest {
 		when(flightReader.read((Parser<Flight>) any())).thenReturn(flights);
 		
 		
-		AirlineQuery airlineQuery = new AirlineQuery(airlineCompanyReader,flightReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
-		List<Flight> flightsResult = airlineQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
+		FlightQuery FlightQuery = new FlightQuery(airlineCompanyReader,flightReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
+		List<Flight> flightsResult = FlightQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
 				
 		assertThat(flights.size(), is(flightsResult.size()));
 		
@@ -283,8 +283,8 @@ public class AirlineQueryTest {
 		when(airlineCompanyReader.read((Parser<AirlineCompany>) any())).thenReturn(airlineCompanies);
 		when(flightReader.read((Parser<Flight>) any())).thenReturn(flights);
 		
-		AirlineQuery airlineQuery = new AirlineQuery(airlineCompanyReader,flightReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
-		List<Flight> flightsResult = airlineQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
+		FlightQuery FlightQuery = new FlightQuery(airlineCompanyReader,flightReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
+		List<Flight> flightsResult = FlightQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
 		
 		assertThat(flights.size(), is(flightsResult.size()));
 		
@@ -337,8 +337,8 @@ public class AirlineQueryTest {
 		when(flightReader.read((Parser<Flight>) any())).thenReturn(flights);
 		doNothing().when(flightWriter).write(null);;
 		
-		AirlineQuery airlineQuery = new AirlineQuery(airlineCompanyReader,flightReader,flightWriter);
-		airlineQuery.updateFlightAvailableByFlightAndReducingNumber(flight, 1);
+		FlightQuery FlightQuery = new FlightQuery(airlineCompanyReader,flightReader,flightWriter);
+		FlightQuery.updateFlightAvailableByFlightAndReducingNumber(flight, 1);
 		
 		int count = 0;
 		for (AirlineCompany airlineCompanyResult : airlineCompanies) {
