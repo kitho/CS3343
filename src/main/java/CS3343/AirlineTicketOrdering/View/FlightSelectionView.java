@@ -16,7 +16,7 @@ public class FlightSelectionView implements View{
 		
 		if(flights.size() == 0){
 			System.out.println("Not Suitable Flight");
-			session.setAttribute("selectedFlight", null);
+			session.setAttribute("flights", null);
 		}else{
 	        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 			System.out.println("=====================");
@@ -29,9 +29,9 @@ public class FlightSelectionView implements View{
 			
 			
 			System.out.println("Please select flight");
-			session.setAttribute("selectedFlight", flights.get(scanner.nextInt()));
+			session.setAttribute("flights", flights.get(scanner.nextInt()));
 			System.out.print("Please input number of tickets that you need?");
-			session.setAttribute("selectedFlightNumber", scanner.nextInt());
+			session.setAttribute("numberOfTicket", scanner.nextInt());
 		}
 	}
 }
