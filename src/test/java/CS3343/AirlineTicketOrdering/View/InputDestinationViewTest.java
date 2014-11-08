@@ -32,8 +32,7 @@ public class InputDestinationViewTest {
 		assertThat("Please Input your depature date, deapture and destination to search\nDate (YYYY-MM-DD):DepatureDestination", is(outContent.toString()));
 		
 		System.setIn(System.in);
-		System.setIn(System.in);
-		System.setIn(System.in);
+
 	}
 
 }
