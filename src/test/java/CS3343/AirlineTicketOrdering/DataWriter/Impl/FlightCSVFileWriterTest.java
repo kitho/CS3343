@@ -1,4 +1,4 @@
-package CS3343.AirlineTicketOrdering.DataWriter;
+package CS3343.AirlineTicketOrdering.DataWriter.Impl;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,6 +18,7 @@ import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
 import CS3343.AirlineTicketOrdering.CustomDateUtil.CustomDateFormatter;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
+import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;

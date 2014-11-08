@@ -1,4 +1,4 @@
-package CS3343.AirlineTicketOrdering.DataReader;
+package CS3343.AirlineTicketOrdering.DataReader.Impl;
 
 import java.io.File;
 import java.io.FileNotFoundException;

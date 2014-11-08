@@ -1,4 +1,4 @@
-package CS3343.AirlineTicketOrdering.Parser;
+package CS3343.AirlineTicketOrdering.Parser.Impl;
 
 import java.text.ParseException;
 
@@ -9,6 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import CS3343.AirlineTicketOrdering.CustomDateUtil.CustomDateFormatter;
 import CS3343.AirlineTicketOrdering.Model.Flight;
+import CS3343.AirlineTicketOrdering.Parser.Parser;
 import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;
 
 public class FlightParserTest {
