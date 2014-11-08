@@ -24,13 +24,15 @@ public class InputDestinationViewTest {
 	}
 	
 	@Test
-	public void displayTest() {
-		System.setIn(new ByteArrayInputStream("2014-01-01 Hong Kong Taiwan".getBytes()));
-		
+	public void displayTest() {	
+		System.setIn(new ByteArrayInputStream("2014-01-01\nHong Kong\nTaiwan".getBytes()));
 		View inputDestinationView = new InputDestinationView();
 		inputDestinationView.display(session);
 		
-		assertThat("[Date (YYYY-MM-DD)] [Depature] [Destination]: ", is(outContent.toString()));
+		assertThat("Please Input your depature date, deapture and destination to search\nDate (YYYY-MM-DD):DepatureDestination", is(outContent.toString()));
+		
+		System.setIn(System.in);
+		System.setIn(System.in);
 		System.setIn(System.in);
 	}
 
