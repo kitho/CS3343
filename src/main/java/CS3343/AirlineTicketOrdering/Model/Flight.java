@@ -1,5 +1,6 @@
 package CS3343.AirlineTicketOrdering.Model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Flight {
@@ -120,19 +121,6 @@ public class Flight {
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return airline + "\t" + flightNumber
-				+ "\t" + travelClass + "\t" + depature
-				+ "\t" + destination + "\t"
-				+ depatureDateTime + "\t" + arrivalDateTime
-				+ "\t" + available + "\t" + oneWayPrice
-				+ "]";
-	}
-	
-	
-	
-	
-	
+
 	
 }
