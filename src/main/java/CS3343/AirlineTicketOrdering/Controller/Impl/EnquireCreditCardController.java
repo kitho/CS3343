@@ -1,7 +1,6 @@
 package CS3343.AirlineTicketOrdering.Controller.Impl;
 
 import CS3343.AirlineTicketOrdering.Controller.AirlineTicketOrderingController;
-import CS3343.AirlineTicketOrdering.Model.CreditCard;
 import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.View;
 
@@ -12,9 +11,7 @@ public class EnquireCreditCardController extends AirlineTicketOrderingController
 	}
 
 	@Override
-	public void execute() throws Exception {
-		CreditCard creditCard = (CreditCard)session.getAttribute("creditCard");
-		
+	public void execute() throws Exception {		
 		view.display(session);
 
 		next();

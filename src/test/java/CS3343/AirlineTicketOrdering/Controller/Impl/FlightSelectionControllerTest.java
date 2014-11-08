@@ -22,13 +22,13 @@ public class FlightSelectionControllerTest {
 		FlightQuery flightQuery = mock(FlightQuery.class);
 		List<Flight> flights = mock(List.class);
 		AirlineTicketOrderingController next = mock(AirlineTicketOrderingController.class); 
-		AirlineTicketOrderingController inputDestinationController = new FlightSelectionController(session, view, flightQuery);
+		AirlineTicketOrderingController flightSelectionController = new FlightSelectionController(session, view, flightQuery);
 		
 		when(session.getAttribute("depatureDate")).thenReturn("2012-12-01 22:30:15");
 		when(flightQuery.findFlightsByDepatureAndDestinationAndDate(any(String.class), any(String.class), any(Date.class))).thenReturn(flights);
 		
-		inputDestinationController.setNext(next);
-		inputDestinationController.execute();
+		flightSelectionController.setNext(next);
+		flightSelectionController.execute();
 		
 		verify(session, times(1)).setAttribute("flights", flights);
 		verify(view, times(1)).display(session);

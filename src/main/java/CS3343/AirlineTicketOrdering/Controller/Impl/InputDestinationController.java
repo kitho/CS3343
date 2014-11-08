@@ -11,8 +11,8 @@ public class InputDestinationController extends AirlineTicketOrderingController 
 	
 	@Override
 	public void execute() throws Exception {
+		session.clear();
 		view.display(session);
-		
 		next();
 	}
 
