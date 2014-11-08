@@ -1,6 +1,6 @@
 Feature: Ticket Ordering
 
-Scenario: One Way Direct flight ticket purchasing
+Scenario: One way direct flight ticket purchasing
 
     Given Airline companies are provided:
     
@@ -34,7 +34,7 @@ Scenario: One Way Direct flight ticket purchasing
 	|Bank	|Credit Card Type	|Credit Card Number |
 	|HSBC	|VISA				|1234-1234-1234-1234|
 
-    And System display the order for the confirmation
+    And System display the order information to ask for the confirmation
     Then Client confirms the order:
     
     |Confirm	|

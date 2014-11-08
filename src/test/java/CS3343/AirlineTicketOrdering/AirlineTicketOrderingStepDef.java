@@ -72,11 +72,10 @@ public class AirlineTicketOrderingStepDef {
 
 	}
 
-	@And("^System display the order for the confirmation$")
-	public void System_display_the_order_for_the_confirmation() throws Throwable {
-	    
+	@When("^System display the order information to ask for the confirmation$")
+	public void System_display_the_order_information_to_ask_for_the_confirmation() throws Throwable {
+		
 	}
-
 	@Then("^Client confirms the order:$")
 	public void Client_confirms_the_order(DataTable dataTable) throws Throwable {
 	    

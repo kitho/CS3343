@@ -1,7 +1,8 @@
-package CS3343.AirlineTicketOrdering.Controller;
+package CS3343.AirlineTicketOrdering.Controller.Impl;
 
 import java.util.List;
 
+import CS3343.AirlineTicketOrdering.Controller.AirlineTicketOrderingController;
 import CS3343.AirlineTicketOrdering.CustomDateUtil.CustomDateFormatter;
 import CS3343.AirlineTicketOrdering.DataQuery.FlightQuery;
 import CS3343.AirlineTicketOrdering.Model.Flight;
