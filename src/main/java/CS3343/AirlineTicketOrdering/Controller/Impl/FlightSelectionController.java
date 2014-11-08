@@ -27,7 +27,7 @@ public class FlightSelectionController extends AirlineTicketOrderingController {
 		session.setAttribute("flights", flights);
 		view.display(session);
 		
-		next.next();
+		next();
 	}
 	
 }

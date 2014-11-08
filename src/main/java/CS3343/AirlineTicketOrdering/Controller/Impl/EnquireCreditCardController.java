@@ -17,7 +17,7 @@ public class EnquireCreditCardController extends AirlineTicketOrderingController
 		
 		view.display(session);
 
-		next.next();
+		next();
 	}
 
 }

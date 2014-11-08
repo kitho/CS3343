@@ -18,7 +18,7 @@ public class ControllerChainTest {
 			}
 			public void next() throws Exception {
 				super.next();
-				if(next != null)
+				if(next == null)
 					count++;
 			}
 		}
@@ -27,7 +27,7 @@ public class ControllerChainTest {
 		
 		controllerChain.next();
 
-		assertThat(0, is(controllerChain.getCount()));
+		assertThat(1, is(controllerChain.getCount()));
 	}
 	
 	@Test

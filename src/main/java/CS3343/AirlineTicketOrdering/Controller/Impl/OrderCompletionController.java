@@ -12,8 +12,9 @@ public class OrderCompletionController extends AirlineTicketOrderingController {
 
 	@Override
 	public void execute() throws Exception {
-		// TODO Auto-generated method stub
+		view.display(session);
 
+		next();
 	}
 
 }

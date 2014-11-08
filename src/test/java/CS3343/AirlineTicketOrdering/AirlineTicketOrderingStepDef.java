@@ -52,8 +52,8 @@ public class AirlineTicketOrderingStepDef {
 	    
 	}
 
-	@And("^System shows up the flights and classes and prices and times$")
-	public void System_shows_up_the_flights_and_classes_and_prices_and_times() throws Throwable {
+	@And("^System shows up the flights and classes and prices and times:$")
+	public void System_shows_up_the_flights_and_classes_and_prices_and_times(DataTable arg1) throws Throwable {
 	    
 	}
 

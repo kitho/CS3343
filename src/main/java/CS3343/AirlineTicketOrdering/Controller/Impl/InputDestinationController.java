@@ -13,7 +13,7 @@ public class InputDestinationController extends AirlineTicketOrderingController 
 	public void execute() throws Exception {
 		view.display(session);
 		
-		next.next();
+		next();
 	}
 
 }
