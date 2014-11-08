@@ -62,24 +62,14 @@ public class AirlineTicketOrderingStepDef {
 	    
 	}
 
-	@And("^System displays the total prices$")
-	public void System_displays_the_total_prices() throws Throwable {
+	@And("^System enquires the credit card information$")
+	public void System_enquires_the_credit_card_information() throws Throwable {
 
 	}
 
-	@When("^Customer confirms the order$")
-	public void Customer_confirms_the_order() throws Throwable {
+	@When("^Client inputs credit card information to pay the order:$")
+	public void Client_inputs_credit_card_information_to_pay_the_order(DataTable dataTable) throws Throwable {
 
-	}
-
-	@And("^System enquires the personal information and credit card number to complete the order$")
-	public void System_enquires_the_personal_information_and_credit_card_number_to_complete_the_order() throws Throwable {
-
-	}
-
-	@When("^Client inputs personal information:$")
-	public void Client_inputs_personal_information(DataTable dataTable) throws Throwable {
-	    
 	}
 
 	@And("^System display the order for the confirmation$")
@@ -87,8 +77,8 @@ public class AirlineTicketOrderingStepDef {
 	    
 	}
 
-	@Then("^Client confirms the order$")
-	public void Client_confirms_the_order() throws Throwable {
+	@Then("^Client confirms the order:$")
+	public void Client_confirms_the_order(DataTable dataTable) throws Throwable {
 	    
 	}
 

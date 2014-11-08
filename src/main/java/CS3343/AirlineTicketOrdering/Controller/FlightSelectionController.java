@@ -5,14 +5,15 @@ import java.util.List;
 import CS3343.AirlineTicketOrdering.CustomDateUtil.CustomDateFormatter;
 import CS3343.AirlineTicketOrdering.DataQuery.FlightQuery;
 import CS3343.AirlineTicketOrdering.Model.Flight;
+import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.View;
 
 public class FlightSelectionController extends AirlineTicketOrderingController {
 
 	private FlightQuery flightQuery;
 	
-	public FlightSelectionController(View view, FlightQuery flightQuery){
-		super(view);
+	public FlightSelectionController(Session session,View view, FlightQuery flightQuery){
+		super(session, view);
 		this.flightQuery = flightQuery;
 	}
 

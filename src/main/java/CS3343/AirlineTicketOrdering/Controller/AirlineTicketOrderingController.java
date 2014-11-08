@@ -9,8 +9,8 @@ public abstract class AirlineTicketOrderingController extends ControllerChain im
 	protected View view;
 	protected ControllerChain next;
 	
-	public AirlineTicketOrderingController(View view){
-		session = Session.getInstance();
+	public AirlineTicketOrderingController(Session session, View view){
+		this.session = session;
 		this.view = view;
 	}
 	
