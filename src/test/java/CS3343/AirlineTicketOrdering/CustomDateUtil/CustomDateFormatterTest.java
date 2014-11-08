@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import org.junit.Test;
 
@@ -37,6 +38,12 @@ public class CustomDateFormatterTest {
 
 	@Test
 	public void formatDateToStringTest(){
+		String date = "2012-12-01 22:30:15";
+		CustomDateFormatter formatter = new CustomDateFormatter();
 		
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(2012, 11, 1, 22, 30, 15);
+		
+		assertThat(date, is(formatter.format(calendar.getTime())));
 	}
 }
