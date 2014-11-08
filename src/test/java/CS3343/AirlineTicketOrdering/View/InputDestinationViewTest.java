@@ -28,11 +28,7 @@ public class InputDestinationViewTest {
 		System.setIn(new ByteArrayInputStream("2014-01-01\nHong Kong\nTaiwan".getBytes()));
 		View inputDestinationView = new InputDestinationView();
 		inputDestinationView.display(session);
-		
-		assertThat("Please Input your depature date, deapture and destination to search\nDate (YYYY-MM-DD):DepatureDestination", is(outContent.toString()));
-		
-		System.setIn(System.in);
-
+		assertThat("Please Input your depature date, deapture and destination to search\nDate (YYYY-MM-DD): Depature: Destination: ", is(outContent.toString()));
 	}
 
 }

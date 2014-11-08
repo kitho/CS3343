@@ -120,6 +120,18 @@ public class Flight {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return airline + "\t" + flightNumber
+				+ "\t" + travelClass + "\t" + depature
+				+ "\t" + destination + "\t"
+				+ depatureDateTime + "\t" + arrivalDateTime
+				+ "\t" + available + "\t" + oneWayPrice
+				+ "]";
+	}
+	
+	
+	
 	
 	
 	
