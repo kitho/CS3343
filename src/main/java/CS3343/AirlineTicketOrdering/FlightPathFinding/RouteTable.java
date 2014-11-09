@@ -31,7 +31,26 @@ public class RouteTable {
 		r5.setDeparture("Thailand");
 		r5.setDestination("Taiwan");
 		routeList.add(r5);
-		
+		Route r6 = new Route();
+		r6.setDeparture("Tokyo");
+		r6.setDestination("Singapore");
+		routeList.add(r6);
+		Route r7 = new Route();
+		r7.setDeparture("Hong Kong");
+		r7.setDestination("Singapore");
+		routeList.add(r7);
+		Route r8 = new Route();
+		r8.setDeparture("Singapore");
+		r8.setDestination("Taiwan");
+		routeList.add(r8);
+		Route r9 = new Route();
+		r9.setDeparture("Tokyo");
+		r9.setDestination("England");
+		routeList.add(r9);
+		Route r10 = new Route();
+		r10.setDeparture("England");
+		r10.setDestination("USA");
+		routeList.add(r10);
 	}
 	public ArrayList<Route> getRouteList() {
 		return routeList;
