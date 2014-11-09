@@ -36,7 +36,7 @@ public class OrderConfirmationViewTest {
 		creditCard.setCreditCardType("VISA");
 		creditCard.setCreditCardNumber("0000-0000-0000-0000");
 		
-		List<Flight> flights = new ArrayList<>();
+		List<Flight> flights = new ArrayList<Flight>();
 		Flight flight = new Flight();
 		flight.setAirline("AirLine");
 		flight.setArrivalDateTime(new Date(1415472252));

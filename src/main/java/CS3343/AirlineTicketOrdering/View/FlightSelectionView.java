@@ -9,7 +9,6 @@ import CS3343.AirlineTicketOrdering.Session.Session;
 
 public class FlightSelectionView implements View{
 
-	@Override
 	public void display(Session session) {
 		Scanner scanner = new Scanner(System.in);
 		List<Flight> flights = (List<Flight>) session.getAttribute("flights");

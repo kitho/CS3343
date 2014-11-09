@@ -29,7 +29,7 @@ public class FlightSelectionViewTest {
 	
 	@Test
 	public void displayTestWithNotFlightInSession() {	
-		List<Flight> flights = new ArrayList<>();
+		List<Flight> flights = new ArrayList<Flight>();
 		session.setAttribute("flights",flights);
 
 		View flightSelectionView = new FlightSelectionView();
@@ -39,7 +39,7 @@ public class FlightSelectionViewTest {
 	
 	@Test
 	public void displayTestWithOneFlightInSession() {	
-		List<Flight> flights = new ArrayList<>();
+		List<Flight> flights = new ArrayList<Flight>();
 		Flight flight = new Flight();
 		flight.setAirline("AirLine");
 		flight.setArrivalDateTime(new Date(1415472252));
@@ -95,7 +95,7 @@ public class FlightSelectionViewTest {
 		flight3.setTravelClass("First Class");
 		
 		
-		List<Flight> flights = new ArrayList<>();
+		List<Flight> flights = new ArrayList<Flight>();
 		flights.add(flight1);
 		flights.add(flight2);
 		flights.add(flight3);

@@ -10,14 +10,13 @@ import CS3343.AirlineTicketOrdering.Session.Session;
 
 public class OrderConfirmationView implements View{
 
-	@Override
 	public void display(Session session) {
 		Scanner scanner = new Scanner(System.in);
 		
 		CreditCard creditCard = (CreditCard)session.getAttribute("creditCard");
 		List<Flight> flights = (List<Flight>)(session.getAttribute("flights")); 
 		int numberOfTicket = (Integer)(session.getAttribute("numberOfTicket"));
-		double totalPrice = (double)(session.getAttribute("totalPrice"));
+		double totalPrice = (Double)(session.getAttribute("totalPrice"));
 
 		System.out.println("Here is your order detail:");
 		System.out.println("==========Payment Method==========");
