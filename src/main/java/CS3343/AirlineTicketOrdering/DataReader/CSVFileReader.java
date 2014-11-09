@@ -8,11 +8,11 @@ import java.util.List;
 
 import CS3343.AirlineTicketOrdering.Parser.Parser;
 
-public abstract class FileReader<T> implements SourceReader<T> {
+public abstract class CSVFileReader<T> implements SourceReader<T> {
 
 	protected BufferedReader bufferedReader;
 
-	public FileReader(String path) throws FileNotFoundException {
+	public CSVFileReader(String path) throws FileNotFoundException {
 		bufferedReader = new BufferedReader(new java.io.FileReader(path));
 	}
 

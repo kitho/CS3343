@@ -4,11 +4,11 @@ package CS3343.AirlineTicketOrdering.DataWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-public abstract class FileWriter<T> implements SourceWriter<T> {
+public abstract class CSVFileWriter<T> implements SourceWriter<T> {
 	
 	protected BufferedWriter bufferedWriter;
 	
-	public FileWriter(String path) throws IOException{
+	public CSVFileWriter(String path) throws IOException{
 		bufferedWriter = new BufferedWriter(new java.io.FileWriter(path, true));
 	}
 	

@@ -6,11 +6,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import CS3343.AirlineTicketOrdering.DataReader.FileReader;
+import CS3343.AirlineTicketOrdering.DataReader.CSVFileReader;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Parser.Parser;
 
-public class FlightCSVFileReader extends FileReader<Flight> {
+public class FlightCSVFileReader extends CSVFileReader<Flight> {
 
 	public FlightCSVFileReader(String path) throws FileNotFoundException {
 		super(path);

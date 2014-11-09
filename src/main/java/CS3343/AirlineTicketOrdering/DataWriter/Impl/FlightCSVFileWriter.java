@@ -3,12 +3,12 @@ package CS3343.AirlineTicketOrdering.DataWriter.Impl;
 import java.io.IOException;
 import java.util.List;
 
-import CS3343.AirlineTicketOrdering.DataWriter.FileWriter;
+import CS3343.AirlineTicketOrdering.DataWriter.CSVFileWriter;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Parser.Parser;
 import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;
 
-public class FlightCSVFileWriter extends FileWriter<List<Flight>> {
+public class FlightCSVFileWriter extends CSVFileWriter<List<Flight>> {
 
 	public FlightCSVFileWriter(String path) throws IOException {
 		super(path);

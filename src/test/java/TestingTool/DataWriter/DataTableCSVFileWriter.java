@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import CS3343.AirlineTicketOrdering.DataWriter.FileWriter;
+import CS3343.AirlineTicketOrdering.DataWriter.CSVFileWriter;
 import cucumber.api.DataTable;
 
-public class DataTableCSVFileWriter extends FileWriter<DataTable> {
+public class DataTableCSVFileWriter extends CSVFileWriter<DataTable> {
 	
 	public DataTableCSVFileWriter(String path) throws IOException {
 		super(path);
