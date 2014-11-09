@@ -81,8 +81,12 @@ public class BaggageFeeCalculator {
 				
 				//Does it fulfill condition?
 				Float unitNumForPassenger = unitNumForBaggage.get(keyUnit);
-				if(conditionUnitNumFrom > unitNumForPassenger ||
-						conditionUnitNumTo < unitNumForPassenger)
+				
+				//Pre-process: calculate avg
+				Float avgUnitNumForPassenger = unitNumForPassenger / unitNumForBaggage.get("Piece");
+				
+				if(conditionUnitNumFrom > avgUnitNumForPassenger ||
+						conditionUnitNumTo < avgUnitNumForPassenger)
 					isPass = false;
 			}
 			if(isPass)
@@ -116,8 +120,12 @@ public class BaggageFeeCalculator {
 				
 				//Does it fulfill condition?
 				Float unitNum = unitNumForPet.get(keyUnit);
-				if(conditionUnitNumFrom > unitNum ||
-						conditionUnitNumTo < unitNum)
+				
+				//Pre-process: calculate avg
+				Float avgUnitNum = unitNum / unitNumForPet.get("Piece");
+				
+				if(conditionUnitNumFrom > avgUnitNum ||
+						conditionUnitNumTo < avgUnitNum)
 					isPass = false;
 			}
 			if(isPass)
