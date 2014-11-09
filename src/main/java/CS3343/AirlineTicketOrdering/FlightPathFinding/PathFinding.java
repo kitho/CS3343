@@ -75,7 +75,7 @@ public class PathFinding {
 
 				}else if (DeptList.size() == 0){
 					ArrayList<Route> fp = fPath.getFlightList();
-					//if (!fp.get(fp.size()-1).equals(to));
+					//if (!fp.get(fp.size()-1).equals(to))
 						resultRouteList.remove(z);
 				}else{
 					for (int i = 0; i < DeptList.size(); i++){
