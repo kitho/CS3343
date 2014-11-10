@@ -26,6 +26,5 @@ public class InputDestinationView implements View {
 		session.setAttribute("destination", destination);
 		session.setAttribute("depatureDate", depatureDate);
 		
-		scanner.close();
 	}
 }
