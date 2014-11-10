@@ -1,4 +1,4 @@
-package CS3343.AirlineTicketOrdering.View;
+package CS3343.AirlineTicketOrdering.View.Impl;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -12,6 +12,8 @@ import org.junit.Test;
 
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Session.Session;
+import CS3343.AirlineTicketOrdering.View.View;
+import CS3343.AirlineTicketOrdering.View.Impl.FlightSelectionView;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
 

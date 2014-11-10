@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import CS3343.AIrlineTickerOrdering.Calculator.Calculator;
+import CS3343.AirlineTicketOrdering.Calculator.Calculator;
 import CS3343.AirlineTicketOrdering.Controller.AirlineTicketOrderingController;
 import CS3343.AirlineTicketOrdering.Discount.Discount;
 import CS3343.AirlineTicketOrdering.Model.CreditCard;

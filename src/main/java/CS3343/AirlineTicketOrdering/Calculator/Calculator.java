@@ -1,4 +1,5 @@
-package CS3343.AIrlineTickerOrdering.Calculator;
+package CS3343.AirlineTicketOrdering.Calculator;
+
 
 import java.util.List;
 

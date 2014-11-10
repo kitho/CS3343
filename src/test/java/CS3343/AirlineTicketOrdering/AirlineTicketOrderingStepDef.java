@@ -1,9 +1,15 @@
 package CS3343.AirlineTicketOrdering;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import TestingTool.DataWriter.DataTableCSVFileWriter;
 import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
@@ -18,14 +24,15 @@ import cucumber.api.java.en.When;
 public class AirlineTicketOrderingStepDef {
 	
 	private File projectPath; 
-	private AirlineTicketOrderingSystem airlineTicketOrderingSystem;
+	private ByteArrayOutputStream outContent;
 	
 	@Before
 	public void setUp() throws IOException{
 		projectPath = new File(".").getCanonicalFile();
 		Files.deleteIfExists(Paths.get(projectPath + CSVFile.AIRLINECOMPANYCSV.value()));
 		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
-		airlineTicketOrderingSystem = new AirlineTicketOrderingSystem();
+		outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
 	}
 
 	@Given("^Airline companies are provided:$")
@@ -44,12 +51,17 @@ public class AirlineTicketOrderingStepDef {
 	
 	@And("^Client comes to the airline ticket ordering view$")
 	public void Client_comes_to_the_airline_ticket_ordering_view() throws Throwable {
-		airlineTicketOrderingSystem.invoke();
+		AirlineTicketOrderingSystem.main(new String[]{});
 	}
 
 	@When("^Client inputs the depature and destination and date:$")
 	public void Client_inputs_the_depature_and_destination_and_date(DataTable dataTable) throws Throwable {
-	    
+		List<List<String>> dataTableList = dataTable.raw();
+		String dataString = "";
+		for (int i = 1 ; i < dataTableList.size() ; i++) {
+			dataString = StringUtils.join(dataTableList.get(i), "\n");
+		}
+		System.setIn(new ByteArrayInputStream(dataString.getBytes()));
 	}
 
 	@And("^System shows up the flights and classes and prices and times:$")

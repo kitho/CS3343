@@ -1,4 +1,4 @@
-package CS3343.AirlineTicketOrdering.View;
+package CS3343.AirlineTicketOrdering.View.Impl;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -8,10 +8,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import CS3343.AirlineTicketOrdering.Session.Session;
+import CS3343.AirlineTicketOrdering.View.View;
+import CS3343.AirlineTicketOrdering.View.Impl.InputDestinationView;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
 
-public class EnquireCreditCardViewTest {
+public class InputDestinationViewTest {
 	
 	private ByteArrayOutputStream outContent;
 	private Session session;
@@ -25,10 +27,10 @@ public class EnquireCreditCardViewTest {
 	
 	@Test
 	public void displayTest() {	
-		System.setIn(new ByteArrayInputStream("HSBC\nVISA\n1234-1234-1234-1234".getBytes()));
-		View enquireCreditCardView = new EnquireCreditCardView();
-		enquireCreditCardView.display(session);
-		assertThat("Please input your credit card information\nBank: Type: Number: ", is(outContent.toString()));
+		System.setIn(new ByteArrayInputStream("2014-01-01\nHong Kong\nTaiwan".getBytes()));
+		View inputDestinationView = new InputDestinationView();
+		inputDestinationView.display(session);
+		assertThat("Please Input your depature date, deapture and destination to search\nDate (YYYY-MM-DD): Depature: Destination: ", is(outContent.toString()));
 	}
 
 }

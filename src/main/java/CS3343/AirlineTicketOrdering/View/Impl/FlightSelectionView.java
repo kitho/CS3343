@@ -1,4 +1,4 @@
-package CS3343.AirlineTicketOrdering.View;
+package CS3343.AirlineTicketOrdering.View.Impl;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Session.Session;
+import CS3343.AirlineTicketOrdering.View.View;
 
 public class FlightSelectionView implements View{
 
