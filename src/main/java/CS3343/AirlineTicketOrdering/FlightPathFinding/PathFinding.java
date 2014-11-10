@@ -2,7 +2,6 @@ package CS3343.AirlineTicketOrdering.FlightPathFinding;
 
 import java.util.ArrayList;
 
-import sun.org.mozilla.javascript.internal.ast.NewExpression;
 import CS3343.AirlineTicketOrdering.Model.Route;
 
 public class PathFinding {
@@ -76,13 +75,13 @@ public class PathFinding {
 				}else if (DeptList.size() == 0){
 					ArrayList<Route> fp = fPath.getFlightList();
 					//if (!fp.get(fp.size()-1).equals(to))
-						resultRouteList.remove(z);
+					resultRouteList.remove(fPath);
 				}else{
 					for (int i = 0; i < DeptList.size(); i++){
 						if (DeptList.get(i).getDestination().equals(to)){
 
 							fPath.addFlighPath(DeptList.get(i));
-							resultRouteList.add(fPath);
+							//resultRouteList.add(fPath);
 
 						}else{
 
@@ -98,8 +97,14 @@ public class PathFinding {
 							ArrayList<FlightPath> subList = new ArrayList<FlightPath>();
 							subList.add(subFPath);
 							ArrayList<FlightPath> subResultList = getIndirectFlight(subList);
-							for (int j = 0; j < subResultList.size(); j++){
+							
+							//resultRouteList.get(z).getFlightList().get(z);
+							
+							ArrayList<Route> route = fPath.getFlightList();
+							if (subResultList.size() == 0 && !route.get(route.size()-1).getDestination().equals(to))
+								resultRouteList.remove(fPath);
 
+							for (int j = 0; j < subResultList.size(); j++){
 								resultRouteList.add(subResultList.get(j));
 							}
 						}

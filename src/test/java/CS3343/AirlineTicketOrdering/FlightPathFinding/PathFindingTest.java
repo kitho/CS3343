@@ -64,7 +64,7 @@ public class PathFindingTest {
 	
 	@Test
 	public void testDirectFlight6(){
-		PathFinding	pathFinding = new PathFinding("Hong Kong", "Taiwan");
+		PathFinding	pathFinding = new PathFinding("Tokyo", "Taiwan");
 		ArrayList<FlightPath> resultRoutes = pathFinding.getIndirectFlight(new ArrayList<FlightPath>());
 		
 		System.out.println(resultRoutes.size());

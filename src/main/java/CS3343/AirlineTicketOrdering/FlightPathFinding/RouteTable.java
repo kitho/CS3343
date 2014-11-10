@@ -45,12 +45,17 @@ public class RouteTable {
 		routeList.add(r8);
 		Route r9 = new Route();
 		r9.setDeparture("Tokyo");
-		r9.setDestination("England");
+		r9.setDestination("USA");
 		routeList.add(r9);
 		Route r10 = new Route();
-		r10.setDeparture("England");
-		r10.setDestination("USA");
+		r10.setDeparture("USA");
+		r10.setDestination("England");
 		routeList.add(r10);
+		
+		Route r11 = new Route();
+		r11.setDeparture("Taiwan");
+		r11.setDestination("England");
+		routeList.add(r11);
 	}
 	public ArrayList<Route> getRouteList() {
 		return routeList;
