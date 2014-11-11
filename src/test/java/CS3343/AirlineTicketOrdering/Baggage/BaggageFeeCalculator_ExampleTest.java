@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +14,7 @@ import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
 import CS3343.AirlineTicketOrdering.Model.FlightClass;
 import CS3343.AirlineTicketOrdering.Model.Route;
 
-public class BaggageFeeCalculator_KGEvnTest {
+public class BaggageFeeCalculator_ExampleTest {
 	private BaggagePlan baggagePlan;
 	private FlightClass flightClass;
 	private Route route;
@@ -80,116 +81,71 @@ public class BaggageFeeCalculator_KGEvnTest {
 		//***4. Get instance of calculator...
 		calculator = new BaggageFeeCalculator();
 	}
-
-	@Test
-	public void calculateBaggageFeeWithoutEquipmentAndPet(){
-		//1. Initial passenger data...
-		ArrayList<String> units = baggagePlan.getUnit();
-				
-		//1.1 Passenger take n KG baggage
-		Map<String, Float> unitNumForBaggage = new HashMap<String, Float>();
-		unitNumForBaggage.put(units.get(0),30f);
-		unitNumForBaggage.put(units.get(1),1f);
-		unitNumForBaggage.put(units.get(2),40f);
-		
-		//1.2 NO sporting  equipment
-		ArrayList<String> sportingEquipments = new ArrayList<String>();
-		
-		//1.3 NO pet
-		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
-
-		float fee = calculator.calBaggageFee(
-				route, 
-				flightClass, 
-				unitNumForBaggage, 
-				sportingEquipments, 
-				unitNumForPet,
-				1);
-
-		assertEquals(1000f, fee, 0);
-	}
+	
 	
 	@Test
-	public void calculateBaggageFeeWithEquipment(){
+	public void exampleTest() {
 		//1. Initial passenger data...
 		ArrayList<String> units = baggagePlan.getUnit();
-				
-		//1.1 Passenger take 30KG baggage
+		
+		//System input ready
+		Scanner in = new Scanner(System.in);
+		
+		//Number of Passengers
+		System.out.println("Input number of passengers:");
+		int numOfPassengers = in.nextInt();
+		
+		//1.1 Passenger take n baggage
+		ArrayList<Float> kgList = new ArrayList<Float>();
+		ArrayList<Integer> pieceList = new ArrayList<Integer>();
+		ArrayList<Float> sizeList = new ArrayList<Float>();
+		for(int i = 0; i < numOfPassengers; i++){
+			System.out.println("Input your baggage total kg, total piece and total size for #" + (i+1) + " passengers");
+			kgList.add(in.nextFloat());
+			pieceList.add(in.nextInt());
+			sizeList.add(in.nextFloat());
+		}
+		
+		//Sum all value of baggage
+		float sumKG = 0, sumPiece = 0, sumSize = 0;
+		for (Float num : kgList) 
+			sumKG += num;
+		for (Integer num : pieceList) 
+			sumPiece += num;
+		for (Float num : sizeList) 
+			sumSize += num;
 		Map<String, Float> unitNumForBaggage = new HashMap<String, Float>();
-		unitNumForBaggage.put(units.get(0),30f);
-		unitNumForBaggage.put(units.get(1),1f);
-		unitNumForBaggage.put(units.get(2),40f);
+		unitNumForBaggage.put(units.get(0),sumKG);
+		unitNumForBaggage.put(units.get(1),sumPiece);
+		unitNumForBaggage.put(units.get(2),sumSize);
 		
 		//1.2 The baggage include bicycles
 		ArrayList<String> sportingEquipments = new ArrayList<String>();
-		sportingEquipments.add("Bicycles");
+		//sportingEquipments.add("Bicycles");
 		
-		//1.3 NO pet
-		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
-
-		float fee = calculator.calBaggageFee(
-				route, 
-				flightClass, 
-				unitNumForBaggage, 
-				sportingEquipments, 
-				unitNumForPet,
-				2);
-
-		assertEquals(0f, fee, 0);
-	}
+		//1.3 The passenger take n pets
+		ArrayList<Float> petKgList = new ArrayList<Float>();
+		ArrayList<Integer> petPieceList = new ArrayList<Integer>();
+		ArrayList<Float> petSizeList = new ArrayList<Float>();
+		for(int i = 0; i < numOfPassengers; i++){
+			System.out.println("Input your pet total kg, total piece and total size for #" + (i+1) + " passengers");
+			petKgList.add(in.nextFloat());
+			petPieceList.add(in.nextInt());
+			petSizeList.add(in.nextFloat());
+		}
 	
-	
-	@Test
-	public void calculateBaggageFeeWithPet(){
-		//1. Initial passenger data...
-		ArrayList<String> units = baggagePlan.getUnit();
-				
-		//1.1 Passenger take 30KG baggage
-		Map<String, Float> unitNumForBaggage = new HashMap<String, Float>();
-		unitNumForBaggage.put(units.get(0),30f);
-		unitNumForBaggage.put(units.get(1),1f);
-		unitNumForBaggage.put(units.get(2),40f);
-		
-		//1.2 NO Equipment
-		ArrayList<String> sportingEquipments = new ArrayList<String>();
-		
-		//1.3 The passenger take 10KG pets
+		//Sum all value of pet
+		float sumPetKG = 0, sumPetPiece = 0, sumPetSize = 0;
+		for (Float num : petKgList) 
+			sumPetKG += num;
+		for (Integer num : petPieceList) 
+			sumPetPiece += num;
+		for (Float num : petSizeList) 
+			sumPetSize += num;
 		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
-		unitNumForPet.put(units.get(0), 30f);
-		unitNumForPet.put(units.get(1), 1f);
-		unitNumForPet.put(units.get(2), 40f);
-
-		float fee = calculator.calBaggageFee(
-					route, 
-					flightClass, 
-					unitNumForBaggage, 
-					sportingEquipments, 
-					unitNumForPet,
-					1);
-
-		assertEquals(1900f, fee, 0);
-	}
-	
-	@Test
-	public void calculateBaggageFeeWithEquipmentAndPet() {
-		//1. Initial passenger data...
-		ArrayList<String> units = baggagePlan.getUnit();
-		
-		//1.1 Passenger take 30KG baggage
-		Map<String, Float> unitNumForBaggage = new HashMap<String, Float>();
-		unitNumForBaggage.put(units.get(0),40f);
-		unitNumForBaggage.put(units.get(1),2f);
-		unitNumForBaggage.put(units.get(2),40f);
-		
-		//1.2 The baggage include bicycles
-		ArrayList<String> sportingEquipments = new ArrayList<String>();
-		sportingEquipments.add("Bicycles");
-		
-		//1.3 The passenger take 10KG pets
-		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
-		unitNumForPet.put(units.get(0), 30f);
-		unitNumForPet.put(units.get(1), 1f);
-		unitNumForPet.put(units.get(2), 40f);
+		unitNumForPet.put(units.get(0), sumPetKG);
+		unitNumForPet.put(units.get(1), sumPetPiece);
+		unitNumForPet.put(units.get(2), sumPetSize);
 		
 		float fee = calculator.calBaggageFee(
 				route, 
@@ -197,8 +153,16 @@ public class BaggageFeeCalculator_KGEvnTest {
 				unitNumForBaggage, 
 				sportingEquipments, 
 				unitNumForPet,
-				1);
+				numOfPassengers);
 
+		System.out.println("You can enjoy " + calculator.getOrgFreeUnit());
+		System.out.println("Your remaining unit " + calculator.getRemainingFreeUnit());
+		System.out.println("Basic Baggage Fee " + calculator.getExtraBaggageFee());
+		System.out.println("Extra Baggage Fee " + calculator.getExtraExtraBaggageFee());
+		System.out.println("Basic Pet Fee " + calculator.getPetFee());
+		System.out.println("Extra Pet Fee " + calculator.getExtraPatFee());
+		System.out.println("Total Fee " + calculator.getResultFee());
+		
 		assertEquals(1900f, fee, 0);
 	}
 

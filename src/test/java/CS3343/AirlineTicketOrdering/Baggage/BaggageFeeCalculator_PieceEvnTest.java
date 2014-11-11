@@ -38,7 +38,7 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		Map<String, Float> freeUnitDetails = new HashMap<String, Float>();
 		freeUnitDetails.put(unit.get(1), 1f);
 		freeUnits.put(flightClass, freeUnitDetails);
-		
+			
 		//2.3 Initial free units for sporting equipments
 		Map<String, Map<String, Float>> extraFreeUnitForSportingEquipments = new HashMap<String, Map<String, Float>>();
 		Map<String, Float> freeSEUnitDetails = new HashMap<String, Float>();
@@ -151,7 +151,7 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		route.setBaggagePlan(baggagePlan);
 		
 		//***4. Get instance of calculator...
-		calculator = BaggageFeeCalculator.getInstance();
+		calculator = new BaggageFeeCalculator();
 	}
 	
 	@Test
@@ -171,12 +171,13 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		//1.3 NO pet
 		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
 
-		float fee = calculator.calBaggageFeeForOnePassenger(
+		float fee = calculator.calBaggageFee(
 				route, 
 				flightClass, 
 				unitNumForBaggage, 
 				sportingEquipments, 
-				unitNumForPet);
+				unitNumForPet,
+				1);
 
 		assertEquals(100f, fee, 0);
 	}
@@ -199,12 +200,13 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		//1.3 NO pet
 		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
 
-		float fee = calculator.calBaggageFeeForOnePassenger(
+		float fee = calculator.calBaggageFee(
 				route, 
 				flightClass, 
 				unitNumForBaggage, 
 				sportingEquipments, 
-				unitNumForPet);
+				unitNumForPet,
+				1);
 
 		assertEquals(1000f, fee, 0);
 	}
@@ -230,12 +232,13 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		unitNumForPet.put(units.get(1), 2f);
 		unitNumForPet.put(units.get(2), 40f);
 
-		float fee = calculator.calBaggageFeeForOnePassenger(
+		float fee = calculator.calBaggageFee(
 					route, 
 					flightClass, 
 					unitNumForBaggage, 
 					sportingEquipments, 
-					unitNumForPet);
+					unitNumForPet,
+					1);
 
 		assertEquals(3000f, fee, 0);
 	}
@@ -261,12 +264,13 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		unitNumForPet.put(units.get(1), 1f);
 		unitNumForPet.put(units.get(2), 40f);
 		
-		float fee = calculator.calBaggageFeeForOnePassenger(
+		float fee = calculator.calBaggageFee(
 				route, 
 				flightClass, 
 				unitNumForBaggage, 
 				sportingEquipments, 
-				unitNumForPet);
+				unitNumForPet,
+				1);
 
 		assertEquals(1600f, fee, 0);
 	}

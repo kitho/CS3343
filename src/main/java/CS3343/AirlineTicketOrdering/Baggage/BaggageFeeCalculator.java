@@ -15,57 +15,72 @@ import CS3343.AirlineTicketOrdering.Model.FlightClass;
 import CS3343.AirlineTicketOrdering.Model.Route;
 
 public class BaggageFeeCalculator {
-	private static BaggageFeeCalculator calculator;
+	private float resultFee = 0;
+	private float extraBaggageFee = 0;
+	private float extraExtraBaggageFee = 0;
+	private float petFee = 0;
+	private float extraPatFee = 0;
+	private Map<String, Float> orgFreeUnit = new HashMap<String, Float>();
+	private Map<String, Float> remainingFreeUnit = new HashMap<String, Float>();
 	
-	//Singleton Pattern
-	private BaggageFeeCalculator(){}
-	
-	public static BaggageFeeCalculator getInstance(){
-		if (calculator == null)
-			calculator = new BaggageFeeCalculator();
-		return calculator;
-	}
+	public BaggageFeeCalculator(){}
 	
 	//Calculate baggage fee for ONE passenger
-	public float calBaggageFeeForOnePassenger(Route route, FlightClass flightClass, 
+	public float calBaggageFee(Route route, FlightClass flightClass, 
 			Map<String, Float> unitNumForBaggage, ArrayList<String> sportingEquipments, 
-			Map<String, Float> unitNumForPet){
+			Map<String, Float> unitNumForPet, int amountOfPassenger){
 		
-		float resultFee = 0;
 		BaggagePlan plan = route.getBaggagePlan();
 		
 		//Initial remaining unit
-		float baggageFee = 0;
 		Map<FlightClass, Map<String, Float>> freeUnit = plan.getFreeUnit();
-		Map<String, Float> remainingFreeUnit = freeUnit.get(flightClass);
+		orgFreeUnit.putAll(freeUnit.get(flightClass));			//Clone into new list
+		remainingFreeUnit.putAll(freeUnit.get(flightClass));	//Clone into new list
 		
+		//Increase free unit based on amount of passenger
+		orgFreeUnit = this.increaseFreeUnit(orgFreeUnit, amountOfPassenger);
+		remainingFreeUnit = this.increaseFreeUnit(remainingFreeUnit, amountOfPassenger);
+
 		//Calculate remaining unit
 		remainingFreeUnit = this.subBaggageUnitNum(remainingFreeUnit, unitNumForBaggage);
-		
+
 		//Plus free sporting equipments unit
 		remainingFreeUnit = this.plusSportingEquipments(remainingFreeUnit, 
 														sportingEquipments, 
 														plan, 
 														flightClass);
 		//Calculate extra fee
-		baggageFee += this.calExtraFreeForRemainingUnit(remainingFreeUnit, plan);
+		extraBaggageFee += this.calExtraFreeForRemainingUnit(remainingFreeUnit, plan);
 		
 		//Extra extra fee...
-		baggageFee += this.calExtraExtraFee(plan, unitNumForBaggage, flightClass);
+		extraExtraBaggageFee += this.calExtraExtraFee(plan, unitNumForBaggage, flightClass, amountOfPassenger);
 			
 		//Pet fee
-		float petFee = this.calPetFee(plan, unitNumForPet);
+		petFee += this.calPetFee(plan, unitNumForPet);
 		
 		//Pet extra fee
-		petFee += this.calExtraPetFee(plan, unitNumForPet, flightClass);
+		extraPatFee += this.calExtraPetFee(plan, unitNumForPet, flightClass, amountOfPassenger);
 		
-		resultFee = baggageFee + petFee;
+		//Final result fees
+		resultFee = extraBaggageFee + extraExtraBaggageFee + petFee + extraPatFee;
+		
 		return resultFee;
+	}
+	
+	//Increase free unit based on amount of passenger
+	private Map<String, Float> increaseFreeUnit(Map<String, Float> freeUnit, int amountOfPassenger){
+		for(String keyUnit : freeUnit.keySet()){
+			Float unitNumber = freeUnit.get(keyUnit);
+			unitNumber = unitNumber * amountOfPassenger;
+			freeUnit.remove(keyUnit);
+			freeUnit.put(keyUnit, unitNumber);
+		}
+		return freeUnit;
 	}
 	
 	//Calculate extra extra fee
 	private float calExtraExtraFee(BaggagePlan plan, Map<String, Float> unitNumForBaggage,
-			FlightClass flightClass){
+			FlightClass flightClass, int amountOfPassenger){
 		float resultExtraExtraFee = 0;
 		Map<FlightClass, Map<String, Float>> extraExtraFeeForLevels = plan.getExtraExtraFeeForLevel();
 		Map<String, Map<String, ArrayList<Float>>> extraExtraFeeCondtions = plan.getExtraExtraFeeCondtion();
@@ -80,10 +95,10 @@ public class BaggageFeeCalculator {
 				Float conditionUnitNumTo = conditionUnitNums.get(1);
 				
 				//Does it fulfill condition?
-				Float unitNumForPassenger = unitNumForBaggage.get(keyUnit);
+				Float unitNumForPassenger = unitNumForBaggage.get(keyUnit) / amountOfPassenger;
 				
 				//Pre-process: calculate avg
-				Float avgUnitNumForPassenger = unitNumForPassenger / unitNumForBaggage.get("Piece");
+				Float avgUnitNumForPassenger = unitNumForPassenger / unitNumForBaggage.get(plan.getUnit().get(1));
 				
 				if(conditionUnitNumFrom > avgUnitNumForPassenger ||
 						conditionUnitNumTo < avgUnitNumForPassenger)
@@ -97,12 +112,12 @@ public class BaggageFeeCalculator {
 			Map<String, Float> extraExtraFees = extraExtraFeeForLevels.get(flightClass);
 			resultExtraExtraFee += extraExtraFees.get(lastPassedLevel);
 		}
-		return resultExtraExtraFee;
+		return -resultExtraExtraFee;
 	}
 	
 	//Calculate extra pet fee
 	private float calExtraPetFee(BaggagePlan plan, Map<String, Float> unitNumForPet,
-			FlightClass flightClass){
+			FlightClass flightClass, int amountOfPassenger){
 		if(unitNumForPet.size() == 0)
 			return 0;
 		float resultExtraPetFee = 0;
@@ -119,10 +134,10 @@ public class BaggageFeeCalculator {
 				Float conditionUnitNumTo = conditionUnitNums.get(1);
 				
 				//Does it fulfill condition?
-				Float unitNum = unitNumForPet.get(keyUnit);
+				Float unitNum = unitNumForPet.get(keyUnit) / amountOfPassenger;
 				
 				//Pre-process: calculate avg
-				Float avgUnitNum = unitNum / unitNumForPet.get("Piece");
+				Float avgUnitNum = unitNum / unitNumForPet.get(plan.getUnit().get(1));
 				
 				if(conditionUnitNumFrom > avgUnitNum ||
 						conditionUnitNumTo < avgUnitNum)
@@ -136,7 +151,7 @@ public class BaggageFeeCalculator {
 			Map<String, Float> extraPetFees = extraExtraPetFeeForLevels.get(flightClass);
 			resultExtraPetFee += extraPetFees.get(lastPassedLevel);
 		}
-		return resultExtraPetFee;
+		return -resultExtraPetFee;
 	}
 	
 	//Calculate pet fee
@@ -151,7 +166,7 @@ public class BaggageFeeCalculator {
 				petUnitNum = unitNumForPet.get(key);
 			petFee += feePerUnit * petUnitNum;
 		}
-		return petFee;
+		return -petFee;
 		
 	}
 	
@@ -161,11 +176,11 @@ public class BaggageFeeCalculator {
 		float fee = 0;
 		Map<String, Float> extraFeePerUnits = plan.getExtraFeePerUnit();
 		for(String key : remainingFreeUnit.keySet()){
-			float unitNum = Math.abs(remainingFreeUnit.get(key));
+			float unitNum = remainingFreeUnit.get(key);
 			float feePerUnit = extraFeePerUnits.get(key);
 			fee += unitNum * feePerUnit;
 		}
-		return fee;
+		return (fee < 0) ? fee : 0;
 	}
 	
 	
@@ -239,4 +254,62 @@ public class BaggageFeeCalculator {
 		return maxUnitNum;
 		
 	}
+
+	public float getResultFee() {
+		return resultFee;
+	}
+
+	public void setResultFee(float resultFee) {
+		this.resultFee = resultFee;
+	}
+
+	public float getExtraBaggageFee() {
+		return extraBaggageFee;
+	}
+
+	public void setExtraBaggageFee(float extraBaggageFee) {
+		this.extraBaggageFee = extraBaggageFee;
+	}
+
+	public float getExtraExtraBaggageFee() {
+		return extraExtraBaggageFee;
+	}
+
+	public void setExtraExtraBaggageFee(float extraExtraBaggageFee) {
+		this.extraExtraBaggageFee = extraExtraBaggageFee;
+	}
+
+	public float getPetFee() {
+		return petFee;
+	}
+
+	public void setPetFee(float petFee) {
+		this.petFee = petFee;
+	}
+
+	public float getExtraPatFee() {
+		return extraPatFee;
+	}
+
+	public void setExtraPatFee(float extraPatFee) {
+		this.extraPatFee = extraPatFee;
+	}
+
+	public Map<String, Float> getOrgFreeUnit() {
+		return orgFreeUnit;
+	}
+
+	public void setOrgFreeUnit(Map<String, Float> orgFreeUnit) {
+		this.orgFreeUnit = orgFreeUnit;
+	}
+
+	public Map<String, Float> getRemainingFreeUnit() {
+		return remainingFreeUnit;
+	}
+
+	public void setRemainingFreeUnit(Map<String, Float> remainingFreeUnit) {
+		this.remainingFreeUnit = remainingFreeUnit;
+	}
+	
+	
 }
