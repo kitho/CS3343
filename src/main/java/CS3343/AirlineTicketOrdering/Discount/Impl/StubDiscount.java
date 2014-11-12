@@ -8,8 +8,17 @@ import CS3343.AirlineTicketOrdering.Model.Flight;
 
 public class StubDiscount implements Discount {
 
-	public double getDiscount(List<Flight> flights, CreditCard creditCard) {
+	public double[] getDiscount(List<Flight> flights, CreditCard creditCard) {
 		// TODO Auto-generated method stub
+		double[] discounts = new double[flights.size()];
+		
+		return discounts;
+	}
+
+	@Override
+	public double getDiscount(Flight flight, CreditCard creditCard) {
+		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 

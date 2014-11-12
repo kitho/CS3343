@@ -25,14 +25,14 @@ public class OrderConfirmationControllerTest {
 		CreditCard creditCard = mock(CreditCard.class);
 		List<Flight> flights = mock(List.class);
 		int numberOfTicket = 1;
-		double discountOff = 0.2;
+		double[] discountOff = {0.2,0.4};
 		double totalPrice = 100.0;
 		
 		when(session.getAttribute("creditCard")).thenReturn(creditCard);
 		when(session.getAttribute("flights")).thenReturn(flights);
 		when(session.getAttribute("numberOfTicket")).thenReturn(numberOfTicket);
 		when(discount.getDiscount(anyList(), any(CreditCard.class))).thenReturn(discountOff);
-		when(calculator.calculate(anyList(), anyInt(), anyDouble())).thenReturn(totalPrice);
+		when(calculator.calculate(anyList(), anyInt(), any(double[].class))).thenReturn(totalPrice);
 		
 		AirlineTicketOrderingController next = mock(AirlineTicketOrderingController.class); 
 		AirlineTicketOrderingController orderConfirmationController = new OrderConfirmationController(session, view, discount, calculator);
