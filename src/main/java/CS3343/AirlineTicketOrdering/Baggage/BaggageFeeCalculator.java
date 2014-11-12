@@ -18,7 +18,7 @@ public class BaggageFeeCalculator {
 	private float extraBaggageFee = 0;
 	private float extraExtraBaggageFee = 0;
 	private float petFee = 0;
-	private float extraPatFee = 0;
+	private float extraPetFee = 0;
 	private Map<String, Float> orgFreeUnit = new HashMap<String, Float>();
 	private Map<String, Float> remainingFreeUnit = new HashMap<String, Float>();
 	
@@ -58,10 +58,10 @@ public class BaggageFeeCalculator {
 		petFee += this.calPetFee(plan, unitNumForPet);
 		
 		//Pet extra fee
-		extraPatFee += this.calExtraPetFee(plan, unitNumForPet, flightClass, amountOfPassenger);
+		extraPetFee += this.calExtraPetFee(plan, unitNumForPet, flightClass, amountOfPassenger);
 		
 		//Final result fees
-		resultFee = extraBaggageFee + extraExtraBaggageFee + petFee + extraPatFee;
+		resultFee = extraBaggageFee + extraExtraBaggageFee + petFee + extraPetFee;
 		
 		return resultFee;
 	}
@@ -85,6 +85,7 @@ public class BaggageFeeCalculator {
 		Map<String, Map<String, ArrayList<Float>>> extraExtraFeeCondtions = plan.getExtraExtraFeeCondtion();
 		//Find last passed level
 		String lastPassedLevel = null;
+		Float numberOfBaggage = 0f;
 		for(String keyLevel : extraExtraFeeCondtions.keySet()){
 			Map<String, ArrayList<Float>> conditions = extraExtraFeeCondtions.get(keyLevel);
 			boolean isPass = true;
@@ -94,11 +95,12 @@ public class BaggageFeeCalculator {
 				Float conditionUnitNumTo = conditionUnitNums.get(1);
 				
 				//Does it fulfill condition?
+				//Pre-process: calculate avg unit for a baggage
 				Float unitNumForPassenger = unitNumForBaggage.get(keyUnit) / amountOfPassenger;
-				
-				//Pre-process: calculate avg
-				Float avgUnitNumForPassenger = unitNumForPassenger / unitNumForBaggage.get(plan.getUnit().get(1));
-				
+				numberOfBaggage = unitNumForBaggage.get(plan.getUnit().get(1));
+				Float avgUnitNumForPassenger = unitNumForPassenger / (numberOfBaggage / amountOfPassenger);
+				//Float avgUnitNumForPassenger = unitNumForPassenger;
+
 				if(conditionUnitNumFrom > avgUnitNumForPassenger ||
 						conditionUnitNumTo < avgUnitNumForPassenger)
 					isPass = false;
@@ -109,7 +111,7 @@ public class BaggageFeeCalculator {
 		//Plus the level's fee
 		if(lastPassedLevel != null){
 			Map<String, Float> extraExtraFees = extraExtraFeeForLevels.get(flightClass);
-			resultExtraExtraFee += extraExtraFees.get(lastPassedLevel);
+			resultExtraExtraFee += extraExtraFees.get(lastPassedLevel) * numberOfBaggage;
 		}
 		return -resultExtraExtraFee;
 	}
@@ -124,6 +126,7 @@ public class BaggageFeeCalculator {
 		Map<String, Map<String, ArrayList<Float>>> extraExtraPetFeeCondtions = plan.getExtraExtraPetFeeCondtion();
 		//Find last passed level
 		String lastPassedLevel = null;
+		Float numberOfPet = 0f;
 		for(String keyLevel : extraExtraPetFeeCondtions.keySet()){
 			Map<String, ArrayList<Float>> conditions = extraExtraPetFeeCondtions.get(keyLevel);
 			boolean isPass = true;
@@ -136,7 +139,8 @@ public class BaggageFeeCalculator {
 				Float unitNum = unitNumForPet.get(keyUnit) / amountOfPassenger;
 				
 				//Pre-process: calculate avg
-				Float avgUnitNum = unitNum / unitNumForPet.get(plan.getUnit().get(1));
+				numberOfPet = unitNumForPet.get(plan.getUnit().get(1));
+				Float avgUnitNum = unitNum / (numberOfPet / amountOfPassenger);
 				
 				if(conditionUnitNumFrom > avgUnitNum ||
 						conditionUnitNumTo < avgUnitNum)
@@ -148,9 +152,7 @@ public class BaggageFeeCalculator {
 		//Plus the level's fee
 		if(lastPassedLevel != null){
 			Map<String, Float> extraPetFees = extraExtraPetFeeForLevels.get(flightClass);
-			System.out.println(extraPetFees);
-			System.out.println(lastPassedLevel);
-			resultExtraPetFee += extraPetFees.get(lastPassedLevel);
+			resultExtraPetFee += extraPetFees.get(lastPassedLevel) * numberOfPet;
 		}
 		return -resultExtraPetFee;
 	}
@@ -288,12 +290,12 @@ public class BaggageFeeCalculator {
 		this.petFee = petFee;
 	}
 
-	public float getExtraPatFee() {
-		return extraPatFee;
+	public float getExtraPetFee() {
+		return extraPetFee;
 	}
 
-	public void setExtraPatFee(float extraPatFee) {
-		this.extraPatFee = extraPatFee;
+	public void setExtraPetFee(float extraPetFee) {
+		this.extraPetFee = extraPetFee;
 	}
 
 	public Map<String, Float> getOrgFreeUnit() {

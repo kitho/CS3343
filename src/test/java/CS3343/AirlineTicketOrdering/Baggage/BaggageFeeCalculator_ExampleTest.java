@@ -125,7 +125,7 @@ public class BaggageFeeCalculator_ExampleTest {
 		System.out.println("Basic Baggage Fee " + calculator.getExtraBaggageFee());
 		System.out.println("Extra Baggage Fee " + calculator.getExtraExtraBaggageFee());
 		System.out.println("Basic Pet Fee " + calculator.getPetFee());
-		System.out.println("Extra Pet Fee " + calculator.getExtraPatFee());
+		System.out.println("Extra Pet Fee " + calculator.getExtraPetFee());
 		System.out.println("Total Fee " + calculator.getResultFee());
 		
 		assertEquals(1900f, fee, 0);
