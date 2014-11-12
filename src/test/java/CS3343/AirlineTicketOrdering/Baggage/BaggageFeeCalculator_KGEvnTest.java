@@ -10,19 +10,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
-import CS3343.AirlineTicketOrdering.Model.FlightClass;
 import CS3343.AirlineTicketOrdering.Model.Route;
 
 public class BaggageFeeCalculator_KGEvnTest {
 	private BaggagePlan baggagePlan;
-	private FlightClass flightClass;
+	private String flightClass;
 	private Route route;
 	private BaggageFeeCalculator calculator;
 	
 	@Before
 	public void initialEnvironment(){
 		//***1. Initial flight class...
-		flightClass = new FlightClass("EconomyClass");
+		flightClass = "EconomyClass";
 		
 		//***2. Initial baggage plan...
 		baggagePlan = new BaggagePlan();
@@ -34,7 +33,7 @@ public class BaggageFeeCalculator_KGEvnTest {
 		unit.add("Inch");
 		
 		//2.2 Initial free units 
-		Map<FlightClass, Map<String, Float>> freeUnits = new HashMap<FlightClass, Map<String, Float>>();
+		Map<String, Map<String, Float>> freeUnits = new HashMap<String, Map<String, Float>>();
 		Map<String, Float> freeUnitDetails = new HashMap<String, Float>();
 		freeUnitDetails.put(unit.get(0), 20f);
 		freeUnits.put(flightClass, freeUnitDetails);
@@ -51,7 +50,7 @@ public class BaggageFeeCalculator_KGEvnTest {
 		extraFeePerUnit.put(unit.get(0), 100f);
 		
 		//2.5 Initial extra extra fee (NO Extra Extra Fee for KG Unit)
-		Map<FlightClass, Map<String, Float>> extraExtraFeeForLevels = new HashMap<FlightClass, Map<String, Float>>();
+		Map<String, Map<String, Float>> extraExtraFeeForLevels = new HashMap<String, Map<String, Float>>();
 		Map<String, Map<String, ArrayList<Float>>> extraExtraFeeCondtions = new HashMap<String, Map<String, ArrayList<Float>>>();
 		
 		//2.6 Initial pet fee
@@ -59,7 +58,7 @@ public class BaggageFeeCalculator_KGEvnTest {
 		petFee.put(unit.get(0), 30f);
 		
 		//2.7 Initial extra extra PET fee (NO Extra Extra Pet Fee for KG Unit)
-		Map<FlightClass, Map<String, Float>> extraPetFeeForLevels = new HashMap<FlightClass, Map<String, Float>>();
+		Map<String, Map<String, Float>> extraPetFeeForLevels = new HashMap<String, Map<String, Float>>();
 		Map<String, Map<String, ArrayList<Float>>> extraPetFeeCondtions = new HashMap<String, Map<String, ArrayList<Float>>>();
 		
 		//2.8 Set value for baggage plan

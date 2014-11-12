@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
-import CS3343.AirlineTicketOrdering.Model.FlightClass;
 import CS3343.AirlineTicketOrdering.Model.Route;
 
 public class BaggageFeeCalculator {
@@ -26,14 +25,14 @@ public class BaggageFeeCalculator {
 	public BaggageFeeCalculator(){}
 	
 	//Calculate baggage fee for ONE passenger
-	public float calBaggageFee(Route route, FlightClass flightClass, 
+	public float calBaggageFee(Route route, String flightClass, 
 			Map<String, Float> unitNumForBaggage, ArrayList<String> sportingEquipments, 
 			Map<String, Float> unitNumForPet, int amountOfPassenger){
 		
 		BaggagePlan plan = route.getBaggagePlan();
 		
 		//Initial remaining unit
-		Map<FlightClass, Map<String, Float>> freeUnit = plan.getFreeUnit();
+		Map<String, Map<String, Float>> freeUnit = plan.getFreeUnit();
 		orgFreeUnit.putAll(freeUnit.get(flightClass));			//Clone into new list
 		remainingFreeUnit.putAll(freeUnit.get(flightClass));	//Clone into new list
 		
@@ -80,9 +79,9 @@ public class BaggageFeeCalculator {
 	
 	//Calculate extra extra fee
 	private float calExtraExtraFee(BaggagePlan plan, Map<String, Float> unitNumForBaggage,
-			FlightClass flightClass, int amountOfPassenger){
+			String flightClass, int amountOfPassenger){
 		float resultExtraExtraFee = 0;
-		Map<FlightClass, Map<String, Float>> extraExtraFeeForLevels = plan.getExtraExtraFeeForLevel();
+		Map<String, Map<String, Float>> extraExtraFeeForLevels = plan.getExtraExtraFeeForLevel();
 		Map<String, Map<String, ArrayList<Float>>> extraExtraFeeCondtions = plan.getExtraExtraFeeCondtion();
 		//Find last passed level
 		String lastPassedLevel = null;
@@ -117,11 +116,11 @@ public class BaggageFeeCalculator {
 	
 	//Calculate extra pet fee
 	private float calExtraPetFee(BaggagePlan plan, Map<String, Float> unitNumForPet,
-			FlightClass flightClass, int amountOfPassenger){
+			String flightClass, int amountOfPassenger){
 		if(unitNumForPet.size() == 0)
 			return 0;
 		float resultExtraPetFee = 0;
-		Map<FlightClass, Map<String, Float>> extraExtraPetFeeForLevels = plan.getExtraExtraPetFeeForLevel();
+		Map<String, Map<String, Float>> extraExtraPetFeeForLevels = plan.getExtraExtraPetFeeForLevel();
 		Map<String, Map<String, ArrayList<Float>>> extraExtraPetFeeCondtions = plan.getExtraExtraPetFeeCondtion();
 		//Find last passed level
 		String lastPassedLevel = null;
@@ -149,6 +148,8 @@ public class BaggageFeeCalculator {
 		//Plus the level's fee
 		if(lastPassedLevel != null){
 			Map<String, Float> extraPetFees = extraExtraPetFeeForLevels.get(flightClass);
+			System.out.println(extraPetFees);
+			System.out.println(lastPassedLevel);
 			resultExtraPetFee += extraPetFees.get(lastPassedLevel);
 		}
 		return -resultExtraPetFee;
@@ -200,7 +201,7 @@ public class BaggageFeeCalculator {
 	
 	//Plus extra enjoy sporting equipment unit for remaining unit
 	private Map<String, Float> plusSportingEquipments(Map<String, Float> remainingFreeUnit,
-			ArrayList<String> sportingEquipments, BaggagePlan plan, FlightClass flightClass){
+			ArrayList<String> sportingEquipments, BaggagePlan plan, String flightClass){
 		
 		ArrayList<String> units = this.getUnits(plan, flightClass);
 		Map<String, Float> maxUnitNumsForSE = new HashMap<String, Float>();
@@ -225,10 +226,10 @@ public class BaggageFeeCalculator {
 	
 	
 	//Get the supported units of the plan for free baggage weight
-	private ArrayList<String> getUnits(BaggagePlan plan, FlightClass flightClass){
+	private ArrayList<String> getUnits(BaggagePlan plan, String flightClass){
 		
 		ArrayList<String> units = new ArrayList<String>();
-		Map<FlightClass, Map<String, Float>> freeUnit = plan.getFreeUnit();
+		Map<String, Map<String, Float>> freeUnit = plan.getFreeUnit();
 		Map<String, Float> remainingFreeUnit = freeUnit.get(flightClass);
 		for(String key : remainingFreeUnit.keySet())
 			units.add(key);

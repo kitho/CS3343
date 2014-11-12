@@ -10,19 +10,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
-import CS3343.AirlineTicketOrdering.Model.FlightClass;
 import CS3343.AirlineTicketOrdering.Model.Route;
 
 public class BaggageFeeCalculator_PieceEvnTest {
 	private BaggagePlan baggagePlan;
-	private FlightClass flightClass;
+	private String flightClass;
 	private Route route;
 	private BaggageFeeCalculator calculator;
 	
 	@Before
 	public void initialEnvironment(){
 		//***1. Initial flight class...
-		flightClass = new FlightClass("EconomyClass");
+		flightClass = "EconomyClass";
 		
 		//***2. Initial baggage plan...
 		baggagePlan = new BaggagePlan();
@@ -34,7 +33,7 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		unit.add("Inch");
 		
 		//2.2 Initial free units 
-		Map<FlightClass, Map<String, Float>> freeUnits = new HashMap<FlightClass, Map<String, Float>>();
+		Map<String, Map<String, Float>> freeUnits = new HashMap<String, Map<String, Float>>();
 		Map<String, Float> freeUnitDetails = new HashMap<String, Float>();
 		freeUnitDetails.put(unit.get(1), 1f);
 		freeUnits.put(flightClass, freeUnitDetails);
@@ -52,7 +51,7 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		
 		//2.5 Initial extra extra fee for so many / very large baggage
 		//*Normally for Piece Unit
-		Map<FlightClass, Map<String, Float>> extraExtraFeeForLevels = new HashMap<FlightClass, Map<String, Float>>();
+		Map<String, Map<String, Float>> extraExtraFeeForLevels = new HashMap<String, Map<String, Float>>();
 		//Define 3 levels' extra extra fee for the flight class
 		Map<String, Float> extraExtraFees = new HashMap<String, Float>();
 		extraExtraFees.put("1", 100f);
@@ -96,7 +95,7 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		petFee.put(unit.get(1), 1500f);
 		
 		//2.7 Initial extra extra PET fee for so many / very large pet
-		Map<FlightClass, Map<String, Float>> extraPetFeeForLevels = new HashMap<FlightClass, Map<String, Float>>();
+		Map<String, Map<String, Float>> extraPetFeeForLevels = new HashMap<String, Map<String, Float>>();
 		//Define 3 levels' extra PET fee for the flight class
 		Map<String, Float> extraPetFees = new HashMap<String, Float>();
 		extraPetFees.put("1", 100f);

@@ -2,81 +2,46 @@ package CS3343.AirlineTicketOrdering.Baggage;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import CS3343.AirlineTicketOrdering.DataReader.CSVFileReader;
+import CS3343.AirlineTicketOrdering.DataReader.Impl.BaggagePlanCSVFileReader;
 import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
-import CS3343.AirlineTicketOrdering.Model.FlightClass;
 import CS3343.AirlineTicketOrdering.Model.Route;
+import CS3343.AirlineTicketOrdering.Parser.Parser;
+import CS3343.AirlineTicketOrdering.Parser.Impl.BaggagePlanParser;
 
 public class BaggageFeeCalculator_ExampleTest {
 	private BaggagePlan baggagePlan;
-	private FlightClass flightClass;
+	private String flightClass;
 	private Route route;
 	private BaggageFeeCalculator calculator;
 	
 	@Before
 	public void initialEnvironment(){
-		//***1. Initial flight class...
-		flightClass = new FlightClass("EconomyClass");
+		List<BaggagePlan> planList = null;
+		try {
+			CSVFileReader<BaggagePlan> reader = new BaggagePlanCSVFileReader("datasource/BaggagePlan.csv");
+			Parser<BaggagePlan> parser = new BaggagePlanParser();
+			planList = reader.read(parser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		//***2. Initial baggage plan...
-		baggagePlan = new BaggagePlan();
+		baggagePlan = planList.get(0);
 		
-		//2.1 Initial supported unit
-		ArrayList<String> unit = new ArrayList<String>();
-		unit.add("KG");
-		unit.add("Piece");
-		unit.add("Inch");
-		
-		//2.2 Initial free units 
-		Map<FlightClass, Map<String, Float>> freeUnits = new HashMap<FlightClass, Map<String, Float>>();
-		Map<String, Float> freeUnitDetails = new HashMap<String, Float>();
-		freeUnitDetails.put(unit.get(0), 20f);
-		freeUnits.put(flightClass, freeUnitDetails);
-		
-		//2.3 Initial free units for sporting equipments
-		Map<String, Map<String, Float>> extraFreeUnitForSportingEquipments = new HashMap<String, Map<String, Float>>();
-		Map<String, Float> freeSEUnitDetails = new HashMap<String, Float>();
-		freeSEUnitDetails.put(unit.get(0), 10f);
-		extraFreeUnitForSportingEquipments.put("Bicycles", freeSEUnitDetails);
-		extraFreeUnitForSportingEquipments.put("Golf equipment", freeSEUnitDetails);
-		
-		//2.4 Initial extra fee per unit
-		Map<String, Float> extraFeePerUnit = new HashMap<String, Float>();
-		extraFeePerUnit.put(unit.get(0), 100f);
-		
-		//2.5 Initial extra extra fee (NO Extra Extra Fee for KG Unit)
-		Map<FlightClass, Map<String, Float>> extraExtraFeeForLevels = new HashMap<FlightClass, Map<String, Float>>();
-		Map<String, Map<String, ArrayList<Float>>> extraExtraFeeCondtions = new HashMap<String, Map<String, ArrayList<Float>>>();
-		
-		//2.6 Initial pet fee
-		Map<String, Float> petFee = new HashMap<String, Float>();
-		petFee.put(unit.get(0), 30f);
-		
-		//2.7 Initial extra extra PET fee (NO Extra Extra Pet Fee for KG Unit)
-		Map<FlightClass, Map<String, Float>> extraPetFeeForLevels = new HashMap<FlightClass, Map<String, Float>>();
-		Map<String, Map<String, ArrayList<Float>>> extraPetFeeCondtions = new HashMap<String, Map<String, ArrayList<Float>>>();
-		
-		//2.8 Set value for baggage plan
-		baggagePlan.setUnit(unit);
-		baggagePlan.setFreeUnit(freeUnits);
-		baggagePlan.setExtraFreeUnitForSportingEquipments(extraFreeUnitForSportingEquipments);
-		baggagePlan.setExtraFeePerUnit(extraFeePerUnit);
-		baggagePlan.setPetFee(petFee);
-		baggagePlan.setExtraExtraFeeForLevel(extraExtraFeeForLevels);
-		baggagePlan.setExtraExtraFeeCondtion(extraExtraFeeCondtions);
-		baggagePlan.setExtraExtraPetFeeForLevel(extraPetFeeForLevels);
-		baggagePlan.setExtraExtraPetFeeCondtion(extraPetFeeCondtions);
-		
-		//***3. Initial route...
 		route = new Route();
 		route.setBaggagePlan(baggagePlan);
+		
+		flightClass = "EconomyClass";
 		
 		//***4. Get instance of calculator...
 		calculator = new BaggageFeeCalculator();

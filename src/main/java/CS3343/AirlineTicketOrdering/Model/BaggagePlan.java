@@ -8,19 +8,19 @@ public class BaggagePlan {
 	private ArrayList<String> unit;												//KG, Baggage, Size, etc.
 	
 	//For Passenger's Baggage
-	private Map<FlightClass, Map<String, Float>> freeUnit;
+	private Map<String, Map<String, Float>> freeUnit;
 	private Map<String, Map<String, Float>> extraFreeUnitForSportingEquipments;	//<NameOfEquipments, <Unit, Num>>
 	private Map<String, Float> extraFeePerUnit;									//<Unit, Fee>
 	
 	//Extra extra fee
-	private Map<FlightClass, Map<String, Float>> extraExtraFeeForLevel;			//<FlightClass, <Level, Fee>>
+	private Map<String, Map<String, Float>> extraExtraFeeForLevel;			//<FlightClass, <Level, Fee>>
 	private Map<String, Map<String, ArrayList<Float>>> extraExtraFeeCondtion;	//<Level, <Unit, Num Range>>
 	
 	//For Pet Placed in Baggage
 	private Map<String, Float> petFee;											//<Unit,Pat Fee>
 	
 	//For Pet If Exceed Normal Fee's Weight or Size
-	private Map<FlightClass, Map<String, Float>> extraExtraPetFeeForLevel;		//<FlightClass, <Level, Fee>>
+	private Map<String, Map<String, Float>> extraExtraPetFeeForLevel;		//<FlightClass, <Level, Fee>>
 	private Map<String, Map<String, ArrayList<Float>>> extraExtraPetFeeCondtion;//<Level, <Unit, Num Range>>
 	
 	public BaggagePlan(){
@@ -28,13 +28,13 @@ public class BaggagePlan {
 	}
 
 	public BaggagePlan(ArrayList<String> unit,
-			Map<FlightClass, Map<String, Float>> freeUnit,
+			Map<String, Map<String, Float>> freeUnit,
 			Map<String, Map<String, Float>> extraFreeUnitForSportingEquipments,
 			Map<String, Float> extraFeePerUnit,
-			Map<FlightClass, Map<String, Float>> extraExtraFeeForLevel,
+			Map<String, Map<String, Float>> extraExtraFeeForLevel,
 			Map<String, Map<String, ArrayList<Float>>> extraExtraFeeCondtion,
 			Map<String, Float> petFee,
-			Map<FlightClass, Map<String, Float>> extraExtraPetFeeForLevel,
+			Map<String, Map<String, Float>> extraExtraPetFeeForLevel,
 			Map<String, Map<String, ArrayList<Float>>> extraExtraPetFeeCondtion) {
 		super();
 		this.unit = unit;
@@ -56,11 +56,11 @@ public class BaggagePlan {
 		this.unit = unit;
 	}
 
-	public Map<FlightClass, Map<String, Float>> getFreeUnit() {
+	public Map<String, Map<String, Float>> getFreeUnit() {
 		return freeUnit;
 	}
 
-	public void setFreeUnit(Map<FlightClass, Map<String, Float>> freeUnit) {
+	public void setFreeUnit(Map<String, Map<String, Float>> freeUnit) {
 		this.freeUnit = freeUnit;
 	}
 
@@ -81,12 +81,12 @@ public class BaggagePlan {
 		this.extraFeePerUnit = extraFeePerUnit;
 	}
 
-	public Map<FlightClass, Map<String, Float>> getExtraExtraFeeForLevel() {
+	public Map<String, Map<String, Float>> getExtraExtraFeeForLevel() {
 		return extraExtraFeeForLevel;
 	}
 
 	public void setExtraExtraFeeForLevel(
-			Map<FlightClass, Map<String, Float>> extraExtraFeeForLevel) {
+			Map<String, Map<String, Float>> extraExtraFeeForLevel) {
 		this.extraExtraFeeForLevel = extraExtraFeeForLevel;
 	}
 
@@ -107,12 +107,12 @@ public class BaggagePlan {
 		this.petFee = petFee;
 	}
 
-	public Map<FlightClass, Map<String, Float>> getExtraExtraPetFeeForLevel() {
+	public Map<String, Map<String, Float>> getExtraExtraPetFeeForLevel() {
 		return extraExtraPetFeeForLevel;
 	}
 
 	public void setExtraExtraPetFeeForLevel(
-			Map<FlightClass, Map<String, Float>> extraExtraPetFeeForLevel) {
+			Map<String, Map<String, Float>> extraExtraPetFeeForLevel) {
 		this.extraExtraPetFeeForLevel = extraExtraPetFeeForLevel;
 	}
 
