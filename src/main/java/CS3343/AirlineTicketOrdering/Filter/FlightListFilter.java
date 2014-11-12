@@ -12,9 +12,9 @@ public class FlightListFilter {
 		this.fList = fList;
 	}
 	
-	public List<Flight> filterByDepartNDest(String depart, String dest) {
+	public ArrayList<Flight> filterByDepartNDest(String depart, String dest) {
 		// TODO Auto-generated method stub
-		List<Flight> tempList = new ArrayList<Flight>();
+		ArrayList<Flight> tempList = new ArrayList<Flight>();
 		for(Flight f : fList){
 			if(f.getDepature().equals(depart) && f.getDestination().equals(dest)){
 				tempList.add(f);
