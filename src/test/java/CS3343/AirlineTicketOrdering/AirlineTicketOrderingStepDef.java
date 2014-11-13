@@ -1,5 +1,8 @@
 package CS3343.AirlineTicketOrdering;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -47,25 +50,23 @@ public class AirlineTicketOrderingStepDef {
 		SourceWriter<DataTable> dataTableCSVFileWriter = new DataTableCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value());
 		dataTableCSVFileWriter.write(dataTable);
 		dataTableCSVFileWriter.close();
-	}
-	
-	@And("^Client comes to the airline ticket ordering view$")
-	public void Client_comes_to_the_airline_ticket_ordering_view() throws Throwable {
-		AirlineTicketOrderingSystem.main(new String[]{});
+		System.out.println("A");
 	}
 
-	@When("^Client inputs the depature and destination and date:$")
-	public void Client_inputs_the_depature_and_destination_and_date(DataTable dataTable) throws Throwable {
+	@When("^Client comes to the airline ticket ordering view and inputs the depature and destination and date:$")
+	public void Client_comes_to_the_airline_ticket_ordering_view_and_inputs_the_depature_and_destination_and_date(DataTable dataTable) throws Throwable {
 		List<List<String>> dataTableList = dataTable.raw();
 		String dataString = "";
 		for (int i = 1 ; i < dataTableList.size() ; i++) {
-			dataString = StringUtils.join(dataTableList.get(i), "\n");
+			dataString += StringUtils.join(dataTableList.get(i), "\n");
 		}
 		System.setIn(new ByteArrayInputStream(dataString.getBytes()));
+		AirlineTicketOrderingSystem.main(new String[]{});
+		assertThat("Welcome to Airline Ticket Ordering System\nPlease Input your depature date, deapture and destination to search\nDate (YYYY-MM-DD): Depature: Destination: ", is(outContent.toString()));
 	}
 
 	@And("^System shows up the flights and classes and prices and times:$")
-	public void System_shows_up_the_flights_and_classes_and_prices_and_times(DataTable arg1) throws Throwable {
+	public void System_shows_up_the_flights_and_classes_and_prices_and_times(DataTable dataTable) throws Throwable {
 	    
 	}
 

@@ -33,7 +33,7 @@ public class InputDestinationViewTest {
 		
 		View inputDestinationView = new InputDestinationView(scanner);
 		inputDestinationView.display(session);
-		assertThat("Please Input your depature date, deapture and destination to search\nDate (YYYY-MM-DD): Depature: Destination: ", is(outContent.toString()));
+		assertThat("Please Input your depature date, depature and destination to search\nDate (YYYY-MM-DD): Depature: Destination: ", is(outContent.toString()));
 	}
 
 }

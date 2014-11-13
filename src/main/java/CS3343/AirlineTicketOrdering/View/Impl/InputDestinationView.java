@@ -19,7 +19,7 @@ public class InputDestinationView implements View {
 		String destination = "";
 		String depatureDate = "";
 
-		System.out.println("Please Input your depature date, deapture and destination to search");
+		System.out.println("Please Input your depature date, depature and destination to search");
 		System.out.print("Date (YYYY-MM-DD): ");
 		depatureDate = scanner.nextLine();
 		System.out.print("Depature: ");
