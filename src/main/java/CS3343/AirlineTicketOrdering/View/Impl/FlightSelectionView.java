@@ -1,5 +1,7 @@
 package CS3343.AirlineTicketOrdering.View.Impl;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
@@ -10,13 +12,14 @@ import CS3343.AirlineTicketOrdering.View.View;
 
 public class FlightSelectionView implements View{
 	
-	private Scanner scanner;
+	private BufferedReader bufferedReader;
+
 	
-	public FlightSelectionView(Scanner scanner) {
-		this.scanner = scanner;
+	public FlightSelectionView(BufferedReader bufferedReader) {
+		this.bufferedReader = bufferedReader;
 	}
 	
-	public void display(Session session) {
+	public void display(Session session) throws IOException {
 		List<Flight> flights = (List<Flight>) session.getAttribute("flights");
 		
 		if(flights.size() == 0){
@@ -33,10 +36,10 @@ public class FlightSelectionView implements View{
 			System.out.println("=====================");
 			
 			System.out.print("Please select flight: ");
-			String selectedFlight = scanner.nextLine();
+			String selectedFlight = bufferedReader.readLine();
 			session.setAttribute("flights", flights.get(Integer.parseInt(selectedFlight)));
 			System.out.print("Please input number of tickets that you need: ");
-			String numberOfTicket = scanner.nextLine();
+			String numberOfTicket = bufferedReader.readLine();
 			session.setAttribute("numberOfTicket", Integer.parseInt(numberOfTicket));
 
 		}

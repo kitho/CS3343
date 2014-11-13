@@ -1,6 +1,8 @@
 package CS3343.AirlineTicketOrdering;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
@@ -44,16 +46,16 @@ public class AirlineTicketOrderingSystem {
 		public void invoke() throws Exception{
 			projectPath = new File(".").getCanonicalFile();
 			
-			Scanner scanner = new Scanner(System.in);
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 			
 			Session session = Session.getInstance(); 
-			AirlineTicketOrderingController inputDestinationController = new InputDestinationController(session, new InputDestinationView(scanner));
-			AirlineTicketOrderingController flightSelectionController = new FlightSelectionController(session, new FlightSelectionView(scanner), 
+			AirlineTicketOrderingController inputDestinationController = new InputDestinationController(session, new InputDestinationView(bufferedReader));
+			AirlineTicketOrderingController flightSelectionController = new FlightSelectionController(session, new FlightSelectionView(bufferedReader), 
 					new FlightQuery(new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value()), 
 							new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value()), 
 							new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value())));
-			AirlineTicketOrderingController enquireCreditCardController = new EnquireCreditCardController(session, new EnquireCreditCardView(scanner));
-			AirlineTicketOrderingController orderConfirmationController = new OrderConfirmationController(session, new OrderConfirmationView(scanner), new StubDiscount(), new StubCalculator());
+			AirlineTicketOrderingController enquireCreditCardController = new EnquireCreditCardController(session, new EnquireCreditCardView(bufferedReader));
+			AirlineTicketOrderingController orderConfirmationController = new OrderConfirmationController(session, new OrderConfirmationView(bufferedReader), new StubDiscount(), new StubCalculator());
 			AirlineTicketOrderingController orderCompletionController = new OrderCompletionController(session, new OrderCompletionView());
 			AirlineTicketOrderingController inputBaggageDataController = new InputBaggageDataController(session, new InputBaggageDataView());
 			
@@ -66,9 +68,7 @@ public class AirlineTicketOrderingSystem {
 			
 			System.out.println("Welcome to Airline Ticket Ordering System");
 			inputDestinationController.execute();
-			
-			scanner.close();
-		
+
 		}
 	}
 }
