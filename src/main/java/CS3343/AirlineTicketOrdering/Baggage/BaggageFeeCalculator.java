@@ -24,7 +24,7 @@ public class BaggageFeeCalculator {
 	
 	public BaggageFeeCalculator(){}
 	
-	//Calculate baggage fee for ONE passenger
+	//Calculate baggage fee for N passengers
 	public float calBaggageFee(Route route, String flightClass, 
 			Map<String, Float> unitNumForBaggage, ArrayList<String> sportingEquipments, 
 			Map<String, Float> unitNumForPet, int amountOfPassenger){

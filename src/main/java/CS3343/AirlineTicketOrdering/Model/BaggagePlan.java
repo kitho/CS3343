@@ -125,7 +125,13 @@ public class BaggagePlan {
 		this.extraExtraPetFeeCondtion = extraExtraPetFeeCondtion;
 	}
 	
-	
+	public ArrayList<String> getAvailSportingEquipments(){
+		ArrayList<String> availSportingEquipments = new ArrayList<String>();
+		for(String nameKey : extraFreeUnitForSportingEquipments.keySet()){
+			availSportingEquipments.add(nameKey);
+		}
+		return availSportingEquipments;
+	}
 	
 	
 }
