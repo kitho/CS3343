@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +34,8 @@ public class OrderConfirmationViewTest {
 	@Test
 	public void displayTest() {	
 		System.setIn(new ByteArrayInputStream("Yes".getBytes()));
+		Scanner scanner = new Scanner(System.in);
+		
 		CreditCard creditCard = new CreditCard();
 		creditCard.setBank("HSBC");
 		creditCard.setCreditCardType("VISA");
@@ -56,7 +59,7 @@ public class OrderConfirmationViewTest {
 		session.setAttribute("numberOfTicket", 1);
 		session.setAttribute("totalPrice", 10000.0);
 		
-		View orderConfirmationView = new OrderConfirmationView();
+		View orderConfirmationView = new OrderConfirmationView(scanner);
 		orderConfirmationView.display(session);
 		assertThat("Here is your order detail:\n==========Payment Method==========\nBank: HSBC\nType: VISA\nNumber: 0000-0000-0000-0000\n\n==========Ticket Information==========\nAirline             FlightNumber        TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\nAirLine             LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n\n======================================\nNumber of Ticket: 1\nTotal Price: 10000.0\n======================================\n\nConfirm to order? (Yes/No)", is(outContent.toString()));
 	}

@@ -3,6 +3,7 @@ package CS3343.AirlineTicketOrdering.View.Impl;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +29,9 @@ public class InputDestinationViewTest {
 	@Test
 	public void displayTest() {	
 		System.setIn(new ByteArrayInputStream("2014-01-01\nHong Kong\nTaiwan".getBytes()));
-		View inputDestinationView = new InputDestinationView();
+		Scanner scanner = new Scanner(System.in);
+		
+		View inputDestinationView = new InputDestinationView(scanner);
 		inputDestinationView.display(session);
 		assertThat("Please Input your depature date, deapture and destination to search\nDate (YYYY-MM-DD): Depature: Destination: ", is(outContent.toString()));
 	}

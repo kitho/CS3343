@@ -14,7 +14,6 @@ public class CreditCardAirlineDiscountChecker implements DiscountChecker {
 		this.card = card;
 	}
 	
-	@Override
 	public double check() {
 		// TODO Auto-generated method stub
 		String company = this.flight.getAirline();

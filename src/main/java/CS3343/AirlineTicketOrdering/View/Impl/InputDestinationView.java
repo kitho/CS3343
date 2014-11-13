@@ -6,9 +6,14 @@ import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.View;
 
 public class InputDestinationView implements View {
+	
+	private Scanner scanner;
+	
+	public InputDestinationView(Scanner scanner) {
+		this.scanner = scanner;
+	}
 
 	public void display(Session session){
-		Scanner scanner = new Scanner(System.in);
 		
 		String deapture = "";
 		String destination = "";

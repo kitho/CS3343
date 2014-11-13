@@ -14,7 +14,6 @@ public class CreditCardCodeChecker implements CodeChecker {
 		this.card = card;
 	}
 	
-	@Override
 	public boolean check() {
 		// TODO Auto-generated method stub
 		String tempString[] = card.getCreditCardNumber().split("-");

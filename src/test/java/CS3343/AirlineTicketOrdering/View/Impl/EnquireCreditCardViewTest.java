@@ -3,6 +3,7 @@ package CS3343.AirlineTicketOrdering.View.Impl;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,10 +28,15 @@ public class EnquireCreditCardViewTest {
 	
 	@Test
 	public void displayTest() {	
+		
 		System.setIn(new ByteArrayInputStream("HSBC\nVISA\n1234-1234-1234-1234".getBytes()));
-		View enquireCreditCardView = new EnquireCreditCardView();
+		Scanner scanner = new Scanner(System.in);
+		
+		View enquireCreditCardView = new EnquireCreditCardView(scanner);
 		enquireCreditCardView.display(session);
 		assertThat("Please input your credit card information\nBank: Type: Number: ", is(outContent.toString()));
+	
+		scanner.close();
 	}
 
 }

@@ -9,9 +9,14 @@ import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.View;
 
 public class FlightSelectionView implements View{
-
+	
+	private Scanner scanner;
+	
+	public FlightSelectionView(Scanner scanner) {
+		this.scanner = scanner;
+	}
+	
 	public void display(Session session) {
-		Scanner scanner = new Scanner(System.in);
 		List<Flight> flights = (List<Flight>) session.getAttribute("flights");
 		
 		if(flights.size() == 0){

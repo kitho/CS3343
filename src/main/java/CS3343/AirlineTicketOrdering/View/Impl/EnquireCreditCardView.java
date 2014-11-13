@@ -7,10 +7,15 @@ import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.View;
 
 public class EnquireCreditCardView implements View {
+	
+	private Scanner scanner;
+	
+	public EnquireCreditCardView(Scanner scanner) {
+		this.scanner = scanner;
+	}
 
 	public void display(Session session){
 		CreditCard creditCard = new CreditCard();
-		Scanner scanner = new Scanner(System.in);
 		System.out.println("Please input your credit card information");
 		System.out.print("Bank: ");
 		creditCard.setBank(scanner.nextLine());

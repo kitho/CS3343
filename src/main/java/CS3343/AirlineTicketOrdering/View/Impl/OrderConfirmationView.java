@@ -11,8 +11,13 @@ import CS3343.AirlineTicketOrdering.View.View;
 
 public class OrderConfirmationView implements View{
 
+	private Scanner scanner;
+	
+	public OrderConfirmationView(Scanner scanner) {
+		this.scanner = scanner;
+	}
+	
 	public void display(Session session) {
-		Scanner scanner = new Scanner(System.in);
 		
 		CreditCard creditCard = (CreditCard)session.getAttribute("creditCard");
 		List<Flight> flights = (List<Flight>)(session.getAttribute("flights")); 
@@ -40,7 +45,5 @@ public class OrderConfirmationView implements View{
 
 		System.out.print("\nConfirm to order? (Yes/No)");
 
-
-		
 	}
 }

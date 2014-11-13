@@ -1,6 +1,7 @@
 package CS3343.AirlineTicketOrdering;
 
 import java.io.File;
+import java.util.Scanner;
 
 import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
 import CS3343.AirlineTicketOrdering.Calculator.Impl.StubCalculator;
@@ -41,22 +42,27 @@ public class AirlineTicketOrderingSystem {
 		public void invoke() throws Exception{
 			projectPath = new File(".").getCanonicalFile();
 			
+			Scanner scanner = new Scanner(System.in);
+			
 			Session session = Session.getInstance(); 
-			AirlineTicketOrderingController inputDestinationController = new InputDestinationController(session, new InputDestinationView());
-			AirlineTicketOrderingController flightSelectionController = new FlightSelectionController(session, new FlightSelectionView(), 
+			AirlineTicketOrderingController inputDestinationController = new InputDestinationController(session, new InputDestinationView(scanner));
+			AirlineTicketOrderingController flightSelectionController = new FlightSelectionController(session, new FlightSelectionView(scanner), 
 					new FlightQuery(new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value()), 
 							new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value()), 
 							new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value())));
-			AirlineTicketOrderingController enquireCreditCardController = new EnquireCreditCardController(session, new EnquireCreditCardView());
-			AirlineTicketOrderingController orderConfirmationController = new OrderConfirmationController(session, new OrderConfirmationView(), new StubDiscount(), new StubCalculator());
+			AirlineTicketOrderingController enquireCreditCardController = new EnquireCreditCardController(session, new EnquireCreditCardView(scanner));
+			AirlineTicketOrderingController orderConfirmationController = new OrderConfirmationController(session, new OrderConfirmationView(scanner), new StubDiscount(), new StubCalculator());
 			AirlineTicketOrderingController orderCompletionController = new OrderCompletionController(session, new OrderCompletionView());
 			
 			inputDestinationController.setNext(flightSelectionController);
 			flightSelectionController.setNext(enquireCreditCardController);
+			enquireCreditCardController.setNext(orderConfirmationController);
 			orderConfirmationController.setNext(orderCompletionController);
 			
 			System.out.println("Welcome to Airline Ticket Ordering System");
 			inputDestinationController.execute();
+			
+			scanner.close();
 		
 		}
 	}

@@ -2,6 +2,8 @@ package CS3343.AirlineTicketOrdering.Controller.Impl;
 
 import java.util.List;
 
+import org.omg.CORBA.SystemException;
+
 import CS3343.AirlineTicketOrdering.Calculator.Calculator;
 import CS3343.AirlineTicketOrdering.Controller.AirlineTicketOrderingController;
 import CS3343.AirlineTicketOrdering.Discount.Discount;
@@ -31,6 +33,8 @@ public class OrderConfirmationController extends AirlineTicketOrderingController
 		
 		session.setAttribute("totalPrice", totalPrice);
 		view.display(session);
+		
+		System.out.println("Hello World");
 
 		next();
 	}
