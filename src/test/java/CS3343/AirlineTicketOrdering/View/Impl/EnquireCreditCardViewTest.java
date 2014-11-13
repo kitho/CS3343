@@ -1,12 +1,15 @@
 package CS3343.AirlineTicketOrdering.View.Impl;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.View;
@@ -27,16 +30,15 @@ public class EnquireCreditCardViewTest {
 	}
 	
 	@Test
-	public void displayTest() {	
+	public void displayTest() throws IOException {	
 		
-		System.setIn(new ByteArrayInputStream("HSBC\nVISA\n1234-1234-1234-1234".getBytes()));
-		Scanner scanner = new Scanner(System.in);
-		
-		View enquireCreditCardView = new EnquireCreditCardView(scanner);
+		BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
+		View enquireCreditCardView = new EnquireCreditCardView(bufferedReader);
+		Mockito.when(bufferedReader.readLine()).thenReturn("HSBC").thenReturn("VISA").thenReturn("1234-1234-1234-1234");
+
 		enquireCreditCardView.display(session);
 		assertThat("Please input your credit card information\nBank: Type: Number: ", is(outContent.toString()));
 	
-		scanner.close();
 	}
 
 }

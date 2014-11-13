@@ -1,12 +1,15 @@
 package CS3343.AirlineTicketOrdering.View.Impl;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.View;
@@ -27,11 +30,13 @@ public class InputDestinationViewTest {
 	}
 	
 	@Test
-	public void displayTest() {	
-		System.setIn(new ByteArrayInputStream("2014-01-01\nHong Kong\nTaiwan".getBytes()));
-		Scanner scanner = new Scanner(System.in);
+	public void displayTest() throws IOException {	
 		
-		View inputDestinationView = new InputDestinationView(scanner);
+		BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
+		Mockito.when(bufferedReader.readLine()).thenReturn("2014-01-01").thenReturn("Hong Kong").thenReturn("nTaiwan");
+
+		
+		View inputDestinationView = new InputDestinationView(bufferedReader);
 		inputDestinationView.display(session);
 		assertThat("Please Input your depature date, depature and destination to search\nDate (YYYY-MM-DD): Depature: Destination: ", is(outContent.toString()));
 	}

@@ -1,5 +1,6 @@
 package CS3343.AirlineTicketOrdering.View.Impl;
 
+import java.io.BufferedReader;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
@@ -11,10 +12,10 @@ import CS3343.AirlineTicketOrdering.View.View;
 
 public class OrderConfirmationView implements View{
 
-	private Scanner scanner;
+	private BufferedReader bufferedReader;
 	
-	public OrderConfirmationView(Scanner scanner) {
-		this.scanner = scanner;
+	public OrderConfirmationView(BufferedReader bufferedReader) {
+		this.bufferedReader = bufferedReader;
 	}
 	
 	public void display(Session session) {
