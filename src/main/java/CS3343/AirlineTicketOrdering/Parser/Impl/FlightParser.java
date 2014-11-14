@@ -3,7 +3,6 @@ package CS3343.AirlineTicketOrdering.Parser.Impl;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -36,7 +35,20 @@ public class FlightParser implements Parser<Flight> {
 	}
 
 	public String parseObject(Flight flight) {
-		return null;
+		List<String> dataList = new ArrayList<String>();
+		dataList.add(flight.getAirline());
+		dataList.add(flight.getFlightNumber());
+		dataList.add(flight.getTravelClass());
+		dataList.add(flight.getDepature());
+		dataList.add(flight.getDestination());
+		dataList.add(formatter.format(flight.getDepatureDateTime()));
+		dataList.add(formatter.format(flight.getArrivalDateTime()));
+		dataList.add(String.valueOf(flight.getAvailable()));
+		dataList.add(String.valueOf(flight.getOneWayPrice()));
+		
+		String line = StringUtils.join(dataList, ",");
+		
+		return line;
 	}
 
 	

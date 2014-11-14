@@ -1,11 +1,9 @@
 package CS3343.AirlineTicketOrdering.View.Impl;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
