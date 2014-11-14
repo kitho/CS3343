@@ -90,6 +90,7 @@ public class OrderCSVFileReaderTest {
 		
 		assertThat(order.getId(), is(orderResult.get(0).getId()));
 		assertThat(order.getFlight(), is(orderResult.get(0).getFlight()));
+		assertThat(order.getNumberOfTicket(), is(orderResult.get(0).getNumberOfTicket()));
 	}
 	
 	
@@ -140,6 +141,8 @@ public class OrderCSVFileReaderTest {
 		assertThat(orders.size(), is(orderResult.size()));
 		
 		for (int i = 0; i < orders.size() ; i++) {
+			assertThat(orders.get(i).getNumberOfTicket(), is(orderResult.get(i).getNumberOfTicket()));
+			assertThat(orders.get(i).getId(), is(orderResult.get(i).getId()));
 			assertThat(orders.get(i).getFlight(), is(orderResult.get(i).getFlight()));
 		}			
 	}
