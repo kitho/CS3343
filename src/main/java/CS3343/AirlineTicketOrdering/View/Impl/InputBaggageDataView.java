@@ -33,7 +33,7 @@ public class InputBaggageDataView implements View {
 		}
 		flightClass = (String)response.getAttribute("flightClass");
 		
-		//***4. Get instance of calculator...
+		//Get instance of calculator...
 		calculator = new BaggageFeeCalculator();
 		rulePrinter = new BaggageRulePrinter();
 		
@@ -44,7 +44,7 @@ public class InputBaggageDataView implements View {
 		String rule = rulePrinter.printRule(baggagePlan, flightClass);
 		System.out.println("\n" + rule);
 		
-		//Input number of Passengers
+		//1. Input number of Passengers
 		int numOfPassengers = 0;
 		while(true){
 			System.out.print("\nInput number of passengers: ");
