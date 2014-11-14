@@ -50,7 +50,7 @@ public class BaggagePlanParser implements Parser<BaggagePlan> {
 		baggagePlan = new BaggagePlan();
 
 		//Start
-		if(dataStr[0].equals("S")){
+		if(dataStr.length > 0 && dataStr[0].equals("S")){
 			baggagePlan = new BaggagePlan();
 			freeUnits = new HashMap<String, Map<String, Float>>();
 			extraFreeUnitForSportingEquipments = new HashMap<String, Map<String, Float>>();
@@ -68,7 +68,7 @@ public class BaggagePlanParser implements Parser<BaggagePlan> {
 		}
 		
 		//Free units
-		if(!dataStr[2].equals("") && !dataStr[3].equals("") && !dataStr[4].equals("")){
+		if(dataStr.length > 4 && !dataStr[2].equals("") && !dataStr[3].equals("") && !dataStr[4].equals("")){
 			Map<String, Float> freeUnitDetails = new HashMap<String, Float>();
 			freeUnitDetails.put(dataStr[3], Float.parseFloat(dataStr[4]));
 			flightClass = dataStr[2];
@@ -76,20 +76,20 @@ public class BaggagePlanParser implements Parser<BaggagePlan> {
 		}
 		
 		//Sporting
-		if(!dataStr[5].equals("") && !dataStr[6].equals("") && !dataStr[7].equals("")){
+		if(dataStr.length > 7 && !dataStr[5].equals("") && !dataStr[6].equals("") && !dataStr[7].equals("")){
 			Map<String, Float> freeSEUnitDetails = new HashMap<String, Float>();
 			freeSEUnitDetails.put(dataStr[6], Float.parseFloat(dataStr[7]));
 			extraFreeUnitForSportingEquipments.put(dataStr[5], freeSEUnitDetails);
 		}
 		
 		//Extra fee
-		if(!dataStr[8].equals("") && !dataStr[9].equals("")){
+		if(dataStr.length > 9 && !dataStr[8].equals("") && !dataStr[9].equals("")){
 			extraFeePerUnit.put(dataStr[8], Float.parseFloat(dataStr[9]));
 		}
 		
 		
 		//Extra extra fee
-		if(!dataStr[11].equals("") && !dataStr[12].equals("") && !dataStr[13].equals("")
+		if(dataStr.length > 15 && !dataStr[11].equals("") && !dataStr[12].equals("") && !dataStr[13].equals("")
 				 && !dataStr[14].equals("") && !dataStr[15].equals("")){
 			if(!dataStr[10].equals("")){
 				flightClass = dataStr[10];
@@ -110,12 +110,12 @@ public class BaggagePlanParser implements Parser<BaggagePlan> {
 		
 		
 		//Pet fee
-		if(!dataStr[16].equals("") && !dataStr[17].equals("")){
+		if(dataStr.length > 17 && !dataStr[16].equals("") && !dataStr[17].equals("")){
 			petFee.put(dataStr[16], Float.parseFloat(dataStr[17]));
 		}
 		
 		//Extra pet fee
-		if(!dataStr[19].equals("") && !dataStr[20].equals("") && !dataStr[21].equals("")
+		if(dataStr.length > 23 && !dataStr[19].equals("") && !dataStr[20].equals("") && !dataStr[21].equals("")
 				 && !dataStr[22].equals("") && !dataStr[23].equals("")){
 			if(!dataStr[18].equals("")){
 				flightClass = dataStr[10];
@@ -145,7 +145,7 @@ public class BaggagePlanParser implements Parser<BaggagePlan> {
 		
 		
 		//End
-		if(dataStr[0].equals("E")){
+		if(dataStr.length > 0 && dataStr[0].equals("E")){
 			ArrayList<String> unit = new ArrayList<String>();
 			unit.add("KG");
 			unit.add("Piece");
@@ -167,7 +167,6 @@ public class BaggagePlanParser implements Parser<BaggagePlan> {
 	}
 
 	public String parseObject(BaggagePlan plan) {
-
 		return null;
 	}
 

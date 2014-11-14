@@ -11,6 +11,7 @@ import CS3343.AirlineTicketOrdering.Controller.AirlineTicketOrderingController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.EnquireCreditCardController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.FlightSelectionController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.InputBaggageDataController;
+import CS3343.AirlineTicketOrdering.Controller.Impl.InputBaggageDataControllerTest;
 import CS3343.AirlineTicketOrdering.Controller.Impl.InputDestinationController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.OrderCompletionController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.OrderConfirmationController;
@@ -56,11 +57,11 @@ public class AirlineTicketOrderingSystem {
 					new FlightQuery(new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value()), 
 							new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value()), 
 							new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value())));
+			AirlineTicketOrderingController inputBaggageDataController = new InputBaggageDataController(session, new InputBaggageDataView(), 
+					new BaggageQuery(new BaggagePlanCSVFileReader(projectPath + CSVFile.BAGGAGEPLANCSV.value())));
 			AirlineTicketOrderingController enquireCreditCardController = new EnquireCreditCardController(session, new EnquireCreditCardView(bufferedReader));
 			AirlineTicketOrderingController orderConfirmationController = new OrderConfirmationController(session, new OrderConfirmationView(bufferedReader), new StubDiscount(), new StubCalculator());
 			AirlineTicketOrderingController orderCompletionController = new OrderCompletionController(session, new OrderCompletionView());
-			AirlineTicketOrderingController inputBaggageDataController = new InputBaggageDataController(session, new InputBaggageDataView(), 
-					new BaggageQuery(new BaggagePlanCSVFileReader(projectPath + CSVFile.BAGGAGEPLANCSV.value())));
 			
 			
 			inputDestinationController.setNext(flightSelectionController);
