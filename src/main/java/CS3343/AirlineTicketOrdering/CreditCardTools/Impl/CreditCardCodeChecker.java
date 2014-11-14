@@ -15,7 +15,7 @@ public class CreditCardCodeChecker implements CodeChecker {
 	}
 	
 	public boolean check() {
-		// TODO Auto-generated method stub
+
 		String tempString[] = card.getCreditCardNumber().split("-");
 		String cardnum = "";
 		for(int i = 0; i < tempString.length; i++){

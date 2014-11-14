@@ -55,4 +55,14 @@ public class BaggageQuery {
 		}
 		return null;
 	}
+
+	public List<BaggagePlan> getPlans() {
+		return plans;
+	}
+
+	public void setPlans(List<BaggagePlan> plans) {
+		this.plans = plans;
+	}
+	
+	
 }
