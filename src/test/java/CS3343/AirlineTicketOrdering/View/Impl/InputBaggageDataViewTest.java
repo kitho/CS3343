@@ -174,7 +174,7 @@ private BaggagePlan baggagePlan = null;
 		
 	}
 	
-	@Test
+	//@Test
 	public void testViewWithSession() throws IOException {
 		View view = new InputBaggageDataView();
 		Session session = Session.getInstance();
