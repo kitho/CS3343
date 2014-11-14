@@ -95,8 +95,53 @@ public class OrderCSVFileReaderTest {
 	
 	@Test
 	public void readOrderCSVFileWithThreeRecordTest() throws IOException, ParseException{		
+		Files.deleteIfExists(Paths.get(projectPath + CSVFile.ORDERCSV.value()));
+		
+		Flight flight = new Flight();
+		flight.setAirline("Cathay Pacific Airways");
+		flight.setFlightNumber("CP001");
+		flight.setTravelClass("FIRST");
+		flight.setDepature("Hong Kong");
+		flight.setDestination("Taiwan");
+		flight.setDepatureDateTime(formatter.parse("2014-01-01 14:30:00"));
+		flight.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
+		flight.setAvailable(30);
+		flight.setOneWayPrice(2500.00);
+		
+		Order order1 = new Order();
+		order1.setId(0);
+		order1.setFlight(flight);
+		order1.setNumberOfTicket(1);
+		
+		Order order2 = new Order();
+		order2.setId(1);
+		order2.setFlight(flight);
+		order2.setNumberOfTicket(1);
+		
+		Order order3 = new Order();
+		order3.setId(2);
+		order3.setFlight(flight);
+		order3.setNumberOfTicket(1);
 
 		
+		ArrayList<Order> orders = new ArrayList<Order>();
+		orders.add(order1);
+		orders.add(order2);
+		orders.add(order3);
+
+		SourceWriter<List<Order>> orderSourceWriter = new OrderCSVFileWriter(projectPath + CSVFile.ORDERCSV.value());
+		orderSourceWriter.write(orders);
+		orderSourceWriter.close();
+		
+		SourceReader<Order> orderReader = new OrderCSVFileReader(projectPath + CSVFile.ORDERCSV.value());
+		List<Order> orderResult = orderReader.read(new OrderParser());
+		orderReader.close();
+		
+		assertThat(orders.size(), is(orderResult.size()));
+		
+		for (int i = 0; i < orders.size() ; i++) {
+			assertThat(orders.get(i).getFlight(), is(orderResult.get(i).getFlight()));
+		}			
 	}
 	
 	
