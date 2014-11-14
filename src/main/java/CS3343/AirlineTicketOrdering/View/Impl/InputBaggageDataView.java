@@ -42,10 +42,10 @@ public class InputBaggageDataView implements View {
 		
 		//Print rule
 		String rule = rulePrinter.printRule(baggagePlan, flightClass);
-		System.out.println(rule);
+		System.out.println("\n" + rule);
 		
 		//Input number of Passengers
-		System.out.println("Input number of passengers:");
+		System.out.print("\nInput number of passengers: ");
 		int numOfPassengers = in.nextInt();
 		
 		//1.1 Input baggage data for N passengers
@@ -53,7 +53,7 @@ public class InputBaggageDataView implements View {
 		ArrayList<Integer> pieceList = new ArrayList<Integer>();
 		ArrayList<Float> sizeList = new ArrayList<Float>();
 		for(int i = 0; i < numOfPassengers; i++){
-			System.out.println("Input your baggage total kg, total piece and total size for #" + (i+1) + " passengers");
+			System.out.print("\nInput your baggage total kg, total piece and total size for #" + (i+1) + " passengers (e.g. 20 1 50): ");
 			kgList.add(in.nextFloat());
 			pieceList.add(in.nextInt());
 			sizeList.add(in.nextFloat());
@@ -79,9 +79,9 @@ public class InputBaggageDataView implements View {
 		ArrayList<String> sportingEquipmentList = baggagePlan.getAvailSportingEquipments();
 		
 		//2.3 Select sporting equipments to enjoy free unit
+		System.out.print("\nEnjoy Free Sporting Equipments Shipping:\n");
 		ArrayList<String> sportingEquipments = new ArrayList<String>();
 		for(int y = 0; y < numOfPassengers; y++){
-			System.out.println("Please select sporting equipments to enjoy free unit for #" + (y+1) + " passagers.");
 			for(int i = 0; i < sportingEquipmentList.size(); i++){
 				Map<String, Float> SEFreeUnit = sportingEquipmentFreeUnits.get(sportingEquipmentList.get(i));
 				String freeUnitStr = "";
@@ -90,6 +90,7 @@ public class InputBaggageDataView implements View {
 				System.out.println((i+1) + ". " + sportingEquipmentList.get(i) + "\t\t- " + freeUnitStr);
 			}
 			System.out.println((sportingEquipmentList.size()+1) + ". No Sporting Equipment");
+			System.out.print("Please select one sporting equipments to enjoy free unit for #" + (y+1) + " passagers: ");
 			int indexOfSelectSE = in.nextInt();
 			if(indexOfSelectSE != sportingEquipmentList.size()+1)
 				sportingEquipments.add(sportingEquipmentList.get(indexOfSelectSE-1));
@@ -100,7 +101,7 @@ public class InputBaggageDataView implements View {
 		ArrayList<Integer> petPieceList = new ArrayList<Integer>();
 		ArrayList<Float> petSizeList = new ArrayList<Float>();
 		for(int i = 0; i < numOfPassengers; i++){
-			System.out.println("Input your pet total kg, total piece and total size for #" + (i+1) + " passengers");
+			System.out.print("\nInput your pet total kg, total piece and total size for #" + (i+1) + " passengers (e.g. 12 1 50): ");
 			petKgList.add(in.nextFloat());
 			petPieceList.add(in.nextInt());
 			petSizeList.add(in.nextFloat());
@@ -132,6 +133,7 @@ public class InputBaggageDataView implements View {
 		response.setAttribute("baggageFee", calculator.getResultFee());
 
 		//6. Get parts of calculated fee
+		System.out.println("\nCalculated Baggage Fee Info:");
 		System.out.println("You can enjoy       \t" + calculator.getOrgFreeUnit());
 		System.out.println("Your remaining unit \t" + calculator.getRemainingFreeUnit());
 		System.out.println("Basic Baggage Fee   \t$" + calculator.getExtraBaggageFee());

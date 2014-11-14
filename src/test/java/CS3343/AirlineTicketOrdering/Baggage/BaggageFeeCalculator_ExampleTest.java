@@ -15,6 +15,7 @@ import org.junit.Test;
 import CS3343.AirlineTicketOrdering.DataReader.CSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.BaggagePlanCSVFileReader;
 import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
+import CS3343.AirlineTicketOrdering.Model.FlightClass;
 import CS3343.AirlineTicketOrdering.Model.Route;
 import CS3343.AirlineTicketOrdering.Parser.Parser;
 import CS3343.AirlineTicketOrdering.Parser.Impl.BaggagePlanParser;
@@ -41,7 +42,7 @@ public class BaggageFeeCalculator_ExampleTest {
 		//Get the first of the list of baggage plans
 		baggagePlan = planList.get(1);
 		
-		flightClass = "Economy Class";
+		flightClass = FlightClass.ECONOMY_CLASS;
 		
 		//***4. Get instance of calculator...
 		calculator = new BaggageFeeCalculator();

@@ -18,7 +18,7 @@ public class InputBaggageDataController extends AirlineTicketOrderingController 
 
 	@Override
 	public void execute() throws Exception {
-		//***TESTING DATA***//
+		//***TEMP DATA***//
 		session.setAttribute("flightClass", FlightClass.ECONOMY_CLASS);
 		
 		//Get baggage plan
