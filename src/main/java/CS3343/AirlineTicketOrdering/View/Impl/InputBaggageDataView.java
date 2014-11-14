@@ -45,18 +45,49 @@ public class InputBaggageDataView implements View {
 		System.out.println("\n" + rule);
 		
 		//Input number of Passengers
-		System.out.print("\nInput number of passengers: ");
-		int numOfPassengers = in.nextInt();
+		int numOfPassengers = 0;
+		while(true){
+			System.out.print("\nInput number of passengers: ");
+			String input = in.next();
+			try{
+				numOfPassengers = Integer.parseInt(input);
+				if(numOfPassengers <= 0)
+					System.out.println("Please input a positive numeric.");
+				else
+					break;
+			}catch(Exception e){
+				System.out.println("Please input a positive numeric.");
+			}
+		}
 		
 		//1.1 Input baggage data for N passengers
 		ArrayList<Float> kgList = new ArrayList<Float>();
 		ArrayList<Integer> pieceList = new ArrayList<Integer>();
 		ArrayList<Float> sizeList = new ArrayList<Float>();
 		for(int i = 0; i < numOfPassengers; i++){
-			System.out.print("\nInput your baggage total kg, total piece and total size for #" + (i+1) + " passengers (e.g. 20 1 50): ");
-			kgList.add(in.nextFloat());
-			pieceList.add(in.nextInt());
-			sizeList.add(in.nextFloat());
+			float kg = 0, size = 0;
+			int piece = 0;
+			while(true){
+				System.out.print("\nInput your baggage total kg, total piece and total size for #" + (i+1) + " passengers (e.g. 20 1 50): ");
+				String inputKG = in.next();
+				String inputPiece = in.next();
+				String inputSize = in.next();
+				try{
+					kg = Float.parseFloat(inputKG);
+					piece = Integer.parseInt(inputPiece);
+					size = Float.parseFloat(inputSize);
+					if(kg < 0 || piece < 0 || size < 0)
+						System.out.println("Please input positive numerics.");
+					else{
+						kgList.add(kg);
+						pieceList.add(piece);
+						sizeList.add(size);
+						break;
+					}
+				}catch(Exception e){
+					System.out.println("Please input positive numerics.");
+				}
+			}
 		}
 		
 		//1.2 Sum all value of baggage for sharing free unit
@@ -90,8 +121,23 @@ public class InputBaggageDataView implements View {
 				System.out.println((i+1) + ". " + sportingEquipmentList.get(i) + "\t\t- " + freeUnitStr);
 			}
 			System.out.println((sportingEquipmentList.size()+1) + ". No Sporting Equipment");
-			System.out.print("Please select one sporting equipments to enjoy free unit for #" + (y+1) + " passagers: ");
-			int indexOfSelectSE = in.nextInt();
+			
+			int indexOfSelectSE = 0;
+			while(true){
+				System.out.print("Please select one sporting equipments to enjoy free unit for #" + (y+1) + " passagers: ");
+				String input = in.next();
+				try{
+					indexOfSelectSE = Integer.parseInt(input);
+					if(indexOfSelectSE <= 0 || indexOfSelectSE > sportingEquipmentList.size() + 1)
+						System.out.println("Please input a numeric options from 1 to " + (sportingEquipmentList.size() + 1));
+					else
+						break;
+				}catch(Exception e){
+					System.out.println("Please input a numeric options from 1 to " + (sportingEquipmentList.size() + 1));
+				}
+			}
+			
+			
 			if(indexOfSelectSE != sportingEquipmentList.size()+1)
 				sportingEquipments.add(sportingEquipmentList.get(indexOfSelectSE-1));
 		}
@@ -101,10 +147,29 @@ public class InputBaggageDataView implements View {
 		ArrayList<Integer> petPieceList = new ArrayList<Integer>();
 		ArrayList<Float> petSizeList = new ArrayList<Float>();
 		for(int i = 0; i < numOfPassengers; i++){
-			System.out.print("\nInput your pet total kg, total piece and total size for #" + (i+1) + " passengers (e.g. 12 1 50): ");
-			petKgList.add(in.nextFloat());
-			petPieceList.add(in.nextInt());
-			petSizeList.add(in.nextFloat());
+			float kg = 0, size = 0;
+			int piece = 0;
+			while(true){
+				System.out.print("\nInput your pet total kg, total piece and total size for #" + (i+1) + " passengers (e.g. 12 1 50): ");
+				String inputKG = in.next();
+				String inputPiece = in.next();
+				String inputSize = in.next();
+				try{
+					kg = Float.parseFloat(inputKG);
+					piece = Integer.parseInt(inputPiece);
+					size = Float.parseFloat(inputSize);
+					if(kg < 0 || piece < 0 || size < 0)
+						System.out.println("Please input positive numerics.");
+					else{
+						petKgList.add(kg);
+						petPieceList.add(piece);
+						petSizeList.add(size);
+						break;
+					}
+				}catch(Exception e){
+					System.out.println("Please input positive numerics.");
+				}
+			}
 		}
 	
 		//3.2 Sum all value of pet for sharing free unit
