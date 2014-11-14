@@ -32,14 +32,9 @@ public class FlightParserTest {
 		String arrivalDateTime = "2014-01-01 17:30:00";
 		int available = 30;
 		double oneWayPrice = 2500;
-		String model = "737-900";
-		String mealIds = "M1";
-		String foodIds = "4-3-6-11-12-1-5";
-		
 		
 		String line = airline + "," + flightNumber + "," + travelClass + "," + depature + "," + destination + ","
-				+ depatureDateTime + "," + arrivalDateTime + "," + String.valueOf(available) + "," + String.valueOf(oneWayPrice) + 
-				"," + model + "," + mealIds + "," + foodIds;
+				+ depatureDateTime + "," + arrivalDateTime + "," + String.valueOf(available) + "," + String.valueOf(oneWayPrice);
 		
 		Parser<Flight> flightParser = new FlightParser();
 		Flight flight = flightParser.parseString(line);
