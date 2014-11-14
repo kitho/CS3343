@@ -3,7 +3,6 @@ package CS3343.AirlineTicketOrdering;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
 import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
 import CS3343.AirlineTicketOrdering.Calculator.Impl.StubCalculator;
