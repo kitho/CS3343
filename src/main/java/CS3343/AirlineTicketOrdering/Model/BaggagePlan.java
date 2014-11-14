@@ -1,6 +1,7 @@
 package CS3343.AirlineTicketOrdering.Model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class BaggagePlan {
@@ -22,6 +23,10 @@ public class BaggagePlan {
 	//For Pet If Exceed Normal Fee's Weight or Size
 	private Map<String, Map<String, Float>> extraExtraPetFeeForLevel;		//<FlightClass, <Level, Fee>>
 	private Map<String, Map<String, ArrayList<Float>>> extraExtraPetFeeCondtion;//<Level, <Unit, Num Range>>
+	
+	//For place
+	private List<String> placeFroms = new ArrayList<String>();
+	private List<String> placeTos = new ArrayList<String>();
 	
 	public BaggagePlan(){
 		super();
@@ -125,6 +130,24 @@ public class BaggagePlan {
 		this.extraExtraPetFeeCondtion = extraExtraPetFeeCondtion;
 	}
 	
+	
+	
+	public List<String> getPlaceFroms() {
+		return placeFroms;
+	}
+
+	public void setPlaceFroms(List<String> placeFroms) {
+		this.placeFroms = placeFroms;
+	}
+
+	public List<String> getPlaceTos() {
+		return placeTos;
+	}
+
+	public void setPlaceTos(List<String> placeTos) {
+		this.placeTos = placeTos;
+	}
+
 	public ArrayList<String> getAvailSportingEquipments(){
 		ArrayList<String> availSportingEquipments = new ArrayList<String>();
 		for(String nameKey : extraFreeUnitForSportingEquipments.keySet()){

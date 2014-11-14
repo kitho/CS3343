@@ -26,9 +26,12 @@ public class InputBaggageDataView implements View {
 	
 	public void display(Session response) {
 		//Get needed data from session
-		route = (Route)response.getAttribute("selectedRoute");
-		baggagePlan = route.getBaggagePlan();
-		flightClass = (String)response.getAttribute("selectedFlightClass");
+		baggagePlan = (BaggagePlan)response.getAttribute("baggagePlan");
+		if(baggagePlan == null){
+			System.out.println("No suitable baggage plan.");
+			return;
+		}
+		flightClass = (String)response.getAttribute("flightClass");
 		
 		//***4. Get instance of calculator...
 		calculator = new BaggageFeeCalculator();

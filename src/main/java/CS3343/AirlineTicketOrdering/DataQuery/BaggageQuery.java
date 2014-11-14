@@ -20,29 +20,39 @@ import CS3343.AirlineTicketOrdering.Parser.Impl.AirlineCompanyParser;
 import CS3343.AirlineTicketOrdering.Parser.Impl.BaggagePlanParser;
 import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;
 
-public class RouteQuery {
-	private List<Route> routes;
+public class BaggageQuery {
+	private List<BaggagePlan> plans = null;
 
-	public RouteQuery(BaggagePlanCSVFileReader baggagePlanCSVFileReader) {
+	public BaggageQuery(BaggagePlanCSVFileReader baggagePlanCSVFileReader) {
 		//Read Baggage Plan
 		Parser<BaggagePlan> parser = new BaggagePlanParser();
-		List<BaggagePlan> plans = null;
 		try {
 			plans = baggagePlanCSVFileReader.read(parser);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		//***TESTING ONLY. SHOULD BE READ ROUTES FROM CSV***//
-		int baggagePlanID = 0;  //SHOULD READ THIS ID FROM ROUTE'S CSV
-		routes = new ArrayList<Route>();
-		Route route1 = new Route();
-		route1.setBaggagePlan(plans.get(baggagePlanID));
-		routes.add(route1);
 	}
 	
-	public List<Route> findAllRoutes(){
-		return routes;
+	//Get all plans
+	public List<BaggagePlan> findAllPlans(){
+		return plans;
+	}
+	
+	
+	//Find a plan by location from and to
+	public BaggagePlan findPlanByLocation(String from, String to){
+		BaggagePlan plan;
+		for(int i = 0; i < plans.size(); i++){
+			plan = plans.get(i);
+			List<String> placeFroms = plan.getPlaceFroms();
+			List<String> placeTos = plan.getPlaceTos();
+			
+			for(int y = 0; y < placeFroms.size(); y++){
+				if(placeFroms.get(y).equals(from) && placeTos.get(y).equals(to)){
+					return plan;
+				}
+			}
+		}
+		return null;
 	}
 }
