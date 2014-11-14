@@ -145,9 +145,6 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		baggagePlan.setExtraExtraPetFeeForLevel(extraPetFeeForLevels);
 		baggagePlan.setExtraExtraPetFeeCondtion(extraPetFeeCondtions);
 		
-		//***3. Initial route...
-		route = new Route();
-		route.setBaggagePlan(baggagePlan);
 		
 		//***4. Get instance of calculator...
 		calculator = new BaggageFeeCalculator();
@@ -171,7 +168,7 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
 
 		float fee = calculator.calBaggageFee(
-				route, 
+				baggagePlan, 
 				flightClass, 
 				unitNumForBaggage, 
 				sportingEquipments, 
@@ -200,7 +197,7 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
 
 		float fee = calculator.calBaggageFee(
-				route, 
+				baggagePlan, 
 				flightClass, 
 				unitNumForBaggage, 
 				sportingEquipments, 
@@ -232,7 +229,7 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		unitNumForPet.put(units.get(2), 40f);
 
 		float fee = calculator.calBaggageFee(
-					route, 
+				baggagePlan, 
 					flightClass, 
 					unitNumForBaggage, 
 					sportingEquipments, 
@@ -264,7 +261,7 @@ public class BaggageFeeCalculator_PieceEvnTest {
 		unitNumForPet.put(units.get(2), 40f);
 		
 		float fee = calculator.calBaggageFee(
-				route, 
+				baggagePlan, 
 				flightClass, 
 				unitNumForBaggage, 
 				sportingEquipments, 

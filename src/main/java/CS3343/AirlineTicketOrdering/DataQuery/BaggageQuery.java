@@ -46,7 +46,7 @@ public class BaggageQuery {
 			plan = plans.get(i);
 			List<String> placeFroms = plan.getPlaceFroms();
 			List<String> placeTos = plan.getPlaceTos();
-			
+
 			for(int y = 0; y < placeFroms.size(); y++){
 				if(placeFroms.get(y).equals(from) && placeTos.get(y).equals(to)){
 					return plan;

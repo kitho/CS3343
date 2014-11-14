@@ -41,9 +41,6 @@ public class BaggageFeeCalculator_ExampleTest {
 		//Get the first of the list of baggage plans
 		baggagePlan = planList.get(1);
 		
-		route = new Route();
-		route.setBaggagePlan(baggagePlan);
-		
 		flightClass = "Economy Class";
 		
 		//***4. Get instance of calculator...
@@ -138,7 +135,7 @@ public class BaggageFeeCalculator_ExampleTest {
 		
 		//4. Calculate free
 		float totalFee = calculator.calBaggageFee(
-				route, 
+				baggagePlan, 
 				flightClass, 
 				unitNumForBaggage, 
 				sportingEquipments, 

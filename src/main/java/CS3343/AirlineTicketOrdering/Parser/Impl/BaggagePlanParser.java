@@ -62,6 +62,8 @@ public class BaggagePlanParser implements Parser<BaggagePlan> {
 			extraPetFeeForLevels = new HashMap<String, Map<String, Float>>();
 			extraPetFeeCondtions = new HashMap<String, Map<String, ArrayList<Float>>>();
 			extraPetFees = new HashMap<String, Float>();
+			placeFroms = new ArrayList<String>();
+			placeTos = new ArrayList<String>();
 			flightClass = null;
 		}
 		
@@ -134,7 +136,7 @@ public class BaggagePlanParser implements Parser<BaggagePlan> {
 		
 		
 		//Supporting location
-		if(dataStr.length > 24){	//Last column must check these
+		if(dataStr.length >= 25){	//Last column must check these
 			if(!dataStr[24].equals("") && !dataStr[25].equals("")){
 				placeFroms.add(dataStr[24]);
 				placeTos.add(dataStr[25]);
@@ -158,7 +160,7 @@ public class BaggagePlanParser implements Parser<BaggagePlan> {
 			baggagePlan.setExtraExtraPetFeeForLevel(extraPetFeeForLevels);
 			baggagePlan.setExtraExtraPetFeeCondtion(extraPetFeeCondtions);
 			baggagePlan.setPlaceFroms(placeFroms);
-			baggagePlan.setPlaceFroms(placeTos);
+			baggagePlan.setPlaceTos(placeTos);
 			return baggagePlan;
 		}
 		return null;

@@ -25,11 +25,9 @@ public class BaggageFeeCalculator {
 	public BaggageFeeCalculator(){}
 	
 	//Calculate baggage fee for N passengers
-	public float calBaggageFee(Route route, String flightClass, 
+	public float calBaggageFee(BaggagePlan plan, String flightClass, 
 			Map<String, Float> unitNumForBaggage, ArrayList<String> sportingEquipments, 
 			Map<String, Float> unitNumForPet, int amountOfPassenger){
-		
-		BaggagePlan plan = route.getBaggagePlan();
 		
 		//Initial remaining unit
 		Map<String, Map<String, Float>> freeUnit = plan.getFreeUnit();

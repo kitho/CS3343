@@ -5,15 +5,8 @@ import java.util.ArrayList;
 public class Route {
 	private String destination;
 	private String departure;
-	private BaggagePlan baggagePlan;
 	private ArrayList<Flight> flights;
 	
-	public BaggagePlan getBaggagePlan() {
-		return baggagePlan;
-	}
-	public void setBaggagePlan(BaggagePlan baggagePlan) {
-		this.baggagePlan = baggagePlan;
-	}
 	public ArrayList<Flight> getFlights() {
 		return flights;
 	}

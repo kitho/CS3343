@@ -121,7 +121,7 @@ public class InputBaggageDataView implements View {
 		
 		//4. Calculate free
 		float totalFee = calculator.calBaggageFee(
-				route, 
+				baggagePlan, 
 				flightClass, 
 				unitNumForBaggage, 
 				sportingEquipments, 

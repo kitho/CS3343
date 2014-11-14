@@ -15,13 +15,12 @@ import CS3343.AirlineTicketOrdering.Model.Route;
 public class BaggageFeeCalculator_KGEvnTest {
 	private BaggagePlan baggagePlan;
 	private String flightClass;
-	private Route route;
 	private BaggageFeeCalculator calculator;
 	
 	@Before
 	public void initialEnvironment(){
 		//***1. Initial flight class...
-		flightClass = "EconomyClass";
+		flightClass = "Economy Class";
 		
 		//***2. Initial baggage plan...
 		baggagePlan = new BaggagePlan();
@@ -71,10 +70,7 @@ public class BaggageFeeCalculator_KGEvnTest {
 		baggagePlan.setExtraExtraFeeCondtion(extraExtraFeeCondtions);
 		baggagePlan.setExtraExtraPetFeeForLevel(extraPetFeeForLevels);
 		baggagePlan.setExtraExtraPetFeeCondtion(extraPetFeeCondtions);
-		
-		//***3. Initial route...
-		route = new Route();
-		route.setBaggagePlan(baggagePlan);
+
 		
 		//***4. Get instance of calculator...
 		calculator = new BaggageFeeCalculator();
@@ -98,7 +94,7 @@ public class BaggageFeeCalculator_KGEvnTest {
 		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
 
 		float fee = calculator.calBaggageFee(
-				route, 
+				baggagePlan, 
 				flightClass, 
 				unitNumForBaggage, 
 				sportingEquipments, 
@@ -127,7 +123,7 @@ public class BaggageFeeCalculator_KGEvnTest {
 		Map<String, Float> unitNumForPet = new HashMap<String, Float>();
 
 		float fee = calculator.calBaggageFee(
-				route, 
+				baggagePlan, 
 				flightClass, 
 				unitNumForBaggage, 
 				sportingEquipments, 
@@ -159,7 +155,7 @@ public class BaggageFeeCalculator_KGEvnTest {
 		unitNumForPet.put(units.get(2), 40f);
 
 		float fee = calculator.calBaggageFee(
-					route, 
+					baggagePlan, 
 					flightClass, 
 					unitNumForBaggage, 
 					sportingEquipments, 
@@ -191,7 +187,7 @@ public class BaggageFeeCalculator_KGEvnTest {
 		unitNumForPet.put(units.get(2), 40f);
 		
 		float fee = calculator.calBaggageFee(
-				route, 
+				baggagePlan, 
 				flightClass, 
 				unitNumForBaggage, 
 				sportingEquipments, 
