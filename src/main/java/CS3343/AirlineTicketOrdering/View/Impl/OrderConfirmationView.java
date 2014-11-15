@@ -1,6 +1,7 @@
 package CS3343.AirlineTicketOrdering.View.Impl;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +19,7 @@ public class OrderConfirmationView implements View{
 		this.bufferedReader = bufferedReader;
 	}
 	
-	public void display(Session session) {
+	public void display(Session session) throws IOException {
 		
 		CreditCard creditCard = (CreditCard)session.getAttribute("creditCard");
 		List<Flight> flights = (List<Flight>)(session.getAttribute("flights")); 
@@ -33,7 +34,7 @@ public class OrderConfirmationView implements View{
 
 		System.out.println("\n==========Ticket Information==========");
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		String format = "%-20s%-20s%-20s%-20s%-20s%-25s%-25s%-20s%s%n";
+		String format = "%-20s%-25s%-20s%-20s%-20s%-25s%-25s%-20s%s%n";
 		System.out.printf(format,"Airline","FlightNumber","TravelClass","Depature","Destination","DepatureDateTime","ArrivalDateTime","Available","OneWayPrice");
 		for(int i = 0; i < flights.size(); i++){
 			System.out.printf(format,flights.get(i).getAirline(),flights.get(i).getFlightNumber(),flights.get(i).getTravelClass(),flights.get(i).getDepature(),flights.get(i).getDestination(),dt.format(flights.get(i).getDepatureDateTime()),dt.format(flights.get(i).getArrivalDateTime()),flights.get(i).getAvailable(),flights.get(i).getOneWayPrice());
@@ -45,6 +46,8 @@ public class OrderConfirmationView implements View{
 		System.out.println("======================================");
 
 		System.out.print("\nConfirm to order? (Yes/No)");
+		session.setAttribute("confirmed", bufferedReader.readLine());
+
 
 	}
 }

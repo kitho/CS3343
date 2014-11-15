@@ -13,7 +13,7 @@ public class BaggageFeeCalculatorImpl implements BaggageFeeCalculator{
 		for(String key : currentUnit.keySet()){
 			float unitNum = currentUnit.get(key);
 			float feePerUnit = 0;
-			if(currentUnit.size() > 0 && basicFeePerUnits.containsKey(key)) 
+			if(basicFeePerUnits.containsKey(key))
 				feePerUnit = basicFeePerUnits.get(key);
 			fee += unitNum * feePerUnit;
 		}

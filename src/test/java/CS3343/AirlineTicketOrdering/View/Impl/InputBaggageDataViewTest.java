@@ -201,6 +201,7 @@ private BaggagePlan baggagePlan = null;
 		
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
+		
 		view.display(session);
 		assertEquals("\n=====Baggage Plan For Economy Class=====\n1. Each passenger can enjoy free 20.0 KG(s) (Can be shared with other tickets purcahsed at the same time.)\n2. Basic fee per KG $100.0\n3. Extra fee if average exceed following items:\n\t25.0 KG(s)\t-\t30.0 KG(s)\t$100.0\n\t40.0 Inch(s)\t-\t50.0 Inch(s)\t$100.0\n\t>=31.0 KG(s)\t\t\t\t$400.0\n\t>=51.0 Inch(s)\t\t\t\t$400.0\n\n4. Basic pet fee per KG $30.0\n5. Extra pet if average exceed following items:\n\t25.0 KG(s)\t-\t30.0 KG(s)\t$100.0\n\t40.0 Inch(s)\t-\t50.0 Inch(s)\t$100.0\n\t>=31.0 KG(s)\t\t\t\t$400.0\n\t>=51.0 Inch(s)\t\t\t\t$400.0\n\r\n\nInput your baggage total kg, total piece and total size for #1 passengers (Format: 99.9 99 99.9): \nEnjoy Free Sporting Equipments Shipping:\n1. Bicycles equipment\t\t- 10.0 KG(s)\r\n2. Golf equipment\t\t- 10.0 KG(s)\r\n3. No Sporting Equipment\r\nPlease select one sporting equipments to enjoy free unit for #1 passagers: \nInput your pet total kg, total piece and total size for #1 passengers (Format: 99.9 99 99.9): ",
 				outContent.toString());

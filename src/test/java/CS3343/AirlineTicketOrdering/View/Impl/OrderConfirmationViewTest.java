@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import CS3343.AirlineTicketOrdering.Model.CreditCard;
 import CS3343.AirlineTicketOrdering.Model.Flight;
@@ -60,9 +61,12 @@ public class OrderConfirmationViewTest {
 		
 		BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
 		View orderConfirmationView = new OrderConfirmationView(bufferedReader);
+		Mockito.when(bufferedReader.readLine()).thenReturn("Yes");
 		
 		orderConfirmationView.display(session);
-		assertThat("Here is your order detail:\n==========Payment Method==========\nBank: HSBC\nType: VISA\nNumber: 0000-0000-0000-0000\n\n==========Ticket Information==========\nAirline             FlightNumber        TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\nAirLine             LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n\n======================================\nNumber of Ticket: 1\nTotal Price: 10000.0\n======================================\n\nConfirm to order? (Yes/No)", is(outContent.toString()));
+		assertThat("Here is your order detail:\n==========Payment Method==========\nBank: HSBC\nType: VISA\nNumber: 0000-0000-0000-0000\n\n==========Ticket Information==========\nAirline             FlightNumber             TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\nAirLine             LE1234                   First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n\n======================================\nNumber of Ticket: 1\nTotal Price: 10000.0\n======================================\n\nConfirm to order? (Yes/No)", is(outContent.toString()));
+		assertThat((String)session.getAttribute("confirmed"),is("Yes"));
+		
 	}
 
 }

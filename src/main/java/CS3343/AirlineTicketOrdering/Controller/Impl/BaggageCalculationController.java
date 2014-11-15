@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import CS3343.AirlineTicketOrdering.Baggage.BaggageFeeCalculator;
+import CS3343.AirlineTicketOrdering.Baggage.Data.BaggageDataPreparer;
 import CS3343.AirlineTicketOrdering.Baggage.Impl.BaggageFeeCalculatorImpl;
 import CS3343.AirlineTicketOrdering.Controller.AirlineTicketOrderingController;
 import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
@@ -22,13 +23,14 @@ public class BaggageCalculationController extends AirlineTicketOrderingControlle
 		//Get needed session data
 		BaggagePlan plan = (BaggagePlan) session.getAttribute("baggagePlan");
 		String flightClass = (String) session.getAttribute("flightClass");
-		int amountOfPassenger = (int) session.getAttribute("amountOfPassenger");
+		int amountOfPassenger = (int) session.getAttribute("numberOfTicket");
 		Map<String, Float> unitNumForBaggage = (Map<String, Float>) session.getAttribute("unitNumForBaggage");
 		Map<String, Float> unitNumForPet = (Map<String, Float>) session.getAttribute("unitNumForPet");
 		ArrayList<String> sportingEquipments = (ArrayList<String>) session.getAttribute("sportingEquipments");
 		
-		//Instance calculator
+		//Instance data preparer and calculator
 		BaggageFeeCalculator calculator = new BaggageFeeCalculatorImpl();
+		BaggageDataPreparer preparer = new BaggageDataPreparer();
 		
 		//Define needed variable
 	    Map<String, Float> orgFreeUnit = new HashMap<String, Float>();
@@ -40,17 +42,16 @@ public class BaggageCalculationController extends AirlineTicketOrderingControlle
 		remainingFreeUnit.putAll(freeUnit.get(flightClass));	//Clone into new list
 		
 		//Increase free unit based on amount of passenger
-		orgFreeUnit = this.increaseFreeUnit(orgFreeUnit, amountOfPassenger);
-		remainingFreeUnit = this.increaseFreeUnit(remainingFreeUnit, amountOfPassenger);
+		orgFreeUnit = preparer.increaseFreeUnit(orgFreeUnit, amountOfPassenger);
+		remainingFreeUnit = preparer.increaseFreeUnit(remainingFreeUnit, amountOfPassenger);
 		
 		//Calculate remaining unit
-		remainingFreeUnit = this.subBaggageUnitNum(remainingFreeUnit, unitNumForBaggage);
+		remainingFreeUnit = preparer.subBaggageUnitNum(remainingFreeUnit, unitNumForBaggage);
 		
 		//Plus free sporting equipments unit
-		remainingFreeUnit = this.plusSportingEquipments(remainingFreeUnit, 
+		remainingFreeUnit = preparer.plusSportingEquipments(remainingFreeUnit, 
 														sportingEquipments, 
-														plan.getExtraFreeUnitForSportingEquipments(), 
-														flightClass);
+														plan.getExtraFreeUnitForSportingEquipments());
 		
 		//Calculate baggage fee
 		Float totalFee = 0f, basicBaggageFee = 0f, extraBaggageFee = 0f
@@ -81,68 +82,12 @@ public class BaggageCalculationController extends AirlineTicketOrderingControlle
 		session.setAttribute("totalFee", totalFee);
 		
 		view.display(session);
-	}
-	
-	
-	/**
-	 * Increase free unit based on amount of passenger
-	 * @param freeUnit
-	 * @param amountOfPassenger
-	 * @return
-	 */
-	private Map<String, Float> increaseFreeUnit(Map<String, Float> freeUnit, int amountOfPassenger){
-		for(String keyUnit : freeUnit.keySet()){
-			Float unitNumber = freeUnit.get(keyUnit);
-			unitNumber = unitNumber * amountOfPassenger;
-			freeUnit.remove(keyUnit);
-			freeUnit.put(keyUnit, unitNumber);
-		}
-		return freeUnit;
-	}
-	
-	
-	/** 
-	 * Subtract unit for remaining free unit
-	 * @param remainingFreeUnit
-	 * @param unitNumForBaggage
-	 * @return
-	 */
-	private Map<String, Float> subBaggageUnitNum(Map<String, Float> remainingFreeUnit,
-			Map<String, Float> unitNumForBaggage){
 		
-		for(String key : remainingFreeUnit.keySet()){
-			Float oldValue = remainingFreeUnit.get(key);
-			Float newValue = oldValue - unitNumForBaggage.get(key);
-			remainingFreeUnit.remove(key);
-			remainingFreeUnit.put(key, newValue);
-		}
-		return remainingFreeUnit;
+		next();
 	}
-
-
-	/**
-	 * Plus extra enjoy sporting equipment unit for remaining unit
-	 * @param remainingFreeUnit
-	 * @param sportingEquipments
-	 * @param extraFreeUnitForSE
-	 * @param flightClass
-	 * @return
-	 */
-	private Map<String, Float> plusSportingEquipments(Map<String, Float> remainingFreeUnit,
-			ArrayList<String> sportingEquipments, Map<String, Map<String, Float>> extraFreeUnitForSE, String flightClass){
-		
-		for(int i = 0; i < sportingEquipments.size(); i++){
-			Map<String, Float> extraFreeUnitForOneSE = extraFreeUnitForSE.get(sportingEquipments.get(i));
-			for(String key : remainingFreeUnit.keySet()){
-				Float oldValue = remainingFreeUnit.get(key);
-				Float newValue = oldValue + extraFreeUnitForOneSE.get(key);
-				remainingFreeUnit.remove(key);
-				remainingFreeUnit.put(key, newValue);
-			}
-		}
-		return remainingFreeUnit;
-		
-	}
+	
+	
+	
 	
 	
 

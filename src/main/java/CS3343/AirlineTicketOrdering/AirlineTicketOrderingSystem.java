@@ -18,10 +18,13 @@ import CS3343.AirlineTicketOrdering.Controller.Impl.OrderCompletionController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.OrderConfirmationController;
 import CS3343.AirlineTicketOrdering.DataQuery.BaggageQuery;
 import CS3343.AirlineTicketOrdering.DataQuery.FlightQuery;
+import CS3343.AirlineTicketOrdering.DataQuery.OrderQuery;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.AirlineCompanyCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.BaggagePlanCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
+import CS3343.AirlineTicketOrdering.DataReader.Impl.OrderCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
+import CS3343.AirlineTicketOrdering.DataWriter.Impl.OrderCSVFileWriter;
 import CS3343.AirlineTicketOrdering.Discount.Impl.StubDiscount;
 import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.Impl.BaggageFeeCalculationView;
@@ -64,7 +67,10 @@ public class AirlineTicketOrderingSystem {
 			AirlineTicketOrderingController baggageCalculationController = new BaggageCalculationController(session, new BaggageFeeCalculationView(bufferedReader));
 			AirlineTicketOrderingController enquireCreditCardController = new EnquireCreditCardController(session, new EnquireCreditCardView(bufferedReader));
 			AirlineTicketOrderingController orderConfirmationController = new OrderConfirmationController(session, new OrderConfirmationView(bufferedReader), new StubDiscount(), new StubCalculator());
-			AirlineTicketOrderingController orderCompletionController = new OrderCompletionController(session, new OrderCompletionView());
+			AirlineTicketOrderingController orderCompletionController = new OrderCompletionController(session, 
+					new OrderCompletionView(),
+					new OrderQuery(new OrderCSVFileReader(projectPath + CSVFile.ORDERCSV.value()),
+							new OrderCSVFileWriter(projectPath + CSVFile.ORDERCSV.value())));
 			
 			
 			inputDestinationController.setNext(flightSelectionController);

@@ -15,7 +15,7 @@ public class OrderQuery {
 	private SourceWriter<List<Order>> orderWriter;
 	private List<Order> orders;
 	
-	public OrderQuery(SourceReader<Order> orderReader, SourceWriter<List<Order>> OrderWriter) throws IOException, ParseException{
+	public OrderQuery(SourceReader<Order> orderReader, SourceWriter<List<Order>> orderWriter) throws IOException, ParseException{
 		this.orderWriter = orderWriter;
 		orders = orderReader.read(new OrderParser());
 	}

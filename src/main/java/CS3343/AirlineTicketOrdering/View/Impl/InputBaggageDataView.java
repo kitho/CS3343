@@ -25,7 +25,7 @@ public class InputBaggageDataView implements View {
 			return;
 		}
 		
-		int numOfPassengers = (int)response.getAttribute("amountOfPassenger");
+		int numOfPassengers = (int)response.getAttribute("numberOfTicket");
 		
 		System.out.println("\n" + this.genBaggagePlanRule(baggagePlan, flightClass));
 		

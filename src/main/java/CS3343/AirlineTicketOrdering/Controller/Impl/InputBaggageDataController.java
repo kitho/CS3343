@@ -21,8 +21,10 @@ public class InputBaggageDataController extends AirlineTicketOrderingController 
 	@Override
 	public void execute() throws Exception {
 		//***TEMP DATA***//
-		session.setAttribute("flightClass", FlightClass.ECONOMY_CLASS);
-		session.setAttribute("amountOfPassenger", 1);
+		if(session.getAttribute("flightClass") == null)
+			session.setAttribute("flightClass", FlightClass.ECONOMY_CLASS);
+		if(session.getAttribute("numberOfTicket") == null)
+			session.setAttribute("numberOfTicket", 1);
 		//***TEMP DATA***//
 
 		//Get baggage plan
@@ -34,5 +36,4 @@ public class InputBaggageDataController extends AirlineTicketOrderingController 
 		view.display(session);
 		next();
 	}
-
 }
