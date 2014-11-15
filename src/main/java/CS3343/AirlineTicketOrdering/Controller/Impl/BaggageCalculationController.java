@@ -70,7 +70,8 @@ public class BaggageCalculationController extends AirlineTicketOrderingControlle
 									amountOfPassenger, 
 									plan.getExtraExtraPetFeeForLevel(),
 									plan.getExtraExtraPetFeeCondtion());
-		
+		basicBaggageFee = (basicBaggageFee < 0) ? basicBaggageFee : 0;
+		petFee = (petFee < 0) ? petFee : -petFee;
 		totalFee = basicBaggageFee + extraBaggageFee + petFee + extraPetFee;
 		
 		session.setAttribute("orgFreeUnit", orgFreeUnit);

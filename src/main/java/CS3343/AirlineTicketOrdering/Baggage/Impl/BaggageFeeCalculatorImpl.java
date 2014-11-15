@@ -17,7 +17,7 @@ public class BaggageFeeCalculatorImpl implements BaggageFeeCalculator{
 				feePerUnit = basicFeePerUnits.get(key);
 			fee += unitNum * feePerUnit;
 		}
-		return (fee < 0) ? fee : 0;
+		return fee;
 	}
 	
 	@Override
@@ -26,7 +26,7 @@ public class BaggageFeeCalculatorImpl implements BaggageFeeCalculator{
 			String flightClass, int amountOfPassenger,
 			Map<String, Map<String, Float>> extraFeeLevels,
 			Map<String, Map<String, ArrayList<Float>>> extraFeeConditions){
-		
+
 		float totalFee = 0;
 		
 		//Find last passed level
@@ -49,6 +49,7 @@ public class BaggageFeeCalculatorImpl implements BaggageFeeCalculator{
 				if(conditionUnitNumTo < 9999){
 					if(avgUnitNumForPassenger >= conditionUnitNumFrom &&
 							 avgUnitNumForPassenger < conditionUnitNumTo + 1)
+						System.out.println("in2");
 						isPass = true;
 				}else{
 					if(avgUnitNumForPassenger >= conditionUnitNumFrom)
