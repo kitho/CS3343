@@ -73,7 +73,6 @@ public class DiscountTest {
 	@Test
 	public void testDiscountByMasterCard(){
 		CreditCard card = new CreditCard();
-		PathFinding	pathFinding = new PathFinding("Tokyo", "Taiwan");
 		Discount discount = new StubDiscount();
 		double[] discounts;
 		
@@ -93,7 +92,6 @@ public class DiscountTest {
 	@Test
 	public void testDiscountByAmericanExpress(){
 		CreditCard card = new CreditCard();
-		PathFinding	pathFinding = new PathFinding("Tokyo", "Taiwan");
 		Discount discount = new StubDiscount();
 		double[] discounts;
 		
