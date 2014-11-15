@@ -1,6 +1,6 @@
 package CS3343.AirlineTicketOrdering.FlyerMiles;
 
-import CS3343.AirlineTicketOrdering.Model.CreditCard;
+import CS3343.AirlineTicketOrdering.Model.*;
 
 public class BonusChecker {
 	private CreditCard card;
@@ -9,7 +9,7 @@ public class BonusChecker {
 		this.card = card;
 	}
 	
-	public double getBounsRate(){
+	public double getCreditCardBounsRate(){
 		String bank = card.getBank();
 		if(bank.equals("HSBC")){
 			switch(card.getCreditCardType()){
@@ -33,4 +33,5 @@ public class BonusChecker {
 		}
 		return 0.0;
 	}
+	
 }
