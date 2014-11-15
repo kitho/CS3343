@@ -22,7 +22,6 @@ import CS3343.AirlineTicketOrdering.View.View;
 public class InputBaggageDataView implements View {
 	private BaggagePlan baggagePlan;
 	private String flightClass;
-	private Route route;
 	private BaggageFeeCalculator calculator;
 	private BaggageRulePrinter rulePrinter;
 	private BufferedReader bufferedReader;
@@ -59,16 +58,18 @@ public class InputBaggageDataView implements View {
 			float kg = 0, size = 0;
 			int piece = 0;
 			while(true){
-				System.out.print("\nInput your baggage total kg, total piece and total size for #" + (i+1) + " passengers (e.g. 20 1 50): ");
-				String inputKG = bufferedReader.readLine();
-				String inputPiece = bufferedReader.readLine();
-				String inputSize = bufferedReader.readLine();
+				System.out.print("\nInput your baggage total kg, total piece and total size for #" + (i+1) + " passengers (Format: 99.9 99 99.9): ");
 				try{
+					String input = bufferedReader.readLine();
+					String[] inputs = input.split(" ");
+					String inputKG = inputs[0];
+					String inputPiece = inputs[1];
+					String inputSize = inputs[2];
 					kg = Float.parseFloat(inputKG);
 					piece = Integer.parseInt(inputPiece);
 					size = Float.parseFloat(inputSize);
 					if(kg < 0 || piece < 0 || size < 0)
-						System.out.println("Please input positive numerics.");
+						System.out.println("Please input positive numerics with format (99.9 99 99.9).");
 					else{
 						kgList.add(kg);
 						pieceList.add(piece);
@@ -76,7 +77,7 @@ public class InputBaggageDataView implements View {
 						break;
 					}
 				}catch(Exception e){
-					System.out.println("Please input positive numerics.");
+					System.out.println("Please input positive numerics with format (99.9 99 99.9).");
 				}
 			}
 		}
@@ -141,16 +142,18 @@ public class InputBaggageDataView implements View {
 			float kg = 0, size = 0;
 			int piece = 0;
 			while(true){
-				System.out.print("\nInput your pet total kg, total piece and total size for #" + (i+1) + " passengers (e.g. 12 1 50): ");
-				String inputKG = bufferedReader.readLine();
-				String inputPiece = bufferedReader.readLine();
-				String inputSize = bufferedReader.readLine();
+				System.out.print("\nInput your pet total kg, total piece and total size for #" + (i+1) + " passengers (Format: 99.9 99 99.9): ");
 				try{
+					String input = bufferedReader.readLine();
+					String[] inputs = input.split(" ");
+					String inputKG = inputs[0];
+					String inputPiece = inputs[1];
+					String inputSize = inputs[2];
 					kg = Float.parseFloat(inputKG);
 					piece = Integer.parseInt(inputPiece);
 					size = Float.parseFloat(inputSize);
 					if(kg < 0 || piece < 0 || size < 0)
-						System.out.println("Please input positive numerics.");
+						System.out.println("Please input positive numerics with format (99.9 99 99.9).");
 					else{
 						petKgList.add(kg);
 						petPieceList.add(piece);
@@ -158,7 +161,7 @@ public class InputBaggageDataView implements View {
 						break;
 					}
 				}catch(Exception e){
-					System.out.println("Please input positive numerics.");
+					System.out.println("Please input positive numerics with format (99.9 99 99.9).");
 				}
 			}
 		}
