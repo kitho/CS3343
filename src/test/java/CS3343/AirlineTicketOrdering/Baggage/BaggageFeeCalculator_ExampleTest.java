@@ -50,7 +50,7 @@ public class BaggageFeeCalculator_ExampleTest {
 	}
 	
 	
-	@Test
+	//@Test
 	public void exampleTest() {
 		//System input ready
 		Scanner in = new Scanner(System.in);

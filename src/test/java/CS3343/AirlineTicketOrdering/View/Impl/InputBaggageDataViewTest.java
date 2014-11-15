@@ -3,6 +3,7 @@ package CS3343.AirlineTicketOrdering.View.Impl;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -10,9 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
 import CS3343.AirlineTicketOrdering.Session.Session;
@@ -162,28 +165,41 @@ private BaggagePlan baggagePlan = null;
 	
 	@Test
 	public void testViewWithNoContentSession() throws IOException {
-		View view = new InputBaggageDataView();
+		BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
+		Mockito.when(bufferedReader.readLine()).thenReturn("20")
+		.thenReturn("1").thenReturn("25").thenReturn("2").thenReturn("0")
+		.thenReturn("0").thenReturn("0");
+		
+		View view = new InputBaggageDataView(bufferedReader);
 		Session session = Session.getInstance();
 		session.removeAttribute("baggagePlan");
 		session.removeAttribute("flightClass");
+		session.setAttribute("numberOfPassengers",1);
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
+		
 		view.display(session);
 		assertEquals("No suitable baggage plan.\r\n", outContent.toString());
 		outContent.reset();
 		
 	}
 	
-	//@Test
+	@Test
 	public void testViewWithSession() throws IOException {
-		View view = new InputBaggageDataView();
+		BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
+		Mockito.when(bufferedReader.readLine()).thenReturn("20")
+			.thenReturn("1").thenReturn("25").thenReturn("2").thenReturn("0")
+			.thenReturn("0").thenReturn("0");
+
+		View view = new InputBaggageDataView(bufferedReader);
 		Session session = Session.getInstance();
 		session.setAttribute("baggagePlan", baggagePlan);
 		session.setAttribute("flightClass", "Economy Class");
+		session.setAttribute("numberOfPassengers",1);
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		view.display(session);
-		assertEquals("\n=====Baggage Plan For Economy Class=====\n1. Each passenger can enjoy free 20.0 KG(s) (Can be shared with other tickets purcahsed at the same time.)\n2. Basic fee per KG $100.0\n3. Extra fee if average exceed following items:\n\t25.0 KG(s)\t-\t30.0 KG(s)\t$100.0\n\t40.0 Inch(s)\t-\t50.0 Inch(s)\t$100.0\n\t31.0 KG(s)\t-\t9999.0 KG(s)\t$400.0\n\t51.0 Inch(s)\t-\t9999.0 Inch(s)\t$400.0\n\n4. Basic pet fee per KG $30.0\n5. Extra pet if average exceed following items:\n\t25.0 KG(s)\t-\t30.0 KG(s)\t$100.0\n\t40.0 Inch(s)\t-\t50.0 Inch(s)\t$100.0\n\t31.0 KG(s)\t-\t9999.0 KG(s)\t$400.0\n\t51.0 Inch(s)\t-\t9999.0 Inch(s)\t$400.0\n\r\n\nInput number of passengers: \nInput your baggage total kg, total piece and total size for #1 passengers (e.g. 20 1 50): \nEnjoy Free Sporting Equipments Shipping:\n1. Bicycles equipment\t\t- 10.0 KG(s)\r\n2. Golf equipment\t\t- 10.0 KG(s)\r\n3. No Sporting Equipment\r\nPlease select one sporting equipments to enjoy free unit for #1 passagers: \nInput your pet total kg, total piece and total size for #1 passengers (e.g. 12 1 50): \nCalculated Baggage Fee Info:\r\nYou can enjoy       \t{KG=20.0}\r\nYour remaining unit \t{KG=28.0}\r\nBasic Baggage Fee   \t$0.0\r\nExtra Baggage Fee   \t$0.0\r\nBasic Pet Fee       \t$-60.0\r\nExtra Pet Fee       \t$0.0\r\nTotal Baggage Fee   \t$-60.0\r\n",
+		assertEquals("\n=====Baggage Plan For Economy Class=====\n1. Each passenger can enjoy free 20.0 KG(s) (Can be shared with other tickets purcahsed at the same time.)\n2. Basic fee per KG $100.0\n3. Extra fee if average exceed following items:\n\t25.0 KG(s)\t-\t30.0 KG(s)\t$100.0\n\t40.0 Inch(s)\t-\t50.0 Inch(s)\t$100.0\n\t>=31.0 KG(s)\t\t\t\t$400.0\n\t>=51.0 Inch(s)\t\t\t\t$400.0\n\n4. Basic pet fee per KG $30.0\n5. Extra pet if average exceed following items:\n\t25.0 KG(s)\t-\t30.0 KG(s)\t$100.0\n\t40.0 Inch(s)\t-\t50.0 Inch(s)\t$100.0\n\t>=31.0 KG(s)\t\t\t\t$400.0\n\t>=51.0 Inch(s)\t\t\t\t$400.0\n\r\n\nInput your baggage total kg, total piece and total size for #1 passengers (e.g. 20 1 50): \nEnjoy Free Sporting Equipments Shipping:\n1. Bicycles equipment\t\t- 10.0 KG(s)\r\n2. Golf equipment\t\t- 10.0 KG(s)\r\n3. No Sporting Equipment\r\nPlease select one sporting equipments to enjoy free unit for #1 passagers: \nInput your pet total kg, total piece and total size for #1 passengers (e.g. 12 1 50): \nCalculated Baggage Fee Info:\r\nYou can enjoy       \t{KG=20.0}\r\nYour remaining unit \t{KG=10.0}\r\nBasic Baggage Fee   \t$0.0\r\nExtra Baggage Fee   \t$0.0\r\nBasic Pet Fee       \t$0.0\r\nExtra Pet Fee       \t$0.0\r\nTotal Baggage Fee   \t$0.0\r\n",
 				outContent.toString());
 		outContent.reset();
 	}

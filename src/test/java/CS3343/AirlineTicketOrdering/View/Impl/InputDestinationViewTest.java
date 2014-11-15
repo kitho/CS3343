@@ -34,7 +34,6 @@ public class InputDestinationViewTest {
 		
 		BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
 		Mockito.when(bufferedReader.readLine()).thenReturn("2014-01-01").thenReturn("Hong Kong").thenReturn("nTaiwan");
-
 		
 		View inputDestinationView = new InputDestinationView(bufferedReader);
 		inputDestinationView.display(session);

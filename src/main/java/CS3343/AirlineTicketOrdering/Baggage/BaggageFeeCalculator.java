@@ -242,7 +242,7 @@ public class BaggageFeeCalculator {
 		
 	}
 	
-	
+	/*
 	//Find max sporting equipments unit number
 	private float findMaxSportingEquipmentsUnitNum(ArrayList<String> sportingEquipments, 
 			Map<String, Map<String, Float>> extraFreeUnitForSportingEquipments,
@@ -260,7 +260,7 @@ public class BaggageFeeCalculator {
 		return maxUnitNum;
 		
 	}
-
+	*/
 	public float getResultFee() {
 		return resultFee;
 	}

@@ -3,6 +3,7 @@ package CS3343.AirlineTicketOrdering;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
 import CS3343.AirlineTicketOrdering.Calculator.Impl.StubCalculator;
@@ -56,7 +57,7 @@ public class AirlineTicketOrderingSystem {
 					new FlightQuery(new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value()), 
 							new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value()), 
 							new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value())));
-			AirlineTicketOrderingController inputBaggageDataController = new InputBaggageDataController(session, new InputBaggageDataView(), 
+			AirlineTicketOrderingController inputBaggageDataController = new InputBaggageDataController(session, new InputBaggageDataView(bufferedReader), 
 					new BaggageQuery(new BaggagePlanCSVFileReader(projectPath + CSVFile.BAGGAGEPLANCSV.value())));
 			AirlineTicketOrderingController enquireCreditCardController = new EnquireCreditCardController(session, new EnquireCreditCardView(bufferedReader));
 			AirlineTicketOrderingController orderConfirmationController = new OrderConfirmationController(session, new OrderConfirmationView(bufferedReader), new StubDiscount(), new StubCalculator());

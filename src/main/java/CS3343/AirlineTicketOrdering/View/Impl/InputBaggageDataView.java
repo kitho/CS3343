@@ -1,5 +1,7 @@
 package CS3343.AirlineTicketOrdering.View.Impl;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,8 +25,13 @@ public class InputBaggageDataView implements View {
 	private Route route;
 	private BaggageFeeCalculator calculator;
 	private BaggageRulePrinter rulePrinter;
+	private BufferedReader bufferedReader;
 	
-	public void display(Session response) {
+	public InputBaggageDataView(BufferedReader bufferedReader){
+		this.bufferedReader = bufferedReader;
+	}
+	
+	public void display(Session response) throws IOException {
 		//Get needed data from session
 		baggagePlan = (BaggagePlan)response.getAttribute("baggagePlan");
 		if(baggagePlan == null){
@@ -36,9 +43,6 @@ public class InputBaggageDataView implements View {
 		//Get instance of calculator...
 		calculator = new BaggageFeeCalculator();
 		rulePrinter = new BaggageRulePrinter();
-		
-		//System input ready
-		Scanner in = new Scanner(System.in);
 		
 		//Print rule
 		String rule = rulePrinter.printRule(baggagePlan, flightClass);
@@ -56,9 +60,9 @@ public class InputBaggageDataView implements View {
 			int piece = 0;
 			while(true){
 				System.out.print("\nInput your baggage total kg, total piece and total size for #" + (i+1) + " passengers (e.g. 20 1 50): ");
-				String inputKG = in.next();
-				String inputPiece = in.next();
-				String inputSize = in.next();
+				String inputKG = bufferedReader.readLine();
+				String inputPiece = bufferedReader.readLine();
+				String inputSize = bufferedReader.readLine();
 				try{
 					kg = Float.parseFloat(inputKG);
 					piece = Integer.parseInt(inputPiece);
@@ -112,7 +116,7 @@ public class InputBaggageDataView implements View {
 			int indexOfSelectSE = 0;
 			while(true){
 				System.out.print("Please select one sporting equipments to enjoy free unit for #" + (y+1) + " passagers: ");
-				String input = in.next();
+				String input = bufferedReader.readLine();
 				try{
 					indexOfSelectSE = Integer.parseInt(input);
 					if(indexOfSelectSE <= 0 || indexOfSelectSE > sportingEquipmentList.size() + 1)
@@ -138,9 +142,9 @@ public class InputBaggageDataView implements View {
 			int piece = 0;
 			while(true){
 				System.out.print("\nInput your pet total kg, total piece and total size for #" + (i+1) + " passengers (e.g. 12 1 50): ");
-				String inputKG = in.next();
-				String inputPiece = in.next();
-				String inputSize = in.next();
+				String inputKG = bufferedReader.readLine();
+				String inputPiece = bufferedReader.readLine();
+				String inputSize = bufferedReader.readLine();
 				try{
 					kg = Float.parseFloat(inputKG);
 					piece = Integer.parseInt(inputPiece);
