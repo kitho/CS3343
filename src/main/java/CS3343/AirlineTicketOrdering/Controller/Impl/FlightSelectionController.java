@@ -29,7 +29,9 @@ public class FlightSelectionController extends AirlineTicketOrderingController {
 		
 		view.display(session);
 		
-		next();
+		if(flights.size() > 0 ){
+			next();
+		}
 	}
 	
 }

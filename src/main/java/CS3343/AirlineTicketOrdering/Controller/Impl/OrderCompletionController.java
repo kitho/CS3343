@@ -21,17 +21,19 @@ public class OrderCompletionController extends AirlineTicketOrderingController {
 
 	@Override
 	public void execute() throws Exception {
-		int newOrderId = orderQuery.getMaxOrderId() + 1;
-		CreditCard creditCard = (CreditCard)session.getAttribute("creditCard");
-		List<Flight> flights = (List<Flight>)(session.getAttribute("flights")); 
-		int numberOfTicket = (Integer)(session.getAttribute("numberOfTicket"));
-
 		Order order = new Order();
-		order.setId(newOrderId);
-		order.setFlight(flights.get(0));
-		order.setNumberOfTicket(numberOfTicket);
-		orderQuery.newOrder(order);
-		
+		if(session.getAttribute("confirmed").equals("Yes")){
+			int newOrderId = orderQuery.getMaxOrderId() + 1;
+			CreditCard creditCard = (CreditCard)session.getAttribute("creditCard");
+			List<Flight> flights = (List<Flight>)(session.getAttribute("flights")); 
+			int numberOfTicket = (Integer)(session.getAttribute("numberOfTicket"));
+	
+			order.setId(newOrderId);
+			order.setFlight(flights.get(0));
+			order.setNumberOfTicket(numberOfTicket);
+			orderQuery.newOrder(order);
+			session.setAttribute("orders", order);
+		}
 		view.display(session);
 		next();
 	}

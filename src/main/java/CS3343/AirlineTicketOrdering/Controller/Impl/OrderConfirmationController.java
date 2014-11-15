@@ -33,8 +33,6 @@ public class OrderConfirmationController extends AirlineTicketOrderingController
 		session.setAttribute("totalPrice", totalPrice);
 		view.display(session);
 		
-		
-		
 		next();
 	}
 
