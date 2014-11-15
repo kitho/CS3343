@@ -8,6 +8,7 @@ public class FlyerMiles {
 		
 	}
 	
+	//calculate the aware miles points
 	public int awareMiles(Route route, String FlightClass, CreditCard card){
 		int point = 0;
 		MilesCalculator mc = new MilesCalculator();
