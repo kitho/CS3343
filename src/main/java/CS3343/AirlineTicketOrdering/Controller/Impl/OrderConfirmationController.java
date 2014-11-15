@@ -26,16 +26,15 @@ public class OrderConfirmationController extends AirlineTicketOrderingController
 	@Override
 	public void execute() throws Exception {
 		CreditCard creditCard = (CreditCard)session.getAttribute("creditCard");
-		List<Flight> flights = (List<Flight>)(session.getAttribute("flights")); 
+		List<Flight> flights = (List<Flight>)(session.getAttribute("flights"));
 		int numberOfTicket = (Integer)(session.getAttribute("numberOfTicket"));
-		
 		double totalPrice = calculator.calculate(flights, numberOfTicket, discount.getDiscount(flights, creditCard));
 		
 		session.setAttribute("totalPrice", totalPrice);
 		view.display(session);
 		
-		System.out.println("Hello World");
-
+		
+		
 		next();
 	}
 
