@@ -2,7 +2,11 @@ package CS3343.AirlineTicketOrdering.View.Impl;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
-
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -12,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -32,7 +35,7 @@ private BaggagePlan baggagePlan = null;
 		String flightClass = "Economy Class";
 		
 		//***2. Initial baggage plan...
-		baggagePlan = new BaggagePlan();
+		baggagePlan = new BaggagePlan_stub();
 		
 		//2.1 Initial supported unit
 		ArrayList<String> unit = new ArrayList<String>();
@@ -165,16 +168,16 @@ private BaggagePlan baggagePlan = null;
 	
 	@Test
 	public void testViewWithNoContentSession() throws IOException {
-		BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
+		BufferedReader bufferedReader = mock(BufferedReader.class);
 		Mockito.when(bufferedReader.readLine()).thenReturn("20")
 		.thenReturn("1").thenReturn("25").thenReturn("2").thenReturn("0")
 		.thenReturn("0").thenReturn("0");
 		
 		View view = new InputBaggageDataView(bufferedReader);
-		Session session = Session.getInstance();
-		session.removeAttribute("baggagePlan");
-		session.removeAttribute("flightClass");
-		session.setAttribute("numberOfPassengers",1);
+		Session session = mock(Session.class);
+		when(session.getAttribute("baggagePlan")).thenReturn(null);
+		when(session.getAttribute("flightClass")).thenReturn("Economy Class");
+		when(session.getAttribute("numberOfTicket")).thenReturn(1);
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		
@@ -191,17 +194,186 @@ private BaggagePlan baggagePlan = null;
 			.thenReturn("2").thenReturn("0 0 0");
 
 		View view = new InputBaggageDataView(bufferedReader);
-		Session session = Session.getInstance();
-		session.setAttribute("baggagePlan", baggagePlan);
-		session.setAttribute("flightClass", "Economy Class");
-		session.setAttribute("numberOfPassengers",1);
+		Session session = mock(Session.class);
+		when(session.getAttribute("baggagePlan")).thenReturn(baggagePlan);
+		when(session.getAttribute("flightClass")).thenReturn("Economy Class");
+		when(session.getAttribute("numberOfTicket")).thenReturn(1);
+		
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		view.display(session);
-		assertEquals("\n=====Baggage Plan For Economy Class=====\n1. Each passenger can enjoy free 20.0 KG(s) (Can be shared with other tickets purcahsed at the same time.)\n2. Basic fee per KG $100.0\n3. Extra fee if average exceed following items:\n\t25.0 KG(s)\t-\t30.0 KG(s)\t$100.0\n\t40.0 Inch(s)\t-\t50.0 Inch(s)\t$100.0\n\t>=31.0 KG(s)\t\t\t\t$400.0\n\t>=51.0 Inch(s)\t\t\t\t$400.0\n\n4. Basic pet fee per KG $30.0\n5. Extra pet if average exceed following items:\n\t25.0 KG(s)\t-\t30.0 KG(s)\t$100.0\n\t40.0 Inch(s)\t-\t50.0 Inch(s)\t$100.0\n\t>=31.0 KG(s)\t\t\t\t$400.0\n\t>=51.0 Inch(s)\t\t\t\t$400.0\n\r\n\nInput your baggage total kg, total piece and total size for #1 passengers (Format: 99.9 99 99.9): \nEnjoy Free Sporting Equipments Shipping:\n1. Bicycles equipment\t\t- 10.0 KG(s)\r\n2. Golf equipment\t\t- 10.0 KG(s)\r\n3. No Sporting Equipment\r\nPlease select one sporting equipments to enjoy free unit for #1 passagers: \nInput your pet total kg, total piece and total size for #1 passengers (Format: 99.9 99 99.9): \nCalculated Baggage Fee Info:\r\nYou can enjoy       \t{KG=20.0}\r\nYour remaining unit \t{KG=10.0}\r\nBasic Baggage Fee   \t$0.0\r\nExtra Baggage Fee   \t$0.0\r\nBasic Pet Fee       \t$0.0\r\nExtra Pet Fee       \t$0.0\r\nTotal Baggage Fee   \t$0.0\r\n",
+		assertEquals("\n=====Baggage Plan For Economy Class=====\n1. Each passenger can enjoy free 20.0 KG(s) (Can be shared with other tickets purcahsed at the same time.)\n2. Basic fee per KG $100.0\n3. Extra fee if average exceed following items:\n\t25.0 KG(s)\t-\t30.0 KG(s)\t$100.0\n\t40.0 Inch(s)\t-\t50.0 Inch(s)\t$100.0\n\t>=31.0 KG(s)\t\t\t\t$400.0\n\t>=51.0 Inch(s)\t\t\t\t$400.0\n\n4. Basic pet fee per KG $30.0\n5. Extra pet if average exceed following items:\n\t25.0 KG(s)\t-\t30.0 KG(s)\t$100.0\n\t40.0 Inch(s)\t-\t50.0 Inch(s)\t$100.0\n\t>=31.0 KG(s)\t\t\t\t$400.0\n\t>=51.0 Inch(s)\t\t\t\t$400.0\n\r\n\nInput your baggage total kg, total piece and total size for #1 passengers (Format: 99.9 99 99.9): \nEnjoy Free Sporting Equipments Shipping:\n1. Bicycles equipment\t\t- 10.0 KG(s)\r\n2. Golf equipment\t\t- 10.0 KG(s)\r\n3. No Sporting Equipment\r\nPlease select one sporting equipments to enjoy free unit for #1 passagers: \nInput your pet total kg, total piece and total size for #1 passengers (Format: 99.9 99 99.9): ",
 				outContent.toString());
 		outContent.reset();
 	}
+	
+	@Test
+	public void testViewWithIncorrectEnglishLetterInput() throws IOException {
+		BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
+		Mockito.when(bufferedReader.readLine()).thenReturn("w w w").thenReturn("20 1 25")
+			.thenReturn("999").thenReturn("2").thenReturn("w w w").thenReturn("0 0 0");
+
+		View view = new InputBaggageDataView(bufferedReader);
+		Session session = mock(Session.class);
+		when(session.getAttribute("baggagePlan")).thenReturn(baggagePlan);
+		when(session.getAttribute("flightClass")).thenReturn("Economy Class");
+		when(session.getAttribute("numberOfTicket")).thenReturn(1);
+
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		view.display(session);
+		assertEquals("\n=====Baggage Plan For Economy Class=====\n1. Each passenger can enjoy free 20.0 KG(s) (Can be shared with other tickets purcahsed at the same time.)\n2. Basic fee per KG $100.0\n3. Extra fee if average exceed following items:\n\t25.0 KG(s)\t-\t30.0 KG(s)\t$100.0\n\t40.0 Inch(s)\t-\t50.0 Inch(s)\t$100.0\n\t>=31.0 KG(s)\t\t\t\t$400.0\n\t>=51.0 Inch(s)\t\t\t\t$400.0\n\n4. Basic pet fee per KG $30.0\n5. Extra pet if average exceed following items:\n\t25.0 KG(s)\t-\t30.0 KG(s)\t$100.0\n\t40.0 Inch(s)\t-\t50.0 Inch(s)\t$100.0\n\t>=31.0 KG(s)\t\t\t\t$400.0\n\t>=51.0 Inch(s)\t\t\t\t$400.0\n\r\n\nInput your baggage total kg, total piece and total size for #1 passengers (Format: 99.9 99 99.9): Please input positive numerics with format (99.9 99 99.9).\r\n\nInput your baggage total kg, total piece and total size for #1 passengers (Format: 99.9 99 99.9): \nEnjoy Free Sporting Equipments Shipping:\n1. Bicycles equipment\t\t- 10.0 KG(s)\r\n2. Golf equipment\t\t- 10.0 KG(s)\r\n3. No Sporting Equipment\r\nPlease select one sporting equipments to enjoy free unit for #1 passagers: Please input a numeric options from 1 to 3\r\nPlease select one sporting equipments to enjoy free unit for #1 passagers: \nInput your pet total kg, total piece and total size for #1 passengers (Format: 99.9 99 99.9): Please input positive numerics with format (99.9 99 99.9).\r\n\nInput your pet total kg, total piece and total size for #1 passengers (Format: 99.9 99 99.9): ",
+				outContent.toString());
+		outContent.reset();
+	}
+	
+	@Test
+	public void testViewWithIncorrectNegativeInput() throws IOException {
+		BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
+		Mockito.when(bufferedReader.readLine()).thenReturn("-2 -2 -2").thenReturn("20 1 25")
+			.thenReturn("999").thenReturn("2").thenReturn("-2 -2 -2").thenReturn("0 0 0");
+
+		View view = new InputBaggageDataView(bufferedReader);
+		Session session = mock(Session.class);
+		when(session.getAttribute("baggagePlan")).thenReturn(baggagePlan);
+		when(session.getAttribute("flightClass")).thenReturn("Economy Class");
+		when(session.getAttribute("numberOfTicket")).thenReturn(1);
+		
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		view.display(session);
+		assertEquals("\n=====Baggage Plan For Economy Class=====\n1. Each passenger can enjoy free 20.0 KG(s) (Can be shared with other tickets purcahsed at the same time.)\n2. Basic fee per KG $100.0\n3. Extra fee if average exceed following items:\n\t25.0 KG(s)\t-\t30.0 KG(s)\t$100.0\n\t40.0 Inch(s)\t-\t50.0 Inch(s)\t$100.0\n\t>=31.0 KG(s)\t\t\t\t$400.0\n\t>=51.0 Inch(s)\t\t\t\t$400.0\n\n4. Basic pet fee per KG $30.0\n5. Extra pet if average exceed following items:\n\t25.0 KG(s)\t-\t30.0 KG(s)\t$100.0\n\t40.0 Inch(s)\t-\t50.0 Inch(s)\t$100.0\n\t>=31.0 KG(s)\t\t\t\t$400.0\n\t>=51.0 Inch(s)\t\t\t\t$400.0\n\r\n\nInput your baggage total kg, total piece and total size for #1 passengers (Format: 99.9 99 99.9): Please input positive numerics with format (99.9 99 99.9).\r\n\nInput your baggage total kg, total piece and total size for #1 passengers (Format: 99.9 99 99.9): \nEnjoy Free Sporting Equipments Shipping:\n1. Bicycles equipment\t\t- 10.0 KG(s)\r\n2. Golf equipment\t\t- 10.0 KG(s)\r\n3. No Sporting Equipment\r\nPlease select one sporting equipments to enjoy free unit for #1 passagers: Please input a numeric options from 1 to 3\r\nPlease select one sporting equipments to enjoy free unit for #1 passagers: \nInput your pet total kg, total piece and total size for #1 passengers (Format: 99.9 99 99.9): Please input positive numerics with format (99.9 99 99.9).\r\n\nInput your pet total kg, total piece and total size for #1 passengers (Format: 99.9 99 99.9): ",
+				outContent.toString());
+		outContent.reset();
+	}
+	
+	
+	class BaggagePlan_stub extends BaggagePlan{
+		//Unit
+		private ArrayList<String> unit;												//KG, Baggage, Size, etc.
+		
+		//For Passenger's Baggage
+		private Map<String, Map<String, Float>> freeUnit;
+		private Map<String, Map<String, Float>> extraFreeUnitForSportingEquipments;	//<NameOfEquipments, <Unit, Num>>
+		private Map<String, Float> extraFeePerUnit;									//<Unit, Fee>
+		
+		//Extra extra fee
+		private Map<String, Map<String, Float>> extraExtraFeeForLevel;			//<FlightClass, <Level, Fee>>
+		private Map<String, Map<String, ArrayList<Float>>> extraExtraFeeCondtion;	//<Level, <Unit, Num Range>>
+		
+		//For Pet Placed in Baggage
+		private Map<String, Float> petFee;											//<Unit,Pat Fee>
+		
+		//For Pet If Exceed Normal Fee's Weight or Size
+		private Map<String, Map<String, Float>> extraExtraPetFeeForLevel;		//<FlightClass, <Level, Fee>>
+		private Map<String, Map<String, ArrayList<Float>>> extraExtraPetFeeCondtion;//<Level, <Unit, Num Range>>
+		
+		//For place
+		private List<String> placeFroms = new ArrayList<String>();
+		private List<String> placeTos = new ArrayList<String>();
+		
+		public BaggagePlan_stub(){
+			super();
+		}
+
+		public void setUnit(ArrayList<String> unit) {
+			this.unit = unit;
+		}
+
+
+		public ArrayList<String> getUnit() {
+			return unit;
+		}
+		
+		public Map<String, Map<String, Float>> getFreeUnit() {
+			return freeUnit;
+		}
+
+		public void setFreeUnit(Map<String, Map<String, Float>> freeUnit) {
+			this.freeUnit = freeUnit;
+		}
+
+		public Map<String, Map<String, Float>> getExtraFreeUnitForSportingEquipments() {
+			return extraFreeUnitForSportingEquipments;
+		}
+
+		public void setExtraFreeUnitForSportingEquipments(
+				Map<String, Map<String, Float>> extraFreeUnitForSportingEquipments) {
+			this.extraFreeUnitForSportingEquipments = extraFreeUnitForSportingEquipments;
+		}
+
+		public Map<String, Float> getExtraFeePerUnit() {
+			return extraFeePerUnit;
+		}
+
+		public void setExtraFeePerUnit(Map<String, Float> extraFeePerUnit) {
+			this.extraFeePerUnit = extraFeePerUnit;
+		}
+
+		public Map<String, Map<String, Float>> getExtraExtraFeeForLevel() {
+			return extraExtraFeeForLevel;
+		}
+
+		public void setExtraExtraFeeForLevel(
+				Map<String, Map<String, Float>> extraExtraFeeForLevel) {
+			this.extraExtraFeeForLevel = extraExtraFeeForLevel;
+		}
+
+		public Map<String, Map<String, ArrayList<Float>>> getExtraExtraFeeCondtion() {
+			return extraExtraFeeCondtion;
+		}
+
+		public void setExtraExtraFeeCondtion(
+				Map<String, Map<String, ArrayList<Float>>> extraExtraFeeCondtion) {
+			this.extraExtraFeeCondtion = extraExtraFeeCondtion;
+		}
+
+		public Map<String, Float> getPetFee() {
+			return petFee;
+		}
+
+		public void setPetFee(Map<String, Float> petFee) {
+			this.petFee = petFee;
+		}
+
+		public Map<String, Map<String, Float>> getExtraExtraPetFeeForLevel() {
+			return extraExtraPetFeeForLevel;
+		}
+
+		public void setExtraExtraPetFeeForLevel(
+				Map<String, Map<String, Float>> extraExtraPetFeeForLevel) {
+			this.extraExtraPetFeeForLevel = extraExtraPetFeeForLevel;
+		}
+
+		public Map<String, Map<String, ArrayList<Float>>> getExtraExtraPetFeeCondtion() {
+			return extraExtraPetFeeCondtion;
+		}
+
+		public void setExtraExtraPetFeeCondtion(
+				Map<String, Map<String, ArrayList<Float>>> extraExtraPetFeeCondtion) {
+			this.extraExtraPetFeeCondtion = extraExtraPetFeeCondtion;
+		}
+		
+
+		public void setPlaceFroms(List<String> placeFroms) {
+			this.placeFroms = placeFroms;
+		}
+
+		public void setPlaceTos(List<String> placeTos) {
+			this.placeTos = placeTos;
+		}
+
+		public ArrayList<String> getAvailSportingEquipments(){
+			ArrayList<String> availSportingEquipments = new ArrayList<String>();
+			for(String nameKey : extraFreeUnitForSportingEquipments.keySet()){
+				availSportingEquipments.add(nameKey);
+			}
+			return availSportingEquipments;
+		}
+		
+		
+	}
+
 }
 
 	
