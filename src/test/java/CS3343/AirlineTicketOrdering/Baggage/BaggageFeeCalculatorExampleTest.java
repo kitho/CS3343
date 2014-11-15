@@ -19,7 +19,7 @@ import CS3343.AirlineTicketOrdering.Model.FlightClass;
 import CS3343.AirlineTicketOrdering.Model.Route;
 import CS3343.AirlineTicketOrdering.Parser.Parser;
 import CS3343.AirlineTicketOrdering.Parser.Impl.BaggagePlanParser;
-
+/*
 public class BaggageFeeCalculator_ExampleTest {
 	private BaggagePlan baggagePlan;
 	private String flightClass;
@@ -156,3 +156,4 @@ public class BaggageFeeCalculator_ExampleTest {
 	}
 
 }
+*/

@@ -8,6 +8,7 @@ import java.util.Scanner;
 import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
 import CS3343.AirlineTicketOrdering.Calculator.Impl.StubCalculator;
 import CS3343.AirlineTicketOrdering.Controller.AirlineTicketOrderingController;
+import CS3343.AirlineTicketOrdering.Controller.Impl.BaggageCalculationController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.EnquireCreditCardController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.FlightSelectionController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.InputBaggageDataController;
@@ -23,6 +24,7 @@ import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
 import CS3343.AirlineTicketOrdering.Discount.Impl.StubDiscount;
 import CS3343.AirlineTicketOrdering.Session.Session;
+import CS3343.AirlineTicketOrdering.View.Impl.BaggageFeeCalculationView;
 import CS3343.AirlineTicketOrdering.View.Impl.EnquireCreditCardView;
 import CS3343.AirlineTicketOrdering.View.Impl.FlightSelectionView;
 import CS3343.AirlineTicketOrdering.View.Impl.InputBaggageDataView;
@@ -59,6 +61,7 @@ public class AirlineTicketOrderingSystem {
 							new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value())));
 			AirlineTicketOrderingController inputBaggageDataController = new InputBaggageDataController(session, new InputBaggageDataView(bufferedReader), 
 					new BaggageQuery(new BaggagePlanCSVFileReader(projectPath + CSVFile.BAGGAGEPLANCSV.value())));
+			AirlineTicketOrderingController baggageCalculationController = new BaggageCalculationController(session, new BaggageFeeCalculationView(bufferedReader));
 			AirlineTicketOrderingController enquireCreditCardController = new EnquireCreditCardController(session, new EnquireCreditCardView(bufferedReader));
 			AirlineTicketOrderingController orderConfirmationController = new OrderConfirmationController(session, new OrderConfirmationView(bufferedReader), new StubDiscount(), new StubCalculator());
 			AirlineTicketOrderingController orderCompletionController = new OrderCompletionController(session, new OrderCompletionView());
@@ -66,7 +69,8 @@ public class AirlineTicketOrderingSystem {
 			
 			inputDestinationController.setNext(flightSelectionController);
 			flightSelectionController.setNext(inputBaggageDataController);
-			inputBaggageDataController.setNext(enquireCreditCardController);
+			inputBaggageDataController.setNext(baggageCalculationController);
+			baggageCalculationController.setNext(enquireCreditCardController);
 			enquireCreditCardController.setNext(orderConfirmationController);
 			orderConfirmationController.setNext(orderCompletionController);
 			

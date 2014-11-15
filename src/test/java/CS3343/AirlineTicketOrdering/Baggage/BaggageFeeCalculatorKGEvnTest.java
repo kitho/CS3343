@@ -12,6 +12,7 @@ import org.junit.Test;
 import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
 import CS3343.AirlineTicketOrdering.Model.Route;
 
+/*
 public class BaggageFeeCalculator_KGEvnTest {
 	private BaggagePlan baggagePlan;
 	private String flightClass;
@@ -274,3 +275,4 @@ public class BaggageFeeCalculator_KGEvnTest {
 	}
 
 }
+*/

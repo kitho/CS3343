@@ -21,9 +21,6 @@ import CS3343.AirlineTicketOrdering.View.View;
 
 public class InputBaggageDataView implements View {
 	private BaggagePlan baggagePlan;
-	private String flightClass;
-	private BaggageFeeCalculator calculator;
-	private BaggageRulePrinter rulePrinter;
 	private BufferedReader bufferedReader;
 	
 	public InputBaggageDataView(BufferedReader bufferedReader){
@@ -37,18 +34,11 @@ public class InputBaggageDataView implements View {
 			System.out.println("No suitable baggage plan.");
 			return;
 		}
-		flightClass = (String)response.getAttribute("flightClass");
 		
-		//Get instance of calculator...
-		calculator = new BaggageFeeCalculator();
-		rulePrinter = new BaggageRulePrinter();
+		String baggagePlanRule = (String) response.getAttribute("baggagePlanRule");
+		int numOfPassengers = (int)response.getAttribute("amountOfPassenger");
 		
-		//Print rule
-		String rule = rulePrinter.printRule(baggagePlan, flightClass);
-		System.out.println("\n" + rule);
-		
-		//1. Input number of Passengers
-		int numOfPassengers = (int)response.getAttribute("numberOfPassengers");
+		System.out.println("\n" + baggagePlanRule);
 		
 		//1.1 Input baggage data for N passengers
 		ArrayList<Float> kgList = new ArrayList<Float>();
@@ -179,27 +169,11 @@ public class InputBaggageDataView implements View {
 		unitNumForPet.put(units.get(1), sumPetPiece);
 		unitNumForPet.put(units.get(2), sumPetSize);
 		
-		//4. Calculate free
-		float totalFee = calculator.calBaggageFee(
-				baggagePlan, 
-				flightClass, 
-				unitNumForBaggage, 
-				sportingEquipments, 
-				unitNumForPet,
-				numOfPassengers);
 		
-		//5. Set fee into session
-		response.setAttribute("baggageFee", calculator.getResultFee());
-
-		//6. Get parts of calculated fee
-		System.out.println("\nCalculated Baggage Fee Info:");
-		System.out.println("You can enjoy       \t" + calculator.getOrgFreeUnit());
-		System.out.println("Your remaining unit \t" + calculator.getRemainingFreeUnit());
-		System.out.println("Basic Baggage Fee   \t$" + calculator.getExtraBaggageFee());
-		System.out.println("Extra Baggage Fee   \t$" + calculator.getExtraExtraBaggageFee());
-		System.out.println("Basic Pet Fee       \t$" + calculator.getPetFee());
-		System.out.println("Extra Pet Fee       \t$" + calculator.getExtraPetFee());
-		System.out.println("Total Baggage Fee   \t$" + calculator.getResultFee());
+		//4. Save into session
+		response.setAttribute("unitNumForBaggage", unitNumForBaggage);
+		response.setAttribute("unitNumForPet", unitNumForPet);
+		response.setAttribute("sportingEquipments", sportingEquipments);
 	}
 
 }
