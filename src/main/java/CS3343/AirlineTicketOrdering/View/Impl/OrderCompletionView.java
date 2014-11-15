@@ -9,7 +9,7 @@ public class OrderCompletionView implements View {
 	public void display(Session response) {
 		Order order = (Order) response.getAttribute("orders");
 		if(order != null){
-			System.out.print("Order Id:" + order.getId());
+			System.out.print("Order Success \n Order Id: " + order.getId());
 		}else{
 			System.out.print("Order Canceled");
 		}
