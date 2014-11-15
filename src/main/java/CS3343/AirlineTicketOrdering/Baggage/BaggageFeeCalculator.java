@@ -86,7 +86,7 @@ public class BaggageFeeCalculator {
 		Float numberOfBaggage = 0f;
 		for(String keyLevel : extraExtraFeeCondtions.keySet()){
 			Map<String, ArrayList<Float>> conditions = extraExtraFeeCondtions.get(keyLevel);
-			boolean isPass = true;
+			boolean isPass = false;
 			for(String keyUnit : conditions.keySet()){
 				ArrayList<Float> conditionUnitNums = conditions.get(keyUnit);
 				Float conditionUnitNumFrom = conditionUnitNums.get(0);
@@ -100,12 +100,12 @@ public class BaggageFeeCalculator {
 				//Float avgUnitNumForPassenger = unitNumForPassenger;
 
 				if(conditionUnitNumTo < 9999){
-					if(conditionUnitNumFrom > avgUnitNumForPassenger ||
-							conditionUnitNumTo < avgUnitNumForPassenger)
-						isPass = false;
+					if(avgUnitNumForPassenger >= conditionUnitNumFrom &&
+							 avgUnitNumForPassenger < conditionUnitNumTo + 1)
+						isPass = true;
 				}else{
-					if(conditionUnitNumFrom > avgUnitNumForPassenger)
-						isPass = false;
+					if(avgUnitNumForPassenger >= conditionUnitNumFrom)
+						isPass = true;
 				}
 			}
 			if(isPass)
@@ -132,7 +132,7 @@ public class BaggageFeeCalculator {
 		Float numberOfPet = 0f;
 		for(String keyLevel : extraExtraPetFeeCondtions.keySet()){
 			Map<String, ArrayList<Float>> conditions = extraExtraPetFeeCondtions.get(keyLevel);
-			boolean isPass = true;
+			boolean isPass = false;
 			for(String keyUnit : conditions.keySet()){
 				ArrayList<Float> conditionUnitNums = conditions.get(keyUnit);
 				Float conditionUnitNumFrom = conditionUnitNums.get(0);
@@ -146,12 +146,12 @@ public class BaggageFeeCalculator {
 				Float avgUnitNum = unitNum / (numberOfPet / amountOfPassenger);
 				
 				if(conditionUnitNumTo < 9999){
-					if(conditionUnitNumFrom > avgUnitNum ||
-							conditionUnitNumTo < avgUnitNum)
-						isPass = false;
+					if(avgUnitNum >= conditionUnitNumFrom &&
+							avgUnitNum < conditionUnitNumTo + 1)
+						isPass = true;
 				}else{
-					if(conditionUnitNumFrom > avgUnitNum)
-						isPass = false;
+					if(avgUnitNum >= conditionUnitNumFrom)
+						isPass = true;
 				}
 			}
 			if(isPass)
