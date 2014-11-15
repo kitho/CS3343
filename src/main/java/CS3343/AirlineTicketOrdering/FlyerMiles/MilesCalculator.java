@@ -25,7 +25,7 @@ public class MilesCalculator {
 	
 	public int findBasePoints(int distance){
 		for(int i=0; i<mp.size(); i++){
-			if(distance>mp.get(i).getMinimun() && distance>mp.get(i).getMaximun()){
+			if(distance>mp.get(i).getMinimun() && distance<mp.get(i).getMaximun()){
 				return mp.get(i).getBasepoint();
 			}
 		}
