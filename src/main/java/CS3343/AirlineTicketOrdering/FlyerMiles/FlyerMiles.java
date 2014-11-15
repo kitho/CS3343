@@ -10,12 +10,15 @@ public class FlyerMiles {
 	
 	//calculate the aware miles points
 	public int awareMiles(Route route, String FlightClass, CreditCard card){
-		int point = 0;
-		MilesCalculator mc = new MilesCalculator();
-		BonusChecker bc = new BonusChecker(card,FlightClass);
-		point = mc.findBasePoints(route.getDistance());
-		point = (int) (point * (1 + bc.getCreditCardBounsRate() + bc.getFlightClassBounsRate()));
-		
-		return point;
+		if(route !=null){
+			int point = 0;
+			MilesCalculator mc = new MilesCalculator();
+			BonusChecker bc = new BonusChecker(card,FlightClass);
+			point = mc.findBasePoints(route.getDistance());
+			point = (int) (point * (1 + bc.getCreditCardBounsRate() + bc.getFlightClassBounsRate()));
+			
+			return point;
+		}
+		return 0;
 	}
 }
