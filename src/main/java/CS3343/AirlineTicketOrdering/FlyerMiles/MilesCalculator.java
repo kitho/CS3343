@@ -6,6 +6,7 @@ import CS3343.AirlineTicketOrdering.Model.*;
 
 public class MilesCalculator {
 	ArrayList<MilesPoint> mp;
+	
 	public MilesCalculator(){
 		 mp = new ArrayList<MilesPoint>();
 		 addBaseMiles(0,600,1000);
