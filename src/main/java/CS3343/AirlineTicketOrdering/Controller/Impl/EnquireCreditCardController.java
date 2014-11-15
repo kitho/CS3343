@@ -13,7 +13,6 @@ public class EnquireCreditCardController extends AirlineTicketOrderingController
 	@Override
 	public void execute() throws Exception {		
 		view.display(session);
-
 		next();
 	}
 

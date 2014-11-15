@@ -6,6 +6,7 @@ public class Route {
 	private String destination;
 	private String departure;
 	private ArrayList<Flight> flights;
+	private int distance;
 	
 	public ArrayList<Flight> getFlights() {
 		return flights;
@@ -24,5 +25,11 @@ public class Route {
 	}
 	public void setDeparture(String departure) {
 		this.departure = departure;
+	}
+	public int getDistance() {
+		return distance;
+	}
+	public void setDistance(int distance) {
+		this.distance = distance;
 	}
 }

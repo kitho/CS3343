@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import CS3343.AirlineTicketOrdering.Model.CreditCard;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.View;
@@ -62,12 +63,16 @@ public class FlightSelectionViewTest {
 		session.setAttribute("flights",flights);
 		
 		BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
-		Mockito.when(bufferedReader.readLine()).thenReturn("0");
+		Mockito.when(bufferedReader.readLine()).thenReturn("0").thenReturn("10");
 
 		View flightSelectionView = new FlightSelectionView(bufferedReader);
 		flightSelectionView.display(session);
 		assertThat("=====================\nNo.  Airline                       FlightNumber        TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\n0    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n=====================\nPlease select flight: Please input number of tickets that you need: ", is(outContent.toString()));
+		assertThat(((Flight)session.getAttribute("flights")),is(flight));
+		assertThat(((Integer)session.getAttribute("numberOfTicket")),is(10));
+
 	}
+	
 
 	@Test
 	public void displayTestWithManyFlightInSession() throws IOException {	
@@ -117,6 +122,9 @@ public class FlightSelectionViewTest {
 		View flightSelectionView = new FlightSelectionView(bufferedReader);
 		flightSelectionView.display(session);
 		assertThat("=====================\nNo.  Airline                       FlightNumber        TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\n0    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n1    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n2    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n=====================\nPlease select flight: Please input number of tickets that you need: ", is(outContent.toString()));
+		assertThat(((Flight)session.getAttribute("flights")),is(flight1));
+		assertThat(((Integer)session.getAttribute("numberOfTicket")),is(2));
+
 	}
 
 }
