@@ -3,6 +3,7 @@ package CS3343.AirlineTicketOrdering.View.Impl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -37,7 +38,9 @@ public class FlightSelectionView implements View{
 			
 			System.out.print("Please select flight: ");
 			String selectedFlight = bufferedReader.readLine();
-			session.setAttribute("flights", flights.get(Integer.parseInt(selectedFlight)));
+			List<Flight> selectedflights = new ArrayList<Flight>();
+			selectedflights.add(flights.get(Integer.parseInt(selectedFlight)));
+			session.setAttribute("flights", selectedflights);
 			System.out.print("Please input number of tickets that you need: ");
 			String numberOfTicket = bufferedReader.readLine();
 			session.setAttribute("numberOfTicket", Integer.parseInt(numberOfTicket));
