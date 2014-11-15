@@ -202,23 +202,18 @@ public class BaggageFeeCalculator {
 	//Plus extra enjoy sporting equipment unit for remaining unit
 	private Map<String, Float> plusSportingEquipments(Map<String, Float> remainingFreeUnit,
 			ArrayList<String> sportingEquipments, BaggagePlan plan, String flightClass){
+			
+		Map<String, Map<String, Float>> extraFreeUnitForSE = plan.getExtraFreeUnitForSportingEquipments();
 		
-		ArrayList<String> units = this.getUnits(plan, flightClass);
-		Map<String, Float> maxUnitNumsForSE = new HashMap<String, Float>();
-		Iterator<String> itr = units.iterator();
-		while(itr.hasNext()){
-			String unit = itr.next();
-			float maxUnitNum = this.findMaxSportingEquipmentsUnitNum(
-					sportingEquipments,
-					plan.getExtraFreeUnitForSportingEquipments(),
-					unit);
-			maxUnitNumsForSE.put(unit, maxUnitNum);
-		}
-		for(String key : remainingFreeUnit.keySet()){
-			Float oldValue = remainingFreeUnit.get(key);
-			Float newValue = oldValue + maxUnitNumsForSE.get(key);
-			remainingFreeUnit.remove(key);
-			remainingFreeUnit.put(key, newValue);
+		for(int i = 0; i < sportingEquipments.size(); i++){
+			Map<String, Float> extraFreeUnitForOneSE = extraFreeUnitForSE.get(sportingEquipments.get(i));
+			
+			for(String key : remainingFreeUnit.keySet()){
+				Float oldValue = remainingFreeUnit.get(key);
+				Float newValue = oldValue + extraFreeUnitForOneSE.get(key);
+				remainingFreeUnit.remove(key);
+				remainingFreeUnit.put(key, newValue);
+			}
 		}
 		return remainingFreeUnit;
 		
