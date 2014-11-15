@@ -28,8 +28,11 @@ public class FlightSelectionController extends AirlineTicketOrderingController {
 		session.setAttribute("flights", flights);
 		
 		view.display(session);
+
 		
-		next();
+		if(flights.size() > 0){
+			next();
+		}
 	}
 	
 }

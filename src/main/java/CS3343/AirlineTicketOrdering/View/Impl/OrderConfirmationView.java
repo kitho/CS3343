@@ -1,6 +1,7 @@
 package CS3343.AirlineTicketOrdering.View.Impl;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +19,7 @@ public class OrderConfirmationView implements View{
 		this.bufferedReader = bufferedReader;
 	}
 	
-	public void display(Session session) {
+	public void display(Session session) throws IOException {
 		
 		CreditCard creditCard = (CreditCard)session.getAttribute("creditCard");
 		List<Flight> flights = (List<Flight>)(session.getAttribute("flights")); 
@@ -45,6 +46,8 @@ public class OrderConfirmationView implements View{
 		System.out.println("======================================");
 
 		System.out.print("\nConfirm to order? (Yes/No)");
+		session.setAttribute("confirmed", bufferedReader.readLine());
+
 
 	}
 }
