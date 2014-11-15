@@ -7,6 +7,7 @@ import CS3343.AirlineTicketOrdering.Model.*;
 public class MilesCalculator {
 	ArrayList<MilesPoint> mp;
 	
+	//setup a list of base points according to distance
 	public MilesCalculator(){
 		 mp = new ArrayList<MilesPoint>();
 		 addBaseMiles(0,600,1000);
@@ -23,6 +24,7 @@ public class MilesCalculator {
 		mp.add(m);
 	}
 	
+	//find out the base points
 	public int findBasePoints(int distance){
 		for(int i=0; i<mp.size(); i++){
 			if(distance>mp.get(i).getMinimun() && distance<mp.get(i).getMaximun()){
