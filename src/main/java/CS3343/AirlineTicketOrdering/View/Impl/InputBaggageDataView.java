@@ -45,20 +45,7 @@ public class InputBaggageDataView implements View {
 		System.out.println("\n" + rule);
 		
 		//1. Input number of Passengers
-		int numOfPassengers = 0;
-		while(true){
-			System.out.print("\nInput number of passengers: ");
-			String input = in.next();
-			try{
-				numOfPassengers = Integer.parseInt(input);
-				if(numOfPassengers <= 0)
-					System.out.println("Please input a positive numeric.");
-				else
-					break;
-			}catch(Exception e){
-				System.out.println("Please input a positive numeric.");
-			}
-		}
+		int numOfPassengers = (int)response.getAttribute("numberOfPassengers");
 		
 		//1.1 Input baggage data for N passengers
 		ArrayList<Float> kgList = new ArrayList<Float>();

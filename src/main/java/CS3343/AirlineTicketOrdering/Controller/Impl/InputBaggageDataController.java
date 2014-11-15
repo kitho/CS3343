@@ -20,6 +20,7 @@ public class InputBaggageDataController extends AirlineTicketOrderingController 
 	public void execute() throws Exception {
 		//***TEMP DATA***//
 		session.setAttribute("flightClass", FlightClass.ECONOMY_CLASS);
+		session.setAttribute("numberOfPassengers", 1);
 		
 		//Get baggage plan
 		String deapture = (String) session.getAttribute("deapture");

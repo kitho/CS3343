@@ -144,7 +144,7 @@ public class BaggageFeeCalculator_ExampleTest {
 				numOfPassengers);
 
 		//5. Get parts of calculated fee
-		System.out.println("You can enjoy       \t" + calculator.getOrgFreeUnit());
+		System.out.println("\nYou can enjoy       \t" + calculator.getOrgFreeUnit());
 		System.out.println("Your remaining unit \t" + calculator.getRemainingFreeUnit());
 		System.out.println("Basic Baggage Fee   \t$" + calculator.getExtraBaggageFee());
 		System.out.println("Extra Baggage Fee   \t$" + calculator.getExtraExtraBaggageFee());
