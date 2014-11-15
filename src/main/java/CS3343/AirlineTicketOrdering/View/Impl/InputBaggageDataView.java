@@ -4,23 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
-
-import CS3343.AirlineTicketOrdering.Baggage.BaggageFeeCalculator;
-import CS3343.AirlineTicketOrdering.Baggage.BaggageRulePrinter;
-import CS3343.AirlineTicketOrdering.DataReader.CSVFileReader;
-import CS3343.AirlineTicketOrdering.DataReader.Impl.BaggagePlanCSVFileReader;
 import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
-import CS3343.AirlineTicketOrdering.Model.Route;
-import CS3343.AirlineTicketOrdering.Parser.Parser;
-import CS3343.AirlineTicketOrdering.Parser.Impl.BaggagePlanParser;
 import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.View;
 
 public class InputBaggageDataView implements View {
-	private BaggagePlan baggagePlan;
 	private BufferedReader bufferedReader;
 	
 	public InputBaggageDataView(BufferedReader bufferedReader){
@@ -29,16 +18,16 @@ public class InputBaggageDataView implements View {
 	
 	public void display(Session response) throws IOException {
 		//Get needed data from session
-		baggagePlan = (BaggagePlan)response.getAttribute("baggagePlan");
+		BaggagePlan baggagePlan = (BaggagePlan)response.getAttribute("baggagePlan");
+		String flightClass = (String)response.getAttribute("flightClass");
 		if(baggagePlan == null){
 			System.out.println("No suitable baggage plan.");
 			return;
 		}
 		
-		String baggagePlanRule = (String) response.getAttribute("baggagePlanRule");
 		int numOfPassengers = (int)response.getAttribute("amountOfPassenger");
 		
-		System.out.println("\n" + baggagePlanRule);
+		System.out.println("\n" + this.genBaggagePlanRule(baggagePlan, flightClass));
 		
 		//1.1 Input baggage data for N passengers
 		ArrayList<Float> kgList = new ArrayList<Float>();
@@ -174,6 +163,96 @@ public class InputBaggageDataView implements View {
 		response.setAttribute("unitNumForBaggage", unitNumForBaggage);
 		response.setAttribute("unitNumForPet", unitNumForPet);
 		response.setAttribute("sportingEquipments", sportingEquipments);
+	}
+	
+	private String genBaggagePlanRule(BaggagePlan plan, String flightClass){
+		String rule = "";
+		
+		//Get free unit rule string
+		String feeUnitStr = "";
+		Map<String, Map<String, Float>> freeUnits = plan.getFreeUnit();
+		for(String classKey : freeUnits.keySet()){
+			if(classKey.equals(flightClass)){
+				Map<String, Float> freeUnit = freeUnits.get(classKey);
+					for(String unitKey : freeUnit.keySet()){
+						feeUnitStr += freeUnit.get(unitKey) + " " + unitKey + "(s)";
+					}
+			}
+		}
+		
+		//Get basic fee rule string
+		String basicFeeStr = "";
+		Map<String, Float> extraFeePerUnits = plan.getExtraFeePerUnit();
+		for(String unitKey : extraFeePerUnits.keySet()){
+			basicFeeStr += unitKey + " $" + extraFeePerUnits.get(unitKey);
+		}
+		
+		//Get extra fee rule string
+		String extraFeeStr = "";
+		Map<String, Map<String, Float>> extraExtraFeeForLevels = plan.getExtraExtraFeeForLevel();
+		Map<String, Map<String, ArrayList<Float>>> extraExtraFeeCondtions = plan.getExtraExtraFeeCondtion();
+		int i = 0;
+		for(String keyLevel : extraExtraFeeCondtions.keySet()){
+			i++;
+			Map<String, ArrayList<Float>> conditions = extraExtraFeeCondtions.get(keyLevel);
+			for(String keyUnit : conditions.keySet()){
+				ArrayList<Float> conditionUnitNums = conditions.get(keyUnit);
+				Float conditionUnitNumFrom = conditionUnitNums.get(0);
+				Float conditionUnitNumTo = conditionUnitNums.get(1);
+				
+				Map<String, Float> extraExtraFees = extraExtraFeeForLevels.get(flightClass);
+				
+				if(conditionUnitNumTo < 9999)
+					extraFeeStr += "\t" + conditionUnitNumFrom + " " + keyUnit + "(s)\t-\t" + 
+									conditionUnitNumTo + " " + keyUnit + "(s)" +
+									"\t$" + extraExtraFees.get(""+i) + "\n";
+				else
+					extraFeeStr += "\t>=" + conditionUnitNumFrom + " " + keyUnit + "(s)" + 
+							"\t\t\t\t$" + extraExtraFees.get(""+i) + "\n";
+			}
+		}
+		
+		
+		//Get basic pet rule string
+		String basicPetFeeStr = "";
+		Map<String, Float> petFeePerUnits = plan.getPetFee();
+		for(String unitKey : petFeePerUnits.keySet()){
+			basicPetFeeStr += unitKey + " $" + petFeePerUnits.get(unitKey);
+		}
+		
+		//Get extra pet rule string
+		String extraPetFeeStr = "";
+		Map<String, Map<String, Float>> extraPetFeeForLevels = plan.getExtraExtraPetFeeForLevel();
+		Map<String, Map<String, ArrayList<Float>>> extraPetFeeCondtions = plan.getExtraExtraPetFeeCondtion();
+		i = 0;
+		for(String keyLevel : extraPetFeeCondtions.keySet()){
+			i++;
+			Map<String, ArrayList<Float>> conditions = extraPetFeeCondtions.get(keyLevel);
+			for(String keyUnit : conditions.keySet()){
+				ArrayList<Float> conditionUnitNums = conditions.get(keyUnit);
+				Float conditionUnitNumFrom = conditionUnitNums.get(0);
+				Float conditionUnitNumTo = conditionUnitNums.get(1);
+				
+				Map<String, Float> extraPetFees = extraPetFeeForLevels.get(flightClass);
+				
+				if(conditionUnitNumTo < 9999)
+					extraPetFeeStr += "\t" + conditionUnitNumFrom + " " + keyUnit + "(s)\t-\t" + 
+									conditionUnitNumTo + " " + keyUnit + "(s)" +
+									"\t$" + extraPetFees.get(""+i) + "\n";
+				else
+					extraPetFeeStr += "\t>=" + conditionUnitNumFrom + " " + keyUnit + "(s)" +
+							"\t\t\t\t$" + extraPetFees.get(""+i) + "\n";
+			}
+		}
+		
+		rule += "=====Baggage Plan For " + flightClass + "=====";
+		rule += "\n1. Each passenger can enjoy free " + feeUnitStr + " (Can be shared with other tickets purcahsed at the same time.)";
+		rule += "\n2. Basic fee per " + basicFeeStr;
+		rule += "\n3. Extra fee if average exceed following items:\n" + extraFeeStr;
+		rule += "\n4. Basic pet fee per " + basicPetFeeStr;
+		rule += "\n5. Extra pet if average exceed following items:\n" + extraPetFeeStr;
+		
+		return rule;
 	}
 
 }

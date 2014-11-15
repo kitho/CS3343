@@ -1,7 +1,9 @@
-package CS3343.AirlineTicketOrdering.Baggage;
+package CS3343.AirlineTicketOrdering.Baggage.Impl;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import CS3343.AirlineTicketOrdering.Baggage.BaggageFeeCalculator;
 
 public class BaggageFeeCalculatorImpl implements BaggageFeeCalculator{
 	
@@ -43,8 +45,7 @@ public class BaggageFeeCalculatorImpl implements BaggageFeeCalculator{
 				Float unitNumForPassenger = currentUnitNum.get(keyUnit) / amountOfPassenger;
 				numberOfBaggage = currentUnitNum.get(UNIT_PIECE);
 				Float avgUnitNumForPassenger = unitNumForPassenger / (numberOfBaggage / amountOfPassenger);
-				//Float avgUnitNumForPassenger = unitNumForPassenger;
-
+				
 				if(conditionUnitNumTo < 9999){
 					if(avgUnitNumForPassenger >= conditionUnitNumFrom &&
 							 avgUnitNumForPassenger < conditionUnitNumTo + 1)

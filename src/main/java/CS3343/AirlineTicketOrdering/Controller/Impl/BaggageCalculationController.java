@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import CS3343.AirlineTicketOrdering.Baggage.BaggageFeeCalculator;
-import CS3343.AirlineTicketOrdering.Baggage.BaggageFeeCalculatorImpl;
+import CS3343.AirlineTicketOrdering.Baggage.Impl.BaggageFeeCalculatorImpl;
 import CS3343.AirlineTicketOrdering.Controller.AirlineTicketOrderingController;
 import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
 import CS3343.AirlineTicketOrdering.Session.Session;
