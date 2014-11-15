@@ -9,6 +9,7 @@ public class BonusChecker {
 		this.card = card;
 	}
 	
+	//check the credit card bank and type, return different bouns rate
 	public double getCreditCardBounsRate(){
 		String bank = card.getBank();
 		if(bank.equals("HSBC")){
