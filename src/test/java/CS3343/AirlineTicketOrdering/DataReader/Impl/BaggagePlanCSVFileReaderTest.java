@@ -40,9 +40,12 @@ public class BaggagePlanCSVFileReaderTest {
 				return null;
 			}
 		}
-		
-		CSVFileReader reader = new BaggagePlanCSVFileReader(projectPath + CSVFile.BAGGAGEPLANCSV.value());
-		
+		CSVFileReader reader = null;
+		try{
+			reader = new BaggagePlanCSVFileReader(projectPath + CSVFile.BAGGAGEPLANCSV.value());
+		}catch(Exception e){
+			fail("CSV not exist");
+		}
 		List<BaggagePlan> baggagePlans = reader.read(new parser_stub());
 		assertEquals(true,(baggagePlans != null));
 		assertEquals(true,(baggagePlans.size() > 0));
