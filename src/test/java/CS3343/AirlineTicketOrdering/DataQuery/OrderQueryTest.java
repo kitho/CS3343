@@ -121,5 +121,60 @@ public class OrderQueryTest {
 		
 	}
 	
+	
+	public void TestSaveOrder() throws ParseException, IOException{
+		SourceReader<Order> orderReader = mock(OrderCSVFileReader.class);
+
+		Flight flight = new Flight();
+		flight.setAirline("Cathay Pacific Airways");
+		flight.setFlightNumber("CP001");
+		flight.setTravelClass("FIRST");
+		flight.setDepature("Hong Kong");
+		flight.setDestination("Taiwan");
+		flight.setDepatureDateTime(formatter.parse("2014-01-01 14:30:00"));
+		flight.setArrivalDateTime(formatter.parse("2014-01-01 17:30:00"));
+		flight.setAvailable(30);
+		flight.setOneWayPrice(2500.00);
+		
+		Order order1 = new Order();
+		order1.setId(1);
+		order1.setFlight(flight);
+		order1.setNumberOfTicket(1);
+		
+		Order order2 = new Order();
+		order2.setId(3);
+		order2.setFlight(flight);
+		order2.setNumberOfTicket(1);
+		
+		Order order3 = new Order();
+		order3.setId(2);
+		order3.setFlight(flight);
+		order3.setNumberOfTicket(1);
+		
+		ArrayList<Order> orders = new ArrayList<>();
+		orders.add(order1);
+		orders.add(order2);
+		orders.add(order3);
+		
+		when(orderReader.read((Parser<Order>) any())).thenReturn(orders);
+		
+		Order newOrder = new Order();
+		newOrder.setId(100);
+		newOrder.setFlight(flight);
+		newOrder.setNumberOfTicket(100);
+		
+		OrderQuery orderQuery = new OrderQuery(orderReader, (SourceWriter<List<Order>>)mock(OrderCSVFileWriter.class));
+		orderQuery.newOrder(newOrder);
+		
+		int count = 0;
+		for(int i = 0; i < orders.size(); i ++){
+			if(orders.get(i).equals(newOrder)){
+				count ++;
+			}
+		}
+		
+		assertThat(count, is(1));
+	}
+	
 
 }

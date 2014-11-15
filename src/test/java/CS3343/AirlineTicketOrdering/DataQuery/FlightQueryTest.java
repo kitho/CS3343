@@ -351,5 +351,7 @@ public class FlightQueryTest {
 		
 		assertThat(count, is(1));
 	}
+	
+	
 
 }

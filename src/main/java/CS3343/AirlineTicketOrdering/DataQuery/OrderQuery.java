@@ -29,5 +29,10 @@ public class OrderQuery {
 		}
 		return max;
 	}
+	
+	public void newOrder(Order order) throws IOException{
+		orders.add(order);
+		orderWriter.write(orders);
+	}
 
 }
