@@ -188,9 +188,9 @@ public class BaggageCalculationControllerTest {
 		verify(session, times(1)).setAttribute("remainingFreeUnit", expectedRemainingFreeUnit);
 		verify(session, times(1)).setAttribute("basicBaggageFee", 0f);
 		verify(session, times(1)).setAttribute("extraBaggageFee", 0f);
-		verify(session, times(1)).setAttribute("petFee", 0f);
+		verify(session, times(1)).setAttribute("petFee", -600f);
 		verify(session, times(1)).setAttribute("extraPetFee", 0f);
-		verify(session, times(1)).setAttribute("totalFee", 0f);
+		verify(session, times(1)).setAttribute("totalFee", -600f);
 		verify(view, times(1)).display(session);
 		verify(next,times(1)).execute();
 	}

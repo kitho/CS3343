@@ -93,7 +93,7 @@ public class BaggageFeeCalculatorTest {
 		BaggageFeeCalculator baggageFeeCalculator = new BaggageFeeCalculatorImpl();
 		float fee = baggageFeeCalculator.calBasicFee(currentUnit, basicFeePerUnits);
 		
-		assertEquals(0f, fee, 0);
+		assertEquals(2000f, fee, 0);
 	}
 	
 	@Test

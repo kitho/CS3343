@@ -49,7 +49,6 @@ public class BaggageFeeCalculatorImpl implements BaggageFeeCalculator{
 				if(conditionUnitNumTo < 9999){
 					if(avgUnitNumForPassenger >= conditionUnitNumFrom &&
 							 avgUnitNumForPassenger < conditionUnitNumTo + 1)
-						System.out.println("in2");
 						isPass = true;
 				}else{
 					if(avgUnitNumForPassenger >= conditionUnitNumFrom)
