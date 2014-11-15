@@ -47,10 +47,13 @@ public class BaggageRulePrinter {
 				
 				Map<String, Float> extraExtraFees = extraExtraFeeForLevels.get(flightClass);
 				
-				extraFeeStr += "\t" + conditionUnitNumFrom + " " + keyUnit + "(s)\t-\t" + 
-								conditionUnitNumTo + " " + keyUnit + "(s)" +
-								"\t$" + extraExtraFees.get(""+i) + "\n";
-				
+				if(conditionUnitNumTo < 9999)
+					extraFeeStr += "\t" + conditionUnitNumFrom + " " + keyUnit + "(s)\t-\t" + 
+									conditionUnitNumTo + " " + keyUnit + "(s)" +
+									"\t$" + extraExtraFees.get(""+i) + "\n";
+				else
+					extraFeeStr += "\t>=" + conditionUnitNumFrom + " " + keyUnit + "(s)" + 
+							"\t\t\t\t$" + extraExtraFees.get(""+i) + "\n";
 			}
 		}
 		
@@ -77,10 +80,13 @@ public class BaggageRulePrinter {
 				
 				Map<String, Float> extraPetFees = extraPetFeeForLevels.get(flightClass);
 				
-				extraPetFeeStr += "\t" + conditionUnitNumFrom + " " + keyUnit + "(s)\t-\t" + 
-								conditionUnitNumTo + " " + keyUnit + "(s)" +
-								"\t$" + extraPetFees.get(""+i) + "\n";
-				
+				if(conditionUnitNumTo < 9999)
+					extraPetFeeStr += "\t" + conditionUnitNumFrom + " " + keyUnit + "(s)\t-\t" + 
+									conditionUnitNumTo + " " + keyUnit + "(s)" +
+									"\t$" + extraPetFees.get(""+i) + "\n";
+				else
+					extraPetFeeStr += "\t>=" + conditionUnitNumFrom + " " + keyUnit + "(s)" +
+							"\t\t\t\t$" + extraPetFees.get(""+i) + "\n";
 			}
 		}
 		

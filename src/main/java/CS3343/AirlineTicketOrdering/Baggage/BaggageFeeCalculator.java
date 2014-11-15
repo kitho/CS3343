@@ -99,9 +99,14 @@ public class BaggageFeeCalculator {
 				Float avgUnitNumForPassenger = unitNumForPassenger / (numberOfBaggage / amountOfPassenger);
 				//Float avgUnitNumForPassenger = unitNumForPassenger;
 
-				if(conditionUnitNumFrom > avgUnitNumForPassenger ||
-						conditionUnitNumTo < avgUnitNumForPassenger)
-					isPass = false;
+				if(conditionUnitNumTo < 9999){
+					if(conditionUnitNumFrom > avgUnitNumForPassenger ||
+							conditionUnitNumTo < avgUnitNumForPassenger)
+						isPass = false;
+				}else{
+					if(conditionUnitNumFrom > avgUnitNumForPassenger)
+						isPass = false;
+				}
 			}
 			if(isPass)
 				lastPassedLevel = keyLevel;
@@ -140,9 +145,14 @@ public class BaggageFeeCalculator {
 				numberOfPet = unitNumForPet.get(plan.getUnit().get(1));
 				Float avgUnitNum = unitNum / (numberOfPet / amountOfPassenger);
 				
-				if(conditionUnitNumFrom > avgUnitNum ||
-						conditionUnitNumTo < avgUnitNum)
-					isPass = false;
+				if(conditionUnitNumTo < 9999){
+					if(conditionUnitNumFrom > avgUnitNum ||
+							conditionUnitNumTo < avgUnitNum)
+						isPass = false;
+				}else{
+					if(conditionUnitNumFrom > avgUnitNum)
+						isPass = false;
+				}
 			}
 			if(isPass)
 				lastPassedLevel = keyLevel;
