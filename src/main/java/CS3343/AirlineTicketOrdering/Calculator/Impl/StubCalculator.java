@@ -9,7 +9,14 @@ public class StubCalculator implements Calculator {
 
 	public double calculate(List<Flight> flights, int numberOfTicket,
 			double[] discount) {
-		return 0;
+		double totalAmount = 0.00;
+		
+		for(int i = 0; i < flights.size(); i++){
+			Flight f = flights.get(i);
+			totalAmount += f.getOneWayPrice() * numberOfTicket * discount[i];
+		}
+		
+		return totalAmount;
 	}
 
 }
