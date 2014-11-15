@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.View;
 import CS3343.AirlineTicketOrdering.View.Impl.InputDestinationView;
@@ -33,11 +34,15 @@ public class InputDestinationViewTest {
 	public void displayTest() throws IOException {	
 		
 		BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
-		Mockito.when(bufferedReader.readLine()).thenReturn("2014-01-01").thenReturn("Hong Kong").thenReturn("nTaiwan");
+		Mockito.when(bufferedReader.readLine()).thenReturn("2014-01-01").thenReturn("Hong Kong").thenReturn("Taiwan");
 		
 		View inputDestinationView = new InputDestinationView(bufferedReader);
 		inputDestinationView.display(session);
 		assertThat("Please Input your depature date, depature and destination to search\nDate (YYYY-MM-DD): Depature: Destination: ", is(outContent.toString()));
+		
+		assertThat(((String)session.getAttribute("deapture")),is("Hong Kong"));
+		assertThat(((String)session.getAttribute("destination")),is("Taiwan"));
+		assertThat(((String)session.getAttribute("depatureDate")),is("2014-01-01"));
 	}
 
 }

@@ -25,5 +25,6 @@ public class EnquireCreditCardView implements View {
 		creditCard.setCreditCardType(bufferedReader.readLine());
 		System.out.print("Number: ");
 		creditCard.setCreditCardNumber(bufferedReader.readLine());
+		response.setAttribute("creditCard", creditCard);
 	}
 }
