@@ -17,7 +17,7 @@ public class CreditCardAirlineDiscountChecker implements DiscountChecker {
 	public double check() {
 		// TODO Auto-generated method stub
 		String company = this.flight.getAirline();
-		if(company.equals(AirlineCompanyShort.CPA)){
+		if(company.equals(AirlineCompanyShort.CPA.value())){
 			switch(card.getCreditCardType()){
 				case "VISA":
 					return 0.8;
@@ -26,7 +26,7 @@ public class CreditCardAirlineDiscountChecker implements DiscountChecker {
 				case "American Express":
 					return 0.75;
 			}
-		}else if(company.equals(AirlineCompanyShort.CRK)){
+		}else if(company.equals(AirlineCompanyShort.CRK.value())){
 			switch(card.getCreditCardType()){
 				case "VISA":
 					return 0.9;
@@ -35,7 +35,7 @@ public class CreditCardAirlineDiscountChecker implements DiscountChecker {
 				case "American Express":
 					return 0.85;
 			}
-		}else if(company.equals(AirlineCompanyShort.HDA)){
+		}else if(company.equals(AirlineCompanyShort.HDA.value())){
 			switch(card.getCreditCardType()){
 				case "VISA":
 					return 0.8;

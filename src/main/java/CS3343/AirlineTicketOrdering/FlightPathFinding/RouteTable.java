@@ -31,16 +31,17 @@ public class RouteTable {
 		r.setDeparture(depart);
 		r.setDestination(dest);
 		
-		//Data for testing, should use the real data in CSV file.
+		/* Data for testing, should use the real data in CSV file.
 		List<Flight> fList = fetchAllFlights();
-		//Data for testing, should use the real data in CSV file.
 		
 		FlightListFilter flf = new FlightListFilter(fList);
 		r.setFlights(flf.filterByDepartNDest(depart, dest));
+		Data for testing, should use the real data in CSV file. */
 		
 		routeList.add(r);
 	}
 	
+	/*
 	private List<Flight> fetchAllFlights(){
 		List<Flight> flightList = new ArrayList<Flight>();
 		
@@ -87,7 +88,8 @@ public class RouteTable {
 		flightList.add(f6);
 		
 		return flightList;
-	}
+	} 
+	*/
 	
 	public ArrayList<Route> getRouteList() {
 		return routeList;
