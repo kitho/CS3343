@@ -76,7 +76,7 @@ public class AirlineCalculatorTest {
 		discounts = ccadc.check(fList, card);
 		totalAmount = sC.calculate(fList, 1, discounts);
 
-		//Airline - VISA's discount: CP - 0.8, Ca - 0.9, HKA - 0.8
+		//Airline - VISA's discount: CP - 0.8, CA - 0.9, HKA - 0.8
 		expectedResult += 2000 * 1 * 0.8;	//CP
 		expectedResult += 1700 * 1 * 0.9;	//CA
 		expectedResult += 1800 * 1 * 0.8;	//HKA
@@ -101,10 +101,10 @@ public class AirlineCalculatorTest {
 		discounts = ccadc.check(fList, card);
 		totalAmount = sC.calculate(fList, 1, discounts);
 
-		//Airline - MasterCard's discount: CPA - 0.85, CRK - 0.9, HDA - 0.8
-		expectedResult += 2000 * 1 * 0.85;	//CPA
-		expectedResult += 1700 * 1 * 0.9;	//CRK
-		expectedResult += 1800 * 1 * 0.8;	//HDA
+		//Airline - Master Card's discount: CP - 0.85, CA - 0.9, HKA - 0.8
+		expectedResult += 2000 * 1 * 0.85;	//CP
+		expectedResult += 1700 * 1 * 0.9;	//CA
+		expectedResult += 1800 * 1 * 0.8;	//HKA
 		assertThat(expectedResult, is(totalAmount));
 	}
 	
@@ -126,10 +126,10 @@ public class AirlineCalculatorTest {
 		discounts = ccadc.check(fList, card);
 		totalAmount = sC.calculate(fList, 1, discounts);
 
-		//Airline - AmericanExpress's discount: CPA - 0.75, CRK - 0.85, HDA - 0.7
-		expectedResult += 2000 * 1 * 0.75;	//CPA
-		expectedResult += 1700 * 1 * 0.85;	//CRK
-		expectedResult += 1800 * 1 * 0.7;	//HDA
+		//Airline - American Express's discount: CP - 0.75, CA - 0.85, HKA - 0.7
+		expectedResult += 2000 * 1 * 0.75;	//CP
+		expectedResult += 1700 * 1 * 0.85;	//CA
+		expectedResult += 1800 * 1 * 0.7;	//HKA
 		assertThat(expectedResult, is(totalAmount));
 	}
 	
@@ -151,10 +151,10 @@ public class AirlineCalculatorTest {
 		discounts = ccadc.check(fList, card);
 		totalAmount = sC.calculate(fList, 3, discounts);
 
-		//Airline - VISA's discount: CPA - 0.8, CRK - 0.9, HDA - 0.8
-		expectedResult += 2000 * 3 * 0.8;	//CPA
-		expectedResult += 1700 * 3 * 0.9;	//CRK
-		expectedResult += 1800 * 3 * 0.8;	//HDA
+		//Airline - VISA's discount: CP - 0.8, CA - 0.9, HKA - 0.8
+		expectedResult += 2000 * 3 * 0.8;	//CP
+		expectedResult += 1700 * 3 * 0.9;	//CA
+		expectedResult += 1800 * 3 * 0.8;	//HKA
 		assertThat(expectedResult, is(totalAmount));
 	}
 	
@@ -176,10 +176,10 @@ public class AirlineCalculatorTest {
 		discounts = ccadc.check(fList, card);
 		totalAmount = sC.calculate(fList, 3, discounts);
 
-		//Airline - MasterCard's discount: CPA - 0.85, CRK - 0.9, HDA - 0.8
-		expectedResult += 2000 * 3 * 0.85;	//CPA
-		expectedResult += 1700 * 3 * 0.9;	//CRK
-		expectedResult += 1800 * 3 * 0.8;	//HDA
+		//Airline - Master Card's discount: CP - 0.85, CA - 0.9, HKA - 0.8
+		expectedResult += 2000 * 3 * 0.85;	//CP
+		expectedResult += 1700 * 3 * 0.9;	//CA
+		expectedResult += 1800 * 3 * 0.8;	//HKA
 		assertThat(expectedResult, is(totalAmount));
 	}
 	
@@ -201,10 +201,10 @@ public class AirlineCalculatorTest {
 		discounts = ccadc.check(fList, card);
 		totalAmount = sC.calculate(fList, 3, discounts);
 
-		//Airline - AmericanExpress's discount: CPA - 0.75, CRK - 0.85, HDA - 0.7
-		expectedResult += 2000 * 3 * 0.75;	//CPA
-		expectedResult += 1700 * 3 * 0.85;	//CRK
-		expectedResult += 1800 * 3 * 0.7;	//HDA
+		//Airline - American Express's discount: CP - 0.75, CA - 0.85, HKA - 0.7
+		expectedResult += 2000 * 3 * 0.75;	//CP
+		expectedResult += 1700 * 3 * 0.85;	//CA
+		expectedResult += 1800 * 3 * 0.7;	//HKA
 		assertThat(expectedResult, is(totalAmount));
 	}
 	
@@ -226,10 +226,10 @@ public class AirlineCalculatorTest {
 		discounts = ccadc.check(fList, card);
 		totalAmount = sC.calculate(fList, 5, discounts);
 
-		//Airline - VISA's discount: CPA - 0.8, CRK - 0.9, HDA - 0.8
-		expectedResult += 2000 * 5 * 0.8;	//CPA
-		expectedResult += 1700 * 5 * 0.9;	//CRK
-		expectedResult += 1800 * 5 * 0.8;	//HDA
+		//Airline - VISA's discount: CP - 0.8, CA - 0.9, HKA - 0.8
+		expectedResult += 2000 * 5 * 0.8;	//CP
+		expectedResult += 1700 * 5 * 0.9;	//CA
+		expectedResult += 1800 * 5 * 0.8;	//HKA
 		assertThat(expectedResult, is(totalAmount));
 	}
 	
@@ -251,10 +251,10 @@ public class AirlineCalculatorTest {
 		discounts = ccadc.check(fList, card);
 		totalAmount = sC.calculate(fList, 5, discounts);
 
-		//Airline - MasterCard's discount: CPA - 0.85, CRK - 0.9, HDA - 0.8
-		expectedResult += 2000 * 5 * 0.85;	//CPA
-		expectedResult += 1700 * 5 * 0.9;	//CRK
-		expectedResult += 1800 * 5 * 0.8;	//HDA
+		//Airline - Master Card's discount: CP - 0.85, CA - 0.9, HKA - 0.8
+		expectedResult += 2000 * 5 * 0.85;	//CP
+		expectedResult += 1700 * 5 * 0.9;	//CA
+		expectedResult += 1800 * 5 * 0.8;	//HKA
 		assertThat(expectedResult, is(totalAmount));
 	}
 	
@@ -276,10 +276,10 @@ public class AirlineCalculatorTest {
 		discounts = ccadc.check(fList, card);
 		totalAmount = sC.calculate(fList, 5, discounts);
 
-		//Airline - AmericanExpress's discount: CPA - 0.75, CRK - 0.85, HDA - 0.7
-		expectedResult += 2000 * 5 * 0.75;	//CPA
-		expectedResult += 1700 * 5 * 0.85;	//CRK
-		expectedResult += 1800 * 5 * 0.7;	//HDA
+		//Airline - American Express's discount: CP - 0.75, CA - 0.85, HKA - 0.7
+		expectedResult += 2000 * 5 * 0.75;	//CP
+		expectedResult += 1700 * 5 * 0.85;	//CA
+		expectedResult += 1800 * 5 * 0.7;	//HKA
 		assertThat(expectedResult, is(totalAmount));
 	}
 }
