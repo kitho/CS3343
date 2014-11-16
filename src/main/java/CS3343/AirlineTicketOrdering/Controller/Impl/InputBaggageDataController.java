@@ -33,7 +33,10 @@ public class InputBaggageDataController extends AirlineTicketOrderingController 
 		BaggagePlan plan = baggageQuery.findPlanByLocation(deapture, destination);
 		if(plan != null)
 			session.setAttribute("baggagePlan", plan);
+		
 		view.display(session);
-		next();
+		
+		if(plan != null)
+			next();
 	}
 }
