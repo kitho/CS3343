@@ -155,13 +155,15 @@ public class BaggageCalculationControllerTest {
 		baggagePlan.setExtraExtraPetFeeForLevel(extraPetFeeForLevels);
 		baggagePlan.setExtraExtraPetFeeCondtion(extraPetFeeCondtions);
 
-		unitNumForBaggage.put("KG", 20f);
-		unitNumForBaggage.put("Piece", 20f);
-		unitNumForBaggage.put("Inch", 20f);
+		
 	}
 	
 	@Test
-	public void testExecute() throws Exception {
+	public void testExecuteWithPositive() throws Exception {
+		unitNumForBaggage.put("KG", 20f);
+		unitNumForBaggage.put("Piece", 20f);
+		unitNumForBaggage.put("Inch", 20f);
+		
 		Session session = mock(Session.class);
 		when(session.getAttribute("baggagePlan")).thenReturn(baggagePlan);
 		when(session.getAttribute("flightClass")).thenReturn("Economy Class");
@@ -191,6 +193,50 @@ public class BaggageCalculationControllerTest {
 		verify(session, times(1)).setAttribute("petFee", -600f);
 		verify(session, times(1)).setAttribute("extraPetFee", 0f);
 		verify(session, times(1)).setAttribute("totalFee", -600f);
+		verify(view, times(1)).display(session);
+		verify(next,times(1)).execute();
+	}
+	
+	@Test
+	public void testExecuteWithNegative() throws Exception {
+		unitNumForBaggage.put("KG", -20f);
+		unitNumForBaggage.put("Piece", -20f);
+		unitNumForBaggage.put("Inch", -20f);
+		
+		Map<String, Float> extraFeePerUnit = new HashMap<String, Float>();
+		extraFeePerUnit.put("KG", -100f);
+		
+		baggagePlan.setExtraFeePerUnit(extraFeePerUnit);
+		
+		Session session = mock(Session.class);
+		when(session.getAttribute("baggagePlan")).thenReturn(baggagePlan);
+		when(session.getAttribute("flightClass")).thenReturn("Economy Class");
+		when(session.getAttribute("numberOfTicket")).thenReturn(1);
+		when(session.getAttribute("unitNumForBaggage")).thenReturn(unitNumForBaggage);
+		when(session.getAttribute("unitNumForPet")).thenReturn(unitNumForBaggage);
+		when(session.getAttribute("sportingEquipments")).thenReturn(new ArrayList<String>());
+		
+		View view = mock(View.class);
+		
+		AirlineTicketOrderingController next = mock(AirlineTicketOrderingController.class); 
+		AirlineTicketOrderingController baggageCalculationController = new BaggageCalculationController(session, view);
+		
+		baggageCalculationController.setNext(next);
+		baggageCalculationController.execute();
+		
+		Map<String, Float> expectedOrgFreeUnit = new HashMap<String, Float>();
+		expectedOrgFreeUnit.put("KG", 20f);
+		
+		Map<String, Float> expectedRemainingFreeUnit = new HashMap<String, Float>();
+		expectedRemainingFreeUnit.put("KG", 40f);
+		
+		verify(session, times(1)).setAttribute("orgFreeUnit", expectedOrgFreeUnit);
+		verify(session, times(1)).setAttribute("remainingFreeUnit", expectedRemainingFreeUnit);
+		verify(session, times(1)).setAttribute("basicBaggageFee", -4000f);
+		verify(session, times(1)).setAttribute("extraBaggageFee", 0f);
+		verify(session, times(1)).setAttribute("petFee", -600f);
+		verify(session, times(1)).setAttribute("extraPetFee", 0f);
+		verify(session, times(1)).setAttribute("totalFee", -4600f);
 		verify(view, times(1)).display(session);
 		verify(next,times(1)).execute();
 	}
