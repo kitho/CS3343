@@ -24,7 +24,6 @@ public class CreditCardAirlineDiscountChecker implements CreditCardDiscountCheck
 		for(int i = 0; i < flights.size(); i++){
 			discounts[i] = check(flights.get(i),card);
 		}
-		
 		return discounts;
 	}
 	

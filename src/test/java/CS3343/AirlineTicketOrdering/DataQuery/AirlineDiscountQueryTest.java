@@ -52,7 +52,7 @@ public class AirlineDiscountQueryTest {
 		
 		AirlineDiscount ad2 = new AirlineDiscount();
 		ad2.setAirline("Cathay Pacific Airways");
-		ad2.setCreditCardType("Master CArd");
+		ad2.setCreditCardType("Master Card");
 		ad2.setDiscount(0.85);
 		
 		AirlineDiscount ad3 = new AirlineDiscount();
