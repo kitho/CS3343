@@ -7,7 +7,11 @@ import java.util.List;
 import org.junit.Test;
 
 import CS3343.AirlineTicketOrdering.Calculator.Calculator;
+import CS3343.AirlineTicketOrdering.Calculator.Impl.AirlineCalculator;
 import CS3343.AirlineTicketOrdering.Controller.AirlineTicketOrderingController;
+import CS3343.AirlineTicketOrdering.CreditCardTools.CreditCardDiscountChecker;
+import CS3343.AirlineTicketOrdering.CreditCardTools.Impl.CreditCardAirlineDiscountChecker;
+import CS3343.AirlineTicketOrdering.DataQuery.AirlineDiscountQuery;
 import CS3343.AirlineTicketOrdering.Discount.Discount;
 import CS3343.AirlineTicketOrdering.Model.CreditCard;
 import CS3343.AirlineTicketOrdering.Model.Flight;
@@ -20,8 +24,9 @@ public class OrderConfirmationControllerTest {
 	public void testExecute() throws Exception {
 		Session session = mock(Session.class);
 		View view = mock(View.class);
-		Discount discount = mock(Discount.class);
-		Calculator calculator= mock(Calculator.class);
+		CreditCardDiscountChecker ccadc = mock(CreditCardAirlineDiscountChecker.class);
+		AirlineCalculator calculator= mock(AirlineCalculator.class);
+		AirlineDiscountQuery adQuery = mock(AirlineDiscountQuery.class);
 		CreditCard creditCard = mock(CreditCard.class);
 		List<Flight> flights = mock(List.class);
 		int numberOfTicket = 1;
@@ -31,11 +36,11 @@ public class OrderConfirmationControllerTest {
 		when(session.getAttribute("creditCard")).thenReturn(creditCard);
 		when(session.getAttribute("flights")).thenReturn(flights);
 		when(session.getAttribute("numberOfTicket")).thenReturn(numberOfTicket);
-		when(discount.getDiscount(anyList(), any(CreditCard.class))).thenReturn(discountOff);
+		when(ccadc.check(anyList(), any(CreditCard.class))).thenReturn(discountOff);
 		when(calculator.calculate(anyList(), anyInt(), any(double[].class))).thenReturn(totalPrice);
 		
 		AirlineTicketOrderingController next = mock(AirlineTicketOrderingController.class); 
-		AirlineTicketOrderingController orderConfirmationController = new OrderConfirmationController(session, view, discount, calculator);
+		AirlineTicketOrderingController orderConfirmationController = new OrderConfirmationController(session, view, calculator,adQuery);
 		orderConfirmationController.setNext(next);
 		orderConfirmationController.execute();
 		

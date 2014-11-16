@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
-import CS3343.AirlineTicketOrdering.Calculator.Impl.StubCalculator;
+import CS3343.AirlineTicketOrdering.Calculator.Impl.AirlineCalculator;
 import CS3343.AirlineTicketOrdering.Controller.AirlineTicketOrderingController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.BaggageCalculationController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.EnquireCreditCardController;
@@ -19,13 +19,15 @@ import CS3343.AirlineTicketOrdering.Controller.Impl.OrderConfirmationController;
 import CS3343.AirlineTicketOrdering.DataQuery.BaggageQuery;
 import CS3343.AirlineTicketOrdering.DataQuery.FlightQuery;
 import CS3343.AirlineTicketOrdering.DataQuery.OrderQuery;
+import CS3343.AirlineTicketOrdering.DataQuery.AirlineDiscountQuery;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.AirlineCompanyCSVFileReader;
+import CS3343.AirlineTicketOrdering.DataReader.Impl.AirlineDiscountCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.BaggagePlanCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.OrderCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.OrderCSVFileWriter;
-import CS3343.AirlineTicketOrdering.Discount.Impl.StubDiscount;
+import CS3343.AirlineTicketOrdering.Discount.Impl.AirlineDiscount;
 import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.Impl.BaggageFeeCalculationView;
 import CS3343.AirlineTicketOrdering.View.Impl.EnquireCreditCardView;
@@ -66,7 +68,8 @@ public class AirlineTicketOrderingSystem {
 					new BaggageQuery(new BaggagePlanCSVFileReader(projectPath + CSVFile.BAGGAGEPLANCSV.value())));
 			AirlineTicketOrderingController baggageCalculationController = new BaggageCalculationController(session, new BaggageFeeCalculationView(bufferedReader));
 			AirlineTicketOrderingController enquireCreditCardController = new EnquireCreditCardController(session, new EnquireCreditCardView(bufferedReader));
-			AirlineTicketOrderingController orderConfirmationController = new OrderConfirmationController(session, new OrderConfirmationView(bufferedReader), new StubDiscount(), new StubCalculator());
+			AirlineTicketOrderingController orderConfirmationController = new OrderConfirmationController(session, new OrderConfirmationView(bufferedReader), new AirlineCalculator(),
+					new AirlineDiscountQuery(new AirlineDiscountCSVFileReader(projectPath + CSVFile.AIRLINEDISCOUNTCSV.value())));
 			AirlineTicketOrderingController orderCompletionController = new OrderCompletionController(session, 
 					new OrderCompletionView(),
 					new OrderQuery(new OrderCSVFileReader(projectPath + CSVFile.ORDERCSV.value()),

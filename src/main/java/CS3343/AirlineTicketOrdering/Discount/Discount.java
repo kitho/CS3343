@@ -7,7 +7,6 @@ import CS3343.AirlineTicketOrdering.Model.Flight;
 
 public interface Discount {
 	
-	public double[] getDiscount(List<Flight> flights, CreditCard creditCard);
-	public double getDiscount(Flight flight, CreditCard creditCard);
+	public double getDiscount();
 
 }

@@ -3,7 +3,6 @@ package CS3343.AirlineTicketOrdering.FlightPathFinding;
 import java.util.ArrayList;
 import java.util.List;
 
-import CS3343.AirlineTicketOrdering.AirlineCompany.AirlineCompanyShort;
 import CS3343.AirlineTicketOrdering.Filter.FlightListFilter;
 import CS3343.AirlineTicketOrdering.Model.*;
 

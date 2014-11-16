@@ -12,6 +12,8 @@ import org.junit.Test;
 
 import CS3343.AirlineTicketOrdering.Calculator.Calculator;
 import CS3343.AirlineTicketOrdering.Controller.AirlineTicketOrderingController;
+import CS3343.AirlineTicketOrdering.CreditCardTools.CreditCardDiscountChecker;
+import CS3343.AirlineTicketOrdering.CreditCardTools.Impl.CreditCardAirlineDiscountChecker;
 import CS3343.AirlineTicketOrdering.DataQuery.OrderQuery;
 import CS3343.AirlineTicketOrdering.Discount.Discount;
 import CS3343.AirlineTicketOrdering.Model.CreditCard;
@@ -33,7 +35,7 @@ public class OrderCompletionControllerTest {
 	public void testExecuteWithAnsYes() throws Exception {
 		Session session = mock(Session.class);
 		View view = mock(View.class);
-		Discount discount = mock(Discount.class);
+		CreditCardDiscountChecker ccadc = mock(CreditCardAirlineDiscountChecker.class);
 		Calculator calculator= mock(Calculator.class);
 		CreditCard creditCard = mock(CreditCard.class);
 		OrderQuery orderQuery = mock(OrderQuery.class);
@@ -60,7 +62,7 @@ public class OrderCompletionControllerTest {
 		when(session.getAttribute("flights")).thenReturn(flights);
 		when(session.getAttribute("numberOfTicket")).thenReturn(numberOfTicket);
 		when(session.getAttribute("confirmed")).thenReturn("Yes");
-		when(discount.getDiscount(anyList(), any(CreditCard.class))).thenReturn(discountOff);
+		when(ccadc.check(anyList(), any(CreditCard.class))).thenReturn(discountOff);
 		when(calculator.calculate(anyList(), anyInt(), any(double[].class))).thenReturn(totalPrice);
 		when(orderQuery.getMaxOrderId()).thenReturn(0);
 		
@@ -81,7 +83,7 @@ public class OrderCompletionControllerTest {
 	public void testExecuteWithAnsNo() throws Exception {
 		Session session = mock(Session.class);
 		View view = mock(View.class);
-		Discount discount = mock(Discount.class);
+		CreditCardDiscountChecker ccadc = mock(CreditCardAirlineDiscountChecker.class);
 		Calculator calculator= mock(Calculator.class);
 		CreditCard creditCard = mock(CreditCard.class);
 		OrderQuery orderQuery = mock(OrderQuery.class);
@@ -108,7 +110,7 @@ public class OrderCompletionControllerTest {
 		when(session.getAttribute("flights")).thenReturn(flights);
 		when(session.getAttribute("numberOfTicket")).thenReturn(numberOfTicket);
 		when(session.getAttribute("confirmed")).thenReturn("No");
-		when(discount.getDiscount(anyList(), any(CreditCard.class))).thenReturn(discountOff);
+		when(ccadc.check(anyList(), any(CreditCard.class))).thenReturn(discountOff);
 		when(calculator.calculate(anyList(), anyInt(), any(double[].class))).thenReturn(totalPrice);
 		when(orderQuery.getMaxOrderId()).thenReturn(0);
 		

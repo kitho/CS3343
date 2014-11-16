@@ -5,7 +5,7 @@ import java.util.List;
 import CS3343.AirlineTicketOrdering.Calculator.Calculator;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 
-public class StubCalculator implements Calculator {
+public class AirlineCalculator implements Calculator {
 
 	public double calculate(List<Flight> flights, int numberOfTicket,
 			double[] discount) {
@@ -15,7 +15,6 @@ public class StubCalculator implements Calculator {
 			Flight f = flights.get(i);
 			totalAmount += f.getOneWayPrice() * numberOfTicket * discount[i];
 		}
-		
 		return totalAmount;
 	}
 
