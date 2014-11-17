@@ -87,25 +87,33 @@ public class PathFinding {
 
 							FlightPath subFPath = new FlightPath();
 							ArrayList<Route> tempRoutes = fPath.getFlightList();
+							boolean chk = true;
+							
 							for (int x = 0; x < tempRoutes.size(); x++){
-
 								if (!tempRoutes.get(x).getDestination().equals(to))
 									subFPath.addFlighPath(tempRoutes.get(x));
-
 							}
-							subFPath.addFlighPath(DeptList.get(i));
-							ArrayList<FlightPath> subList = new ArrayList<FlightPath>();
-							subList.add(subFPath);
-							ArrayList<FlightPath> subResultList = getIndirectFlight(subList);
-							
-							//resultRouteList.get(z).getFlightList().get(z);
-							
-							ArrayList<Route> route = fPath.getFlightList();
-							if (subResultList.size() == 0 && !route.get(route.size()-1).getDestination().equals(to))
-								resultRouteList.remove(fPath);
-
-							for (int j = 0; j < subResultList.size(); j++){
-								resultRouteList.add(subResultList.get(j));
+							for (int x = 0; x < tempRoutes.size(); x++){
+								Route r = DeptList.get(i);
+								if (r.getDestination().equals(tempRoutes.get(x).getDeparture()) ||
+									r.getDestination().equals(tempRoutes.get(x).getDestination()))
+									chk = false;
+							}
+							if (chk){
+								subFPath.addFlighPath(DeptList.get(i));
+								ArrayList<FlightPath> subList = new ArrayList<FlightPath>();
+								subList.add(subFPath);
+								ArrayList<FlightPath> subResultList = getIndirectFlight(subList);
+								
+								//resultRouteList.get(z).getFlightList().get(z);
+								
+								ArrayList<Route> route = fPath.getFlightList();
+								if (subResultList.size() == 0 && !route.get(route.size()-1).getDestination().equals(to))
+									resultRouteList.remove(fPath);
+	
+								for (int j = 0; j < subResultList.size(); j++){
+									resultRouteList.add(subResultList.get(j));
+								}
 							}
 						}
 						

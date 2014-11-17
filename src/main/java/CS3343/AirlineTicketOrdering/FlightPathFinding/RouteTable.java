@@ -22,6 +22,8 @@ public class RouteTable {
 		addRouteRow("Tokyo", "USA",10123);
 		addRouteRow("USA", "England",7575);
 		addRouteRow("Taiwan", "England",9208);
+		addRouteRow("Singapore", "Hong Kong",1000);
+
 		
 	}
 	
