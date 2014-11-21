@@ -21,6 +21,7 @@ public class RouteQuery {
 				Route temp = new Route();
 				temp.setDeparture(flight.getDepature());
 				temp.setDestination(flight.getDestination());
+				temp.addFlight(flight);
 				routes.add(temp);
 			}
 		}
