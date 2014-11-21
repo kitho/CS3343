@@ -32,4 +32,8 @@ public class Route {
 	public void setDistance(int distance) {
 		this.distance = distance;
 	}
+	
+	public void addFlight(Flight flight){
+		flights.add(flight);
+	}
 }
