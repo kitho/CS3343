@@ -26,7 +26,8 @@ public class OrderCSVFileReader extends CSVFileReader<Order> {
 		while ((line = bufferedReader.readLine()) != null) {
 			orders.add(parser.parseString(line));
 		}
-
+		bufferedReader.close();
+		fileReader.close();
 		return orders;
 	}
 

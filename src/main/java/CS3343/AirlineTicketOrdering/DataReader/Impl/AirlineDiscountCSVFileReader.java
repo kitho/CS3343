@@ -28,7 +28,8 @@ public class AirlineDiscountCSVFileReader extends CSVFileReader<AirlineDiscount>
 			AirlineDiscount airlineDiscount = parser.parseString(line);
 			airlineDiscounts.add(airlineDiscount);
 		}
-		
+		bufferedReader.close();
+		fileReader.close();
 		return airlineDiscounts;
 	}
 }

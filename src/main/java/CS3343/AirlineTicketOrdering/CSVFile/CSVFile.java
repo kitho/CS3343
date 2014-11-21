@@ -4,7 +4,7 @@ public enum CSVFile {
 	AIRLINECOMPANYCSV("/datasource/airlineCompany.csv")
 	, FLIGHTCSV("/datasource/flight.csv")
 	, BAGGAGEPLANCSV("/datasource/BaggagePlan.csv")
-	, ORDERCSV("/datasource/BaggagePlan.csv")
+	, ORDERCSV("/datasource/order.csv")
 	, AIRLINEDISCOUNTCSV("/datasource/airlineDiscount.csv");
 	
 	private String value;

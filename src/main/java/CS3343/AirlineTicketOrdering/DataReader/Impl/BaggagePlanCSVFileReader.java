@@ -30,6 +30,8 @@ public class BaggagePlanCSVFileReader extends CSVFileReader<BaggagePlan> {
 				baggagePlanList.add(bp);
 			}
 		}
+		bufferedReader.close();
+		fileReader.close();
 		return baggagePlanList;
 	}
 

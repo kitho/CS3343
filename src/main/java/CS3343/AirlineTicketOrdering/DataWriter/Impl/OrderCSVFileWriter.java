@@ -23,6 +23,8 @@ public class OrderCSVFileWriter extends CSVFileWriter<List<Order>> {
 			bufferedWriter.write(dataString);
 			bufferedWriter.newLine();
 		}
+		bufferedWriter.close();
+		fileWriter.close();
 	}
 
 }

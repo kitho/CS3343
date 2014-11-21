@@ -23,6 +23,8 @@ public class FlightCSVFileWriter extends CSVFileWriter<List<Flight>> {
 			bufferedWriter.write(dataString);
 			bufferedWriter.newLine();
 		}
+		bufferedWriter.close();
+		fileWriter.close();
 	}
 
 }

@@ -26,7 +26,8 @@ public class AirlineCompanyCSVFileReader extends CSVFileReader<AirlineCompany> {
 			AirlineCompany airlineCompany = parser.parseString(line);
 			airlineCompanies.add(airlineCompany);
 		}
-
+		bufferedReader.close();
+		fileReader.close();
 		return airlineCompanies;
 	}
 
