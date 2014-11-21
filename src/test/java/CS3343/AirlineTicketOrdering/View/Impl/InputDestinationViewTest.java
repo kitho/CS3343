@@ -38,8 +38,11 @@ public class InputDestinationViewTest {
 		
 		View inputDestinationView = new InputDestinationView(bufferedReader);
 		inputDestinationView.display(session);
-		assertThat("Please Input your depature date, depature and destination to search\nDate (YYYY-MM-DD): Depature: Destination: ", is(outContent.toString()));
-		
+
+		boolean checkOutPrint = outContent.toString().equals("Please Input your depature date, depature and destination to search\nDate (YYYY-MM-DD): Depature: Destination: ") || 
+								outContent.toString().equals("Please Input your depature date, depature and destination to search\r\nDate (YYYY-MM-DD): Depature: Destination: ");
+
+		assertThat(checkOutPrint, is(true));
 		assertThat(((String)session.getAttribute("deapture")),is("Hong Kong"));
 		assertThat(((String)session.getAttribute("destination")),is("Taiwan"));
 		assertThat(((String)session.getAttribute("depatureDate")),is("2014-01-01"));

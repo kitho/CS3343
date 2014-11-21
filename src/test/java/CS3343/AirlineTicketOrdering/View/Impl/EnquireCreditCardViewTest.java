@@ -36,7 +36,11 @@ public class EnquireCreditCardViewTest {
 		Mockito.when(bufferedReader.readLine()).thenReturn("HSBC").thenReturn("VISA").thenReturn("1234-1234-1234-1234");
 
 		enquireCreditCardView.display(session);
-		assertThat("Please input your credit card information\nBank: Type: Number: ", is(outContent.toString()));
+		
+		boolean checkOutPrint = outContent.toString().equals("Please input your credit card information\r\nBank: Type: Number: ") || 
+								outContent.toString().equals("Please input your credit card information\nBank: Type: Number: ");
+		
+		assertThat(checkOutPrint, is(true));
 		assertThat(((CreditCard)session.getAttribute("creditCard")).getBank(),is("HSBC"));
 		assertThat(((CreditCard)session.getAttribute("creditCard")).getCreditCardType(),is("VISA"));
 		assertThat(((CreditCard)session.getAttribute("creditCard")).getCreditCardNumber(),is("1234-1234-1234-1234"));

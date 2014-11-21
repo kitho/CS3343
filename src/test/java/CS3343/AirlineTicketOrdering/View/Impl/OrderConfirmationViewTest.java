@@ -1,3 +1,4 @@
+
 package CS3343.AirlineTicketOrdering.View.Impl;
 
 import java.io.BufferedReader;
@@ -64,8 +65,13 @@ public class OrderConfirmationViewTest {
 		Mockito.when(bufferedReader.readLine()).thenReturn("Yes");
 		
 		orderConfirmationView.display(session);
-		assertThat("Here is your order detail:\n==========Payment Method==========\nBank: HSBC\nType: VISA\nNumber: 0000-0000-0000-0000\n\n==========Ticket Information==========\nAirline             FlightNumber             TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\nAirLine             LE1234                   First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n\n======================================\nNumber of Ticket: 1\nTotal Price: 10000.0\n======================================\n\nConfirm to order? (Yes/No)", is(outContent.toString()));
+		boolean checkOutPrint = outContent.toString().equals("Here is your order detail:\n==========Payment Method==========\nBank: HSBC\nType: VISA\nNumber: 0000-0000-0000-0000\n\n==========Ticket Information==========\nAirline             FlightNumber             TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\nAirLine             LE1234                   First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n\n======================================\nNumber of Ticket: 1\nTotal Price: 10000.0\n======================================\n\nConfirm to order? (Yes/No)") || 
+								outContent.toString().equals("Here is your order detail:\r\n==========Payment Method==========\r\nBank: HSBC\r\nType: VISA\r\nNumber: 0000-0000-0000-0000\r\n\n==========Ticket Information==========\r\nAirline             FlightNumber             TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\r\nAirLine             LE1234                   First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\r\n\n======================================\r\nNumber of Ticket: 1\r\nTotal Price: 10000.0\r\n======================================\r\n\nConfirm to order? (Yes/No)");
+
+		assertThat(checkOutPrint, is(true));
 		assertThat((String)session.getAttribute("confirmed"),is("Yes"));
+		
+
 		
 	}
 

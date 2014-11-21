@@ -43,7 +43,11 @@ public class FlightSelectionViewTest {
 		View flightSelectionView = new FlightSelectionView(bufferedReader);
 		
 		flightSelectionView.display(session);
-		assertThat("Not Suitable Flight\n", is(outContent.toString()));
+		
+		boolean checkOutPrint = outContent.toString().equals("Not Suitable Flight\n")||
+								outContent.toString().equals("Not Suitable Flight\r\n");
+		
+		assertThat(checkOutPrint, is(true));
 	}
 	
 	@Test
@@ -67,7 +71,12 @@ public class FlightSelectionViewTest {
 
 		View flightSelectionView = new FlightSelectionView(bufferedReader);
 		flightSelectionView.display(session);
-		assertThat("=====================\nNo.  Airline                       FlightNumber        TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\n0    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n=====================\nPlease select flight: Please input number of tickets that you need: ", is(outContent.toString()));
+		
+		
+		boolean checkOutPrint = outContent.toString().equals("=====================\nNo.  Airline                       FlightNumber        TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\n0    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n=====================\nPlease select flight: Please input number of tickets that you need: ") || 
+								outContent.toString().equals("=====================\r\nNo.  Airline                       FlightNumber        TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\r\n0    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\r\n=====================\r\nPlease select flight: Please input number of tickets that you need: ");
+
+		assertThat(checkOutPrint, is(true));
 		assertThat(((List<Flight>)session.getAttribute("flights")).get(0),is(flight));
 		assertThat(((Integer)session.getAttribute("numberOfTicket")),is(10));
 
@@ -121,7 +130,13 @@ public class FlightSelectionViewTest {
 		
 		View flightSelectionView = new FlightSelectionView(bufferedReader);
 		flightSelectionView.display(session);
-		assertThat("=====================\nNo.  Airline                       FlightNumber        TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\n0    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n1    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n2    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n=====================\nPlease select flight: Please input number of tickets that you need: ", is(outContent.toString()));
+		
+		boolean checkOutPrint = outContent.toString().equals("=====================\nNo.  Airline                       FlightNumber        TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\n0    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n1    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n2    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n=====================\nPlease select flight: Please input number of tickets that you need: ") || 
+				outContent.toString().equals("=====================\r\nNo.  Airline                       FlightNumber        TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\r\n0    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\r\n1    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\r\n2    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\r\n=====================\r\nPlease select flight: Please input number of tickets that you need: ");
+
+
+		
+		assertThat(checkOutPrint, is(true));
 		assertThat(((List<Flight>)session.getAttribute("flights")).get(0),is(flight1));
 		assertThat(((Integer)session.getAttribute("numberOfTicket")),is(2));
 

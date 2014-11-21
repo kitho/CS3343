@@ -45,7 +45,12 @@ public class OrderCompletionViewTest {
 		View orderCompletionView = new OrderCompletionView();
 		
 		orderCompletionView.display(session);
-		assertThat("Order Success \n Order Id: 0", is(outContent.toString()));
+		
+		boolean checkOutPrint = outContent.toString().equals("Order Success \n Order Id: 0") || 
+				outContent.toString().equals("Order Success \r\n Order Id: 0");
+
+		assertThat(checkOutPrint, is(true));
+
 	}
 	
 	@Test
@@ -56,7 +61,10 @@ public class OrderCompletionViewTest {
 		View orderCompletionView = new OrderCompletionView();
 		
 		orderCompletionView.display(session);
-		assertThat("Order Canceled", is(outContent.toString()));
+		
+		boolean checkOutPrint = outContent.toString().equals("Order Canceled");
+
+		assertThat(checkOutPrint, is(true));
 	}
 
 }
