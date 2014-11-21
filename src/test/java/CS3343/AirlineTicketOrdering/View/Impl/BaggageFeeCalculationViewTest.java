@@ -38,8 +38,14 @@ public class BaggageFeeCalculationViewTest {
 		System.setOut(new PrintStream(outContent));
 		View view = new BaggageFeeCalculationView(bufferedReader);
 		view.display(session);
-		assertEquals("\nCalculated Baggage Fee Info:\r\nYou can enjoy       \t{}\r\nYour remaining unit \t{}\r\nBasic Baggage Fee   \t$-100.0\r\nExtra Baggage Fee   \t$-100.0\r\nBasic Pet Fee       \t$-100.0\r\nExtra Pet Fee       \t$-100.0\r\nTotal Baggage Fee   \t$-400.0\r\n",
-				outContent.toString());
+		
+		boolean checkOutPrint = outContent.toString().equals("\nCalculated Baggage Fee Info:\r\nYou can enjoy       \t{}\r\nYour remaining unit \t{}\r\nBasic Baggage Fee   \t$-100.0\r\nExtra Baggage Fee   \t$-100.0\r\nBasic Pet Fee       \t$-100.0\r\nExtra Pet Fee       \t$-100.0\r\nTotal Baggage Fee   \t$-400.0\r\n") || 
+				outContent.toString().equals("\nCalculated Baggage Fee Info:\nYou can enjoy       \t{}\nYour remaining unit \t{}\nBasic Baggage Fee   \t$-100.0\nExtra Baggage Fee   \t$-100.0\nBasic Pet Fee       \t$-100.0\nExtra Pet Fee       \t$-100.0\nTotal Baggage Fee   \t$-400.0\n");
+
+		
+		assertThat(checkOutPrint, is(true));
+
+		
 		outContent.reset();
 	}
 
