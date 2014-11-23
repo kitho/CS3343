@@ -2,6 +2,7 @@ package CS3343.AirlineTicketOrdering.DataQuery;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import CS3343.AirlineTicketOrdering.Model.*;
 
@@ -21,6 +22,7 @@ public class RouteQuery {
 				Route temp = new Route();
 				temp.setDeparture(flight.getDepature());
 				temp.setDestination(flight.getDestination());
+				temp.setDistance((int)(Math.random() * 500 + 1));
 				temp.addFlight(flight);
 				routes.add(temp);
 			}

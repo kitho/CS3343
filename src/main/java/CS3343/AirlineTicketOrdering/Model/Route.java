@@ -8,6 +8,10 @@ public class Route {
 	private ArrayList<Flight> flights;
 	private int distance;
 	
+	public Route (){
+		flights = new ArrayList<Flight>();
+	}
+	
 	public ArrayList<Flight> getFlights() {
 		return flights;
 	}

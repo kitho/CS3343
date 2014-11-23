@@ -10,10 +10,15 @@ public class PathFinding {
 	private RouteTable routeTable;
 	
 	
-	public PathFinding(String f, String t){
-		from = f;
-		to = t;
-		routeTable = new RouteTable();
+	public PathFinding(String from, String to, RouteTable rt){
+		this.from = from;
+		this.to = to;
+		routeTable = rt;
+		ArrayList<Route> routeList = routeTable.getRouteList();
+		System.out.println(from + " : " + to);
+		for (int i = 0; i < routeList.size(); i++){
+			System.out.println(routeList.get(i).getDeparture() + " : "+ routeList.get(i).getDestination());
+		}
 	}
 	
 	public ArrayList<FlightPath> getDirectFlight(){
@@ -40,7 +45,7 @@ public class PathFinding {
 	
 	public ArrayList<FlightPath> getIndirectFlight(ArrayList<FlightPath> resultRouteList){
 		ArrayList<Route> routeList = routeTable.getRouteList();
-		
+		System.out.println("enter pathfinding");
 		if (resultRouteList.size() == 0){
 			ArrayList<Route> DeptList = findRouteDepart(from, routeList);
 			if (DeptList.size() == 0)

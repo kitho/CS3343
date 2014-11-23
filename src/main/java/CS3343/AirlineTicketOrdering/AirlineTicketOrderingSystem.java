@@ -16,10 +16,12 @@ import CS3343.AirlineTicketOrdering.Controller.Impl.InputBaggageDataControllerTe
 import CS3343.AirlineTicketOrdering.Controller.Impl.InputDestinationController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.OrderCompletionController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.OrderConfirmationController;
+import CS3343.AirlineTicketOrdering.Controller.Impl.RouteSelectionController;
 import CS3343.AirlineTicketOrdering.DataQuery.BaggageQuery;
 import CS3343.AirlineTicketOrdering.DataQuery.FlightQuery;
 import CS3343.AirlineTicketOrdering.DataQuery.OrderQuery;
 import CS3343.AirlineTicketOrdering.DataQuery.AirlineDiscountQuery;
+import CS3343.AirlineTicketOrdering.DataQuery.RouteQuery;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.AirlineCompanyCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.AirlineDiscountCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.BaggagePlanCSVFileReader;
@@ -36,6 +38,7 @@ import CS3343.AirlineTicketOrdering.View.Impl.InputBaggageDataView;
 import CS3343.AirlineTicketOrdering.View.Impl.InputDestinationView;
 import CS3343.AirlineTicketOrdering.View.Impl.OrderCompletionView;
 import CS3343.AirlineTicketOrdering.View.Impl.OrderConfirmationView;
+import CS3343.AirlineTicketOrdering.View.Impl.RouteSelectionView;
 
 public class AirlineTicketOrderingSystem {
 	
@@ -75,9 +78,15 @@ public class AirlineTicketOrderingSystem {
 					new OrderQuery(new OrderCSVFileReader(projectPath + CSVFile.ORDERCSV.value()),
 							new OrderCSVFileWriter(projectPath + CSVFile.ORDERCSV.value())));
 			
+			AirlineTicketOrderingController routeSelectionController = new RouteSelectionController(session, new RouteSelectionView(bufferedReader), 
+					new FlightQuery(new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value()), 
+							new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value()), 
+							new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value())), new RouteQuery());
 			
-			inputDestinationController.setNext(flightSelectionController);
-			flightSelectionController.setNext(inputBaggageDataController);
+			
+			inputDestinationController.setNext(routeSelectionController);
+			routeSelectionController.setNext(inputBaggageDataController);
+			//flightSelectionController.setNext(inputBaggageDataController);
 			inputBaggageDataController.setNext(baggageCalculationController);
 			baggageCalculationController.setNext(enquireCreditCardController);
 			enquireCreditCardController.setNext(orderConfirmationController);

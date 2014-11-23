@@ -18,7 +18,7 @@ public class PathFindingTest {
 	
 	@Test
 	public void testDirectFlight1(){
-		PathFinding	pathFinding = new PathFinding("Hong Kong", "Thailand");
+		PathFinding	pathFinding = new PathFinding("Hong Kong", "Thailand", new RouteTable());
 
 		ArrayList<FlightPath> resultRoutes = pathFinding.getDirectFlight();
 		assertThat(resultRoutes.size(), is(1));
@@ -27,7 +27,7 @@ public class PathFindingTest {
 	
 	@Test
 	public void testDirectFlight2(){
-		PathFinding	pathFinding = new PathFinding("Hong Kong", "Tokyo");
+		PathFinding	pathFinding = new PathFinding("Hong Kong", "Tokyo", new RouteTable());
 
 		ArrayList<FlightPath> resultRoutes = pathFinding.getDirectFlight();
 		assertThat(resultRoutes.size(), is(1));
@@ -36,14 +36,14 @@ public class PathFindingTest {
 	
 	@Test
 	public void testDirectFlight3(){
-		PathFinding	pathFinding = new PathFinding("Hong Kong", "Taiwan");
+		PathFinding	pathFinding = new PathFinding("Hong Kong", "Taiwan", new RouteTable());
 		ArrayList<FlightPath> resultRoutes = pathFinding.getDirectFlight();
 		assertThat(resultRoutes.size(), is(1));
 	}	
 	
 	@Test
 	public void testDirectFlight4(){
-		PathFinding	pathFinding = new PathFinding("Tokyo", "Taiwan");
+		PathFinding	pathFinding = new PathFinding("Tokyo", "Taiwan", new RouteTable());
 		ArrayList<FlightPath> resultRoutes = pathFinding.getDirectFlight();
 		assertThat(resultRoutes.size(), is(1));
 		assertThat(resultRoutes.get(0).getFlightList().size(), is(1));
@@ -51,14 +51,14 @@ public class PathFindingTest {
 	
 	@Test
 	public void testDirectFlight5(){
-		PathFinding	pathFinding = new PathFinding("Thailand", "Taiwan");
+		PathFinding	pathFinding = new PathFinding("Thailand", "Taiwan", new RouteTable());
 		ArrayList<FlightPath> resultRoutes = pathFinding.getDirectFlight();
 		assertThat(resultRoutes.size(), is(1));
 	}	
 	
 	@Test
 	public void testDirectFlight6(){
-		PathFinding	pathFinding = new PathFinding("Tokyo", "Taiwan");
+		PathFinding	pathFinding = new PathFinding("Tokyo", "Taiwan", new RouteTable());
 		ArrayList<FlightPath> resultRoutes = pathFinding.getIndirectFlight(new ArrayList<FlightPath>());
 		
 		System.out.println(resultRoutes.size());

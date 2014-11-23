@@ -44,6 +44,10 @@ public class FlightQuery {
 		
 		return flightResultList;
 	}
+	
+	public List<Flight> getFlights(){
+		return flights;
+	}
 
 	public void updateFlightAvailableByFlightAndReducingNumber(Flight targetFlight, int reducingNumber) throws IOException {
 		List<Flight> flights = new ArrayList<Flight>();
