@@ -34,15 +34,13 @@ public class RouteSelectionController extends AirlineTicketOrderingController {
 		System.out.println(routes.size());
 		RouteTable rTable = new RouteTable();
 		rTable.setRouteList(routes);
-		if (((String)session.getAttribute("deapture")).equals("Hong Kong"))
-			System.out.println("same");
-		
-		if (((String)session.getAttribute("destination")).equals("Taiwan"))
-			System.out.println("samesame");
+
 		
 		String departure = session.getAttribute("deapture").toString();
 		String destination = (String)session.getAttribute("destination").toString();
-		PathFinding pFinding = new PathFinding(departure, destination, rTable);
+		
+		System.out.println("departure"+departure);
+		PathFinding pFinding = new PathFinding(departure, "Taiwan", rTable);
 		ArrayList<FlightPath> fPaths = pFinding.getIndirectFlight(new ArrayList<FlightPath>());
 		System.out.println(fPaths.size());
 

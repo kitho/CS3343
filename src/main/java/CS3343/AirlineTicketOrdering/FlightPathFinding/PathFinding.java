@@ -9,16 +9,15 @@ public class PathFinding {
 	private String to;
 	private RouteTable routeTable;
 	
-	
 	public PathFinding(String from, String to, RouteTable rt){
 		this.from = from;
 		this.to = to;
 		routeTable = rt;
-		ArrayList<Route> routeList = routeTable.getRouteList();
-		System.out.println(from + " : " + to);
-		for (int i = 0; i < routeList.size(); i++){
-			System.out.println(routeList.get(i).getDeparture() + " : "+ routeList.get(i).getDestination());
-		}
+		//ArrayList<Route> routeList = routeTable.getRouteList();
+		//System.out.println(from + " : " + to);
+		
+		//System.out.println(routeList.get(i).getDeparture() + " : "+ routeList.get(i).getDestination());
+		
 	}
 	
 	public ArrayList<FlightPath> getDirectFlight(){
@@ -134,7 +133,7 @@ public class PathFinding {
 		ArrayList<Route> resultRoutes = new ArrayList<Route>();
 		for (int i = 0; i < rl.size(); i++){
 			Route tempRoute = rl.get(i);
-			if (tempRoute.getDeparture() == departure)
+			if (tempRoute.getDeparture().equals(departure))
 				resultRoutes.add(tempRoute);
 		}
 		return resultRoutes;		
@@ -144,7 +143,7 @@ public class PathFinding {
 		ArrayList<Route> resultRoutes = new ArrayList<Route>();
 		for (int i = 0; i < rl.size(); i++){
 			Route tempRoute = rl.get(i);
-			if (tempRoute.getDeparture() == destination)
+			if (tempRoute.getDeparture().equals(destination))
 				resultRoutes.add(tempRoute);
 		}
 		return resultRoutes;				
