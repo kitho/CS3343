@@ -39,11 +39,11 @@ public class BaggageFeeCalculationViewTest {
 		View view = new BaggageFeeCalculationView(bufferedReader);
 		view.display(session);
 		
-		boolean checkOutPrint = outContent.toString().equals("\nCalculated Baggage Fee Info:\r\nYou can enjoy       \t{}\r\nYour remaining unit \t{}\r\nBasic Baggage Fee   \t$-100.0\r\nExtra Baggage Fee   \t$-100.0\r\nBasic Pet Fee       \t$-100.0\r\nExtra Pet Fee       \t$-100.0\r\nTotal Baggage Fee   \t$-400.0\r\n") || 
-				outContent.toString().equals("\nCalculated Baggage Fee Info:\nYou can enjoy       \t{}\nYour remaining unit \t{}\nBasic Baggage Fee   \t$-100.0\nExtra Baggage Fee   \t$-100.0\nBasic Pet Fee       \t$-100.0\nExtra Pet Fee       \t$-100.0\nTotal Baggage Fee   \t$-400.0\n");
+		String separator = System.getProperty("line.separator");
 
-		
-		assertThat(checkOutPrint, is(true));
+			
+		assertThat(""+separator+"Calculated Baggage Fee Info:"+separator+"You can enjoy       \t{}"+separator+"Your remaining unit \t{}"+separator+"Basic Baggage Fee   \t$-100.0"+separator+"Extra Baggage Fee   \t$-100.0"+separator+"Basic Pet Fee       \t$-100.0"+separator+"Extra Pet Fee       \t$-100.0"+separator+"Total Baggage Fee   \t$-400.0"+separator+""
+				, is(outContent.toString()));
 
 		
 		outContent.reset();

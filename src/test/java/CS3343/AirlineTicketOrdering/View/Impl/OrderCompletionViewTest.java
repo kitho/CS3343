@@ -28,6 +28,7 @@ public class OrderCompletionViewTest {
 	
 	private ByteArrayOutputStream outContent;
 	private Session session;
+	private String separator = System.getProperty("line.separator");
 	
 	@Before
 	public void setUp() {
@@ -46,10 +47,9 @@ public class OrderCompletionViewTest {
 		
 		orderCompletionView.display(session);
 		
-		boolean checkOutPrint = outContent.toString().equals("Order Success \n Order Id: 0") || 
-				outContent.toString().equals("Order Success \r\n Order Id: 0");
 
-		assertThat(checkOutPrint, is(true));
+		assertThat("Order Success "+separator+" Order Id: 0", 
+				is(outContent.toString()));
 
 	}
 	

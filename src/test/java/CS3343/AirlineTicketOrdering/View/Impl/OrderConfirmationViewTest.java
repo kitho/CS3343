@@ -27,6 +27,8 @@ public class OrderConfirmationViewTest {
 	
 	private ByteArrayOutputStream outContent;
 	private Session session;
+	private String separator = System.getProperty("line.separator");
+
 	
 	@Before
 	public void setUp() {
@@ -65,10 +67,9 @@ public class OrderConfirmationViewTest {
 		Mockito.when(bufferedReader.readLine()).thenReturn("Yes");
 		
 		orderConfirmationView.display(session);
-		boolean checkOutPrint = outContent.toString().equals("Here is your order detail:\n==========Payment Method==========\nBank: HSBC\nType: VISA\nNumber: 0000-0000-0000-0000\n\n==========Ticket Information==========\nAirline             FlightNumber             TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\nAirLine             LE1234                   First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\n\n======================================\nNumber of Ticket: 1\nTotal Price: 10000.0\n======================================\n\nConfirm to order? (Yes/No)") || 
-								outContent.toString().equals("Here is your order detail:\r\n==========Payment Method==========\r\nBank: HSBC\r\nType: VISA\r\nNumber: 0000-0000-0000-0000\r\n\n==========Ticket Information==========\r\nAirline             FlightNumber             TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice\r\nAirLine             LE1234                   First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0\r\n\n======================================\r\nNumber of Ticket: 1\r\nTotal Price: 10000.0\r\n======================================\r\n\nConfirm to order? (Yes/No)");
 
-		assertThat(checkOutPrint, is(true));
+		assertThat("Here is your order detail:"+separator+"==========Payment Method=========="+separator+"Bank: HSBC"+separator+"Type: VISA"+separator+"Number: 0000-0000-0000-0000"+separator+""+separator+"==========Ticket Information=========="+separator+"Airline             FlightNumber             TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice"+separator+"AirLine             LE1234                   First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0"+separator+""+separator+"======================================"+separator+"Number of Ticket: 1"+separator+"Total Price: 10000.0"+separator+"======================================"+separator+""+separator+"Confirm to order? (Yes/No)"
+				, is(outContent.toString()));
 		assertThat((String)session.getAttribute("confirmed"),is("Yes"));
 		
 

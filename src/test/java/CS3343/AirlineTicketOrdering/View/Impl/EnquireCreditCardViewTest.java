@@ -37,10 +37,11 @@ public class EnquireCreditCardViewTest {
 
 		enquireCreditCardView.display(session);
 		
-		boolean checkOutPrint = outContent.toString().equals("Please input your credit card information\r\nBank: Type: Number: ") || 
-								outContent.toString().equals("Please input your credit card information\nBank: Type: Number: ");
+		String separator = System.getProperty("line.separator");
+
 		
-		assertThat(checkOutPrint, is(true));
+		assertThat("Please input your credit card information"+separator+"Bank: Type: Number: " 
+			, is(outContent.toString()));
 		assertThat(((CreditCard)session.getAttribute("creditCard")).getBank(),is("HSBC"));
 		assertThat(((CreditCard)session.getAttribute("creditCard")).getCreditCardType(),is("VISA"));
 		assertThat(((CreditCard)session.getAttribute("creditCard")).getCreditCardNumber(),is("1234-1234-1234-1234"));
