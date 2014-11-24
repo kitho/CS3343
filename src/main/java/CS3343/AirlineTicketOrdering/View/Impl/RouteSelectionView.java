@@ -33,11 +33,20 @@ public class RouteSelectionView implements View{
 		}else{
 			System.out.println("Route List:");
 			for (int i = 0; i < resultRoutes.size(); i++){
+				int distance = 0;
 				ArrayList<Route> routes = resultRoutes.get(i).getFlightList();
-				for (int j = 0; j < routes.size(); j++)
-					System.out.print("route"+ (i+1) +": "+routes.get(j).getDeparture() + " --> " + routes.get(j).getDestination() + ", ");
+				System.out.print("route ("+ (i+1) +"): ");
+				for (int j = 0; j < routes.size(); j++){
+					distance += routes.get(j).getDistance();
+					System.out.print(routes.get(j).getDeparture() + " --> " + routes.get(j).getDestination());
+					if (j != routes.size()-1)
+						System.out.print(", ");
+				}
 				System.out.println();
+				System.out.println("Total bouns miles can earn: " +distance);
+
 			}
+			System.out.print("Please enter backet number to select route:");
 		}
 	}
 }

@@ -15,8 +15,8 @@ public class PathFinding {
 		routeTable = rt;
 		//ArrayList<Route> routeList = routeTable.getRouteList();
 		//System.out.println(from + " : " + to);
-		
-		//System.out.println(routeList.get(i).getDeparture() + " : "+ routeList.get(i).getDestination());
+		//for (int i = 0; i < routeList.size(); i ++)
+			//System.out.println(routeList.get(i).getDeparture() + " : "+ routeList.get(i).getDestination());
 		
 	}
 	
@@ -44,7 +44,7 @@ public class PathFinding {
 	
 	public ArrayList<FlightPath> getIndirectFlight(ArrayList<FlightPath> resultRouteList){
 		ArrayList<Route> routeList = routeTable.getRouteList();
-		System.out.println("enter pathfinding");
+		//System.out.println("enter pathfinding");
 		if (resultRouteList.size() == 0){
 			ArrayList<Route> DeptList = findRouteDepart(from, routeList);
 			if (DeptList.size() == 0)
@@ -54,7 +54,7 @@ public class PathFinding {
 				fPath.addFlighPath(DeptList.get(i));
 
 				if (DeptList.get(i).getDestination().equals(to)){
-					System.out.println("insert" + DeptList.get(i).getDeparture() + DeptList.get(i).getDestination());
+					//System.out.println("insert" + DeptList.get(i).getDeparture() + DeptList.get(i).getDestination());
 					resultRouteList.add(fPath);	
 				}else{
 					ArrayList<FlightPath> subList = new ArrayList<FlightPath>();
@@ -72,7 +72,7 @@ public class PathFinding {
 			for (int z = 0; z < tempResultRouteList.size(); z++){
 				FlightPath fPath = tempResultRouteList.get(z);
 				ArrayList<Route> routeList2 =  fPath.getFlightList();	
-				System.out.println("test " + routeList2.get(routeList2.size()-1).getDestination());
+				//System.out.println("test " + routeList2.get(routeList2.size()-1).getDestination());
 				ArrayList<Route> DeptList = findRouteDepart(routeList2.get(routeList2.size()-1).getDestination(), routeList);
 				if (routeList2.get(routeList2.size()-1).getDestination().equals(to)){
 
@@ -88,7 +88,7 @@ public class PathFinding {
 							//resultRouteList.add(fPath);
 
 						}else{
-
+							
 							FlightPath subFPath = new FlightPath();
 							ArrayList<Route> tempRoutes = fPath.getFlightList();
 							boolean chk = true;

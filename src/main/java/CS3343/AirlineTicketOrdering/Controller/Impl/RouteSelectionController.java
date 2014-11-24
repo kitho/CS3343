@@ -31,16 +31,14 @@ public class RouteSelectionController extends AirlineTicketOrderingController {
 		List<Flight> flights = flightQuery.getFlights();
 
 		ArrayList<Route> routes = (ArrayList<Route>) routeQuery.getAllRoute(flights);
-		System.out.println(routes.size());
 		RouteTable rTable = new RouteTable();
 		rTable.setRouteList(routes);
 
 		
 		String departure = session.getAttribute("deapture").toString();
-		String destination = (String)session.getAttribute("destination").toString();
+		String destination = session.getAttribute("destination").toString();
 		
-		System.out.println("departure"+departure);
-		PathFinding pFinding = new PathFinding(departure, "Taiwan", rTable);
+		PathFinding pFinding = new PathFinding(departure, destination, rTable);
 		ArrayList<FlightPath> fPaths = pFinding.getIndirectFlight(new ArrayList<FlightPath>());
 		System.out.println(fPaths.size());
 

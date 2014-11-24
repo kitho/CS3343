@@ -10,6 +10,7 @@ public class RouteTable {
 	private ArrayList<Route> routeList;
 	public RouteTable(){
 		routeList = new ArrayList<Route>();
+		/*
 		addRouteRow("Hong Kong", "Tokyo",2887);
 		addRouteRow("Tokyo", "Taiwan",2101);
 		addRouteRow("Tokyo", "Thailand",4426);
@@ -21,7 +22,7 @@ public class RouteTable {
 		addRouteRow("Singapore", "Taiwan",3263);
 		addRouteRow("Tokyo", "USA",10123);
 		addRouteRow("Singapore", "Hong Kong",1000);
-		
+		*/
 		
 	}
 	
@@ -45,6 +46,6 @@ public class RouteTable {
 		return routeList;
 	}
 	public void setRouteList(ArrayList<Route> routeList) {
-		//this.routeList = routeList;
+		this.routeList = routeList;
 	}
 }
