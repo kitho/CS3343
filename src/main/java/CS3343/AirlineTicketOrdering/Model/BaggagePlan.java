@@ -32,6 +32,18 @@ public class BaggagePlan {
 		super();
 	}
 
+	/**
+	 * Constructor
+	 * @param unit
+	 * @param freeUnit
+	 * @param extraFreeUnitForSportingEquipments
+	 * @param extraFeePerUnit
+	 * @param extraExtraFeeForLevel
+	 * @param extraExtraFeeCondtion
+	 * @param petFee
+	 * @param extraExtraPetFeeForLevel
+	 * @param extraExtraPetFeeCondtion
+	 */
 	public BaggagePlan(ArrayList<String> unit,
 			Map<String, Map<String, Float>> freeUnit,
 			Map<String, Map<String, Float>> extraFreeUnitForSportingEquipments,

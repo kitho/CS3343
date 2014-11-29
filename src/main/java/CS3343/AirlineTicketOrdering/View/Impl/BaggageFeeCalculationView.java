@@ -3,16 +3,23 @@ package CS3343.AirlineTicketOrdering.View.Impl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Map;
+
 import CS3343.AirlineTicketOrdering.Session.Session;
+import CS3343.AirlineTicketOrdering.Util.LineSeparatorUtil;
 import CS3343.AirlineTicketOrdering.View.View;
 
 public class BaggageFeeCalculationView implements View {
 	private BufferedReader bufferedReader;
 	
+	/**
+	 * Constructor
+	 * @param bufferedReader
+	 */
 	public BaggageFeeCalculationView(BufferedReader bufferedReader){
 		this.bufferedReader = bufferedReader;
 	}
 	
+	@Override
 	public void display(Session response) throws IOException {
 		//Get needed data from session
 		Map<String, Float> orgFreeUnit = (Map<String, Float>) response.getAttribute("orgFreeUnit");
@@ -24,7 +31,7 @@ public class BaggageFeeCalculationView implements View {
 		Float totalFee = (Float) response.getAttribute("totalFee");
 		
 		//Display them
-		System.out.println("\nCalculated Baggage Fee Info:");
+		System.out.println(LineSeparatorUtil.newLine()+"Calculated Baggage Fee Info:");
 		System.out.println("You can enjoy       \t" + orgFreeUnit);
 		System.out.println("Your remaining unit \t" + remainingFreeUnit);
 		System.out.println("Basic Baggage Fee   \t$" + basicBaggageFee);

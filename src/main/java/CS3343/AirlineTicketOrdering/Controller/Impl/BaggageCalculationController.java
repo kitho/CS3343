@@ -14,6 +14,11 @@ import CS3343.AirlineTicketOrdering.View.View;
 
 public class BaggageCalculationController extends AirlineTicketOrderingController {
 
+	/**
+	 * Baggage calculation controller's constructor
+	 * @param session
+	 * @param view
+	 */
 	public BaggageCalculationController(Session session, View view) {
 		super(session, view);
 	}

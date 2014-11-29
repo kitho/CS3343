@@ -13,6 +13,12 @@ public class InputBaggageDataController extends AirlineTicketOrderingController 
 
 	private BaggageQuery baggageQuery;
 	
+	/**
+	 * Constructor
+	 * @param session
+	 * @param view
+	 * @param baggageQuery
+	 */
 	public InputBaggageDataController(Session session, View view, BaggageQuery baggageQuery) {
 		super(session, view);
 		this.baggageQuery = baggageQuery;

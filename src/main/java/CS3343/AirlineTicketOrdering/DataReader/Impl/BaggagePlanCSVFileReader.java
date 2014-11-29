@@ -13,6 +13,11 @@ import CS3343.AirlineTicketOrdering.Parser.Parser;
 
 public class BaggagePlanCSVFileReader extends CSVFileReader<BaggagePlan> {
 
+	/**
+	 * Constructor
+	 * @param path
+	 * @throws FileNotFoundException
+	 */
 	public BaggagePlanCSVFileReader(String path) throws FileNotFoundException {
 		super(path);
 	}

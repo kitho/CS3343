@@ -23,6 +23,10 @@ import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;
 public class BaggageQuery {
 	private List<BaggagePlan> plans = null;
 
+	/**
+	 * Baggage Query constructor
+	 * @param baggagePlanCSVFileReader
+	 */
 	public BaggageQuery(BaggagePlanCSVFileReader baggagePlanCSVFileReader) {
 		//Read Baggage Plan
 		Parser<BaggagePlan> parser = new BaggagePlanParser();
@@ -33,13 +37,23 @@ public class BaggageQuery {
 		}
 	}
 	
-	//Get all plans
+
+	/**
+	 * Find all plans
+	 * @return list of baggagePlan
+	 */
 	public List<BaggagePlan> findAllPlans(){
 		return plans;
 	}
 	
 	
-	//Find a plan by location from and to
+	
+	/**
+	 * Find a plan by location from and to
+	 * @param from
+	 * @param to
+	 * @return BaggagePlan
+	 */
 	public BaggagePlan findPlanByLocation(String from, String to){
 		BaggagePlan plan;
 		for(int i = 0; i < plans.size(); i++){
@@ -56,10 +70,18 @@ public class BaggageQuery {
 		return null;
 	}
 
+	/**
+	 * Get a list of plans
+	 * @return list of BaggagePlan
+	 */
 	public List<BaggagePlan> getPlans() {
 		return plans;
 	}
 
+	/**
+	 * Set a set of plans
+	 * @param plans
+	 */
 	public void setPlans(List<BaggagePlan> plans) {
 		this.plans = plans;
 	}

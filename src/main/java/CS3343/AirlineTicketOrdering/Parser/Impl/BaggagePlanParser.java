@@ -45,6 +45,7 @@ public class BaggagePlanParser implements Parser<BaggagePlan> {
 		
 	}
 
+	@Override
 	public BaggagePlan parseString(String line) throws ParseException {
 		String[] dataStr = line.split(",");
 		baggagePlan = new BaggagePlan();
@@ -166,6 +167,7 @@ public class BaggagePlanParser implements Parser<BaggagePlan> {
 		return null;
 	}
 
+	@Override
 	public String parseObject(BaggagePlan plan) {
 		return null;
 	}

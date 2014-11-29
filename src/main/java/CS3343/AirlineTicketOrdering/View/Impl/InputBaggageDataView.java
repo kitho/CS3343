@@ -5,17 +5,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
 import CS3343.AirlineTicketOrdering.Session.Session;
+import CS3343.AirlineTicketOrdering.Util.LineSeparatorUtil;
 import CS3343.AirlineTicketOrdering.View.View;
 
 public class InputBaggageDataView implements View {
 	private BufferedReader bufferedReader;
 	
+	/**
+	 * Constructor
+	 * @param bufferedReader
+	 */
 	public InputBaggageDataView(BufferedReader bufferedReader){
 		this.bufferedReader = bufferedReader;
 	}
 	
+	@Override
 	public void display(Session response) throws IOException {
 		//Get needed data from session
 		BaggagePlan baggagePlan = (BaggagePlan)response.getAttribute("baggagePlan");
@@ -27,7 +34,7 @@ public class InputBaggageDataView implements View {
 		
 		int numOfPassengers = (int)response.getAttribute("numberOfTicket");
 		
-		System.out.println("\n" + this.genBaggagePlanRule(baggagePlan, flightClass));
+		System.out.println(LineSeparatorUtil.newLine() + this.genBaggagePlanRule(baggagePlan, flightClass));
 		
 		//1.1 Input baggage data for N passengers
 		ArrayList<Float> kgList = new ArrayList<Float>();
@@ -37,7 +44,7 @@ public class InputBaggageDataView implements View {
 			float kg = 0, size = 0;
 			int piece = 0;
 			while(true){
-				System.out.print("\nInput your baggage total kg, total piece and total size for #" + (i+1) + " passengers (Format: 99.9 99 99.9): ");
+				System.out.print(LineSeparatorUtil.newLine() + "Input your baggage total kg, total piece and total size for #" + (i+1) + " passengers (Format: 99.9 99 99.9): ");
 				try{
 					String input = bufferedReader.readLine();
 					String[] inputs = input.split(" ");
@@ -81,7 +88,7 @@ public class InputBaggageDataView implements View {
 		ArrayList<String> sportingEquipmentList = baggagePlan.getAvailSportingEquipments();
 		
 		//2.3 Select sporting equipments to enjoy free unit
-		System.out.print("\nEnjoy Free Sporting Equipments Shipping:\n");
+		System.out.print(LineSeparatorUtil.newLine() + "Enjoy Free Sporting Equipments Shipping:" + LineSeparatorUtil.newLine());
 		ArrayList<String> sportingEquipments = new ArrayList<String>();
 		for(int y = 0; y < numOfPassengers; y++){
 			for(int i = 0; i < sportingEquipmentList.size(); i++){
@@ -121,7 +128,7 @@ public class InputBaggageDataView implements View {
 			float kg = 0, size = 0;
 			int piece = 0;
 			while(true){
-				System.out.print("\nInput your pet total kg, total piece and total size for #" + (i+1) + " passengers (Format: 99.9 99 99.9): ");
+				System.out.print(LineSeparatorUtil.newLine()+"Input your pet total kg, total piece and total size for #" + (i+1) + " passengers (Format: 99.9 99 99.9): ");
 				try{
 					String input = bufferedReader.readLine();
 					String[] inputs = input.split(" ");
@@ -205,10 +212,10 @@ public class InputBaggageDataView implements View {
 				if(conditionUnitNumTo < 9999)
 					extraFeeStr += "\t" + conditionUnitNumFrom + " " + keyUnit + "(s)\t-\t" + 
 									conditionUnitNumTo + " " + keyUnit + "(s)" +
-									"\t$" + extraExtraFees.get(""+i) + "\n";
+									"\t$" + extraExtraFees.get(""+i) + LineSeparatorUtil.newLine();
 				else
 					extraFeeStr += "\t>=" + conditionUnitNumFrom + " " + keyUnit + "(s)" + 
-							"\t\t\t\t$" + extraExtraFees.get(""+i) + "\n";
+							"\t\t\t\t$" + extraExtraFees.get(""+i) + LineSeparatorUtil.newLine();
 			}
 		}
 		
@@ -238,19 +245,19 @@ public class InputBaggageDataView implements View {
 				if(conditionUnitNumTo < 9999)
 					extraPetFeeStr += "\t" + conditionUnitNumFrom + " " + keyUnit + "(s)\t-\t" + 
 									conditionUnitNumTo + " " + keyUnit + "(s)" +
-									"\t$" + extraPetFees.get(""+i) + "\n";
+									"\t$" + extraPetFees.get(""+i) + LineSeparatorUtil.newLine();
 				else
 					extraPetFeeStr += "\t>=" + conditionUnitNumFrom + " " + keyUnit + "(s)" +
-							"\t\t\t\t$" + extraPetFees.get(""+i) + "\n";
+							"\t\t\t\t$" + extraPetFees.get(""+i) + LineSeparatorUtil.newLine();
 			}
 		}
 		
 		rule += "=====Baggage Plan For " + flightClass + "=====";
-		rule += "\n1. Each passenger can enjoy free " + feeUnitStr + " (Can be shared with other tickets purcahsed at the same time.)";
-		rule += "\n2. Basic fee per " + basicFeeStr;
-		rule += "\n3. Extra fee if average exceed following items:\n" + extraFeeStr;
-		rule += "\n4. Basic pet fee per " + basicPetFeeStr;
-		rule += "\n5. Extra pet if average exceed following items:\n" + extraPetFeeStr;
+		rule += LineSeparatorUtil.newLine()+"1. Each passenger can enjoy free " + feeUnitStr + " (Can be shared with other tickets purcahsed at the same time.)";
+		rule += LineSeparatorUtil.newLine()+"2. Basic fee per " + basicFeeStr;
+		rule += LineSeparatorUtil.newLine()+"3. Extra fee if average exceed following items:"+LineSeparatorUtil.newLine() + extraFeeStr;
+		rule += LineSeparatorUtil.newLine()+"4. Basic pet fee per " + basicPetFeeStr;
+		rule += LineSeparatorUtil.newLine()+"5. Extra pet if average exceed following items:"+LineSeparatorUtil.newLine() + extraPetFeeStr;
 		
 		return rule;
 	}
