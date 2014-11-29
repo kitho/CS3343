@@ -22,7 +22,7 @@ public class RouteQuery {
 				Route temp = new Route();
 				temp.setDeparture(flight.getDepature());
 				temp.setDestination(flight.getDestination());
-				temp.setDistance((int)(Math.random() * 500 + 1));
+				temp.setDistance((int)(Math.random() * 3000 + 1));
 				temp.addFlight(flight);
 				routes.add(temp);
 			}

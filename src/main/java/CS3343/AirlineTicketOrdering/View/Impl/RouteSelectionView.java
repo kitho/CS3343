@@ -10,6 +10,7 @@ import java.util.Scanner;
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
 import CS3343.AirlineTicketOrdering.FlightPathFinding.FlightPath;
+import CS3343.AirlineTicketOrdering.FlyerMiles.MilesCalculator;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Model.Route;
 import CS3343.AirlineTicketOrdering.Session.Session;
@@ -31,7 +32,7 @@ public class RouteSelectionView implements View{
 			System.out.println("No Route Found");
 			session.setAttribute("routes", null);
 		}else{
-			System.out.println("Route List:");
+			System.out.println("======= Route List =======");
 			for (int i = 0; i < resultRoutes.size(); i++){
 				int distance = 0;
 				ArrayList<Route> routes = resultRoutes.get(i).getFlightList();
@@ -43,9 +44,15 @@ public class RouteSelectionView implements View{
 						System.out.print(", ");
 				}
 				System.out.println();
-				System.out.println("Total bouns miles can earn: " +distance + " points");
+				MilesCalculator mc = new MilesCalculator();
+				System.out.println("Basic flyer miles*: " + mc.findBasePoints(distance) + " points");
+				System.out.println();
+				
 			}
 			System.out.println();
+			System.out.println ("*without airline and credit card bouns");
+			System.out.println();
+
 			System.out.print("Please enter backet number to select route: ");
 			String selectRoute = bufferedReader.readLine();
 			session.setAttribute("selectedRoute", resultRoutes.get(Integer.parseInt(selectRoute)-1));
@@ -58,6 +65,7 @@ public class RouteSelectionView implements View{
 					System.out.print(", ");
 			}
 			System.out.println ();
+			
 			System.out.println ();
 
 		}
