@@ -5,10 +5,12 @@ import CS3343.AirlineTicketOrdering.Model.*;
 public class BonusChecker {
 	private CreditCard card;
 	private String flightclass;
+	private String company;
 	
-	public BonusChecker(CreditCard card, String flightclass){
+	public BonusChecker(CreditCard card, String flightclass, String company){
 		this.card = card;
 		this.flightclass = flightclass;
+		this.company = company;
 	}
 	
 	//check the credit card bank and type, return different bouns rate
@@ -47,6 +49,16 @@ public class BonusChecker {
 				return 0.1;
 			case FlightClass.ECONOMY_CLASS:
 				return 0.0;	
+		}
+		return 0.0;
+	}
+	
+	public double getCompanyBounsRate(){
+		switch(company){
+		case "Cathay Pacific Airways":
+			return 0.1;
+		case "Dragonair":
+			return 0.05;
 		}
 		return 0.0;
 	}
