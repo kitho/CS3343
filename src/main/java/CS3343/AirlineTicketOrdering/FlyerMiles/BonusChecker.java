@@ -13,7 +13,7 @@ public class BonusChecker {
 		this.company = company;
 	}
 	
-	//check the credit card bank and type, return different bouns rate
+	//check the credit card bank and type, return different bonus rate
 	public double getCreditCardBounsRate(){
 		String bank = card.getBank();
 		if(bank.equals("HSBC")){
@@ -39,6 +39,7 @@ public class BonusChecker {
 		return 0.0;
 	}
 	
+	//check the flight class, return different bonus rate
 	public double getFlightClassBounsRate(){
 		switch(flightclass){
 			case FlightClass.FIRST_CLASS:
@@ -53,6 +54,7 @@ public class BonusChecker {
 		return 0.0;
 	}
 	
+	//check the flight company, return different bonus rate
 	public double getCompanyBounsRate(){
 		switch(company){
 		case "Cathay Pacific Airways":
