@@ -43,7 +43,7 @@ public class RouteSelectionView implements View{
 						System.out.print(", ");
 				}
 				System.out.println();
-				//System.out.println("Total bouns miles can earn: " +distance);
+				System.out.println("Total bouns miles can earn: " +distance + " points");
 			}
 			System.out.println();
 			System.out.print("Please enter backet number to select route: ");
