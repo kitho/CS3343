@@ -30,6 +30,14 @@ public class FlightQuery {
 		}
 	}
 
+	
+	/**
+	 * Returns an List object that meet the departure, destination and date
+	 * 
+	 * @param  deaprture  Departure that user want to search
+	 * @param  destination Destination that user want to search
+	 * @return ArrayList of Flight
+	 */
 	public List<Flight> findFlightsByDepatureAndDestinationAndDate(String depature,
 			String destination, Date depatureDate) {
 		List<Flight> flightResultList = new ArrayList<Flight>();
@@ -45,10 +53,21 @@ public class FlightQuery {
 		return flightResultList;
 	}
 	
+	/**
+	 * Returns an List object of all flights
+	 * 
+	 * @return ArrayList of all flight
+	 */
 	public List<Flight> getFlights(){
 		return flights;
 	}
 
+	/**
+	 * Update the FlightAvailable
+	 * 
+	 *  @param  targetFlight  the flight that have to reduce available seat
+	 *  @param  reducingNumber number of seat to reduce 
+	 */
 	public void updateFlightAvailableByFlightAndReducingNumber(Flight targetFlight, int reducingNumber) throws IOException {
 		List<Flight> flights = new ArrayList<Flight>();
 		

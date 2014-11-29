@@ -20,6 +20,11 @@ public class OrderQuery {
 		orders = orderReader.read(new OrderParser());
 	}
 	
+	/**
+	 * Get the maxID of existing  order
+	 * 
+	 * @return maxID of existing  order
+	 */
 	public int getMaxOrderId(){
 		int max = 0;		
 		for(int i = 0; i < orders.size(); i++){
@@ -30,6 +35,11 @@ public class OrderQuery {
 		return max;
 	}
 	
+	/**
+	 * Insert a new order
+	 * 
+	 * @param  order order that you have to insert
+	 */
 	public void newOrder(Order order) throws IOException{
 		orders.add(order);
 		orderWriter.write(orders);
