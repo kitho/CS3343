@@ -39,7 +39,6 @@ public class FlyerMilesTest {
 		int result1 = fm.awardMiles(routeList, flight, card);
 		
 		int expect1 = (int)(1500 * (1+0.1+0.1+0.0));
-		System.out.println(result1);
 		assertEquals(result1,expect1);
 	}
 	
@@ -66,7 +65,6 @@ public class FlyerMilesTest {
 		int result1 = fm.awardMiles(routeList, flight, card);
 		
 		int expect1 = (int)(1500 * (1+0.0+0.0+0.0));
-		System.out.println(result1);
 		assertEquals(result1,expect1);
 	}
 	
@@ -93,7 +91,6 @@ public class FlyerMilesTest {
 		int result1 = fm.awardMiles(routeList, flight, card);
 		
 		int expect1 = (int)(2500 * (1+0.09+0.05+0.4));
-		System.out.println(result1);
 		assertEquals(result1,expect1);
 	}
 
