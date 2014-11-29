@@ -6,8 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Scanner;
 
+import CS3343.AirlineTicketOrdering.FlightPathFinding.FlightPath;
+import CS3343.AirlineTicketOrdering.FlyerMiles.FlyerMiles;
 import CS3343.AirlineTicketOrdering.Model.CreditCard;
 import CS3343.AirlineTicketOrdering.Model.Flight;
+import CS3343.AirlineTicketOrdering.Model.Route;
 import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.View;
 
@@ -22,10 +25,14 @@ public class OrderConfirmationView implements View{
 	public void display(Session session) throws IOException {
 		
 		CreditCard creditCard = (CreditCard)session.getAttribute("creditCard");
+		FlightPath fPath = (FlightPath) session.getAttribute("selectedRoute");
+		List<Route> routeList = fPath.getFlightList();
 		List<Flight> flights = (List<Flight>)(session.getAttribute("flights")); 
 		int numberOfTicket = (Integer)(session.getAttribute("numberOfTicket"));
 		double totalPrice = (Double)(session.getAttribute("totalPrice"));
-
+		FlyerMiles fmiles = new FlyerMiles();
+		
+		
 		System.out.println("Here is your order detail:");
 		System.out.println("==========Payment Method==========");
 		System.out.println("Bank: " + creditCard.getBank());
@@ -43,6 +50,7 @@ public class OrderConfirmationView implements View{
 		System.out.println("\n======================================");
 		System.out.println("Number of Ticket: " + numberOfTicket);
 		System.out.println("Total Price: " + totalPrice);
+		System.out.println("Total award flyer miles: "+fmiles.awardMiles(fPath, flights, creditCard));
 		System.out.println("======================================");
 
 		System.out.print("\nConfirm to order? (Yes/No)");
