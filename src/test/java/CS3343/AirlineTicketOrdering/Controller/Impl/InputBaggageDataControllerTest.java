@@ -51,7 +51,7 @@ public class InputBaggageDataControllerTest {
 		
 		verify(session, times(0)).setAttribute("baggagePlan", baggagePlan);
 		verify(view, times(1)).display(session);
-		verify(next,times(1)).execute();
+		verify(next,times(0)).execute();
 	}
 
 }

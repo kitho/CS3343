@@ -86,7 +86,6 @@ public class AirlineTicketOrderingSystem {
 			
 			inputDestinationController.setNext(routeSelectionController);
 			routeSelectionController.setNext(inputBaggageDataController);
-			//flightSelectionController.setNext(inputBaggageDataController);
 			inputBaggageDataController.setNext(baggageCalculationController);
 			baggageCalculationController.setNext(enquireCreditCardController);
 			enquireCreditCardController.setNext(orderConfirmationController);
