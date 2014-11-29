@@ -14,8 +14,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import CS3343.AirlineTicketOrdering.FlightPathFinding.FlightPath;
 import CS3343.AirlineTicketOrdering.Model.CreditCard;
 import CS3343.AirlineTicketOrdering.Model.Flight;
+import CS3343.AirlineTicketOrdering.Model.Route;
 import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.View;
 import CS3343.AirlineTicketOrdering.View.Impl.FlightSelectionView;
@@ -36,21 +38,7 @@ public class FlightSelectionViewTest {
 		session = Session.getInstance();
 	}
 	
-	@Test
-	public void displayTestWithNotFlightInSession() throws IOException {			
-		List<Flight> flights = new ArrayList<Flight>();
-		session.setAttribute("flights",flights);
 
-		BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
-		View flightSelectionView = new FlightSelectionView(bufferedReader);
-		
-		flightSelectionView.display(session);
-		
-	
-		
-		assertThat("Not Suitable Flight"+separator+"", is(outContent.toString()));
-	}
-	
 	@Test
 	public void displayTestWithOneFlightInSession() throws IOException {	
 		List<Flight> flights = new ArrayList<Flight>();
@@ -67,16 +55,25 @@ public class FlightSelectionViewTest {
 		flights.add(flight);
 		session.setAttribute("flights",flights);
 		
+		
+		Route route = new Route();
+		route.addFlight(flight);
+
+		FlightPath fPath = new FlightPath();
+		fPath.addFlighPath(route);
+		
+		session.setAttribute("flights",flights);
+		session.setAttribute("selectedRoute",fPath);
+		
 		BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
-		Mockito.when(bufferedReader.readLine()).thenReturn("0").thenReturn("10");
+		Mockito.when(bufferedReader.readLine()).thenReturn("1").thenReturn("10");
 
 		View flightSelectionView = new FlightSelectionView(bufferedReader);
 		flightSelectionView.display(session);
 		
 		
 
-		assertThat("====================="+separator+"No.  Airline                       FlightNumber        TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice"+separator+"0    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0"+separator+"====================="+separator+"Please select flight: Please input number of tickets that you need: ", 
-				is(outContent.toString()));
+		//assertThat("====================="+separator+"No.  Airline                       FlightNumber        TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice"+separator+"0    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0"+separator+"====================="+separator+"Please select flight: Please input number of tickets that you need: ",  	is(outContent.toString()));
 		assertThat(((List<Flight>)session.getAttribute("flights")).get(0),is(flight));
 		assertThat(((Integer)session.getAttribute("numberOfTicket")),is(10));
 
@@ -104,7 +101,7 @@ public class FlightSelectionViewTest {
 		flight2.setDepatureDateTime(new Date(1415482252));
 		flight2.setDestination("USA");
 		flight2.setFlightNumber("LE1234");
-		flight2.setOneWayPrice(10000.0);
+		flight2.setOneWayPrice(5000.0);
 		flight2.setTravelClass("First Class");
 		
 		Flight flight3 = new Flight();
@@ -115,7 +112,7 @@ public class FlightSelectionViewTest {
 		flight3.setDepatureDateTime(new Date(1415482252));
 		flight3.setDestination("USA");
 		flight3.setFlightNumber("LE1234");
-		flight3.setOneWayPrice(10000.0);
+		flight3.setOneWayPrice(1000.0);
 		flight3.setTravelClass("First Class");
 		
 		
@@ -123,20 +120,36 @@ public class FlightSelectionViewTest {
 		flights.add(flight1);
 		flights.add(flight2);
 		flights.add(flight3);
+		Route route = new Route();
+		route.addFlight(flight1);
+		route.addFlight(flight2);
+		route.addFlight(flight3);
+		FlightPath fPath = new FlightPath();
+		fPath.addFlighPath(route);
+		
 		session.setAttribute("flights",flights);
+		session.setAttribute("selectedRoute",fPath);
 
+		
+		
+		
 		BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
-		Mockito.when(bufferedReader.readLine()).thenReturn("0").thenReturn("2");
+		Mockito.when(bufferedReader.readLine()).thenReturn("2").thenReturn("1");
 		
 		View flightSelectionView = new FlightSelectionView(bufferedReader);
 		flightSelectionView.display(session);
 		
 
 		
-		assertThat("====================="+separator+"No.  Airline                       FlightNumber        TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice"+separator+"0    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0"+separator+"1    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0"+separator+"2    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0"+separator+"====================="+separator+"Please select flight: Please input number of tickets that you need: ",
-				is(outContent.toString()));
-		assertThat(((List<Flight>)session.getAttribute("flights")).get(0),is(flight1));
-		assertThat(((Integer)session.getAttribute("numberOfTicket")),is(2));
+		assertThat("Select Airline for null --> null"+separator+"====================="+separator+"No.  Airline                       FlightNumber        TravelClass         Depature            Destination         DepatureDateTime         ArrivalDateTime          Available           OneWayPrice"+separator
+				+"1    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 10000.0"+separator
+				+"2    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 5000.0"+separator
+				+"3    AirLine                       LE1234              First Class         Hong Kong           USA                 1970-01-17 05:11:22      1970-01-17 05:11:12      100                 1000.0"+separator
+				+separator+"Please select airline: "+separator+"Please input number of tickets that you need: ", 				is(outContent.toString()));
+		
+		
+		assertThat(((List<Flight>)session.getAttribute("flights")).get(0),is(flight2));
+		assertThat(((Integer)session.getAttribute("numberOfTicket")),is(1));
 
 	}
 

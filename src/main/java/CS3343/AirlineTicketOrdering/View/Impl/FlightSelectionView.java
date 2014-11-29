@@ -27,6 +27,8 @@ public class FlightSelectionView implements View{
 		FlightPath fPath = (FlightPath) session.getAttribute("selectedRoute");
 		List<Route> routeList = fPath.getFlightList();
 		List<Flight> result = new ArrayList<Flight>();
+		
+
 		for (int i = 0; i < routeList.size(); i++)
 		{
 			Route route = routeList.get(i);
@@ -46,10 +48,14 @@ public class FlightSelectionView implements View{
 			String selectFlight = bufferedReader.readLine();
 			result.add(flightList.get(Integer.parseInt(selectFlight)-1));
 			System.out.println();
-		}
 
-		session.setAttribute("flights", result);
-		
+	
+	
+			session.setAttribute("flights", result);
+			System.out.print("Please input number of tickets that you need: ");
+			String numberOfTicket = bufferedReader.readLine();
+			session.setAttribute("numberOfTicket", Integer.parseInt(numberOfTicket));
+		}
 		/*
 		if(flights.size() == 0){
 			System.out.println("Not Suitable Flight");
