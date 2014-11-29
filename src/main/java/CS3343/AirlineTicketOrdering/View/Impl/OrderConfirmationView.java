@@ -50,7 +50,7 @@ public class OrderConfirmationView implements View{
 		System.out.println("\n======================================");
 		System.out.println("Number of Ticket: " + numberOfTicket);
 		System.out.println("Total Price: " + totalPrice);
-		System.out.println("Total award flyer miles: "+fmiles.awardMiles(fPath, flights, creditCard));
+		System.out.println("Total award flyer miles: "+fmiles.awardMiles(routeList, flights, creditCard));
 		System.out.println("======================================");
 
 		System.out.print("\nConfirm to order? (Yes/No)");
