@@ -33,6 +33,7 @@ public class FlightSelectionView implements View{
 			List<Flight> flightList = route.getFlights();
 			List<Flight> resultFlights = new ArrayList<Flight>();
 	        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	        System.out.println("Select Airline for " +route.getDeparture() + " --> " +route.getDestination());
 			System.out.println("=====================");			
 			String format = "%-5s%-30s%-20s%-20s%-20s%-20s%-25s%-25s%-20s%s%n";
 			System.out.printf(format, "No.","Airline","FlightNumber","TravelClass","Depature","Destination","DepatureDateTime","ArrivalDateTime","Available","OneWayPrice");
@@ -40,12 +41,14 @@ public class FlightSelectionView implements View{
 			for (int j = 0; j < flightList.size(); j++){
 				System.out.printf(format,j+1,flightList.get(j).getAirline(),flightList.get(j).getFlightNumber(),flightList.get(j).getTravelClass(),flightList.get(j).getDepature(),flightList.get(j).getDestination(),dt.format(flightList.get(j).getDepatureDateTime()),dt.format(flightList.get(j).getArrivalDateTime()),flightList.get(j).getAvailable(),flightList.get(j).getOneWayPrice());
 			}
+			System.out.println();
 			System.out.print("Please select airline: ");
 			String selectFlight = bufferedReader.readLine();
 			result.add(flightList.get(Integer.parseInt(selectFlight)-1));
+			System.out.println();
 		}
 
-		session.setAttribute("selectedFlights", result);
+		session.setAttribute("flights", result);
 		
 		/*
 		if(flights.size() == 0){

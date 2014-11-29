@@ -28,27 +28,11 @@ public class FlightSelectionController extends AirlineTicketOrderingController {
 		//				new SimpleDateFormat("yyyy-MM-dd").parse((String)session.getAttribute("depatureDate")));
 		//session.setAttribute("flights", flights);
 		
-		
-		FlightPath fPath = (FlightPath) session.getAttribute("selectedRoute");
-		List<Route> routeList = fPath.getFlightList();
-		ArrayList<List<Flight>> result = new ArrayList<List<Flight>>();
-		for (int i = 0; i < routeList.size(); i++)
-		{
-			Route route = routeList.get(i);
-			List<Flight> flightList = route.getFlights();
-			List<Flight> resultFlights = new ArrayList<Flight>();
-			for (int j = 0; j < flightList.size(); j++){
-				resultFlights.add(flightList.get(j));
-			}
-			result.add(resultFlights);
-		}
-		List<Flight> selectedFlightList = new ArrayList<Flight>();
-
 		view.display(session);
 		
-		//if(flights.size() > 0 ){
+//		if(flights.size() > 0 ){
 			next();
-		//}
+	//	}
 	}
 	
 
