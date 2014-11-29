@@ -18,6 +18,7 @@ import CS3343.AirlineTicketOrdering.Model.CreditCard;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Model.Order;
 import CS3343.AirlineTicketOrdering.Session.Session;
+import CS3343.AirlineTicketOrdering.Util.LineSeparatorUtil;
 import CS3343.AirlineTicketOrdering.View.View;
 import CS3343.AirlineTicketOrdering.View.Impl.OrderConfirmationView;
 import static org.junit.Assert.*;
@@ -28,7 +29,6 @@ public class OrderCompletionViewTest {
 	
 	private ByteArrayOutputStream outContent;
 	private Session session;
-	private String separator = System.getProperty("line.separator");
 	
 	@Before
 	public void setUp() {
@@ -48,7 +48,7 @@ public class OrderCompletionViewTest {
 		orderCompletionView.display(session);
 		
 
-		assertThat("Order Success "+separator+" Order Id: 0", 
+		assertThat("Order Success "+ LineSeparatorUtil.newLine() +" Order Id: 0", 
 				is(outContent.toString()));
 
 	}
