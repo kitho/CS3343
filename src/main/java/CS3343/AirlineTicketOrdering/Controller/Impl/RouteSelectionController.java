@@ -40,13 +40,13 @@ public class RouteSelectionController extends AirlineTicketOrderingController {
 		
 		PathFinding pFinding = new PathFinding(departure, destination, rTable);
 		ArrayList<FlightPath> fPaths = pFinding.getIndirectFlight(new ArrayList<FlightPath>());
-		System.out.println(fPaths.size());
+		System.out.println();
 
 		session.setAttribute("FlightPaths", fPaths);
 		
 		view.display(session);
 		
-		if(flights.size() > 0 ){
+		if(fPaths.size() != 0){
 			next();
 		}
 	}
