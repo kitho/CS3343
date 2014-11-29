@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Session.Session;
+import CS3343.AirlineTicketOrdering.Util.LineSeparatorUtil;
 import CS3343.AirlineTicketOrdering.View.View;
 import CS3343.AirlineTicketOrdering.View.Impl.InputDestinationView;
 import static org.junit.Assert.*;
@@ -22,7 +23,7 @@ public class InputDestinationViewTest {
 	
 	private ByteArrayOutputStream outContent;
 	private Session session;
-	private String separator = System.getProperty("line.separator");
+	private String separator = LineSeparatorUtil.newLine();
 	
 	@Before
 	public void setUp() {

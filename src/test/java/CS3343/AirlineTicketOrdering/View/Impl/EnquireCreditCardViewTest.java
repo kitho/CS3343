@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 
 import CS3343.AirlineTicketOrdering.Model.CreditCard;
 import CS3343.AirlineTicketOrdering.Session.Session;
+import CS3343.AirlineTicketOrdering.Util.LineSeparatorUtil;
 import CS3343.AirlineTicketOrdering.View.View;
 import CS3343.AirlineTicketOrdering.View.Impl.EnquireCreditCardView;
 import static org.junit.Assert.*;
@@ -37,7 +38,7 @@ public class EnquireCreditCardViewTest {
 
 		enquireCreditCardView.display(session);
 		
-		String separator = System.getProperty("line.separator");
+		String separator = LineSeparatorUtil.newLine();
 
 		
 		assertThat("Please input your credit card information"+separator+"Bank: Type: Number: " 

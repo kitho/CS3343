@@ -12,6 +12,7 @@ import CS3343.AirlineTicketOrdering.Model.CreditCard;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Model.Route;
 import CS3343.AirlineTicketOrdering.Session.Session;
+import CS3343.AirlineTicketOrdering.Util.LineSeparatorUtil;
 import CS3343.AirlineTicketOrdering.View.View;
 
 public class OrderConfirmationView implements View{
@@ -39,7 +40,7 @@ public class OrderConfirmationView implements View{
 		System.out.println("Type: " + creditCard.getCreditCardType());
 		System.out.println("Number: " + creditCard.getCreditCardNumber());
 
-		System.out.println("\n==========Ticket Information==========");
+		System.out.println(LineSeparatorUtil.newLine() + "==========Ticket Information==========");
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String format = "%-20s%-25s%-20s%-20s%-20s%-25s%-25s%-20s%s%n";
 		System.out.printf(format,"Airline","FlightNumber","TravelClass","Depature","Destination","DepatureDateTime","ArrivalDateTime","Available","OneWayPrice");
@@ -47,7 +48,7 @@ public class OrderConfirmationView implements View{
 			System.out.printf(format,flights.get(i).getAirline(),flights.get(i).getFlightNumber(),flights.get(i).getTravelClass(),flights.get(i).getDepature(),flights.get(i).getDestination(),dt.format(flights.get(i).getDepatureDateTime()),dt.format(flights.get(i).getArrivalDateTime()),flights.get(i).getAvailable(),flights.get(i).getOneWayPrice());
 		}
 		
-		System.out.println("\n======================================");
+		System.out.println(LineSeparatorUtil.newLine() + "======================================");
 		System.out.println("Number of Ticket: " + numberOfTicket);
 		System.out.println("Total Price: " + totalPrice);
 		System.out.println("Total award flyer miles: "+fmiles.awardMiles(routeList, flights, creditCard));

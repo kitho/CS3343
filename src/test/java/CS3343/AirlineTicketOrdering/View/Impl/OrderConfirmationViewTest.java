@@ -20,6 +20,7 @@ import CS3343.AirlineTicketOrdering.Model.CreditCard;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Model.Route;
 import CS3343.AirlineTicketOrdering.Session.Session;
+import CS3343.AirlineTicketOrdering.Util.LineSeparatorUtil;
 import CS3343.AirlineTicketOrdering.View.View;
 import CS3343.AirlineTicketOrdering.View.Impl.OrderConfirmationView;
 import static org.junit.Assert.*;
@@ -29,7 +30,7 @@ public class OrderConfirmationViewTest {
 	
 	private ByteArrayOutputStream outContent;
 	private Session session;
-	private String separator = System.getProperty("line.separator");
+	private String separator = LineSeparatorUtil.newLine();
 
 	
 	@Before
