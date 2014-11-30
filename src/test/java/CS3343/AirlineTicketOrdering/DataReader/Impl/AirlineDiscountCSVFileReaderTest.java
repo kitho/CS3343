@@ -20,7 +20,7 @@ import org.junit.Test;
 
 import TestingTool.DataWriter.AirlineCompanyCSVFileWriter;
 import TestingTool.DataWriter.AirlineDiscountCSVFileWriter;
-import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
+import TestingTool.DataWriter.CSVFileTest;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.AirlineDiscountCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
@@ -37,11 +37,11 @@ public class AirlineDiscountCSVFileReaderTest {
 	
 	@Test
 	public void readAirlineDiscountCSVFileWhenFileNotExisted() throws IOException{
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.AIRLINEDISCOUNTCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.AIRLINEDISCOUNTCSV.value()));
 		
 		SourceReader<AirlineDiscount> airlineDiscountCSVReader;
 		try{
-			airlineDiscountCSVReader = new AirlineDiscountCSVFileReader(projectPath + CSVFile.AIRLINEDISCOUNTCSV.value());
+			airlineDiscountCSVReader = new AirlineDiscountCSVFileReader(projectPath + CSVFileTest.AIRLINEDISCOUNTCSV.value());
 			fail("File not existed");
 		}catch (FileNotFoundException e){
 			assertThat(e.getMessage().toString(), is(not(nullValue())));
@@ -50,7 +50,7 @@ public class AirlineDiscountCSVFileReaderTest {
 	
 	@Test
 	public void readAirlineDiscountCSVFileWithOneRecordTest() throws IOException, ParseException{
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.AIRLINEDISCOUNTCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.AIRLINEDISCOUNTCSV.value()));
 		
 		AirlineDiscount airlineDiscount = new AirlineDiscount();
 		airlineDiscount.setAirline("Cathay Pacific Airways");
@@ -60,11 +60,11 @@ public class AirlineDiscountCSVFileReaderTest {
 		ArrayList<AirlineDiscount> airlineDiscounts = new ArrayList<AirlineDiscount>();
 		airlineDiscounts.add(airlineDiscount);
 		
-		SourceWriter<List<AirlineDiscount>> airlineDiscountCSVFileWriter = new AirlineDiscountCSVFileWriter(projectPath + CSVFile.AIRLINEDISCOUNTCSV.value());
+		SourceWriter<List<AirlineDiscount>> airlineDiscountCSVFileWriter = new AirlineDiscountCSVFileWriter(projectPath + CSVFileTest.AIRLINEDISCOUNTCSV.value());
 		airlineDiscountCSVFileWriter.write(airlineDiscounts);
 		airlineDiscountCSVFileWriter.close();
 		
-		SourceReader<AirlineDiscount> airlineDiscountCSVFileReader = new AirlineDiscountCSVFileReader(projectPath + CSVFile.AIRLINEDISCOUNTCSV.value());
+		SourceReader<AirlineDiscount> airlineDiscountCSVFileReader = new AirlineDiscountCSVFileReader(projectPath + CSVFileTest.AIRLINEDISCOUNTCSV.value());
 		List<AirlineDiscount> airlineDiscountResultList = airlineDiscountCSVFileReader.read(new AirlineDiscountParser());
 		airlineDiscountCSVFileReader.close();
 		
@@ -76,7 +76,7 @@ public class AirlineDiscountCSVFileReaderTest {
 	
 	@Test
 	public void readAirlineDiscountCSVFileWithThreeRecordsTest() throws IOException, ParseException{
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.AIRLINEDISCOUNTCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.AIRLINEDISCOUNTCSV.value()));
 		
 		AirlineDiscount airlineDiscount1 = new AirlineDiscount();
 		airlineDiscount1.setAirline("Cathay Pacific Airways");
@@ -98,11 +98,11 @@ public class AirlineDiscountCSVFileReaderTest {
 		airlineDiscounts.add(airlineDiscount2);
 		airlineDiscounts.add(airlineDiscount3);
 		
-		SourceWriter<List<AirlineDiscount>> airlineDiscountCSVFileWriter = new AirlineDiscountCSVFileWriter(projectPath + CSVFile.AIRLINEDISCOUNTCSV.value());
+		SourceWriter<List<AirlineDiscount>> airlineDiscountCSVFileWriter = new AirlineDiscountCSVFileWriter(projectPath + CSVFileTest.AIRLINEDISCOUNTCSV.value());
 		airlineDiscountCSVFileWriter.write(airlineDiscounts);
 		airlineDiscountCSVFileWriter.close();
 		
-		SourceReader<AirlineDiscount> airlineDiscountCSVFileReader = new AirlineDiscountCSVFileReader(projectPath + CSVFile.AIRLINEDISCOUNTCSV.value());
+		SourceReader<AirlineDiscount> airlineDiscountCSVFileReader = new AirlineDiscountCSVFileReader(projectPath + CSVFileTest.AIRLINEDISCOUNTCSV.value());
 		List<AirlineDiscount> airlineDiscountResultList = airlineDiscountCSVFileReader.read(new AirlineDiscountParser());
 		airlineDiscountCSVFileReader.close();
 		

@@ -17,8 +17,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import TestingTool.DataWriter.CSVFileTest;
 import TestingTool.DataWriter.DataSourcePropertiesFileWriter;
-import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 
 public class DataSourcePropertiesTest {
@@ -73,14 +73,14 @@ public class DataSourcePropertiesTest {
 				new DataSourcePropertiesFileWriter(projectPath + DataSourceProperties.DATA_SOURCE_PATH);
 		
 		Map<String, String> propertyPairs = new HashMap<String, String>();
-		propertyPairs.put("airlinecompany", CSVFile.AIRLINECOMPANYCSV.value());
+		propertyPairs.put("airlinecompany", CSVFileTest.AIRLINECOMPANYCSV.value());
 		
 		dataSourceFilePropertiesWriter.write(propertyPairs);
 		dataSourceFilePropertiesWriter.close();
 		
 		SystemProperties dataSourceProperties = new DataSourceProperties();
 		
-		assertThat(CSVFile.AIRLINECOMPANYCSV.value(), is(dataSourceProperties.getPath("airlinecompany")));
+		assertThat(CSVFileTest.AIRLINECOMPANYCSV.value(), is(dataSourceProperties.getPath("airlinecompany")));
 	}
 
 	@Test
@@ -91,14 +91,14 @@ public class DataSourcePropertiesTest {
 				new DataSourcePropertiesFileWriter(projectPath + DataSourceProperties.DATA_SOURCE_PATH);
 		
 		Map<String, String> propertyPairs = new HashMap<String, String>();
-		propertyPairs.put("flight", CSVFile.FLIGHTCSV.value());
+		propertyPairs.put("flight", CSVFileTest.FLIGHTCSV.value());
 		
 		dataSourceFilePropertiesWriter.write(propertyPairs);
 		dataSourceFilePropertiesWriter.close();
 		
 		SystemProperties dataSourceProperties = new DataSourceProperties();
 		
-		assertThat(CSVFile.FLIGHTCSV.value(), is(dataSourceProperties.getPath("flight")));
+		assertThat(CSVFileTest.FLIGHTCSV.value(), is(dataSourceProperties.getPath("flight")));
 	}
 	
 	
@@ -111,16 +111,16 @@ public class DataSourcePropertiesTest {
 				new DataSourcePropertiesFileWriter(projectPath + DataSourceProperties.DATA_SOURCE_PATH);
 		
 		Map<String, String> propertyPairs = new HashMap<String, String>();
-		propertyPairs.put("airlinecompany", CSVFile.AIRLINECOMPANYCSV.value());
-		propertyPairs.put("flight", CSVFile.FLIGHTCSV.value());
+		propertyPairs.put("airlinecompany", CSVFileTest.AIRLINECOMPANYCSV.value());
+		propertyPairs.put("flight", CSVFileTest.FLIGHTCSV.value());
 		
 		dataSourceFilePropertiesWriter.write(propertyPairs);
 		dataSourceFilePropertiesWriter.close();
 		
 		SystemProperties dataSourceProperties = new DataSourceProperties();
 		
-		assertThat(CSVFile.AIRLINECOMPANYCSV.value(), is(dataSourceProperties.getPath("airlinecompany")));
-		assertThat(CSVFile.FLIGHTCSV.value(), is(dataSourceProperties.getPath("flight")));
+		assertThat(CSVFileTest.AIRLINECOMPANYCSV.value(), is(dataSourceProperties.getPath("airlinecompany")));
+		assertThat(CSVFileTest.FLIGHTCSV.value(), is(dataSourceProperties.getPath("flight")));
 	}
 	
 	

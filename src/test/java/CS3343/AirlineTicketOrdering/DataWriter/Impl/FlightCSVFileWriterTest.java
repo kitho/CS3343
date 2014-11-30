@@ -14,7 +14,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
+import TestingTool.DataWriter.CSVFileTest;
 import CS3343.AirlineTicketOrdering.CustomDateUtil.CustomDateFormatter;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
@@ -36,7 +36,7 @@ public class FlightCSVFileWriterTest {
 	
 	@Test
 	public void writeFlightCSVFileOnce() throws IOException, ParseException {
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.FLIGHTCSV.value()));
 		
 		Flight flight = new Flight();
 		
@@ -53,14 +53,14 @@ public class FlightCSVFileWriterTest {
 		List<Flight> flights = new ArrayList<Flight>();
 		flights.add(flight);
 
-		SourceWriter<List<Flight>> flightCSVFileWriter = new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value());
+		SourceWriter<List<Flight>> flightCSVFileWriter = new FlightCSVFileWriter(projectPath + CSVFileTest.FLIGHTCSV.value());
 		flightCSVFileWriter.write(flights);
 		flightCSVFileWriter.close();
 		
-		SourceReader<Flight> flightCSVFileReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
+		SourceReader<Flight> flightCSVFileReader = new FlightCSVFileReader(projectPath + CSVFileTest.FLIGHTCSV.value());
 		List<Flight> flightResultList = (ArrayList<Flight>) flightCSVFileReader.read(new FlightParser());
 
-		assertThat(true, is(Files.exists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()))));
+		assertThat(true, is(Files.exists(Paths.get(projectPath + CSVFileTest.FLIGHTCSV.value()))));
 		assertThat(1, is(flightResultList.size()));
 		for (Flight flightResult : flightResultList) {
 			assertThat(flightResult.getAirline(), is(flight.getAirline()));
@@ -77,7 +77,7 @@ public class FlightCSVFileWriterTest {
 	
 	@Test
 	public void writeFlightCSVFileThreeTimes() throws IOException, ParseException {
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.FLIGHTCSV.value()));
 		
 		Flight flightCP1 = new Flight();
 		
@@ -120,14 +120,14 @@ public class FlightCSVFileWriterTest {
 		flightsCP.add(flightCP2);
 		flightsCP.add(flightCP3);
 		
-		SourceWriter<List<Flight>> flightCSVFileWriter = new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value());
+		SourceWriter<List<Flight>> flightCSVFileWriter = new FlightCSVFileWriter(projectPath + CSVFileTest.FLIGHTCSV.value());
 		flightCSVFileWriter.write(flightsCP);
 		flightCSVFileWriter.close();
 		
-		SourceReader<Flight> flightCSVFileReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
+		SourceReader<Flight> flightCSVFileReader = new FlightCSVFileReader(projectPath + CSVFileTest.FLIGHTCSV.value());
 		List<Flight> flightResultList = (ArrayList<Flight>) flightCSVFileReader.read(new FlightParser());
 
-		assertThat(true, is(Files.exists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()))));
+		assertThat(true, is(Files.exists(Paths.get(projectPath + CSVFileTest.FLIGHTCSV.value()))));
 		assertThat(3, is(flightResultList.size()));
 		for (int i = 0 ; i < flightsCP.size() ; i++) {
 			assertThat(flightsCP.get(i).getAirline(), is(flightResultList.get(i).getAirline()));

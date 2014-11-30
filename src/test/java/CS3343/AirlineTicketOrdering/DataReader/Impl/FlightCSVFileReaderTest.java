@@ -12,12 +12,12 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import TestingTool.DataWriter.CSVFileTest;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
-import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
 import CS3343.AirlineTicketOrdering.CustomDateUtil.CustomDateFormatter;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
@@ -40,7 +40,7 @@ public class FlightCSVFileReaderTest {
 	
 	@Test
 	public void readFlightCSVFileWithOneRecordTest() throws IOException, ParseException{		
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.FLIGHTCSV.value()));
 		
 		Flight flight = new Flight();
 		
@@ -57,11 +57,11 @@ public class FlightCSVFileReaderTest {
 		ArrayList<Flight> flights = new ArrayList<Flight>();
 		flights.add(flight);
 		
-		SourceWriter<List<Flight>> flightCsvFileWriter = new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value());
+		SourceWriter<List<Flight>> flightCsvFileWriter = new FlightCSVFileWriter(projectPath + CSVFileTest.FLIGHTCSV.value());
 		flightCsvFileWriter.write(flights);
 		flightCsvFileWriter.close();
 		
-		SourceReader<Flight> flightCsvFileReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
+		SourceReader<Flight> flightCsvFileReader = new FlightCSVFileReader(projectPath + CSVFileTest.FLIGHTCSV.value());
 		List<Flight> resultList = flightCsvFileReader.read(new FlightParser());
 		flightCsvFileReader.close();
 		
@@ -79,7 +79,7 @@ public class FlightCSVFileReaderTest {
 	
 	@Test
 	public void readFlightCSVFileWithThreeRecordTest() throws IOException, ParseException{
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.FLIGHTCSV.value()));
 		
 		Flight flight1 = new Flight();
 		
@@ -122,11 +122,11 @@ public class FlightCSVFileReaderTest {
 		flights.add(flight2);
 		flights.add(flight3);
 		
-		SourceWriter<List<Flight>> flightCsvFileWriter = new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value());
+		SourceWriter<List<Flight>> flightCsvFileWriter = new FlightCSVFileWriter(projectPath + CSVFileTest.FLIGHTCSV.value());
 		flightCsvFileWriter.write(flights);
 		flightCsvFileWriter.close();
 		
-		SourceReader<Flight> flightCsvFileReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
+		SourceReader<Flight> flightCsvFileReader = new FlightCSVFileReader(projectPath + CSVFileTest.FLIGHTCSV.value());
 		List<Flight> resultList = flightCsvFileReader.read(new FlightParser());
 		flightCsvFileReader.close();
 

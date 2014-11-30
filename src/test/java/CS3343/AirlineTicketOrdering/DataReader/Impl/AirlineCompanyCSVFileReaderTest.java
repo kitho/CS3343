@@ -19,7 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import TestingTool.DataWriter.AirlineCompanyCSVFileWriter;
-import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
+import TestingTool.DataWriter.CSVFileTest;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.AirlineCompanyCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
@@ -37,11 +37,11 @@ public class AirlineCompanyCSVFileReaderTest {
 	
 	@Test
 	public void readAirlineCompanyCSVFileWhenFileNotExisted() throws IOException{
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.AIRLINECOMPANYCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.AIRLINECOMPANYCSV.value()));
 		
 		SourceReader<AirlineCompany> airlineCompanyCsvReader;
 		try {
-			airlineCompanyCsvReader = new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value());
+			airlineCompanyCsvReader = new AirlineCompanyCSVFileReader(projectPath + CSVFileTest.AIRLINECOMPANYCSV.value());
 			fail("File not existed");
 		} catch (FileNotFoundException e) {
 			assertThat(e.getMessage().toString(), is(not(nullValue())));
@@ -51,7 +51,7 @@ public class AirlineCompanyCSVFileReaderTest {
 
 	@Test
 	public void readAirlineCompanyCSVFileWithOneRecordTest() throws IOException, ParseException{
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.AIRLINECOMPANYCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.AIRLINECOMPANYCSV.value()));
 		
 		AirlineCompany airlineCompany = new AirlineCompany();
 		airlineCompany.setAirline("Cathay Pacific Airways");
@@ -59,11 +59,11 @@ public class AirlineCompanyCSVFileReaderTest {
 		ArrayList<AirlineCompany> airlineCompanies = new ArrayList<AirlineCompany>();
 		airlineCompanies.add(airlineCompany);
 		
-		SourceWriter<List<AirlineCompany>> airlineCompanyCSVFileWriter = new AirlineCompanyCSVFileWriter(projectPath + CSVFile.AIRLINECOMPANYCSV.value());
+		SourceWriter<List<AirlineCompany>> airlineCompanyCSVFileWriter = new AirlineCompanyCSVFileWriter(projectPath + CSVFileTest.AIRLINECOMPANYCSV.value());
 		airlineCompanyCSVFileWriter.write(airlineCompanies);
 		airlineCompanyCSVFileWriter.close();
 		
-		SourceReader<AirlineCompany> airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value());
+		SourceReader<AirlineCompany> airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + CSVFileTest.AIRLINECOMPANYCSV.value());
 		List<AirlineCompany> airlineCompanyResultList = airlineCompanyCSVFileReader.read(new AirlineCompanyParser());
 		airlineCompanyCSVFileReader.close();
 		
@@ -76,7 +76,7 @@ public class AirlineCompanyCSVFileReaderTest {
 	
 	@Test
 	public void readAirlineCompanyCSVFileWithThreeRecordTest() throws IOException, ParseException{		
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.AIRLINECOMPANYCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.AIRLINECOMPANYCSV.value()));
 		
 		AirlineCompany airlineCompanyCP = new AirlineCompany();
 		airlineCompanyCP.setAirline("Cathay Pacific Airways");
@@ -92,11 +92,11 @@ public class AirlineCompanyCSVFileReaderTest {
 		airlineCompanies.add(airlineCompanyCA);
 		airlineCompanies.add(airlineCompanyHKA);
 
-		SourceWriter<List<AirlineCompany>> airlineCompanyCSVFileWriter = new AirlineCompanyCSVFileWriter(projectPath + CSVFile.AIRLINECOMPANYCSV.value());
+		SourceWriter<List<AirlineCompany>> airlineCompanyCSVFileWriter = new AirlineCompanyCSVFileWriter(projectPath + CSVFileTest.AIRLINECOMPANYCSV.value());
 		airlineCompanyCSVFileWriter.write(airlineCompanies);
 		airlineCompanyCSVFileWriter.close();
 		
-		SourceReader<AirlineCompany> airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value());
+		SourceReader<AirlineCompany> airlineCompanyCSVFileReader = new AirlineCompanyCSVFileReader(projectPath + CSVFileTest.AIRLINECOMPANYCSV.value());
 		List<AirlineCompany> airlineCompanyResultList = airlineCompanyCSVFileReader.read(new AirlineCompanyParser());
 		airlineCompanyCSVFileReader.close();
 		

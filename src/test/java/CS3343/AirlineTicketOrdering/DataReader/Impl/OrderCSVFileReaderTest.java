@@ -19,7 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import TestingTool.DataWriter.AirlineCompanyCSVFileWriter;
-import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
+import TestingTool.DataWriter.CSVFileTest;
 import CS3343.AirlineTicketOrdering.CustomDateUtil.CustomDateFormatter;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.AirlineCompanyCSVFileReader;
@@ -45,11 +45,11 @@ public class OrderCSVFileReaderTest {
 	
 	@Test
 	public void readOrderCSVFileWhenFileNotExisted() throws IOException{
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.ORDERCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.ORDERCSV.value()));
 		
 		SourceReader<Order> orderCsvReader;
 		try {
-			orderCsvReader = new OrderCSVFileReader(projectPath + CSVFile.ORDERCSV.value());
+			orderCsvReader = new OrderCSVFileReader(projectPath + CSVFileTest.ORDERCSV.value());
 			fail("File not existed");
 		} catch (FileNotFoundException e) {
 			assertThat(e.getMessage().toString(), is(not(nullValue())));
@@ -59,7 +59,7 @@ public class OrderCSVFileReaderTest {
 
 	@Test
 	public void readOrderCSVFileWithOneRecordTest() throws IOException, ParseException{
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.ORDERCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.ORDERCSV.value()));
 		
 		Flight flight = new Flight();
 		flight.setAirline("Cathay Pacific Airways");
@@ -80,11 +80,11 @@ public class OrderCSVFileReaderTest {
 		ArrayList<Order> orders = new ArrayList<Order>();
 		orders.add(order);
 		
-		SourceWriter<List<Order>> orderSourceWriter = new OrderCSVFileWriter(projectPath + CSVFile.ORDERCSV.value());
+		SourceWriter<List<Order>> orderSourceWriter = new OrderCSVFileWriter(projectPath + CSVFileTest.ORDERCSV.value());
 		orderSourceWriter.write(orders);
 		orderSourceWriter.close();
 		
-		SourceReader<Order> orderReader = new OrderCSVFileReader(projectPath + CSVFile.ORDERCSV.value());
+		SourceReader<Order> orderReader = new OrderCSVFileReader(projectPath + CSVFileTest.ORDERCSV.value());
 		List<Order> orderResult = orderReader.read(new OrderParser());
 		orderReader.close();
 		
@@ -96,7 +96,7 @@ public class OrderCSVFileReaderTest {
 	
 	@Test
 	public void readOrderCSVFileWithThreeRecordTest() throws IOException, ParseException{		
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.ORDERCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.ORDERCSV.value()));
 		
 		Flight flight = new Flight();
 		flight.setAirline("Cathay Pacific Airways");
@@ -130,11 +130,11 @@ public class OrderCSVFileReaderTest {
 		orders.add(order2);
 		orders.add(order3);
 
-		SourceWriter<List<Order>> orderSourceWriter = new OrderCSVFileWriter(projectPath + CSVFile.ORDERCSV.value());
+		SourceWriter<List<Order>> orderSourceWriter = new OrderCSVFileWriter(projectPath + CSVFileTest.ORDERCSV.value());
 		orderSourceWriter.write(orders);
 		orderSourceWriter.close();
 		
-		SourceReader<Order> orderReader = new OrderCSVFileReader(projectPath + CSVFile.ORDERCSV.value());
+		SourceReader<Order> orderReader = new OrderCSVFileReader(projectPath + CSVFileTest.ORDERCSV.value());
 		List<Order> orderResult = orderReader.read(new OrderParser());
 		orderReader.close();
 		

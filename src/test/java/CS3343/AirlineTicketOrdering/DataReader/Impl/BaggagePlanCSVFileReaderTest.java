@@ -12,7 +12,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
+import TestingTool.DataWriter.CSVFileTest;
 import CS3343.AirlineTicketOrdering.DataReader.CSVFileReader;
 import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
 import CS3343.AirlineTicketOrdering.Parser.Parser;
@@ -42,7 +42,7 @@ public class BaggagePlanCSVFileReaderTest {
 		}
 		CSVFileReader reader = null;
 		try{
-			reader = new BaggagePlanCSVFileReader(projectPath + CSVFile.BAGGAGEPLANCSV.value());
+			reader = new BaggagePlanCSVFileReader(projectPath + CSVFileTest.BAGGAGEPLANCSV.value());
 		}catch(Exception e){
 			fail("CSV not exist");
 		}
@@ -67,7 +67,7 @@ public class BaggagePlanCSVFileReaderTest {
 			}
 		}
 		
-		CSVFileReader reader = new BaggagePlanCSVFileReader(projectPath + CSVFile.BAGGAGEPLANCSV.value());
+		CSVFileReader reader = new BaggagePlanCSVFileReader(projectPath + CSVFileTest.BAGGAGEPLANCSV.value());
 		
 		List<BaggagePlan> baggagePlans = reader.read(new parser_stub());
 		assertEquals(true,(baggagePlans != null));

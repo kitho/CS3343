@@ -3,7 +3,6 @@ package CS3343.AirlineTicketOrdering;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
 import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
 import CS3343.AirlineTicketOrdering.Calculator.Impl.AirlineCalculator;
@@ -12,7 +11,6 @@ import CS3343.AirlineTicketOrdering.Controller.Impl.BaggageCalculationController
 import CS3343.AirlineTicketOrdering.Controller.Impl.EnquireCreditCardController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.FlightSelectionController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.InputBaggageDataController;
-import CS3343.AirlineTicketOrdering.Controller.Impl.InputBaggageDataControllerTest;
 import CS3343.AirlineTicketOrdering.Controller.Impl.InputDestinationController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.OrderCompletionController;
 import CS3343.AirlineTicketOrdering.Controller.Impl.OrderConfirmationController;
@@ -29,7 +27,6 @@ import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.OrderCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.OrderCSVFileWriter;
-import CS3343.AirlineTicketOrdering.Discount.Impl.AirlineDiscount;
 import CS3343.AirlineTicketOrdering.Session.Session;
 import CS3343.AirlineTicketOrdering.View.Impl.BaggageFeeCalculationView;
 import CS3343.AirlineTicketOrdering.View.Impl.EnquireCreditCardView;

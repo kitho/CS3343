@@ -14,7 +14,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import CS3343.AirlineTicketOrdering.CSVFile.CSVFile;
+import TestingTool.DataWriter.CSVFileTest;
 import CS3343.AirlineTicketOrdering.CustomDateUtil.CustomDateFormatter;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
@@ -39,7 +39,7 @@ public class OrderCSVFileWriterTest {
 	
 	@Test
 	public void writeFlightCSVFileOnce() throws IOException, ParseException {
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.ORDERCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.ORDERCSV.value()));
 		
 		Flight flight = new Flight();
 		flight.setAirline("Cathay Pacific Airways");
@@ -61,14 +61,14 @@ public class OrderCSVFileWriterTest {
 		orders.add(order);
 
 
-		SourceWriter<List<Order>> orderCSVFileWriter = new OrderCSVFileWriter(projectPath + CSVFile.ORDERCSV.value());
+		SourceWriter<List<Order>> orderCSVFileWriter = new OrderCSVFileWriter(projectPath + CSVFileTest.ORDERCSV.value());
 		orderCSVFileWriter.write(orders);
 		orderCSVFileWriter.close();
 		
-		SourceReader<Order> orderCSVFileReader = new OrderCSVFileReader(projectPath + CSVFile.ORDERCSV.value());
+		SourceReader<Order> orderCSVFileReader = new OrderCSVFileReader(projectPath + CSVFileTest.ORDERCSV.value());
 		List<Order> orderResultList = (ArrayList<Order>) orderCSVFileReader.read(new OrderParser());
 
-		assertThat(true, is(Files.exists(Paths.get(projectPath + CSVFile.ORDERCSV.value()))));
+		assertThat(true, is(Files.exists(Paths.get(projectPath + CSVFileTest.ORDERCSV.value()))));
 		assertThat(1, is(orderResultList.size()));
 		
 		for (int i = 0; i < orders.size() ; i++) {
@@ -80,7 +80,7 @@ public class OrderCSVFileWriterTest {
 	
 	@Test
 	public void writeFlightCSVFileThreeTimes() throws IOException, ParseException {
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.ORDERCSV.value()));
+		Files.deleteIfExists(Paths.get(projectPath + CSVFileTest.ORDERCSV.value()));
 		
 		Flight flight = new Flight();
 		flight.setAirline("Cathay Pacific Airways");
@@ -113,14 +113,14 @@ public class OrderCSVFileWriterTest {
 		orders.add(order2);
 		orders.add(order3);
 		
-		SourceWriter<List<Order>> orderCSVFileWriter = new OrderCSVFileWriter(projectPath + CSVFile.ORDERCSV.value());
+		SourceWriter<List<Order>> orderCSVFileWriter = new OrderCSVFileWriter(projectPath + CSVFileTest.ORDERCSV.value());
 		orderCSVFileWriter.write(orders);
 		orderCSVFileWriter.close();
 		
-		SourceReader<Order> orderCSVFileReader = new OrderCSVFileReader(projectPath + CSVFile.ORDERCSV.value());
+		SourceReader<Order> orderCSVFileReader = new OrderCSVFileReader(projectPath + CSVFileTest.ORDERCSV.value());
 		List<Order> orderResultList = (ArrayList<Order>) orderCSVFileReader.read(new OrderParser());
 
-		assertThat(true, is(Files.exists(Paths.get(projectPath + CSVFile.ORDERCSV.value()))));
+		assertThat(true, is(Files.exists(Paths.get(projectPath + CSVFileTest.ORDERCSV.value()))));
 		assertThat(3, is(orderResultList.size()));
 		for (int i = 0; i < orders.size() ; i++) {
 			assertThat(orders.get(i).getId(), is(orderResultList.get(i).getId()));
