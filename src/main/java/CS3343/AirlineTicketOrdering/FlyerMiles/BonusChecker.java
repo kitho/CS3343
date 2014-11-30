@@ -17,58 +17,47 @@ public class BonusChecker {
 	public double getCreditCardBounsRate(){
 		String bank = card.getBank();
 		if(bank.equals("HSBC")){
-			switch(card.getCreditCardType()){
-				case "VISA":
+			if(card.getCreditCardType().equals("VISA"))
 					return 0.1;
-				case "Master Card":
+			if(card.getCreditCardType().equals("Master Card"))
 					return 0.1;
-				case "American Express":
+			if(card.getCreditCardType().equals("American Express"))
 					return 0.2;
-				default:
-					return 0.0;
-			}
+			return 0.0;
 		}
 		if(bank.equals("DBS")){
-			switch(card.getCreditCardType()){
-				case "VISA":
+			 if(card.getCreditCardType().equals("VISA"))
 					return 0.09;
-				case "Master Card":
+			 if(card.getCreditCardType().equals("Master Card"))
 					return 0.09;
-				case "American Express":
+			 if(card.getCreditCardType().equals("American Express"))
 					return 0.15;
-				default:
-					return 0.0;
-			}
+			return 0.0;
 		}
 		return 0.0;
 	}
 	
 	//check the flight class, return different bonus rate
 	public double getFlightClassBounsRate(){
-		switch(flightclass){
-			case FlightClass.FIRST_CLASS:
+		if(flightclass.equals(FlightClass.FIRST_CLASS))
 				return 0.4;
-			case FlightClass.BUSINESS_CLASS:
+		if(flightclass.equals(FlightClass.BUSINESS_CLASS))
 				return 0.3;
-			case FlightClass.PREMIUM_ECONOMY_CLASS:
+		if(flightclass.equals(FlightClass.PREMIUM_ECONOMY_CLASS))
 				return 0.1;
-			case FlightClass.ECONOMY_CLASS:
+		if(flightclass.equals(FlightClass.ECONOMY_CLASS))
 				return 0.0;	
-			default:
-				return 0.0;
-		}
+		return 0.0;
+		
 	}
 	
 	//check the flight company, return different bonus rate
 	public double getCompanyBounsRate(){
-		switch(company){
-		case "Cathay Pacific Airways":
+		if(company.equals("Cathay Pacific Airways"))
 			return 0.1;
-		case "Dragonair":
+		if(company.equals("Dragonair"))
 			return 0.05;
-		default:
-			return 0.0;	
-		}
+		return 0.0;	
 	}
 	
 }
