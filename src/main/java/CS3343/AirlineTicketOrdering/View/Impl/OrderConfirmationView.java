@@ -54,7 +54,7 @@ public class OrderConfirmationView implements View{
 		System.out.println("Total award flyer miles: "+fmiles.awardMiles(routeList, flights, creditCard));
 		System.out.println("======================================");
 
-		System.out.print("\nConfirm to order? (Yes/No)");
+		System.out.print(LineSeparatorUtil.newLine() + "Confirm to order? (Yes/No)");
 		session.setAttribute("confirmed", bufferedReader.readLine());
 
 
