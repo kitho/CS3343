@@ -129,93 +129,6 @@ public class FlightQueryTest {
 	}
 	
 	
-	@Test
-	public void findFlightsByDepatureAndDestinationAndDateForSingleAirlineAndMultipleFlightsTest() throws ParseException, IOException {
-		SourceReader<AirlineCompany> airlineCompanyReader = mock(AirlineCompanyCSVFileReader.class);
-		SourceReader<Flight> flightReader = mock(FlightCSVFileReader.class);
-		FlightParser flightParser = new FlightParser();
-		AirlineCompanyParser airlineCompanyParser = new AirlineCompanyParser();
-		
-		String depature = "Hong Kong";
-		String destination = "Taiwan"; 
-		Date depatureDate = formatter.parse("2014-01-01 00:00:00");
-		
-		Flight flight1 = new Flight();
-		
-		flight1.setAirline("Cathay Pacific Airways");
-		flight1.setFlightNumber("CP001");
-		flight1.setTravelClass("FIRST");
-		flight1.setDepature(depature);
-		flight1.setDestination(destination);
-		flight1.setDepatureDateTime(formatter.parse("2014-01-01 09:30:00"));
-		flight1.setArrivalDateTime(formatter.parse("2014-01-01 11:30:00"));
-		flight1.setAvailable(30);
-		flight1.setOneWayPrice(2500.00);
-		
-		Flight flight2 = new Flight();
-		
-		flight2.setAirline("Cathay Pacific Airways");
-		flight2.setFlightNumber("CP002");
-		flight2.setTravelClass("FIRST");
-		flight2.setDepature(depature);
-		flight2.setDestination(destination);
-		flight2.setDepatureDateTime(formatter.parse("2014-01-01 12:30:00"));
-		flight2.setArrivalDateTime(formatter.parse("2014-01-01 14:30:00"));
-		flight2.setAvailable(30);
-		flight2.setOneWayPrice(2500.00);
-		
-		Flight flight3 = new Flight();
-		
-		flight3.setAirline("Cathay Pacific Airways");
-		flight3.setFlightNumber("CP003");
-		flight3.setTravelClass("FIRST");
-		flight3.setDepature(depature);
-		flight3.setDestination(destination);
-		flight3.setDepatureDateTime(formatter.parse("2014-01-01 19:30:00"));
-		flight3.setArrivalDateTime(formatter.parse("2014-01-01 21:30:00"));
-		flight3.setAvailable(30);
-		flight3.setOneWayPrice(2500.00);
-		
-		List<Flight> flights = new ArrayList<Flight>();
-		flights.add(flight1);
-		flights.add(flight2);
-		flights.add(flight3);
-		
-		AirlineCompany airlineCompany = new AirlineCompany();
-		airlineCompany.setAirline("Cathay Pacific Airways");
-		
-		List<AirlineCompany> airlineCompanies= new ArrayList<AirlineCompany>();
-		airlineCompanies.add(airlineCompany);
-		
-		when(airlineCompanyReader.read((Parser<AirlineCompany>) any())).thenReturn(airlineCompanies);
-		when(flightReader.read((Parser<Flight>) any())).thenReturn(flights);
-		
-		
-		FlightQuery flightQuery = new FlightQuery(airlineCompanyReader,flightReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
-		List<Flight> flightsResult = flightQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
-				
-		assertThat(flights.size(), is(flightsResult.size()));
-		
-		for (Flight flightResult : flightsResult) {
-			assertThat(depature, is(flightResult.getDepature()));
-			assertThat(destination, is(flightResult.getDestination()));
-			assertThat(true, is(DateUtils.isSameDay(depatureDate, flightResult.getDepatureDateTime())));
-		}
-		
-		for (int i = 0; i < flights.size(); i++) {
-			assertThat(flights.get(i).getAirline(), is(flightsResult.get(i).getAirline()));
-			assertThat(flights.get(i).getFlightNumber(), is(flightsResult.get(i).getFlightNumber()));
-			assertThat(flights.get(i).getTravelClass(), is(flightsResult.get(i).getTravelClass()));
-			assertThat(flights.get(i).getDepature(), is(flightsResult.get(i).getDepature()));
-			assertThat(flights.get(i).getDestination(), is(flightsResult.get(i).getDestination()));
-			assertThat(flights.get(i).getDepatureDateTime(), is(flightsResult.get(i).getDepatureDateTime()));
-			assertThat(flights.get(i).getArrivalDateTime(), is(flightsResult.get(i).getArrivalDateTime()));
-			assertThat(flights.get(i).getAvailable(), is(flightsResult.get(i).getAvailable()));
-			assertThat(flights.get(i).getOneWayPrice(), is(flightsResult.get(i).getOneWayPrice()));
-		}
-
-		
-	}
 	
 	@Test
 	public void findFlightsByDepatureAndDestinationAndDateForMultipleAirlinesAndMultipleFlightsTest() throws ParseException, IOException {
@@ -227,7 +140,6 @@ public class FlightQueryTest {
 		Date depatureDate = formatter.parse("2014-01-01 00:00:00");
 		
 		Flight flight1 = new Flight();
-		
 		flight1.setAirline("Cathay Pacific Airways");
 		flight1.setFlightNumber("CP001");
 		flight1.setTravelClass("FIRST");
@@ -239,9 +151,8 @@ public class FlightQueryTest {
 		flight1.setOneWayPrice(2500.00);
 		
 		Flight flight2 = new Flight();
-		
 		flight2.setAirline("China Airlines");
-		flight2.setFlightNumber("CA001");
+		flight2.setFlightNumber("CA002");
 		flight2.setTravelClass("FIRST");
 		flight2.setDepature(depature);
 		flight2.setDestination(destination);
@@ -251,9 +162,8 @@ public class FlightQueryTest {
 		flight2.setOneWayPrice(2500.00);
 		
 		Flight flight3 = new Flight();
-		
 		flight3.setAirline("Hong Kong Airlines");
-		flight3.setFlightNumber("HKA001");
+		flight3.setFlightNumber("HKA003");
 		flight3.setTravelClass("FIRST");
 		flight3.setDepature(depature);
 		flight3.setDestination(destination);
@@ -262,10 +172,35 @@ public class FlightQueryTest {
 		flight3.setAvailable(30);
 		flight3.setOneWayPrice(2500.00);
 		
+		Flight flight4 = new Flight();
+		flight4.setAirline("Hong Kong Airlines");
+		flight4.setFlightNumber("HKA004");
+		flight4.setTravelClass("FIRST");
+		flight4.setDepature("Hong Kong");
+		flight4.setDestination("B");
+		flight4.setDepatureDateTime(formatter.parse("2014-01-01 19:30:00"));
+		flight4.setArrivalDateTime(formatter.parse("2014-01-01 21:30:00"));
+		flight4.setAvailable(30);
+		flight4.setOneWayPrice(2500.00);
+		
+		Flight flight5 = new Flight();
+		flight5.setAirline("China Airlines");
+		flight5.setFlightNumber("CA005");
+		flight5.setTravelClass("FIRST");
+		flight5.setDepature(depature);
+		flight5.setDestination(destination);
+		flight5.setDepatureDateTime(formatter.parse("2014-01-01 12:30:00"));
+		flight5.setArrivalDateTime(formatter.parse("2014-01-01 14:30:00"));
+		flight5.setAvailable(0);
+		flight5.setOneWayPrice(2500.00);
+		
 		List<Flight> flights = new ArrayList<Flight>();
 		flights.add(flight1);
 		flights.add(flight2);
 		flights.add(flight3);
+		flights.add(flight4);
+		flights.add(flight5);
+
 		
 		AirlineCompany airlineCompany1 = new AirlineCompany();
 		airlineCompany1.setAirline("Cathay Pacific Airways");
@@ -324,8 +259,21 @@ public class FlightQueryTest {
 		flight.setAvailable(30);
 		flight.setOneWayPrice(2500.00);
 		
+		Flight flight2 = new Flight();
+		flight2.setAirline("Cathay Pacific Airways");
+		flight2.setFlightNumber("CP002");
+		flight2.setTravelClass("FIRST");
+		flight2.setDepature("Hong Kong");
+		flight2.setDestination("Taiwan");
+		flight2.setDepatureDateTime(formatter.parse("2014-01-01 09:30:00"));
+		flight2.setArrivalDateTime(formatter.parse("2014-01-01 11:30:00"));
+		flight2.setAvailable(0);
+		flight2.setOneWayPrice(2500.00);
+		
 		List<Flight> flights = new ArrayList<Flight>();
 		flights.add(flight);
+		flights.add(flight2);
+
 		
 		AirlineCompany airlineCompany = new AirlineCompany();
 		airlineCompany.setAirline("Cathay Pacific Airways");
@@ -339,6 +287,8 @@ public class FlightQueryTest {
 		
 		FlightQuery flightQuery = new FlightQuery(airlineCompanyReader,flightReader,flightWriter);
 		flightQuery.updateFlightAvailableByFlightAndReducingNumber(flight, 1);
+		flightQuery.updateFlightAvailableByFlightAndReducingNumber(flight2, 1);
+
 		
 		int count = 0;
 		for (AirlineCompany airlineCompanyResult : airlineCompanies) {
@@ -348,9 +298,15 @@ public class FlightQueryTest {
 					assertThat(flightResult.getAvailable(), is(29));
 				}
 			}
+			for (Flight flightResult : airlineCompanyResult.getFlights()) {
+				if (flight2.equals(flightResult)) {
+					count++;
+					assertThat(flightResult.getAvailable(), is(0));
+				}
+			}
 		}
 		
-		assertThat(count, is(1));
+		assertThat(count, is(2));
 	}
 	
 	@Test
