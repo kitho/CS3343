@@ -1,11 +1,11 @@
 Point,PlanID,Flight Class,Baggage Free Unit,BFU Amount,Sporting Equipment,SE Free Unit,SEFU Amount,Extre Fee Unit,EFU Amount,Extra Extra Fee Flight Class,EEF Level,EE Fee,EEF Unit,EEFU Amount From,EEFU Amount To,Pet Fee Unit,P Fee,Extra Pet Fee Flight Class,EPF Level,EP Fee,EPF Unit,EPFU Amount From,EPFU Amount To,Place From,Place To
-S,1,First Class,KG,40,Bicycles equipment,KG,10,KG,100,First Class,1,100,KG,25,30,KG,30,First Class,1,100,KG,25,30,Hong Kong,Taiwan
-,,Business Class,KG,30,Golf equipment,KG,10,,,,2,100,Inch,40,50,,,,2,100,Inch,40,50,,
-,,Premium Economy Class,KG,25,Ski equipment,KG,10,,,,3,400,KG,31,9999,,,,3,400,KG,31,9999,,
-,,Economy Class,KG,20,Surfboards equipment,KG,10,,,,4,400,Inch,51,9999,,,,4,400,Inch,51,9999,,
-,,,,,Fishing equipment,KG,10,,,Business Class,1,100,KG,25,30,,,Business Class,1,100,KG,25,30,,
-,,,,,Trekking equipment,KG,10,,,,2,100,Inch,40,50,,,,2,100,Inch,40,50,,
-,,,,,,,,,,,3,400,KG,31,9999,,,,3,400,KG,31,9999,,
+S,1,First Class,KG,20,Bicycles equipment,KG,10,KG,100,First Class,1,100,KG,25,30,KG,30,First Class,1,100,KG,25,30,Hong Kong,Taiwan
+,,Business Class,KG,20,Golf equipment,KG,10,,,,2,100,Inch,40,50,,,,2,100,Inch,40,50,Hong Kong,Japan
+,,Premium Economy Class,KG,20,Ski equipment,KG,10,,,,3,400,KG,31,9999,,,,3,400,KG,31,9999,Hong Kong,Thailand
+,,Economy Class,KG,20,Surfboards equipment,KG,10,,,,4,400,Inch,51,9999,,,,4,400,Inch,51,9999,Singapore,Hong Kong
+,,,,,Fishing equipment,KG,10,,,Business Class,1,100,KG,25,30,,,Business Class,1,100,KG,25,30,Taiwan,Hong Kong
+,,,,,Trekking equipment,KG,10,,,,2,100,Inch,40,50,,,,2,100,Inch,40,50,Tokyo,Hong Kong
+,,,,,,,,,,,3,400,KG,31,9999,,,,3,400,KG,31,9999,Thailand,Hong Kong
 ,,,,,,,,,,,4,400,Inch,51,9999,,,,4,400,Inch,51,9999,,
 ,,,,,,,,,,Premium Economy Class,1,100,KG,25,30,,,Premium Economy Class,1,100,KG,25,30,,
 ,,,,,,,,,,,2,100,Inch,40,50,,,,2,100,Inch,40,50,,
@@ -15,12 +15,12 @@ S,1,First Class,KG,40,Bicycles equipment,KG,10,KG,100,First Class,1,100,KG,25,30
 ,,,,,,,,,,,2,100,Inch,40,50,,,,2,100,Inch,40,50,,
 ,,,,,,,,,,,3,400,KG,31,9999,,,,3,400,KG,31,9999,,
 E,,,,,,,,,,,4,400,Inch,51,9999,,,,4,400,Inch,51,9999,,
-S,2,First Class,Piece,2,Bicycles equipment,Piece,1,Piece,1000,First Class,1,100,KG,25,30,Piece,1500,First Class,1,100,KG,25,30,Hong Kong,Japan
-,,Business Class,Piece,1,Golf equipment,Piece,1,,,,2,100,Inch,40,50,,,,2,100,Inch,40,50,,
-,,Premium Economy Class,Piece,1,Ski equipment,Piece,1,,,,3,400,KG,31,9999,,,,3,400,KG,31,9999,,
-,,Economy Class,Piece,1,Surfboards equipment,Piece,1,,,,4,400,Inch,51,9999,,,,4,400,Inch,51,9999,,
-,,,,,Fishing equipment,Piece,1,,,Business Class,1,100,KG,25,30,,,Business Class,1,100,KG,25,30,,
-,,,,,Trekking equipment,Piece,1,,,,2,100,Inch,40,50,,,,2,100,Inch,40,50,,
+S,2,First Class,Piece,1,Bicycles equipment,Piece,1,Piece,1000,First Class,1,100,KG,25,30,Piece,1500,First Class,1,100,KG,25,30,,
+,,Business Class,Piece,1,Golf equipment,Piece,1,,,,2,100,Inch,40,50,,,,2,100,Inch,40,50,Tokyo,Taiwan
+,,Premium Economy Class,Piece,1,Ski equipment,Piece,1,,,,3,400,KG,31,9999,,,,3,400,KG,31,9999,Thailand,Taiwan
+,,Economy Class,Piece,1,Surfboards equipment,Piece,1,,,,4,400,Inch,51,9999,,,,4,400,Inch,51,9999,Tokyo,Singapore
+,,,,,Fishing equipment,Piece,1,,,Business Class,1,100,KG,25,30,,,Business Class,1,100,KG,25,30,Singapore,Taiwan
+,,,,,Trekking equipment,Piece,1,,,,2,100,Inch,40,50,,,,2,100,Inch,40,50,Tokyo,New York
 ,,,,,,,,,,,3,400,KG,31,9999,,,,3,400,KG,31,9999,,
 ,,,,,,,,,,,4,400,Inch,51,9999,,,,4,400,Inch,51,9999,,
 ,,,,,,,,,,Premium Economy Class,1,100,KG,25,30,,,Premium Economy Class,1,100,KG,25,30,,
