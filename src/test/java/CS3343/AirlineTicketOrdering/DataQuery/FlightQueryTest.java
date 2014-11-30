@@ -257,8 +257,8 @@ public class FlightQueryTest {
 		flight3.setTravelClass("FIRST");
 		flight3.setDepature(depature);
 		flight3.setDestination(destination);
-		flight3.setDepatureDateTime(formatter.parse("2014-01-01 19:30:00"));
-		flight3.setArrivalDateTime(formatter.parse("2014-01-01 21:30:00"));
+		flight3.setDepatureDateTime(formatter.parse("2014-01-02 19:30:00"));
+		flight3.setArrivalDateTime(formatter.parse("2014-01-02 21:30:00"));
 		flight3.setAvailable(30);
 		flight3.setOneWayPrice(2500.00);
 		
@@ -283,26 +283,27 @@ public class FlightQueryTest {
 		when(flightReader.read((Parser<Flight>) any())).thenReturn(flights);
 		
 		FlightQuery flightQuery = new FlightQuery(airlineCompanyReader,flightReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
-		List<Flight> flightsResult = flightQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
+		List<Flight> flightsResults = flightQuery.findFlightsByDepatureAndDestinationAndDate(depature, destination, depatureDate);
 		
-		assertThat(flights.size(), is(flightsResult.size()));
+		assertThat(flightsResults.size(), is(2));
 		
-		for (Flight flightResult : flightsResult) {
+		for (int i = 0; i < flightsResults.size(); i++) {
+			Flight flightResult = flightsResults.get(i);
 			assertThat(depature, is(flightResult.getDepature()));
 			assertThat(destination, is(flightResult.getDestination()));
 			assertThat(true, is(DateUtils.isSameDay(depatureDate, flightResult.getDepatureDateTime())));
 		}
 		
-		for (int i = 0; i < flights.size(); i++) {
-			assertThat(flights.get(i).getAirline(), is(flightsResult.get(i).getAirline()));
-			assertThat(flights.get(i).getFlightNumber(), is(flightsResult.get(i).getFlightNumber()));
-			assertThat(flights.get(i).getTravelClass(), is(flightsResult.get(i).getTravelClass()));
-			assertThat(flights.get(i).getDepature(), is(flightsResult.get(i).getDepature()));
-			assertThat(flights.get(i).getDestination(), is(flightsResult.get(i).getDestination()));
-			assertThat(flights.get(i).getDepatureDateTime(), is(flightsResult.get(i).getDepatureDateTime()));
-			assertThat(flights.get(i).getArrivalDateTime(), is(flightsResult.get(i).getArrivalDateTime()));
-			assertThat(flights.get(i).getAvailable(), is(flightsResult.get(i).getAvailable()));
-			assertThat(flights.get(i).getOneWayPrice(), is(flightsResult.get(i).getOneWayPrice()));
+		for (int i = 0; i < flightsResults.size(); i++) {
+			assertThat(flights.get(i).getAirline(), is(flightsResults.get(i).getAirline()));
+			assertThat(flights.get(i).getFlightNumber(), is(flightsResults.get(i).getFlightNumber()));
+			assertThat(flights.get(i).getTravelClass(), is(flightsResults.get(i).getTravelClass()));
+			assertThat(flights.get(i).getDepature(), is(flightsResults.get(i).getDepature()));
+			assertThat(flights.get(i).getDestination(), is(flightsResults.get(i).getDestination()));
+			assertThat(flights.get(i).getDepatureDateTime(), is(flightsResults.get(i).getDepatureDateTime()));
+			assertThat(flights.get(i).getArrivalDateTime(), is(flightsResults.get(i).getArrivalDateTime()));
+			assertThat(flights.get(i).getAvailable(), is(flightsResults.get(i).getAvailable()));
+			assertThat(flights.get(i).getOneWayPrice(), is(flightsResults.get(i).getOneWayPrice()));
 		}
 	}
 	
@@ -350,6 +351,95 @@ public class FlightQueryTest {
 		}
 		
 		assertThat(count, is(1));
+	}
+	
+	@Test
+	public void findAllFlight() throws ParseException, IOException {
+		SourceReader<AirlineCompany> airlineCompanyReader = mock(AirlineCompanyCSVFileReader.class);
+		SourceReader<Flight> flightReader = mock(FlightCSVFileReader.class);
+		
+		String depature = "Hong Kong";
+		String destination = "Taiwan"; 
+		Date depatureDate = formatter.parse("2014-01-01 00:00:00");
+		
+		Flight flight1 = new Flight();
+		
+		flight1.setAirline("Cathay Pacific Airways");
+		flight1.setFlightNumber("CP001");
+		flight1.setTravelClass("FIRST");
+		flight1.setDepature(depature);
+		flight1.setDestination(destination);
+		flight1.setDepatureDateTime(formatter.parse("2014-01-01 09:30:00"));
+		flight1.setArrivalDateTime(formatter.parse("2014-01-01 11:30:00"));
+		flight1.setAvailable(30);
+		flight1.setOneWayPrice(2500.00);
+		
+		Flight flight2 = new Flight();
+		
+		flight2.setAirline("China Airlines");
+		flight2.setFlightNumber("CA001");
+		flight2.setTravelClass("FIRST");
+		flight2.setDepature(depature);
+		flight2.setDestination(destination);
+		flight2.setDepatureDateTime(formatter.parse("2014-01-01 12:30:00"));
+		flight2.setArrivalDateTime(formatter.parse("2014-01-01 14:30:00"));
+		flight2.setAvailable(30);
+		flight2.setOneWayPrice(2500.00);
+		
+		Flight flight3 = new Flight();
+		
+		flight3.setAirline("Hong Kong Airlines");
+		flight3.setFlightNumber("HKA001");
+		flight3.setTravelClass("FIRST");
+		flight3.setDepature(depature);
+		flight3.setDestination(destination);
+		flight3.setDepatureDateTime(formatter.parse("2014-01-01 19:30:00"));
+		flight3.setArrivalDateTime(formatter.parse("2014-01-01 21:30:00"));
+		flight3.setAvailable(30);
+		flight3.setOneWayPrice(2500.00);
+		
+		List<Flight> flights = new ArrayList<Flight>();
+		flights.add(flight1);
+		flights.add(flight2);
+		flights.add(flight3);
+		
+		AirlineCompany airlineCompany1 = new AirlineCompany();
+		airlineCompany1.setAirline("Cathay Pacific Airways");
+		AirlineCompany airlineCompany2 = new AirlineCompany();
+		airlineCompany2.setAirline("China Airlines");
+		AirlineCompany airlineCompany3 = new AirlineCompany();
+		airlineCompany3.setAirline("Hong Kong Airlines");
+		
+		List<AirlineCompany> airlineCompanies= new ArrayList<AirlineCompany>();
+		airlineCompanies.add(airlineCompany1);
+		airlineCompanies.add(airlineCompany2);
+		airlineCompanies.add(airlineCompany3);
+		
+		when(airlineCompanyReader.read((Parser<AirlineCompany>) any())).thenReturn(airlineCompanies);
+		when(flightReader.read((Parser<Flight>) any())).thenReturn(flights);
+		
+		FlightQuery flightQuery = new FlightQuery(airlineCompanyReader,flightReader, (SourceWriter<List<Flight>>)mock(FlightCSVFileWriter.class));
+		List<Flight> flightsResult = flightQuery.getFlights();
+		
+		assertThat(flights.size(), is(flightsResult.size()));
+		
+		for (Flight flightResult : flightsResult) {
+			assertThat(depature, is(flightResult.getDepature()));
+			assertThat(destination, is(flightResult.getDestination()));
+			assertThat(true, is(DateUtils.isSameDay(depatureDate, flightResult.getDepatureDateTime())));
+		}
+		
+		for (int i = 0; i < flights.size(); i++) {
+			assertThat(flights.get(i).getAirline(), is(flightsResult.get(i).getAirline()));
+			assertThat(flights.get(i).getFlightNumber(), is(flightsResult.get(i).getFlightNumber()));
+			assertThat(flights.get(i).getTravelClass(), is(flightsResult.get(i).getTravelClass()));
+			assertThat(flights.get(i).getDepature(), is(flightsResult.get(i).getDepature()));
+			assertThat(flights.get(i).getDestination(), is(flightsResult.get(i).getDestination()));
+			assertThat(flights.get(i).getDepatureDateTime(), is(flightsResult.get(i).getDepatureDateTime()));
+			assertThat(flights.get(i).getArrivalDateTime(), is(flightsResult.get(i).getArrivalDateTime()));
+			assertThat(flights.get(i).getAvailable(), is(flightsResult.get(i).getAvailable()));
+			assertThat(flights.get(i).getOneWayPrice(), is(flightsResult.get(i).getOneWayPrice()));
+		}
 	}
 	
 	
