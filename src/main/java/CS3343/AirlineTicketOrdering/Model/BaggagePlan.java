@@ -32,39 +32,6 @@ public class BaggagePlan {
 		super();
 	}
 
-	/**
-	 * Constructor
-	 * @param unit
-	 * @param freeUnit
-	 * @param extraFreeUnitForSportingEquipments
-	 * @param extraFeePerUnit
-	 * @param extraExtraFeeForLevel
-	 * @param extraExtraFeeCondtion
-	 * @param petFee
-	 * @param extraExtraPetFeeForLevel
-	 * @param extraExtraPetFeeCondtion
-	 */
-	public BaggagePlan(ArrayList<String> unit,
-			Map<String, Map<String, Float>> freeUnit,
-			Map<String, Map<String, Float>> extraFreeUnitForSportingEquipments,
-			Map<String, Float> extraFeePerUnit,
-			Map<String, Map<String, Float>> extraExtraFeeForLevel,
-			Map<String, Map<String, ArrayList<Float>>> extraExtraFeeCondtion,
-			Map<String, Float> petFee,
-			Map<String, Map<String, Float>> extraExtraPetFeeForLevel,
-			Map<String, Map<String, ArrayList<Float>>> extraExtraPetFeeCondtion) {
-		super();
-		this.unit = unit;
-		this.freeUnit = freeUnit;
-		this.extraFreeUnitForSportingEquipments = extraFreeUnitForSportingEquipments;
-		this.extraFeePerUnit = extraFeePerUnit;
-		this.extraExtraFeeForLevel = extraExtraFeeForLevel;
-		this.extraExtraFeeCondtion = extraExtraFeeCondtion;
-		this.petFee = petFee;
-		this.extraExtraPetFeeForLevel = extraExtraPetFeeForLevel;
-		this.extraExtraPetFeeCondtion = extraExtraPetFeeCondtion;
-	}
-
 	public ArrayList<String> getUnit() {
 		return unit;
 	}

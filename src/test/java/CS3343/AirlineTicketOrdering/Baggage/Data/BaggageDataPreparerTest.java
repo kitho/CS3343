@@ -96,6 +96,20 @@ public class BaggageDataPreparerTest {
 	}
 	
 	@Test
+	public void subBaggageUnitNumWithNotFound() {
+		Map<String, Float> remainingFreeUnit = new HashMap<String, Float>();
+		Map<String, Float> unitNumForBaggage = new HashMap<String, Float>();
+		
+		remainingFreeUnit.put("NOT", 20f);
+		unitNumForBaggage.put("NOT2", 10f);
+		Map<String, Float> resultUnit = preparer.subBaggageUnitNum(remainingFreeUnit, unitNumForBaggage);
+		
+		Map<String, Float> expectedUnit = new HashMap<String, Float>();
+		expectedUnit.put("NOT", 0f);
+		assertEquals(expectedUnit, resultUnit);
+	}
+	
+	@Test
 	public void plusSportingEquipmentsWithPositiveUnit() {
 		Map<String, Float> remainingFreeUnit = new HashMap<String, Float>();
 		ArrayList<String> sportingEquipments = new ArrayList<String>();
