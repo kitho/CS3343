@@ -139,14 +139,5 @@ public class PathFinding {
 		return resultRoutes;		
 	}
 	
-	public ArrayList<Route> findRouteDest(String destination,ArrayList<Route> rl){
-		ArrayList<Route> resultRoutes = new ArrayList<Route>();
-		for (int i = 0; i < rl.size(); i++){
-			Route tempRoute = rl.get(i);
-			if (tempRoute.getDeparture().equals(destination))
-				resultRoutes.add(tempRoute);
-		}
-		return resultRoutes;				
-	}
-	
+
 }

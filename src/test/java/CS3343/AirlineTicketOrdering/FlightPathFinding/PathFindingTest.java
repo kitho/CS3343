@@ -112,7 +112,7 @@ public class PathFindingTest {
 	}	
 	
 	@Test
-	public void testDirectFlight6(){
+	public void testInDirectFlight1(){
 		PathFinding	pathFinding = new PathFinding("Tokyo", "Taiwan", rTable);
 		ArrayList<FlightPath> resultRoutes = pathFinding.getIndirectFlight(new ArrayList<FlightPath>());
 /*
@@ -128,12 +128,24 @@ public class PathFindingTest {
 	
 	
 	@Test
-	public void testDirectFlight7(){
+	public void testInDirectFlight2(){
 		PathFinding	pathFinding = new PathFinding("Hong Kong", "Taiwan", rTable);
 		ArrayList<FlightPath> resultRoutes = pathFinding.getIndirectFlight(new ArrayList<FlightPath>());
 		assertThat(resultRoutes.size(), is(6));
 	}
 	
+	@Test
+	public void testInDirectFlight3(){
+		PathFinding	pathFinding = new PathFinding("Hong Kong", "China", rTable);
+		ArrayList<FlightPath> resultRoutes = pathFinding.getIndirectFlight(new ArrayList<FlightPath>());
+		assertThat(resultRoutes.size(), is(0));
+	}
 	
+	@Test
+	public void testDirectFlight9(){
+		PathFinding	pathFinding = new PathFinding("Hong Kong", "China", rTable);
+		ArrayList<FlightPath> resultRoutes = pathFinding.getDirectFlight();
+		assertThat(resultRoutes.size(), is(0));
+	}
 	
 }
