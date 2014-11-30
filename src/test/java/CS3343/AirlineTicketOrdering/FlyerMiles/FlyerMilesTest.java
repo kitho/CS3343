@@ -213,5 +213,55 @@ public class FlyerMilesTest {
 		int expect1 = (int)(0 * (1+0.09+0.05+0.3));
 		assertEquals(result1,expect1);
 	}
+	
+	@Test
+	public void test09() {
+		CreditCard card = new CreditCard();
+		card.setBank("DBS");
+		card.setCreditCardType("VIP");
+		ArrayList<Route> routeList = new ArrayList<Route>();
+		ArrayList<Flight> flight = new ArrayList<Flight>();
+		FlyerMiles fm = new FlyerMiles();
+		
+		Route r = new Route();
+		r.setDeparture("Hong Kong");
+		r.setDestination("Taiwan");
+		r.setDistance(-111);
+		routeList.add(r);
+		
+		Flight f = new Flight();
+		f.setAirline("Dragonair");
+		f.setTravelClass(FlightClass.BUSINESS_CLASS);
+		flight.add(f);
+		int result1 = fm.awardMiles(routeList, flight, card);
+		
+		int expect1 = (int)(0 * (1+0.09+0.05+0.3));
+		assertEquals(result1,expect1);
+	}
+	
+	@Test
+	public void test10() {
+		CreditCard card = new CreditCard();
+		card.setBank("HSBC");
+		card.setCreditCardType("VIP");
+		ArrayList<Route> routeList = new ArrayList<Route>();
+		ArrayList<Flight> flight = new ArrayList<Flight>();
+		FlyerMiles fm = new FlyerMiles();
+		
+		Route r = new Route();
+		r.setDeparture("Hong Kong");
+		r.setDestination("Taiwan");
+		r.setDistance(-111);
+		routeList.add(r);
+		
+		Flight f = new Flight();
+		f.setAirline("Dragonair");
+		f.setTravelClass(FlightClass.BUSINESS_CLASS);
+		flight.add(f);
+		int result1 = fm.awardMiles(routeList, flight, card);
+		
+		int expect1 = (int)(0 * (1+0.09+0.05+0.3));
+		assertEquals(result1,expect1);
+	}
 
 }
