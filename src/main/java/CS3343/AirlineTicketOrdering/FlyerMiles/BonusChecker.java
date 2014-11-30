@@ -24,6 +24,8 @@ public class BonusChecker {
 					return 0.1;
 				case "American Express":
 					return 0.2;
+				default:
+					return 0.0;
 			}
 		}
 		if(bank.equals("DBS")){
@@ -34,6 +36,8 @@ public class BonusChecker {
 					return 0.09;
 				case "American Express":
 					return 0.15;
+				default:
+					return 0.0;
 			}
 		}
 		return 0.0;
@@ -50,8 +54,9 @@ public class BonusChecker {
 				return 0.1;
 			case FlightClass.ECONOMY_CLASS:
 				return 0.0;	
+			default:
+				return 0.0;
 		}
-		return 0.0;
 	}
 	
 	//check the flight company, return different bonus rate
@@ -61,8 +66,9 @@ public class BonusChecker {
 			return 0.1;
 		case "Dragonair":
 			return 0.05;
+		default:
+			return 0.0;	
 		}
-		return 0.0;
 	}
 	
 }
