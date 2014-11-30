@@ -3,6 +3,8 @@ package CS3343.AirlineTicketOrdering.DataQuery;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class BaggageQueryTest {
 	private List<BaggagePlan> plans;
 	
 	@Before
-	public void initialEnvironment(){
+	public void initialEnvironment() throws IOException, ParseException{
 		plans = new ArrayList<BaggagePlan>();
 		
 		

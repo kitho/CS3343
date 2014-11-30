@@ -26,15 +26,14 @@ public class BaggageQuery {
 	/**
 	 * Baggage Query constructor
 	 * @param baggagePlanCSVFileReader
+	 * @throws ParseException 
+	 * @throws IOException 
 	 */
-	public BaggageQuery(BaggagePlanCSVFileReader baggagePlanCSVFileReader) {
+	public BaggageQuery(BaggagePlanCSVFileReader baggagePlanCSVFileReader) throws IOException, ParseException {
 		//Read Baggage Plan
 		Parser<BaggagePlan> parser = new BaggagePlanParser();
-		try {
-			plans = baggagePlanCSVFileReader.read(parser);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		plans = baggagePlanCSVFileReader.read(parser);
+
 	}
 	
 

@@ -27,12 +27,8 @@ public class InputBaggageDataController extends AirlineTicketOrderingController 
 	@Override
 	public void execute() throws Exception {
 		//***TEMP DATA***//
-		if(session.getAttribute("flightClass") == null)
-			session.setAttribute("flightClass", FlightClass.ECONOMY_CLASS);
-		if(session.getAttribute("numberOfTicket") == null)
-			session.setAttribute("numberOfTicket", 1);
-		//***TEMP DATA***//
-
+		session.setAttribute("flightClass", FlightClass.FIRST_CLASS);
+	
 		//Get baggage plan
 		String deapture = (String) session.getAttribute("deapture");
 		String destination = (String) session.getAttribute("destination");

@@ -63,10 +63,7 @@ public class AirlineTicketOrderingSystem {
 			
 			Session session = Session.getInstance(); 
 			AirlineTicketOrderingController inputDestinationController = new InputDestinationController(session, new InputDestinationView(bufferedReader));
-			AirlineTicketOrderingController flightSelectionController = new FlightSelectionController(session, new FlightSelectionView(bufferedReader), 
-					new FlightQuery(new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value()), 
-							new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value()), 
-							new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value())));
+			AirlineTicketOrderingController flightSelectionController = new FlightSelectionController(session, new FlightSelectionView(bufferedReader));
 			AirlineTicketOrderingController inputBaggageDataController = new InputBaggageDataController(session, new InputBaggageDataView(bufferedReader), 
 					new BaggageQuery(new BaggagePlanCSVFileReader(projectPath + CSVFile.BAGGAGEPLANCSV.value())));
 			AirlineTicketOrderingController baggageCalculationController = new BaggageCalculationController(session, new BaggageFeeCalculationView(bufferedReader));

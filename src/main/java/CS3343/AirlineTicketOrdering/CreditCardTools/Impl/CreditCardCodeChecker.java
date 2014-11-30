@@ -22,16 +22,20 @@ public class CreditCardCodeChecker implements CodeChecker {
 			cardnum += tempString[i];
 		}
 		 
+		boolean result= false;
 		switch(typeinput){
 			case "VISA":
-				return cardnum.matches("\\b(4[0-9]{12}(?:[0-9]{3})?)\\b");
+				result = cardnum.matches("\\b(4[0-9]{12}(?:[0-9]{3})?)\\b");
+				break;
 			case "Master Card":
-				return cardnum.matches("\\b(5[1-5][0-9]{14})\\b");
+				result = cardnum.matches("\\b(5[1-5][0-9]{14})\\b");
+				break;
 			case "American Express":
-				return cardnum.matches("\\b(3[47][0-9]{13})\\b");
-			default:
-				return false;
+				result = cardnum.matches("\\b(3[47][0-9]{13})\\b");
+				break;
 		}
+		
+		return result;
 
 	}
 }
