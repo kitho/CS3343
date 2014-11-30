@@ -121,7 +121,7 @@ public class OrderQueryTest {
 		
 	}
 	
-	
+	@Test
 	public void TestSaveOrder() throws ParseException, IOException{
 		SourceReader<Order> orderReader = mock(OrderCSVFileReader.class);
 
