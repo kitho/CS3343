@@ -13,11 +13,13 @@ public class RouteQuery {
 			Flight flight = flights.get(i);
 			boolean exist = false;
 			for(int j = 0 ; j < routes.size(); j++){
-				if(flight.getDepature().equals(routes.get(j).getDeparture()) && flight.getDestination().equals(routes.get(j).getDestination())){
+				Route route = routes.get(j);
+				if(flight.getDepature().equals(route.getDeparture()) && flight.getDestination().equals(route.getDestination())){
 					routes.get(j).addFlight(flight);
 					exist = true;
 				}
 			}
+			
 			if (!exist) {
 				Route temp = new Route();
 				temp.setDeparture(flight.getDepature());

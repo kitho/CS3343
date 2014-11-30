@@ -39,18 +39,6 @@ public class FlightCSVFileReaderTest {
 
 	
 	@Test
-	public void readFlightCSVFileWhenFileNotExisted() throws IOException{
-		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
-		SourceReader<Flight> flightCsvReader;
-		try {
-			flightCsvReader = new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value());
-			fail("File not existed");
-		} catch (FileNotFoundException e) {
-			assertThat(e.getMessage().toString(), is(not(nullValue())));
-		}
-	}
-	
-	@Test
 	public void readFlightCSVFileWithOneRecordTest() throws IOException, ParseException{		
 		Files.deleteIfExists(Paths.get(projectPath + CSVFile.FLIGHTCSV.value()));
 		
