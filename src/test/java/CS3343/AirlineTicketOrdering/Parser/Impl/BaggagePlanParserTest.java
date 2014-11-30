@@ -219,5 +219,36 @@ public class BaggagePlanParserTest {
 		assertEquals(new ArrayList<String>(), plan.getPlaceTos());
 		assertEquals(baggagePlan.getUnit(), plan.getUnit());
 	}
+	
+	@Test
+	public void parserBaggagePartOfEmptyString() throws ParseException {
+		//===Ready a string for a baggage plan===//
+		List<String> baggageCSVFormatStrings = new ArrayList<String>();
+		baggageCSVFormatStrings.add("S,1,,,20,,,10,KG,,,1,100,KG,,30,,30,,1,,,25,,,Taiwan");
+		baggageCSVFormatStrings.add(",,,,,,KG,10,,,,2,100,,,50,20,,,2,,,40,50,,");
+		baggageCSVFormatStrings.add(",,,,,,,,,,,3,400,,31,,,,,3,400,,,9999,,");
+		baggageCSVFormatStrings.add("E,,,,,,,,,,,4,,,,9999,,,,4,,,,,,T");
+			
+		//Parse the string
+		Parser<BaggagePlan> parser = new BaggagePlanParser();
+		BaggagePlan plan = null;
+		for(int i = 0; i < baggageCSVFormatStrings.size(); i++){
+			plan = parser.parseString(baggageCSVFormatStrings.get(i));
+		}
+		
+		//Compare the object and parsered string
+		assertEquals(new ArrayList<String>(), plan.getAvailSportingEquipments());
+		assertEquals(new HashMap<String, Map<String, ArrayList<Float>>>(), plan.getExtraExtraFeeCondtion());
+		assertEquals(new HashMap<String, Map<String, Float>>(), plan.getExtraExtraFeeForLevel());
+		assertEquals(new HashMap<String, Map<String, ArrayList<Float>>>(), plan.getExtraExtraPetFeeCondtion());
+		assertEquals(new HashMap<String, Map<String, Float>>(), plan.getExtraExtraPetFeeForLevel());
+		assertEquals(new HashMap<String, Float>(), plan.getExtraFeePerUnit());
+		assertEquals(new HashMap<String, Map<String, Float>>(), plan.getExtraFreeUnitForSportingEquipments());
+		assertEquals(new HashMap<String, Map<String, Float>>(), plan.getFreeUnit());
+		assertEquals(new HashMap<String, Float>(), plan.getPetFee());
+		assertEquals(new ArrayList<String>(), plan.getPlaceFroms());
+		assertEquals(new ArrayList<String>(), plan.getPlaceTos());
+		assertEquals(baggagePlan.getUnit(), plan.getUnit());
+	}
 
 }
