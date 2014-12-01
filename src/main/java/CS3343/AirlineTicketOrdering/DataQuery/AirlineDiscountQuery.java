@@ -11,10 +11,19 @@ import CS3343.AirlineTicketOrdering.Parser.Impl.AirlineDiscountParser;
 public class AirlineDiscountQuery {
 	private List<AirlineDiscount> airlineDiscounts;
 	
+	/**
+	 * Constructs a airline discount query with required parameters
+	 * @param airlineDiscountReader
+	 * @return 
+	 */
 	public AirlineDiscountQuery(SourceReader<AirlineDiscount> airlineDiscountReader) throws IOException, ParseException{
 		airlineDiscounts = airlineDiscountReader.read(new AirlineDiscountParser());
 	}
 	
+	/**
+	 * find all airline discounts
+	 * @return  List<AirlineDiscount> airlineDiscounts
+	 */
 	public List<AirlineDiscount> findAllAirlineDiscounts(){
 		return this.airlineDiscounts;
 	}

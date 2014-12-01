@@ -7,6 +7,13 @@ import CS3343.AirlineTicketOrdering.Model.Flight;
 
 public class AirlineCalculator implements Calculator {
 
+	/**
+	 * calculate the total amount
+	 * @param flights
+	 * @param numberOfTicket
+	 * @param discount
+	 * @return double totalAmount
+	 */
 	public double calculate(List<Flight> flights, int numberOfTicket,
 			double[] discount) {
 		double totalAmount = 0.00;

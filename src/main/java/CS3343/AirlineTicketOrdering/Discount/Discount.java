@@ -7,6 +7,10 @@ import CS3343.AirlineTicketOrdering.Model.Flight;
 
 public interface Discount {
 	
+	/**
+	 * get Discount
+	 * @return double discount
+	 */
 	public double getDiscount();
 
 }

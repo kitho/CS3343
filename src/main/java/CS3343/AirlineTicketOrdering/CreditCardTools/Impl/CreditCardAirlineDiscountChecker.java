@@ -12,10 +12,21 @@ public class CreditCardAirlineDiscountChecker implements CreditCardDiscountCheck
 	
 	private List<AirlineDiscount> airlineDiscounts;
 	
+	/**
+	 * Constructs a credit card airline discount checker with airline discounts
+	 * @param airlineDiscounts
+	 * @return 
+	 */
 	public CreditCardAirlineDiscountChecker(List<AirlineDiscount> airlineDiscounts){
 		this.airlineDiscounts = airlineDiscounts;
 	}
 	
+	/**
+	 * check airline discounts
+	 * @param flights
+	 * @param card
+	 * @return double[] discounts
+	 */
 	@Override
 	public double[] check(List<Flight> flights, CreditCard card) {
 		// TODO Auto-generated method stub
@@ -27,7 +38,12 @@ public class CreditCardAirlineDiscountChecker implements CreditCardDiscountCheck
 		return discounts;
 	}
 	
-
+	/**
+	 * check airline discount
+	 * @param flight
+	 * @param card
+	 * @return double discount
+	 */
 	@Override
 	public double check(Flight flight, CreditCard card) {
 		// TODO Auto-generated method stub
