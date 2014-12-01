@@ -12,6 +12,10 @@ import CS3343.AirlineTicketOrdering.View.View;
 public class EnquireCreditCardView implements View {
 	private BufferedReader bufferedReader;
 	
+	/**
+	 * Constructor
+	 * @param bufferedReader
+	 */
 	public EnquireCreditCardView(BufferedReader bufferedReader) {
 		this.bufferedReader = bufferedReader;
 	}

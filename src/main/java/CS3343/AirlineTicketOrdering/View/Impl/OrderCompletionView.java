@@ -6,6 +6,10 @@ import CS3343.AirlineTicketOrdering.View.View;
 
 public class OrderCompletionView implements View {
 
+	/**
+	 * Constructor
+	 * @param bufferedReader
+	 */
 	public void display(Session response) {
 		Order order = (Order) response.getAttribute("orders");
 		if(order != null){

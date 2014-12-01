@@ -11,6 +11,10 @@ public class InputDestinationView implements View {
 	
 	private BufferedReader bufferedReader;
 	
+	/**
+	 * Constructor
+	 * @param bufferedReader
+	 */
 	public InputDestinationView(BufferedReader bufferedReader) {
 		this.bufferedReader = bufferedReader;
 	}

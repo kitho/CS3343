@@ -16,8 +16,12 @@ import CS3343.AirlineTicketOrdering.View.View;
 public class FlightSelectionView implements View{
 	
 	private BufferedReader bufferedReader;
-
 	
+	
+	/**
+	 * Constructor
+	 * @param bufferedReader
+	 */
 	public FlightSelectionView(BufferedReader bufferedReader) {
 		this.bufferedReader = bufferedReader;
 	}

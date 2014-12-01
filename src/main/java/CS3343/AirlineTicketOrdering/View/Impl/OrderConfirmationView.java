@@ -18,7 +18,10 @@ import CS3343.AirlineTicketOrdering.View.View;
 public class OrderConfirmationView implements View{
 
 	private BufferedReader bufferedReader;
-	
+	/**
+	 * Constructor
+	 * @param bufferedReader
+	 */
 	public OrderConfirmationView(BufferedReader bufferedReader) {
 		this.bufferedReader = bufferedReader;
 	}

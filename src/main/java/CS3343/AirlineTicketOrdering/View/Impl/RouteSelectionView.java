@@ -20,7 +20,10 @@ public class RouteSelectionView implements View{
 	
 	private BufferedReader bufferedReader;
 
-	
+	/**
+	 * Constructor
+	 * @param bufferedReader
+	 */
 	public RouteSelectionView(BufferedReader bufferedReader) {
 		this.bufferedReader = bufferedReader;
 	}
