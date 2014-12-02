@@ -42,22 +42,21 @@ public class AirlineTicketOrderingSystem {
 	public static void main(String[] args) {
 		AirlineTicketOrderingSystemInvoker invoker = new AirlineTicketOrderingSystemInvoker();
 		try {
-			invoker.invoke();
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+			invoker.invoke(bufferedReader);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("System invokes error");
 		}
 	}
 	
-	private static class AirlineTicketOrderingSystemInvoker{
+	public static class AirlineTicketOrderingSystemInvoker{
 		
 		private File projectPath; 
 		
-		public void invoke() throws Exception{
+		public void invoke(BufferedReader bufferedReader) throws Exception{
 			projectPath = new File(".").getCanonicalFile();
-			
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-			
+						
 			Session session = Session.getInstance(); 
 			AirlineTicketOrderingController inputDestinationController = new InputDestinationController(session, new InputDestinationView(bufferedReader));
 			AirlineTicketOrderingController flightSelectionController = new FlightSelectionController(session, new FlightSelectionView(bufferedReader));
