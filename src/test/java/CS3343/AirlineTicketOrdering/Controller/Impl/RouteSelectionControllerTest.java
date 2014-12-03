@@ -19,6 +19,7 @@ import CS3343.AirlineTicketOrdering.DataQuery.RouteQuery;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.AirlineCompanyCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
+import CS3343.AirlineTicketOrdering.DataReader.Impl.RouteCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
 import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
@@ -76,8 +77,17 @@ public class RouteSelectionControllerTest {
 		session.setAttribute("deapture", "Hong Kong");
 		session.setAttribute("destination", "Taiwan");
 		
+		Route r = new Route();
+		r.setDeparture("Hong Kong");
+		r.setDestination("Taiwan");
+		r.setDistance(1000);
+		ArrayList<Route> routes = new ArrayList<>();
+		routes.add(r);
+		SourceReader<Route> routeReader = mock(RouteCSVFileReader.class);
+		when(routeReader.read((Parser<Route>) any())).thenReturn(routes);
 		
-		RouteQuery rQuery = new RouteQuery();
+		RouteQuery rQuery = new RouteQuery(routeReader);
+		
 		
 		
 		AirlineCompany airlineCompany = new AirlineCompany();
@@ -141,8 +151,17 @@ public class RouteSelectionControllerTest {
 		session.setAttribute("destination", "Singapore");
 		
 		
-		RouteQuery rQuery = new RouteQuery();
+		Route r = new Route();
+		r.setDeparture("Hong Kong");
+		r.setDestination("Taiwan");
+		r.setDistance(1000);
+		ArrayList<Route> routes = new ArrayList<>();
+		routes.add(r);
+		SourceReader<Route> routeReader = mock(RouteCSVFileReader.class);
+		when(routeReader.read((Parser<Route>) any())).thenReturn(routes);
 		
+		RouteQuery rQuery = new RouteQuery(routeReader);
+				
 		
 		AirlineCompany airlineCompany = new AirlineCompany();
 		airlineCompany.setAirline("Cathay Pacific Airways");

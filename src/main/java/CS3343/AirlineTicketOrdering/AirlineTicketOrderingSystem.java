@@ -25,6 +25,7 @@ import CS3343.AirlineTicketOrdering.DataReader.Impl.AirlineDiscountCSVFileReader
 import CS3343.AirlineTicketOrdering.DataReader.Impl.BaggagePlanCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.OrderCSVFileReader;
+import CS3343.AirlineTicketOrdering.DataReader.Impl.RouteCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.OrderCSVFileWriter;
 import CS3343.AirlineTicketOrdering.Session.Session;
@@ -74,7 +75,7 @@ public class AirlineTicketOrderingSystem {
 			AirlineTicketOrderingController routeSelectionController = new RouteSelectionController(session, new RouteSelectionView(bufferedReader), 
 					new FlightQuery(new AirlineCompanyCSVFileReader(projectPath + CSVFile.AIRLINECOMPANYCSV.value()), 
 							new FlightCSVFileReader(projectPath + CSVFile.FLIGHTCSV.value()), 
-							new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value())), new RouteQuery());
+							new FlightCSVFileWriter(projectPath + CSVFile.FLIGHTCSV.value())), new RouteQuery(new RouteCSVFileReader(projectPath + CSVFile.ROUTECSV.value())));
 			
 			
 			inputDestinationController.setNext(routeSelectionController);

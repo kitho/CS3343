@@ -18,21 +18,14 @@ public class RouteParser implements Parser<Route> {
 		Route route = new Route();
 		route.setDeparture(dataStr[0]);
 		route.setDestination(dataStr[1]);
-		route.setDistance(Integer.parseInt(dataStr[3]));
+		route.setDistance(Integer.parseInt(dataStr[2]));
 		
 		return route;
 	}
 
 	public String parseObject(Route route) {
-		List<String> dataList = new ArrayList<String>();
-		dataList.add(route.getDeparture());
-		dataList.add(route.getDestination());
-		dataList.add(String.valueOf(route.getDistance()));
 
-		
-		String line = StringUtils.join(dataList, ",");
-		
-		return line;
+		return null;
 	}
 
 	

@@ -18,9 +18,9 @@ public class RouteCSVFileReader extends CSVFileReader<Route> {
 	}
 
 	@Override
-	public List<Route> read(Parser<Route> parser) throws IOException, ParseException {
+	public ArrayList<Route> read(Parser<Route> parser) throws IOException, ParseException {
 
-		List<Route> routes = new ArrayList<Route>();
+		ArrayList<Route> routes = new ArrayList<Route>();
 
 		String line;
 		while ((line = bufferedReader.readLine()) != null) {

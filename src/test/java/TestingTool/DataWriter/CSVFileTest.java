@@ -5,7 +5,9 @@ public enum CSVFileTest {
 	, FLIGHTCSV("/datasourcetest/flight.csv")
 	, BAGGAGEPLANCSV("/datasourcetest/BaggagePlan.csv")
 	, ORDERCSV("/datasourcetest/order.csv")
-	, AIRLINEDISCOUNTCSV("/datasourcetest/airlineDiscount.csv");
+	, AIRLINEDISCOUNTCSV("/datasourcetest/airlineDiscount.csv")
+	, ROUTECSV("/datasourcetest/route.csv");
+
 	
 	private String value;
 	

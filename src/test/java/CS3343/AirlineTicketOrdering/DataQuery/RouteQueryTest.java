@@ -14,10 +14,12 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import CS3343.AirlineTicketOrdering.DataReader.SourceReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.AirlineCompanyCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataReader.Impl.FlightCSVFileReader;
+import CS3343.AirlineTicketOrdering.DataReader.Impl.RouteCSVFileReader;
 import CS3343.AirlineTicketOrdering.DataWriter.SourceWriter;
 import CS3343.AirlineTicketOrdering.DataWriter.Impl.FlightCSVFileWriter;
 import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
@@ -60,8 +62,16 @@ public class RouteQueryTest {
 		flights.add(flight);
 		
 	
-		
-		RouteQuery rQuery = new RouteQuery();
+		Route r = new Route();
+		r.setDeparture("Hong Kong");
+		r.setDestination("Taiwan");
+		r.setDistance(1000);
+		ArrayList<Route> routes = new ArrayList<>();
+		routes.add(r);
+		SourceReader<Route> routeReader = mock(RouteCSVFileReader.class);
+		when(routeReader.read((Parser<Route>) any())).thenReturn(routes);
+
+		RouteQuery rQuery = new RouteQuery(routeReader);
 		List<Route>getAllRoute = rQuery.getAllRoute(flights);
 		Route route = getAllRoute.get(0);
 		List<Flight> flightsResult = route.getFlights();
@@ -128,7 +138,7 @@ public class RouteQueryTest {
 		flight3.setAvailable(30);
 		flight3.setOneWayPrice(2500.00);
 		
-		List<Flight> flights = new ArrayList<Flight>();
+		ArrayList<Flight> flights = new ArrayList<Flight>();
 		flights.add(flight1);
 		flights.add(flight2);
 		flights.add(flight3);
@@ -143,9 +153,17 @@ public class RouteQueryTest {
 		when(flightReader.read((Parser<Flight>) any())).thenReturn(flights);
 		
 			
-	
+		Route r = new Route();
+		r.setDeparture("Hong Kong");
+		r.setDestination("Taiwan");
+		r.setDistance(1000);
+		ArrayList<Route> routes = new ArrayList<>();
+		routes.add(r);
+		SourceReader<Route> routeReader = mock(RouteCSVFileReader.class);
+		when(routeReader.read((Parser<Route>) any())).thenReturn(routes);
+
+		RouteQuery rQuery = new RouteQuery(routeReader);
 		
-		RouteQuery rQuery = new RouteQuery();
 		List<Route>getAllRoute = rQuery.getAllRoute(flights);
 		Route route = getAllRoute.get(0);
 		List<Flight> flightsResult = route.getFlights();
@@ -248,12 +266,35 @@ public class RouteQueryTest {
 		when(airlineCompanyReader.read((Parser<AirlineCompany>) any())).thenReturn(airlineCompanies);
 		when(flightReader.read((Parser<Flight>) any())).thenReturn(flights);
 		
-		RouteQuery rQuery = new RouteQuery();
+		Route r = new Route();
+		r.setDeparture(depature);
+		r.setDestination(destination);
+		r.setDistance(1000);
+		Route r1 = new Route();
+		r1.setDeparture(depature1);
+		r1.setDestination(destination1);
+		r1.setDistance(1000);
+		
+		Route r2 = new Route();
+		r2.setDeparture(depature2);
+		r2.setDestination(destination2);
+		r2.setDistance(1000);
+		
+		ArrayList<Route> routes = new ArrayList<>();
+		routes.add(r);
+		routes.add(r1);
+		routes.add(r2);
+
+		SourceReader<Route> routeReader = mock(RouteCSVFileReader.class);
+		when(routeReader.read((Parser<Route>) any())).thenReturn(routes);
+
+		RouteQuery rQuery = new RouteQuery(routeReader);
+		
 		List<Route>getAllRoute = rQuery.getAllRoute(flights);
 		Route route = getAllRoute.get(0);
 		
 
-		assertThat(2, is(getAllRoute.size()));
+		assertThat(3, is(getAllRoute.size()));
 		
 		
 		
