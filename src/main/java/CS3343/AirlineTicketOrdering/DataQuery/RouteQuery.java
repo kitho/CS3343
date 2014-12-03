@@ -29,7 +29,11 @@ public class RouteQuery {
 				routes.add(temp);
 			}
 		}
+		for (Route r : routes)
+			System.out.println(r.getDeparture() + " "+ r.getDestination());
 		return routes;
 	}
+
+
 
 }
