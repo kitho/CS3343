@@ -8,19 +8,34 @@ import java.util.List;
 
 import CS3343.AirlineTicketOrdering.DataReader.CSVFileReader;
 import CS3343.AirlineTicketOrdering.Discount.Impl.AirlineDiscount;
-import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
 import CS3343.AirlineTicketOrdering.Parser.Parser;
 
-
+/**
+ * The Class AirlineDiscountCSVFileReader.
+ */
 public class AirlineDiscountCSVFileReader extends CSVFileReader<AirlineDiscount> {
+	
+	/**
+	 * Instantiates a new airline discount csv file reader.
+	 *
+	 * @param path the path
+	 * @throws FileNotFoundException the file not found exception
+	 */
 	public AirlineDiscountCSVFileReader(String path) throws FileNotFoundException{
 		super(path);
 	}
 
+	/**
+	 * Read the airline discount from CSV file
+	 * and return the all the airline discount
+	 * 
+	 * @param parser
+	 * @return list of airline discounts
+	 */
 	@Override
 	public List<AirlineDiscount> read(Parser<AirlineDiscount> parser)
 			throws IOException, ParseException {
-		// TODO Auto-generated method stub
+
 		List<AirlineDiscount> airlineDiscounts = new ArrayList<AirlineDiscount>();
 		
 		String line;

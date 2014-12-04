@@ -13,13 +13,33 @@ import CS3343.AirlineTicketOrdering.Parser.Impl.AirlineCompanyParser;
 import CS3343.AirlineTicketOrdering.Parser.Impl.FlightParser;
 import CS3343.AirlineTicketOrdering.Parser.Impl.RouteParser;
 
+
+/**
+ * The Class RouteQuery.
+ */
 public class RouteQuery {
-	ArrayList<Route> routes;
+	
+	/** The routes. */
+	private ArrayList<Route> routes;
+	
+	/**
+	 * Instantiates a new route query.
+	 *
+	 * @param routeReader the route reader
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws ParseException the parse exception
+	 */
 	public RouteQuery(SourceReader<Route> routeReader) throws IOException, ParseException{
 		routes = (ArrayList<Route>) routeReader.read(new RouteParser());
 
 	}
 	
+	/**
+	 * Gets the all route.
+	 *
+	 * @param flights the flights
+	 * @return the all route
+	 */
 	public List<Route> getAllRoute(List<Flight> flights){
 		for(int i = 0; i < flights.size(); i++){
 			Flight flight = flights.get(i);

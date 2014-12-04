@@ -16,8 +16,8 @@ import CS3343.AirlineTicketOrdering.View.View;
 
 
 /**
- * The Class RouteSelectionController is used to get all the flights and routes
- * by querying and put the 
+ * The Class RouteSelectionController is used to retrieve all the flights and routes
+ * by querying and get the flight path for the view to display them
  */
 public class RouteSelectionController extends AirlineTicketOrderingController {
 
@@ -30,10 +30,15 @@ public class RouteSelectionController extends AirlineTicketOrderingController {
 	/**
 	 * Instantiates a new route selection controller.
 	 *
-	 * @param session the session
-	 * @param view the view
-	 * @param flightQuery the flight query
-	 * @param routeQuery the route query
+	 * @param session
+	 *        Pass the session object to be used in controller to retrieve or store the
+	 *        data
+	 * @param view
+	 * 		  The view is connected to display data or ask for the input from user
+	 * @param flightQuery
+	 *        Query the flight
+	 * @param routeQuery
+	 *        Query the route
 	 */
 	public RouteSelectionController(Session session,View view, FlightQuery flightQuery, RouteQuery routeQuery){
 		super(session, view);
@@ -41,9 +46,10 @@ public class RouteSelectionController extends AirlineTicketOrderingController {
 		this.routeQuery = routeQuery;
 	}
 
-	/* (non-Javadoc)
-	 * @see CS3343.AirlineTicketOrdering.Controller.AirlineTicketOrderingController#execute()
-	 */
+    /**
+     * Retrieve the different flight path that match the user's departure and destination
+     * and assign it to session for the view to display it
+     */
 	@Override
 	public void execute() throws Exception {
 		List<Flight> flights = flightQuery.getFlights();
