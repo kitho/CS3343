@@ -12,7 +12,13 @@ public class FlyerMiles {
 	}
 	
 
-	//calculate the award miles points
+	/**
+	 * calculate the award miles points
+	 * @param routeList
+	 * @param flight
+	 * @param card
+	 * @return int point
+	 */
 	public int awardMiles(List<Route> routeList, List<Flight> flight, CreditCard card){
 		int point = 0;
 		MilesCalculator mc = new MilesCalculator();
