@@ -92,10 +92,5 @@ public class BaggageCalculationController extends AirlineTicketOrderingControlle
 		
 		next();
 	}
-	
-	
-	
-	
-	
 
 }

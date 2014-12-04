@@ -1,7 +1,5 @@
 package CS3343.AirlineTicketOrdering.Controller.Impl;
 
-import CS3343.AirlineTicketOrdering.Baggage.BaggageFeeCalculator;
-import CS3343.AirlineTicketOrdering.Baggage.Impl.BaggageFeeCalculatorImpl;
 import CS3343.AirlineTicketOrdering.Controller.AirlineTicketOrderingController;
 import CS3343.AirlineTicketOrdering.DataQuery.BaggageQuery;
 import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
