@@ -9,8 +9,18 @@ import org.apache.commons.lang3.StringUtils;
 import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
 import CS3343.AirlineTicketOrdering.Parser.Parser;
 
+/**
+ * The Class AirlineCompanyParser.
+ */
 public class AirlineCompanyParser implements Parser<AirlineCompany> {
 
+	/**
+	 * Parse the String into the AirlineCompany object
+	 * 
+	 * @param line
+	 * 
+	 * @return AirlineCompany
+	 */
 	public AirlineCompany parseString(String line) throws ParseException {
 		AirlineCompany airlineCompany = new AirlineCompany();
 		airlineCompany.setAirline(line);
@@ -18,6 +28,14 @@ public class AirlineCompanyParser implements Parser<AirlineCompany> {
 		return airlineCompany;
 	}
 
+	/**
+	 * Parse the AirlineCompany Object into the string
+	 * 
+	 * @param AirlineCompany
+	 * 
+	 * @return line
+	 * 
+	 */
 	public String parseObject(AirlineCompany airlineCompany) {
 
 		List<String> dataList = new ArrayList<String>();

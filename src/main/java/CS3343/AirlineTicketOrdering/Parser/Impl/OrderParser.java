@@ -7,19 +7,32 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import CS3343.AirlineTicketOrdering.CustomDateUtil.CustomDateFormatter;
-import CS3343.AirlineTicketOrdering.Model.AirlineCompany;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Model.Order;
 import CS3343.AirlineTicketOrdering.Parser.Parser;
 
+/**
+ * The Class OrderParser.
+ */
 public class OrderParser implements Parser<Order> {
 	
+	/** The formatter. */
 	private CustomDateFormatter formatter;
 	
+	/**
+	 * Instantiates a new order parser.
+	 */
 	public OrderParser(){
 		formatter = new CustomDateFormatter();
 	}
 	
+	/**
+	 * Parse the String into the Order object
+	 * 
+	 * @param line
+	 * 
+	 * @return Order
+	 */
 	public Order parseString(String line) throws ParseException {
 		String[] dataStr = line.split(",");
 		Order order = new Order();
@@ -39,6 +52,14 @@ public class OrderParser implements Parser<Order> {
 		return order;
 	}
 
+	/**
+	 * Parse the Order Object into the string
+	 * 
+	 * @param Order
+	 * 
+	 * @return line
+	 * 
+	 */
 	public String parseObject(Order order) {
 		List<String> dataList = new ArrayList<String>();
 		Flight flight = order.getFlight();

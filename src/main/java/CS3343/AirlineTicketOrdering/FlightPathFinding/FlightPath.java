@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import CS3343.AirlineTicketOrdering.Model.*;
 
 public class FlightPath {
-	ArrayList<Route> flightPath;
+	private ArrayList<Route> flightPath;
 	public FlightPath(){
 		flightPath = new ArrayList<Route>();
 	}

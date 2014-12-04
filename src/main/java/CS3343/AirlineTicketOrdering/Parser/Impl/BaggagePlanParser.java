@@ -6,11 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
-import CS3343.AirlineTicketOrdering.CustomDateUtil.CustomDateFormatter;
 import CS3343.AirlineTicketOrdering.Model.BaggagePlan;
-import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Parser.Parser;
 
 public class BaggagePlanParser implements Parser<BaggagePlan> {

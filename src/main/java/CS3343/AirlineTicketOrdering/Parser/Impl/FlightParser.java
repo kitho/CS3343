@@ -10,14 +10,28 @@ import CS3343.AirlineTicketOrdering.CustomDateUtil.CustomDateFormatter;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Parser.Parser;
 
+/**
+ * The Class FlightParser.
+ */
 public class FlightParser implements Parser<Flight> {
 	
+	/** The formatter. */
 	private CustomDateFormatter formatter;
 	
+	/**
+	 * Instantiates a new flight parser.
+	 */
 	public FlightParser(){
 		formatter = new CustomDateFormatter();
 	}
 
+	/**
+	 * Parse the String into the Flight object
+	 * 
+	 * @param line
+	 * 
+	 * @return Flight
+	 */
 	public Flight parseString(String line) throws ParseException {
 		String[] dataStr = line.split(",");
 		Flight flight = new Flight();
@@ -34,6 +48,14 @@ public class FlightParser implements Parser<Flight> {
 		return flight;
 	}
 
+	/**
+	 * Parse the Flight Object into the string
+	 * 
+	 * @param Flight
+	 * 
+	 * @return line
+	 * 
+	 */
 	public String parseObject(Flight flight) {
 		List<String> dataList = new ArrayList<String>();
 		dataList.add(flight.getAirline());

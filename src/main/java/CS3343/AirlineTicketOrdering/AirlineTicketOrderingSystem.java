@@ -38,8 +38,16 @@ import CS3343.AirlineTicketOrdering.View.Impl.OrderCompletionView;
 import CS3343.AirlineTicketOrdering.View.Impl.OrderConfirmationView;
 import CS3343.AirlineTicketOrdering.View.Impl.RouteSelectionView;
 
+/**
+ * The Class AirlineTicketOrderingSystem.
+ */
 public class AirlineTicketOrderingSystem {
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		AirlineTicketOrderingSystemInvoker invoker = new AirlineTicketOrderingSystemInvoker();
 		try {
@@ -51,10 +59,21 @@ public class AirlineTicketOrderingSystem {
 		}
 	}
 	
+	/**
+	 * The Class AirlineTicketOrderingSystemInvoker.
+	 */
 	public static class AirlineTicketOrderingSystemInvoker{
 		
+		/** The project path. */
 		private File projectPath; 
 		
+		/**
+		 * Invoke the system with all basic setting and performs the controller
+		 * chain to work
+		 *
+		 * @param bufferedReader the buffered reader
+		 * @throws Exception the exception
+		 */
 		public void invoke(BufferedReader bufferedReader) throws Exception{
 			projectPath = new File(".").getCanonicalFile();
 						

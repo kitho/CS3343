@@ -10,12 +10,28 @@ import CS3343.AirlineTicketOrdering.DataReader.CSVFileReader;
 import CS3343.AirlineTicketOrdering.Model.Flight;
 import CS3343.AirlineTicketOrdering.Parser.Parser;
 
+/**
+ * The Class FlightCSVFileReader.
+ */
 public class FlightCSVFileReader extends CSVFileReader<Flight> {
 
+	/**
+	 * Instantiates a new flight csv file reader.
+	 *
+	 * @param path the path
+	 * @throws FileNotFoundException the file not found exception
+	 */
 	public FlightCSVFileReader(String path) throws FileNotFoundException {
 		super(path);
 	}
 
+	/**
+	 * Read the flight from CSV file
+	 * and return the all the flights
+	 * 
+	 * @param parser
+	 * @return list of flight
+	 */
 	@Override
 	public List<Flight> read(Parser<Flight> parser) throws IOException, ParseException {
 
