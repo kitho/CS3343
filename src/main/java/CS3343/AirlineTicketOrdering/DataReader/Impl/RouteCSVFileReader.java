@@ -14,6 +14,7 @@ import CS3343.AirlineTicketOrdering.Parser.Parser;
  */
 public class RouteCSVFileReader extends CSVFileReader<Route> {
 
+
 	/**
 	 * Instantiates a new route csv file reader.
 	 *
@@ -23,6 +24,7 @@ public class RouteCSVFileReader extends CSVFileReader<Route> {
 	public RouteCSVFileReader(String path) throws FileNotFoundException {
 		super(path);
 	}
+
 
 	/**
 	 * Read the Route from CSV file

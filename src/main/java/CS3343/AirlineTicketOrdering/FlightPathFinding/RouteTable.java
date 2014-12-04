@@ -8,11 +8,7 @@ import CS3343.AirlineTicketOrdering.Model.*;
 public class RouteTable {
 	private ArrayList<Route> routeList;
 	public RouteTable(){
-		routeList = new ArrayList<Route>();
-		/*
-
-		*/
-		
+		routeList = new ArrayList<Route>();		
 	}
 	
 	public void addRouteRow(String depart, String dest, int distance){

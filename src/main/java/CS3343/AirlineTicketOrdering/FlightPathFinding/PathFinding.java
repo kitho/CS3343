@@ -13,11 +13,6 @@ public class PathFinding {
 		this.from = from;
 		this.to = to;
 		routeTable = rt;
-		//ArrayList<Route> routeList = routeTable.getRouteList();
-		//System.out.println(from + " : " + to);
-		//for (int i = 0; i < routeList.size(); i ++)
-			//System.out.println(routeList.get(i).getDeparture() + " : "+ routeList.get(i).getDestination());
-		
 	}
 	
 	public ArrayList<FlightPath> getDirectFlight(){
@@ -128,6 +123,7 @@ public class PathFinding {
 
 		return resultRouteList;
 	}	
+	
 	
 	public ArrayList<Route> findRouteDepart(String departure,ArrayList<Route> rl){
 		ArrayList<Route> resultRoutes = new ArrayList<Route>();
