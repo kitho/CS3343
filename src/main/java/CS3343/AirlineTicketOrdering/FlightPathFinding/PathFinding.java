@@ -1,5 +1,6 @@
 package CS3343.AirlineTicketOrdering.FlightPathFinding;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import CS3343.AirlineTicketOrdering.Model.Route;
@@ -9,12 +10,25 @@ public class PathFinding {
 	private String to;
 	private RouteTable routeTable;
 	
+	/**
+	 * Instantiates a new Path finding
+	 *
+	 * @param departure
+	 * @param destination
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public PathFinding(String from, String to, RouteTable rt){
 		this.from = from;
 		this.to = to;
 		routeTable = rt;
 	}
 	
+	/**
+	 * get direct flight
+	 *
+	 * @return FlightPath ArrayList
+	 * 
+	 */
 	public ArrayList<FlightPath> getDirectFlight(){
 		ArrayList<Route> routeList = routeTable.getRouteList();
 		ArrayList<FlightPath> resultRouteList = new ArrayList<FlightPath>();
@@ -28,6 +42,12 @@ public class PathFinding {
 		return resultRouteList;
 	}
 	
+	/**
+	 * check the route is valid or not
+	 *
+	 * @return Route
+	 * 
+	 */
 	public Route findRoute(String departure, String destination, ArrayList<Route> rl){
 		for (int i = 0; i < rl.size(); i++){
 			Route tempRoute = rl.get(i);
@@ -37,9 +57,13 @@ public class PathFinding {
 		return null;		
 	}
 	
+	/**
+	 * get all indirect flight path
+ 	 * @param FlightPath ArrayList
+	 * @return FlightPath ArrayList
+	 */
 	public ArrayList<FlightPath> getIndirectFlight(ArrayList<FlightPath> resultRouteList){
 		ArrayList<Route> routeList = routeTable.getRouteList();
-		//System.out.println("enter pathfinding");
 		if (resultRouteList.size() == 0){
 			ArrayList<Route> DeptList = findRouteDepart(from, routeList);
 			if (DeptList.size() == 0)
@@ -124,7 +148,12 @@ public class PathFinding {
 		return resultRouteList;
 	}	
 	
-	
+	/**
+	 * find all route that contain that departure
+  	 * @param Departure String
+ 	 * @param Route ArrayList
+	 * @return Route ArrayList
+	 */
 	public ArrayList<Route> findRouteDepart(String departure,ArrayList<Route> rl){
 		ArrayList<Route> resultRoutes = new ArrayList<Route>();
 		for (int i = 0; i < rl.size(); i++){

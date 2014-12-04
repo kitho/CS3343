@@ -1,11 +1,15 @@
 package CS3343.AirlineTicketOrdering.FlightPathFinding;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import CS3343.AirlineTicketOrdering.Model.*;
 
 public class FlightPath {
 	private ArrayList<Route> flightPath;
+	/**
+	 * Instantiates a new Flight Path
+	 */
 	public FlightPath(){
 		flightPath = new ArrayList<Route>();
 	}
