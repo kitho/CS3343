@@ -44,4 +44,36 @@ public class RouteTable {
 	public void setRouteList(ArrayList<Route> routeList) {
 		this.routeList = routeList;
 	}
+	
+	/**
+	 * find all route that contain that departure
+  	 * @param Departure String
+	 * @return Route ArrayList
+	 */
+	public ArrayList<Route> findRouteDepart(String departure){
+		ArrayList<Route> resultRoutes = new ArrayList<Route>();
+		for (int i = 0; i < routeList.size(); i++){
+			Route tempRoute = routeList.get(i);
+			if (tempRoute.getDeparture().equals(departure))
+				resultRoutes.add(tempRoute);
+		}
+		return resultRoutes;		
+	}
+	
+	/**
+	 * check the route is valid or not
+	 *
+	 * @return Route
+	 * 
+	 */
+	public Route findRoute(String departure, String destination){
+		for (int i = 0; i < routeList.size(); i++){
+			Route tempRoute = routeList.get(i);
+			if (tempRoute.getDeparture() == departure && tempRoute.getDestination() == destination)
+				return tempRoute;
+		}
+		return null;		
+	}
+	
+	
 }

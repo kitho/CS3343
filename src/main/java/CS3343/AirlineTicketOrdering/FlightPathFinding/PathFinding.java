@@ -30,10 +30,9 @@ public class PathFinding {
 	 * 
 	 */
 	public ArrayList<FlightPath> getDirectFlight(){
-		ArrayList<Route> routeList = routeTable.getRouteList();
 		ArrayList<FlightPath> resultRouteList = new ArrayList<FlightPath>();
 
-		Route route = findRoute(from, to, routeList);
+		Route route = routeTable.findRoute(from, to);
 		if (route != null){
 			FlightPath fp = new FlightPath();
 			fp.addFlighPath(route);
@@ -42,30 +41,15 @@ public class PathFinding {
 		return resultRouteList;
 	}
 	
-	/**
-	 * check the route is valid or not
-	 *
-	 * @return Route
-	 * 
-	 */
-	public Route findRoute(String departure, String destination, ArrayList<Route> rl){
-		for (int i = 0; i < rl.size(); i++){
-			Route tempRoute = rl.get(i);
-			if (tempRoute.getDeparture() == departure && tempRoute.getDestination() == destination)
-				return tempRoute;
-		}
-		return null;		
-	}
-	
+
 	/**
 	 * get all indirect flight path
  	 * @param FlightPath ArrayList
 	 * @return FlightPath ArrayList
 	 */
 	public ArrayList<FlightPath> getIndirectFlight(ArrayList<FlightPath> resultRouteList){
-		ArrayList<Route> routeList = routeTable.getRouteList();
 		if (resultRouteList.size() == 0){
-			ArrayList<Route> DeptList = findRouteDepart(from, routeList);
+			ArrayList<Route> DeptList = routeTable.findRouteDepart(from);
 			if (DeptList.size() == 0)
 				return resultRouteList;
 			for (int i = 0; i < DeptList.size(); i++){
@@ -92,7 +76,7 @@ public class PathFinding {
 				FlightPath fPath = tempResultRouteList.get(z);
 				ArrayList<Route> routeList2 =  fPath.getFlightList();	
 				//System.out.println("test " + routeList2.get(routeList2.size()-1).getDestination());
-				ArrayList<Route> DeptList = findRouteDepart(routeList2.get(routeList2.size()-1).getDestination(), routeList);
+				ArrayList<Route> DeptList = routeTable.findRouteDepart(routeList2.get(routeList2.size()-1).getDestination());
 				if (routeList2.get(routeList2.size()-1).getDestination().equals(to)){
 
 				}else if (DeptList.size() == 0){
@@ -148,21 +132,7 @@ public class PathFinding {
 		return resultRouteList;
 	}	
 	
-	/**
-	 * find all route that contain that departure
-  	 * @param Departure String
- 	 * @param Route ArrayList
-	 * @return Route ArrayList
-	 */
-	public ArrayList<Route> findRouteDepart(String departure,ArrayList<Route> rl){
-		ArrayList<Route> resultRoutes = new ArrayList<Route>();
-		for (int i = 0; i < rl.size(); i++){
-			Route tempRoute = rl.get(i);
-			if (tempRoute.getDeparture().equals(departure))
-				resultRoutes.add(tempRoute);
-		}
-		return resultRoutes;		
-	}
+	
 	
 
 }

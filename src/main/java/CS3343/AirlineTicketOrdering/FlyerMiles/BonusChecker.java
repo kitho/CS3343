@@ -7,13 +7,22 @@ public class BonusChecker {
 	private String flightclass;
 	private String company;
 	
+	/**
+	 * Calculate the bonus rate
+	 * @param card
+	 * @param flightclass
+	 * @param company
+	 */
 	public BonusChecker(CreditCard card, String flightclass, String company){
 		this.card = card;
 		this.flightclass = flightclass;
 		this.company = company;
 	}
-	
-	//check the credit card bank and type, return different bonus rate
+
+	/**
+	 * check the credit card bank and type, return different bonus rate
+	 * @return double rate
+	 */
 	public double getCreditCardBounsRate(){
 		String bank = card.getBank();
 		if(bank.equals("HSBC")){
@@ -37,7 +46,10 @@ public class BonusChecker {
 		return 0.0;
 	}
 	
-	//check the flight class, return different bonus rate
+	/**
+	 * check the flight class, return different bonus rate
+	 * @return double rate
+	 */
 	public double getFlightClassBounsRate(){
 		if(flightclass.equals(FlightClass.FIRST_CLASS))
 				return 0.4;
@@ -51,7 +63,10 @@ public class BonusChecker {
 		
 	}
 	
-	//check the flight company, return different bonus rate
+	/**
+	 * check the flight company, return different bonus rate
+	 * @return double rate
+	 */
 	public double getCompanyBounsRate(){
 		if(company.equals("Cathay Pacific Airways"))
 			return 0.1;
